@@ -1,0 +1,81 @@
+<html>
+ <head>
+  <title>D:\Agent2002\Salent\v0.13\ModelSim\idu\t\Idu-Util.t</title>
+ </head>
+ <body><tt><pre>
+<font color=gray>     1</font>  <a name="line_1"></a>#: Idu-Util.t
+<font color=gray>     2</font>  <a name="line_2"></a>#: Test inc::Util
+<font color=gray>     3</font>  <a name="line_3"></a>#: Salent v0.13
+<font color=gray>     4</font>  <a name="line_4"></a>#: Copyright (c) 2005 Agent Zhang
+<font color=gray>     5</font>  <a name="line_5"></a>#: 2005-08-12 2005-08-12
+<font color=gray>     6</font>  <a name="line_6"></a>
+<font color=gray>     7</font>  <a name="line_7"></a>use strict;
+<font color=gray>     8</font>  <a name="line_8"></a>use warnings;
+<font color=gray>     9</font>  <a name="line_9"></a>
+<font color=gray>    10</font>  <a name="line_10"></a>use Test::More tests => 40;
+<font color=gray>    11</font>  <a name="line_11"></a>BEGIN { use_ok('inc::Idu::Util'); }
+<font color=gray>    12</font>  <a name="line_12"></a>
+<font color=gray>    13</font>  <a name="line_13"></a>{
+<font color=gray>    14</font>  <a name="line_14"></a># Test sub slice
+<font color=gray>    15</font>  <a name="line_15"></a>is slice('10001011', 2, 0), '011';
+<font color=gray>    16</font>  <a name="line_16"></a>is slice('10001011', 3, 0), '1011';
+<font color=gray>    17</font>  <a name="line_17"></a>is slice('10001011', 3, 1), '101';
+<font color=gray>    18</font>  <a name="line_18"></a>is slice('10001011', 3, 3), '1';
+<font color=gray>    19</font>  <a name="line_19"></a>is slice('10001011', 3), '1';
+<font color=gray>    20</font>  <a name="line_20"></a>is slice('10001011', 2), '0';
+<font color=gray>    21</font>  <a name="line_21"></a>is slice('10001011', 7), '1';
+<font color=gray>    22</font>  <a name="line_22"></a>is slice('10001011', 7, 7), '1';
+<font color=gray>    23</font>  <a name="line_23"></a>is slice('10001011', 7, 0), '10001011';
+<font color=gray>    24</font>  <a name="line_24"></a>is slice('10001011', 7, 1), '1000101';
+<font color=gray>    25</font>  <a name="line_25"></a>is slice('10001011', 7, 2), '100010';
+<font color=gray>    26</font>  <a name="line_26"></a>is slice('10001011', 6, 2), '00010';
+<font color=gray>    27</font>  <a name="line_27"></a>}
+<font color=gray>    28</font>  <a name="line_28"></a>
+<font color=gray>    29</font>  <a name="line_29"></a>{
+<font color=gray>    30</font>  <a name="line_30"></a># Test sub get_imm_len
+<font color=gray>    31</font>  <a name="line_31"></a>is get_imm_len(1,1,1), 1;
+<font color=gray>    32</font>  <a name="line_32"></a>is get_imm_len(1,1), 1;
+<font color=gray>    33</font>  <a name="line_33"></a>
+<font color=gray>    34</font>  <a name="line_34"></a>is get_imm_len(1,0,1), 1;
+<font color=gray>    35</font>  <a name="line_35"></a>is get_imm_len(1,0), 1;
+<font color=gray>    36</font>  <a name="line_36"></a>
+<font color=gray>    37</font>  <a name="line_37"></a>is get_imm_len(0,1,1), 2;
+<font color=gray>    38</font>  <a name="line_38"></a>is get_imm_len(0,1), 4;
+<font color=gray>    39</font>  <a name="line_39"></a>
+<font color=gray>    40</font>  <a name="line_40"></a>is get_imm_len(0,0,1), 1;
+<font color=gray>    41</font>  <a name="line_41"></a>is get_imm_len(0,0), 1;
+<font color=gray>    42</font>  <a name="line_42"></a>
+<font color=gray>    43</font>  <a name="line_43"></a>is get_imm_len(undef,0,1), 1;
+<font color=gray>    44</font>  <a name="line_44"></a>is get_imm_len(undef,0), 1;
+<font color=gray>    45</font>  <a name="line_45"></a>
+<font color=gray>    46</font>  <a name="line_46"></a>is get_imm_len(undef,1,1), 2;
+<font color=gray>    47</font>  <a name="line_47"></a>is get_imm_len(undef,1), 4;
+<font color=gray>    48</font>  <a name="line_48"></a>
+<font color=gray>    49</font>  <a name="line_49"></a>is get_imm_len(0,undef,1), 2;
+<font color=gray>    50</font>  <a name="line_50"></a>is get_imm_len(0,undef), 4;
+<font color=gray>    51</font>  <a name="line_51"></a>
+<font color=gray>    52</font>  <a name="line_52"></a>is get_imm_len(1,undef,1), 1;
+<font color=gray>    53</font>  <a name="line_53"></a>is get_imm_len(1,undef), 1;
+<font color=gray>    54</font>  <a name="line_54"></a>
+<font color=gray>    55</font>  <a name="line_55"></a>is get_imm_len(undef,undef,1), 2;
+<font color=gray>    56</font>  <a name="line_56"></a>is get_imm_len(undef,undef,0), 4;
+<font color=gray>    57</font>  <a name="line_57"></a>}
+<font color=gray>    58</font>  <a name="line_58"></a>
+<font color=gray>    59</font>  <a name="line_59"></a>{ # Test sub set_bit_fld:
+<font color=gray>    60</font>  <a name="line_60"></a>is set_bit_fld("00000000", 7, 1), "10000000";
+<font color=gray>    61</font>  <a name="line_61"></a>is set_bit_fld("00000000", 6, 1), "01000000";
+<font color=gray>    62</font>  <a name="line_62"></a>is set_bit_fld("00000000", 5, 1), "00100000";
+<font color=gray>    63</font>  <a name="line_63"></a>is set_bit_fld("00000000", 3, 1), "00001000";
+<font color=gray>    64</font>  <a name="line_64"></a>is set_bit_fld("00000000", 1, 1), "00000010";
+<font color=gray>    65</font>  <a name="line_65"></a>is set_bit_fld("00000000", 0, 1), "00000001";
+<font color=gray>    66</font>  <a name="line_66"></a>}
+<font color=gray>    67</font>  <a name="line_67"></a>
+<font color=gray>    68</font>  <a name="line_68"></a>{ # Test sub hex2dec:
+<font color=gray>    69</font>  <a name="line_69"></a>my @lst = bin2hex qw(110 011);
+<font color=gray>    70</font>  <a name="line_70"></a>is $lst[0], '06';
+<font color=gray>    71</font>  <a name="line_71"></a>is $lst[1], '03';
+<font color=gray>    72</font>  <a name="line_72"></a>my $elem = bin2hex qw(11111111 001);
+<font color=gray>    73</font>  <a name="line_73"></a>is $elem, 'ff';
+<font color=gray>    74</font>  <a name="line_74"></a>}
+ </pre></tt></body>
+</html>

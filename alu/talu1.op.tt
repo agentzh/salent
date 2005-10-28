@@ -1,0 +1,58 @@
+#: talu1.op.tt
+#: Test add, sub, mul, imul.
+#: Salent v0.13
+#: Copyright (c) 2005 Agent Zhang.
+#: 2005-07-18 2005-07-18
+
+op : A : B : D : cin : word_size : delay
+:::::32:5
+[% USE Perl;
+   #CALL Perl.srand(1);
+   max = Perl.pow(2, 32); -%]
+
+[% i = 0 -%]
+[% WHILE i < 100;
+     A = Perl.int(Perl.rand(max));
+     A = Perl.sprintf("%08x", A);
+     B = Perl.int(Perl.rand(max));
+     B = Perl.sprintf("%08x", B);
+     cin = Perl.int(Perl.rand(2));
+-%]
+add : [% A %] : [% B %] : : [% cin %] : :
+    [%- i = i + 1 %]
+[% END -%]
+
+[% i = 0 -%]
+[% WHILE i < 100;
+     A = Perl.int(Perl.rand(max));
+     A = Perl.sprintf("%08x", A);
+     B = Perl.int(Perl.rand(max));
+     B = Perl.sprintf("%08x", B);
+     cin = Perl.int(Perl.rand(2));
+-%]
+sub : [% A %] : [% B %] : : [% cin %] : :
+    [%- i = i + 1 %]
+[% END -%]
+
+[% i = 0 -%]
+[% WHILE i < 100;
+     A = Perl.int(Perl.rand(max));
+     A = Perl.sprintf("%08x", A);
+     B = Perl.int(Perl.rand(max));
+     B = Perl.sprintf("%08x", B);
+-%]
+mul : [% A %] : [% B %] : : : :
+    [%- i = i + 1 %]
+[% END -%]
+
+[% i = 0 -%]
+[% WHILE i < 100;
+     A = Perl.int(Perl.rand(max));
+     A = Perl.sprintf("%08x", A);
+     B = Perl.int(Perl.rand(max));
+     B = Perl.sprintf("%08x", B);
+-%]
+imul : [% A %] : [% B %] : : : :
+    [%- i = i + 1 %]
+[% END -%]
+

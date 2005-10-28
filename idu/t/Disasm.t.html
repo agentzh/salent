@@ -1,0 +1,483 @@
+<html>
+ <head>
+  <title>D:\Agent2002\AISystem1.0\LogicDesign\Salent\v0.12\ModelSim\idu\t\Disasm.t</title>
+ </head>
+ <body><tt><pre>
+<a name="line_1"></a>#: Disasm.t
+<a name="line_2"></a>#: Test the inc::Disasm module.
+<a name="line_3"></a>#: Salent v0.12
+<a name="line_4"></a>#: Copyright (c) 2005 Agent Zhang
+<a name="line_5"></a>#: 2005-08-23 2005-08-25
+<a name="line_6"></a>
+<a name="line_7"></a>package Disasm;
+<a name="line_8"></a>
+<a name="line_9"></a>use strict;
+<a name="line_10"></a>use warnings;
+<a name="line_11"></a>
+<a name="line_12"></a>use C::Idu;
+<a name="line_13"></a>use Test::More 'no_plan';#tests => 113;
+<a name="line_14"></a>BEGIN { use_ok('inc::Disasm'); }
+<a name="line_15"></a>
+<a name="line_16"></a>is enc2name('reg', '000'), 'eax';
+<a name="line_17"></a>is enc2name('reg1', '000', {w=>undef}), 'eax';
+<a name="line_18"></a>is enc2name('reg2', '000', {w=>undef,bits16=>undef}), 'eax';
+<a name="line_19"></a>is enc2name('reg', '001'), 'ecx';
+<a name="line_20"></a>is enc2name('reg', '010'), 'edx';
+<a name="line_21"></a>is enc2name('reg', '011'), 'ebx';
+<a name="line_22"></a>is enc2name('reg', '100'), 'esp';
+<a name="line_23"></a>is enc2name('reg', '101'), 'ebp';
+<a name="line_24"></a>is enc2name('reg', '110'), 'esi';
+<a name="line_25"></a>is enc2name('reg', '111'), 'edi';
+<a name="line_26"></a>
+<a name="line_27"></a>is enc2name('reg2', '000', {bits16=>1}), 'ax';
+<a name="line_28"></a>is enc2name('reg', '001', {bits16=>1}), 'cx';
+<a name="line_29"></a>is enc2name('reg', '010', {bits16=>1}), 'dx';
+<a name="line_30"></a>is enc2name('reg', '011', {bits16=>1}), 'bx';
+<a name="line_31"></a>is enc2name('reg', '100', {bits16=>1}), 'sp';
+<a name="line_32"></a>is enc2name('reg', '101', {bits16=>1}), 'bp';
+<a name="line_33"></a>is enc2name('reg', '110', {bits16=>1}), 'si';
+<a name="line_34"></a>is enc2name('reg', '111', {bits16=>1}), 'di';
+<a name="line_35"></a>
+<a name="line_36"></a>is enc2name('reg2', '000', {w=>1}), 'eax';
+<a name="line_37"></a>is enc2name('reg', '001', {w=>1}), 'ecx';
+<a name="line_38"></a>is enc2name('reg', '010', {w=>1}), 'edx';
+<a name="line_39"></a>is enc2name('reg', '011', {w=>1}), 'ebx';
+<a name="line_40"></a>is enc2name('reg', '100', {w=>1}), 'esp';
+<a name="line_41"></a>is enc2name('reg', '101', {w=>1}), 'ebp';
+<a name="line_42"></a>is enc2name('reg', '110', {w=>1}), 'esi';
+<a name="line_43"></a>is enc2name('reg', '111', {w=>1}), 'edi';
+<a name="line_44"></a>
+<a name="line_45"></a>is enc2name('reg2', '000', {bits16=>1,w=>1}), 'ax';
+<a name="line_46"></a>is enc2name('reg', '001', {bits16=>1,w=>1}), 'cx';
+<a name="line_47"></a>is enc2name('reg', '010', {bits16=>1,w=>1}), 'dx';
+<a name="line_48"></a>is enc2name('reg', '011', {bits16=>1,w=>1}), 'bx';
+<a name="line_49"></a>is enc2name('reg', '100', {bits16=>1,w=>1}), 'sp';
+<a name="line_50"></a>is enc2name('reg', '101', {bits16=>1,w=>1}), 'bp';
+<a name="line_51"></a>is enc2name('reg', '110', {bits16=>1,w=>1}), 'si';
+<a name="line_52"></a>is enc2name('reg', '111', {bits16=>1,w=>1}), 'di';
+<a name="line_53"></a>
+<a name="line_54"></a>is enc2name('reg1', '000', {w=>0}), 'al';
+<a name="line_55"></a>is enc2name('reg', '001', {w=>0}), 'cl';
+<a name="line_56"></a>is enc2name('reg', '010', {w=>0}), 'dl';
+<a name="line_57"></a>is enc2name('reg', '011', {w=>0}), 'bl';
+<a name="line_58"></a>is enc2name('reg', '100', {w=>0}), 'ah';
+<a name="line_59"></a>is enc2name('reg', '101', {w=>0}), 'ch';
+<a name="line_60"></a>is enc2name('reg', '110', {w=>0}), 'dh';
+<a name="line_61"></a>is enc2name('reg', '111', {w=>0,bits16=>undef}), 'bh';
+<a name="line_62"></a>
+<a name="line_63"></a>is enc2name('reg2', '000', {bits16=>1,w=>0}), 'al';
+<a name="line_64"></a>is enc2name('reg', '001', {bits16=>1,w=>0}), 'cl';
+<a name="line_65"></a>is enc2name('reg', '010', {bits16=>1,w=>0}), 'dl';
+<a name="line_66"></a>is enc2name('reg', '011', {bits16=>1,w=>0}), 'bl';
+<a name="line_67"></a>is enc2name('reg', '100', {bits16=>1,w=>0}), 'ah';
+<a name="line_68"></a>is enc2name('reg', '101', {bits16=>1,w=>0}), 'ch';
+<a name="line_69"></a>is enc2name('reg', '110', {bits16=>1,w=>0}), 'dh';
+<a name="line_70"></a>is enc2name('reg', '111', {bits16=>1,w=>0}), 'bh';
+<a name="line_71"></a>
+<a name="line_72"></a>is enc2name('sreg2', '00'), 'es';
+<a name="line_73"></a>is enc2name('sreg2', '00', {bits16=>1,w=>0}), 'es';
+<a name="line_74"></a>is enc2name('sreg2', '01'), 'cs';
+<a name="line_75"></a>is enc2name('sreg2', '10'), 'ss';
+<a name="line_76"></a>is enc2name('sreg2', '11'), 'ds';
+<a name="line_77"></a>
+<a name="line_78"></a>is enc2name('sreg3', '000'), 'es';
+<a name="line_79"></a>is enc2name('sreg3', '000', {bits16=>1,w=>0}), 'es';
+<a name="line_80"></a>is enc2name('sreg3', '001'), 'cs';
+<a name="line_81"></a>is enc2name('sreg3', '010'), 'ss';
+<a name="line_82"></a>is enc2name('sreg3', '011'), 'ds';
+<a name="line_83"></a>is enc2name('sreg3', '100'), 'fs';
+<a name="line_84"></a>is enc2name('sreg3', '101'), 'gs';
+<a name="line_85"></a>is enc2name('sreg3', '110'), 'reserved';
+<a name="line_86"></a>is enc2name('sreg3', '111'), 'reserved';
+<a name="line_87"></a>
+<a name="line_88"></a>is enc2name('tttn', '0000'), 'o';
+<a name="line_89"></a>is enc2name('tttn', '0001'), 'no';
+<a name="line_90"></a>is enc2name('tttn', '0010'), 'b';
+<a name="line_91"></a>is enc2name('tttn', '0111'), 'nbe';
+<a name="line_92"></a>is enc2name('tttn', '1000'), 's';
+<a name="line_93"></a>is enc2name('tttn', '1001'), 'ns';
+<a name="line_94"></a>is enc2name('tttn', '1110'), 'le';
+<a name="line_95"></a>is enc2name('tttn', '1111'), 'nle';
+<a name="line_96"></a>
+<a name="line_97"></a>ok !defined enc2name('eee', '000');
+<a name="line_98"></a>is enc2name('eee', '000', {CR=>1}), 'cr0';
+<a name="line_99"></a>is enc2name('eee', '001', {CR=>1}), 'cr1';
+<a name="line_100"></a>is enc2name('eee', '010', {CR=>1}), 'cr2';
+<a name="line_101"></a>is enc2name('eee', '011', {CR=>1}), 'cr3';
+<a name="line_102"></a>is enc2name('eee', '100', {CR=>1}), 'cr4';
+<a name="line_103"></a>is enc2name('eee', '101', {CR=>1}), 'cr5';
+<a name="line_104"></a>is enc2name('eee', '110', {CR=>1}), 'cr6';
+<a name="line_105"></a>is enc2name('eee', '111', {CR=>1}), 'cr7';
+<a name="line_106"></a>
+<a name="line_107"></a>ok !defined enc2name('eee', '011');
+<a name="line_108"></a>is enc2name('eee', '000', {DR=>1}), 'dr0';
+<a name="line_109"></a>is enc2name('eee', '001', {DR=>1}), 'dr1';
+<a name="line_110"></a>is enc2name('eee', '010', {DR=>1}), 'dr2';
+<a name="line_111"></a>is enc2name('eee', '011', {DR=>1}), 'dr3';
+<a name="line_112"></a>is enc2name('eee', '100', {DR=>1}), 'dr4';
+<a name="line_113"></a>is enc2name('eee', '101', {DR=>1}), 'dr5';
+<a name="line_114"></a>is enc2name('eee', '110', {DR=>1}), 'dr6';
+<a name="line_115"></a>is enc2name('eee', '111', {DR=>1}), 'dr7';
+<a name="line_116"></a>
+<a name="line_117"></a>is signed('0xff'), '-0x1';
+<a name="line_118"></a>is signed('ff'), '-0x1';
+<a name="line_119"></a>is signed('0x53'), '+0x53';
+<a name="line_120"></a>is signed('53'), '+0x53';
+<a name="line_121"></a>
+<a name="line_122"></a># add ebx,[edi] - 0000 001w : mod reg r/m
+<a name="line_123"></a>my $mac = '03 1F';
+<a name="line_124"></a>my $res = Idu->decode($mac);
+<a name="line_125"></a>is enc2name('reg', $res->{reg}, $res), 'ebx';
+<a name="line_126"></a>is enc2name('reg', $res->{rm}, $res), 'edi';
+<a name="line_127"></a>is gen_mem($res), '[edi]';
+<a name="line_128"></a>
+<a name="line_129"></a># add [0x6d0b5f4f],edx - 0000 000w : mod reg r/m
+<a name="line_130"></a>$mac = '01 15 4F 5F 0B 6D';
+<a name="line_131"></a>$res = Idu->decode($mac);
+<a name="line_132"></a>is gen_mem($res), '[0x6d0b5f4f]';
+<a name="line_133"></a>
+<a name="line_134"></a># add [ebx+0x11],bp - 0000 000w : mod reg r/m
+<a name="line_135"></a>$mac = '66 01 6B 11';
+<a name="line_136"></a>$res = Idu->decode($mac);
+<a name="line_137"></a>is gen_mem($res), '[ebx+0x11]';
+<a name="line_138"></a>
+<a name="line_139"></a># add word [eax-0xf],0x92c - 1000 00sw : mod 000 r/m : immediate data
+<a name="line_140"></a>$mac = '66 81 40 F1 2C 09';
+<a name="line_141"></a>$res = Idu->decode($mac);
+<a name="line_142"></a>is gen_mem($res), '[eax-0xf]';
+<a name="line_143"></a>
+<a name="line_144"></a>$mac = '66 81 40 01 2C 09';
+<a name="line_145"></a>$res = Idu->decode($mac);
+<a name="line_146"></a>is gen_mem($res), '[eax+0x1]';
+<a name="line_147"></a>
+<a name="line_148"></a># bsf si,[ecx+ecx*2+0x42fcd77f] - 0000 1111 : 1011 1100 : mod reg r/m
+<a name="line_149"></a>$mac = '66 0F BC B4 49 7F D7 FC 42';
+<a name="line_150"></a>$res = Idu->decode($mac);
+<a name="line_151"></a>is enc2name('reg', $res->{reg}, $res), 'si';
+<a name="line_152"></a>is gen_mem($res), '[ecx+ecx*2+0x42fcd77f]';
+<a name="line_153"></a>
+<a name="line_154"></a># bsf si,[ecx+ecx*2+0xfffcd77f] - 0000 1111 : 1011 1100 : mod reg r/m
+<a name="line_155"></a>$mac = '66 0F BC B4 49 7F D7 FC ff';
+<a name="line_156"></a>$res = Idu->decode($mac);
+<a name="line_157"></a>is enc2name('reg', $res->{reg}, $res), 'si';
+<a name="line_158"></a>is gen_mem($res), '[ecx+ecx*2+0xfffcd77f]';
+<a name="line_159"></a>
+<a name="line_160"></a># bsr esp,[edx+0x15f8d6bb] - 0000 1111 : 1011 1101 : mod reg r/m
+<a name="line_161"></a>$mac = '0F BD A2 BB D6 F8 15';
+<a name="line_162"></a>$res = Idu->decode($mac);
+<a name="line_163"></a>is enc2name('reg', $res->{reg}, $res), 'esp';
+<a name="line_164"></a>is gen_mem($res), '[edx+0x15f8d6bb]';
+<a name="line_165"></a>
+<a name="line_166"></a># add dword [ebx+ebx],byte +0x8 - 1000 00sw : mod 000 r/m : immediate data
+<a name="line_167"></a>$mac = '83 04 1b 08';
+<a name="line_168"></a>$res = Idu->decode($mac);
+<a name="line_169"></a>is gen_mem($res), '[ebx+ebx]';
+<a name="line_170"></a>
+<a name="line_171"></a># adc word [eax],byte -0x11 - 1000 00sw : mod 010 r/m : immediate data
+<a name="line_172"></a>$mac = '66 83 14 E0 EF';
+<a name="line_173"></a>$res = Idu->decode($mac);
+<a name="line_174"></a>is gen_mem($res), '[eax]';
+<a name="line_175"></a>
+<a name="line_176"></a>$mac = '66 83 14 E0 EF ';
+<a name="line_177"></a>$res = Idu->decode($mac);
+<a name="line_178"></a>is gen_imm($res), 'byte -0x11';
+<a name="line_179"></a>
+<a name="line_180"></a>$mac = '37';
+<a name="line_181"></a>is disasm($mac), 'aaa';
+<a name="line_182"></a>
+<a name="line_183"></a>$mac = '66 62 23';
+<a name="line_184"></a>is disasm($mac), 'bound sp,[ebx]';
+<a name="line_185"></a>
+<a name="line_186"></a>$mac = 'D5 0A';
+<a name="line_187"></a>is disasm($mac), 'aad';
+<a name="line_188"></a>
+<a name="line_189"></a>$mac = 'D4 0A';
+<a name="line_190"></a>is disasm($mac), 'aam';
+<a name="line_191"></a>
+<a name="line_192"></a>$mac = '66 3F';
+<a name="line_193"></a>is disasm($mac), 'aas';
+<a name="line_194"></a>
+<a name="line_195"></a>$mac = '66 98';
+<a name="line_196"></a>is disasm($mac), 'cbw';
+<a name="line_197"></a>
+<a name="line_198"></a>$mac = '98';
+<a name="line_199"></a>is disasm($mac), 'cwde';
+<a name="line_200"></a>
+<a name="line_201"></a>$mac = '99';
+<a name="line_202"></a>is disasm($mac), 'cdq';
+<a name="line_203"></a>
+<a name="line_204"></a>$mac = '66 99';
+<a name="line_205"></a>is disasm($mac), 'cwd';
+<a name="line_206"></a>
+<a name="line_207"></a>$mac = '3F';
+<a name="line_208"></a>is disasm($mac), 'aas';
+<a name="line_209"></a>
+<a name="line_210"></a>$mac = '0F CD';
+<a name="line_211"></a>is disasm($mac), 'bswap ebp';
+<a name="line_212"></a>
+<a name="line_213"></a>$mac = 'F8';
+<a name="line_214"></a>is disasm($mac), 'clc';
+<a name="line_215"></a>
+<a name="line_216"></a>$mac = 'FC';
+<a name="line_217"></a>is disasm($mac), 'cld';
+<a name="line_218"></a>
+<a name="line_219"></a>$mac = 'FA';
+<a name="line_220"></a>is disasm($mac), 'cli';
+<a name="line_221"></a>
+<a name="line_222"></a>$mac = '0F 06';
+<a name="line_223"></a>is disasm($mac), 'clts';
+<a name="line_224"></a>
+<a name="line_225"></a>$mac = 'F5';
+<a name="line_226"></a>is disasm($mac), 'cmc';
+<a name="line_227"></a>
+<a name="line_228"></a>$mac = 'A6';
+<a name="line_229"></a>is disasm($mac),'cmpsb';
+<a name="line_230"></a>
+<a name="line_231"></a>$mac = '0F A2';
+<a name="line_232"></a>is disasm($mac),'cpuid';
+<a name="line_233"></a>
+<a name="line_234"></a>$mac = '27';
+<a name="line_235"></a>is disasm($mac),'daa';
+<a name="line_236"></a>
+<a name="line_237"></a>$mac = '2F';
+<a name="line_238"></a>is disasm($mac),'das';
+<a name="line_239"></a>
+<a name="line_240"></a>$mac = 'F4';
+<a name="line_241"></a>is disasm($mac), 'hlt';
+<a name="line_242"></a>
+<a name="line_243"></a>$mac = '6C';
+<a name="line_244"></a>is disasm($mac), 'insb';
+<a name="line_245"></a>
+<a name="line_246"></a>$mac = '6D';
+<a name="line_247"></a>is disasm($mac), 'insd';
+<a name="line_248"></a>
+<a name="line_249"></a>$mac = '66 6D';
+<a name="line_250"></a>is disasm($mac), 'insw';
+<a name="line_251"></a>
+<a name="line_252"></a>$mac = '66 6C';
+<a name="line_253"></a>is disasm($mac), 'insb';
+<a name="line_254"></a>
+<a name="line_255"></a>$mac = 'CC';
+<a name="line_256"></a>is disasm($mac), 'int3';
+<a name="line_257"></a>
+<a name="line_258"></a>$mac = 'CD 96';
+<a name="line_259"></a>is disasm($mac), 'int 0x96';
+<a name="line_260"></a>
+<a name="line_261"></a>$mac = 'CE';
+<a name="line_262"></a>is disasm($mac), 'into';
+<a name="line_263"></a>
+<a name="line_264"></a>$mac = '0F 08';
+<a name="line_265"></a>is disasm($mac), 'invd';
+<a name="line_266"></a>
+<a name="line_267"></a>$mac = '0F 01 39';
+<a name="line_268"></a>is disasm($mac), 'invlpg [ecx]';
+<a name="line_269"></a>
+<a name="line_270"></a>$mac = 'CF';
+<a name="line_271"></a>is disasm($mac), 'iret';
+<a name="line_272"></a>
+<a name="line_273"></a>$mac = '66 CF';
+<a name="line_274"></a>is disasm($mac), 'iretw';
+<a name="line_275"></a>
+<a name="line_276"></a>$mac = '9F';
+<a name="line_277"></a>is disasm($mac), 'lahf';
+<a name="line_278"></a>
+<a name="line_279"></a>$mac = 'C5 81 53 BC C2 45';
+<a name="line_280"></a>is disasm($mac), 'lds eax,[ecx+0x45c2bc53]';
+<a name="line_281"></a>
+<a name="line_282"></a>$mac = '8D 5D 8E';
+<a name="line_283"></a>is disasm($mac), 'lea ebx,[ebp-0x72]';
+<a name="line_284"></a>
+<a name="line_285"></a>$mac = 'C9';
+<a name="line_286"></a>is disasm($mac), 'leave';
+<a name="line_287"></a>
+<a name="line_288"></a>$mac = '66 C4 A1 41 A4 9A 05';
+<a name="line_289"></a>is disasm($mac), 'les sp,[ecx+0x59aa441]';
+<a name="line_290"></a>
+<a name="line_291"></a>$mac = '0F B4 6A C6';
+<a name="line_292"></a>is disasm($mac), 'lfs ebp,[edx-0x3a]';
+<a name="line_293"></a>
+<a name="line_294"></a>$mac = '0F 01 97 49 4D 7F DC';
+<a name="line_295"></a>is disasm($mac), 'lgdt [edi+0xdc7f4d49]';
+<a name="line_296"></a>
+<a name="line_297"></a>$mac = '66 0F B5 15 B5 8B C0 1D';
+<a name="line_298"></a>is disasm($mac), 'lgs dx,[0x1dc08bb5]';
+<a name="line_299"></a>
+<a name="line_300"></a>$mac = '0F 01 5A 39';
+<a name="line_301"></a>is disasm($mac), 'lidt [edx+0x39]';
+<a name="line_302"></a>
+<a name="line_303"></a>$mac = 'AC';
+<a name="line_304"></a>is disasm($mac), 'lodsb';
+<a name="line_305"></a>
+<a name="line_306"></a>$mac = 'AD';
+<a name="line_307"></a>is disasm($mac), 'lodsd';
+<a name="line_308"></a>
+<a name="line_309"></a>$mac = '66 AD';
+<a name="line_310"></a>is disasm($mac), 'lodsw';
+<a name="line_311"></a>
+<a name="line_312"></a>$mac = 'E8 84 64 B8 3B';
+<a name="line_313"></a>is disasm($mac), 'call 0x3bb86489';
+<a name="line_314"></a>
+<a name="line_315"></a>$mac = '7F D5';
+<a name="line_316"></a>is disasm($mac), 'jg 0xffffffd7';
+<a name="line_317"></a>
+<a name="line_318"></a>$mac = '0F 88 9F 86 14 87';
+<a name="line_319"></a>is disasm($mac), 'js near 0x871486a5';
+<a name="line_320"></a>
+<a name="line_321"></a>$mac = 'E2 C4';
+<a name="line_322"></a>is disasm($mac), 'loop 0xffffffc6';
+<a name="line_323"></a>
+<a name="line_324"></a>$mac = 'E1 B8';
+<a name="line_325"></a>is disasm($mac), 'loope 0xffffffba';
+<a name="line_326"></a>
+<a name="line_327"></a>$mac = 'E0 1C';
+<a name="line_328"></a>is disasm($mac), 'loopne 0x1e';
+<a name="line_329"></a>
+<a name="line_330"></a>$mac = 'E3 2E';
+<a name="line_331"></a>is disasm($mac), 'jecxz 0x30';
+<a name="line_332"></a>
+<a name="line_333"></a>TODO:{
+<a name="line_334"></a>    local $TODO = 'idu restrictions on multiple imm data';
+<a name="line_335"></a>
+<a name="line_336"></a>    $mac = 'C8 67 37 0B';
+<a name="line_337"></a>    is disasm($mac), 'enter 0x3767,0xb';
+<a name="line_338"></a>}
+<a name="line_339"></a>$mac = '66 0F B2 72 4A';
+<a name="line_340"></a>is disasm($mac), 'lss si,[edx+0x4a]';
+<a name="line_341"></a>
+<a name="line_342"></a>$mac = '6E';
+<a name="line_343"></a>is disasm($mac), 'outsb';
+<a name="line_344"></a>
+<a name="line_345"></a>$mac = '66 6F';
+<a name="line_346"></a>is disasm($mac), 'outsw';
+<a name="line_347"></a>
+<a name="line_348"></a>$mac = '6F';
+<a name="line_349"></a>is disasm($mac), 'outsd';
+<a name="line_350"></a>
+<a name="line_351"></a>$mac = '0F 22 C2';
+<a name="line_352"></a>is disasm($mac), 'mov cr0,edx';
+<a name="line_353"></a>
+<a name="line_354"></a>$mac = '0F 20 CE';
+<a name="line_355"></a>is disasm($mac), 'mov esi,cr1';
+<a name="line_356"></a>
+<a name="line_357"></a>$mac = '0F 23 D2';
+<a name="line_358"></a>is disasm($mac), 'mov dr2,edx';
+<a name="line_359"></a>
+<a name="line_360"></a>$mac = '0F 21 D2';
+<a name="line_361"></a>is disasm($mac), 'mov edx,dr2';
+<a name="line_362"></a>
+<a name="line_363"></a>$mac = 'A4';
+<a name="line_364"></a>is disasm($mac), 'movsb';
+<a name="line_365"></a>
+<a name="line_366"></a>$mac = '66 A5';
+<a name="line_367"></a>is disasm($mac), 'movsw';
+<a name="line_368"></a>
+<a name="line_369"></a>$mac= 'A5';
+<a name="line_370"></a>is disasm($mac), 'movsd';
+<a name="line_371"></a>
+<a name="line_372"></a>$mac = '61';
+<a name="line_373"></a>is disasm($mac), 'popa';
+<a name="line_374"></a>
+<a name="line_375"></a>$mac = '66 61';
+<a name="line_376"></a>is disasm($mac), 'popaw';
+<a name="line_377"></a>
+<a name="line_378"></a>$mac = '9D';
+<a name="line_379"></a>is disasm($mac), 'popf';
+<a name="line_380"></a>
+<a name="line_381"></a>$mac = '66 9D';
+<a name="line_382"></a>is disasm($mac), 'popfw';
+<a name="line_383"></a>
+<a name="line_384"></a>$mac = '60';
+<a name="line_385"></a>is disasm($mac), 'pusha';
+<a name="line_386"></a>
+<a name="line_387"></a>$mac = '66 60';
+<a name="line_388"></a>is disasm($mac), 'pushaw';
+<a name="line_389"></a>
+<a name="line_390"></a>$mac = '9C';
+<a name="line_391"></a>is disasm($mac), 'pushf';
+<a name="line_392"></a>
+<a name="line_393"></a>$mac = '66 9C';
+<a name="line_394"></a>is disasm($mac), 'pushfw';
+<a name="line_395"></a>
+<a name="line_396"></a>$mac = '0F 32';
+<a name="line_397"></a>is disasm($mac), 'rdmsr';
+<a name="line_398"></a>
+<a name="line_399"></a>$mac = '0F 33';
+<a name="line_400"></a>is disasm($mac), 'rdpmc';
+<a name="line_401"></a>
+<a name="line_402"></a>$mac = '0F 31';
+<a name="line_403"></a>is disasm($mac), 'rdtsc';
+<a name="line_404"></a>
+<a name="line_405"></a>$mac = '0F AA';
+<a name="line_406"></a>is disasm($mac), 'rsm';
+<a name="line_407"></a>
+<a name="line_408"></a>$mac = '9E';
+<a name="line_409"></a>is disasm($mac), 'sahf';
+<a name="line_410"></a>
+<a name="line_411"></a>$mac = 'D6';
+<a name="line_412"></a>is disasm($mac), 'salc';
+<a name="line_413"></a>
+<a name="line_414"></a>$mac = '0F 01 87 7B 69 C1 D2';
+<a name="line_415"></a>is disasm($mac), 'sgdt [edi+0xd2c1697b]';
+<a name="line_416"></a>
+<a name="line_417"></a>$mac = '0F 01 48 78';
+<a name="line_418"></a>is disasm($mac), 'sidt [eax+0x78]';
+<a name="line_419"></a>
+<a name="line_420"></a>$mac = 'F9';
+<a name="line_421"></a>is disasm($mac), 'stc';
+<a name="line_422"></a>
+<a name="line_423"></a>$mac = 'FD';
+<a name="line_424"></a>is disasm($mac), 'std';
+<a name="line_425"></a>
+<a name="line_426"></a>$mac = 'FB';
+<a name="line_427"></a>is disasm($mac), 'sti';
+<a name="line_428"></a>
+<a name="line_429"></a>$mac = '9B';
+<a name="line_430"></a>is disasm($mac), 'wait';
+<a name="line_431"></a>
+<a name="line_432"></a>$mac = '0F 09';
+<a name="line_433"></a>is disasm($mac), 'wbinvd';
+<a name="line_434"></a>
+<a name="line_435"></a>$mac = '0F 30';
+<a name="line_436"></a>is disasm($mac), 'wrmsr';
+<a name="line_437"></a>
+<a name="line_438"></a>$mac = 'D7';
+<a name="line_439"></a>is disasm($mac), 'xlatb';
+<a name="line_440"></a>
+<a name="line_441"></a>$mac = '63 C1';
+<a name="line_442"></a>is disasm($mac), 'arpl cx,ax';
+<a name="line_443"></a>
+<a name="line_444"></a>$mac = '0F 03 C2';
+<a name="line_445"></a>is disasm($mac), 'lsl eax,edx';
+<a name="line_446"></a>
+<a name="line_447"></a>$mac = '0F 02 FE';
+<a name="line_448"></a>is disasm($mac), 'lar edi,esi';
+<a name="line_449"></a>
+<a name="line_450"></a>$mac = '0F 01 F4';
+<a name="line_451"></a>is disasm($mac), 'lmsw sp';
+<a name="line_452"></a>
+<a name="line_453"></a>my %data = (
+<a name="line_454"></a>    '8F 04 F7' => 'pop dword [edi+esi*8]',
+<a name="line_455"></a>    '66 0f 00 0b' => 'str [ebx]',
+<a name="line_456"></a>    '0f 00 8a 58 02 3c 90' => 'str [edx+0x903c0258]',
+<a name="line_457"></a>    '85 df' => 'test edi,ebx',
+<a name="line_458"></a>    '66 d3 0e' => 'ror word [esi],cl',
+<a name="line_459"></a>    'd2 0b' => 'ror byte [ebx],cl',
+<a name="line_460"></a>);
+<a name="line_461"></a>
+<a name="line_462"></a>my $asm;
+<a name="line_463"></a>while (($mac, $asm) = each %data) {
+<a name="line_464"></a>  is disasm($mac), $asm;
+<a name="line_465"></a>}  
+<a name="line_466"></a>
+<a name="line_467"></a>
+<a name="line_468"></a>
+<a name="line_469"></a>
+<a name="line_470"></a>
+<a name="line_471"></a>
+<a name="line_472"></a>
+<a name="line_473"></a>
+<a name="line_474"></a>
+<a name="line_475"></a>
+<a name="line_476"></a>
+ </pre></tt></body>
+</html>

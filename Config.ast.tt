@@ -1,0 +1,67 @@
+[% SET
+    ast = {
+        version = '0.13'
+        word_size = 32
+        addr_size = 32
+        alu = {
+            sels = 
+              [
+                'NOP',
+                'ADD', 'SUB', 'MUL', 'IMUL', 'DIV', 'IDIV',
+                'AND', 'OR', 'XOR', 'NOT', 'NEG',
+                'SHL', 'SHR', 'SAL', 'SAR',
+                'ROL', 'ROR', 'RCL', 'RCR',
+              ]
+            delay = 1
+        }
+        ram = {
+            capacity = 64 * 1024  # in words, not in bytes
+            delay = 10
+        }
+        idu = {
+            reg_fields = [
+              'reg', 'reg1', 'reg2',
+              'sreg2', 'sreg3',
+              'eee', 'tttn', 'ST_i',
+            ]
+            bit_fields = [ 's', 'w', 'd', 'R' ]
+            prefixes = [
+                'f2', 'f3', # REP & REPE
+                'f0', # LOCK
+
+                '67', # address size
+                '66', # operand size
+
+                '2e', # CS segment override
+                '36', # SS segment override
+                '3e', # DS segment override
+                '26', # ES segment override
+                '64', # FS segment override
+                '65', # GS segment override
+            ]
+        }
+        fld_map = { 
+            reg32 =
+              {
+                 w0 = ['AL' 'CL' 'DL' 'BL' 'AH' 'CH' 'DH' 'BH'],
+                 w1 = ['EAX' 'ECX' 'EDX' 'EBX' 'ESP' 'EBP' 'ESI' 'EDI'],
+                 none = ['EAX' 'ECX' 'EDX' 'EBX' 'ESP' 'EBP' 'ESI' 'EDI']
+              },
+            reg16 =
+              {
+                 w0 = ['AL' 'CL' 'DL' 'BL' 'AH' 'CH' 'DH' 'BH'],
+                 w1 = ['AX' 'CX' 'DX' 'BX' 'SP' 'BP' 'SI' 'DI'],
+                 none = ['AX' 'CX' 'DX' 'BX' 'SP' 'BP' 'SI' 'DI']
+              },
+            sreg2 = ['ES' 'CS' 'SS' 'DS'],
+            sreg3 = ['ES' 'CS' 'SS' 'DS' 'FS' 'GS' 'segr6' 'segr7'],
+            eee   = {
+                CR = ['CR0' 'CR1' 'CR2' 'CR3' 'CR4' 'CR5' 'CR6' 'CR7'],
+                DR = ['DR0' 'DR1' 'DR2' 'DR3' 'DR4' 'DR5' 'DR6' 'DR7']
+            }
+            tttn  = ['O' 'NO' 'C' 'NC' 'Z' 'NZ' 'NA' 'A' 'S' 'NS' 'PE' 'PO' 'L' 'NL' 'NG' 'G'],
+        }
+    }
+-%]
+[% USE dumper;
+   dumper.dump(ast) -%]

@@ -1,0 +1,175 @@
+[% TAGS <+ +> -%]
+<+ DEFAULT lang='Default' -+>
+[% DEFAULT
+    ast_file = 't/optest.ast'
+    tests = 3 * 14
+    ops = []
+-%]
+[% SET tests = 3 * ops.size IF ops.0 -%]
+[% USE date;
+   SET
+     last_mod = date.format(template.modtime, '20%y-%m-%d', 'en_GB')
+-%]
+#: This test script was generated from optest.tt
+#: Salent v0.13
+#: Copyright (c) 2005 Agent Zhang
+#: 2005-07-29 [% last_mod %]
+
+use strict;
+use warnings;
+
+use Getopt::Std;
+use Test::More tests => [% tests %];
+<+ IF lang == 'Perl' -+>
+use inc::Idu;
+<+ ELSE -+>
+use <+ lang +>::Idu;
+<+ END -+>
+use Template::Ast;
+
+my %opts;
+getopts('d', \%opts);
+my $debug = $opts{d};
+
+my %enc_pats; # For testing instruction pattern coverage
+my $ast = Template::Ast->read('[% ast_file %]');
+my @ops = @{$ast->{ops}};
+#warn Template::Ast->dump([\@ops], [qw(ops)]);
+
+my @synonyms = (
+    'CMPS/CMPSB/CMPSW/CMPSD',
+    'CWD/CDQ',     # Add by Agent
+    'CWDE/CDW/CBW',    # Add by Agent
+    'FDIVR/FDIV',  # Add by Agent
+    'FSUBR/FSUB',  # Add by Agent
+    'FWAIT/WAIT',  # Add by Agent
+    'IRET/IRETD',
+    'INT/INT1/INT2/INT3/INT n',    # Add by Agent
+    'INS/INSB/INSW/INSD',    # Add by Agent
+    'JCXZ/JECXZ',
+    'LODS/LODSB/LODSW/LODSD',
+    'LOOPZ/LOOPE',
+    'LOOPNZ/LOOPNE',
+    'MOVS/MOVSB/MOVSW/MOVSD',
+    'OUTS/OUTSB/OUTSW/OUTSD',
+    'POPA/POPAD',
+    'POPF/POPFD',
+    'PUSHA/PUSHAD',
+    'PUSHF/PUSHFD',
+    'PUSH/PUSHD',   # Add by Agent
+    'RET/RETF',     # Add by Agent
+    'SCAS/SCASB/SCASW/SCASD',
+    'STOS/STOSB/STOSW/STOSD',
+    'XLAT/XLATB',
+);
+
+map { s/\//|/g; $_ = "(?:$_)"; } @synonyms;
+#warn "@synonyms\n";
+
+foreach my $op (@ops) {
+    my $mac = $op->{mac};
+    my ($ins, $asm) = process_asm($op->{asm});
+
+    my $res = Idu->decode($mac);
+    if ($debug and $res) {
+        my $enc = $res->{encoding};
+        $enc_pats{$enc} = 1 if defined $enc;
+    }
+
+    # Ignore some legacy preffix byte:
+    $ins =~ s/^(?:lock|es|ss)\s+//io;
+
+=begin comment_todo
+
+    if ($ins =~ m/DEC|INC|POP|FADD|FSUB|FMUL|FDIV|JNS/io) {
+        TODO: {
+            local $TODO = 'State machine needs to be adapted to LALR(2)';
+            ok($res, "res ok - $mac => $ins => $asm");
+            is $res->{ins}, $ins, "op name ok";
+            ok eq_array (
+                \@Idu::oldbytes,
+                [split(' ', $mac)],
+            ), "no bytes left";
+        }
+        next;
+    }
+
+=cut
+
+    # The disassembler fails to parse the bytes:
+    if ($ins =~ m/^DB$/i or $ins =~ m/^byte$/i) {
+        ok(!defined $res, "res ok - $mac => $ins => $asm");
+        ok(1);
+        ok(1);
+        next;
+    }
+
+    ok($res, "res ok - $mac => $ins => $asm");
+    ok eq_array (
+        $res->{bytes},
+        [split(' ', $mac)],
+    ), "no bytes left";
+
+    # Resolve "NOP":
+    if ($ins =~ m/^\s*NOP/i) {
+        is($res->{ins}, 'XCHG', 'op name ok');
+        next;
+    }
+
+    cmp_op($res->{ins}, $ins);
+}
+
+if ($debug) {
+    print "# ", scalar(keys %enc_pats), " instruction pattern(s) covered.\n";
+}
+
+sub cmp_op {
+    my ($dec_ins, $des_ins) = @_;
+
+    if ($dec_ins =~ m/\//) {  # decoder returns 'PUSHF/PUSHFD', 'PUSH/PUSHD', etc.
+        my $pat = $dec_ins;
+        $pat =~ s/\//|/g;
+        return like($des_ins, qr/$pat/, 'op name ok');
+    }
+
+    if ($dec_ins =~ m/^(\w+)cc$/) {  # cc problem:
+        return like($des_ins, qr/^$1\w+/i, 'op name ok');
+    }
+
+    # resolve the synonym problem:
+    my $prefix;
+    my $found = grep {
+        if ($des_ins =~ m/^$_$/) {
+            1;
+        } elsif ($des_ins =~ m/^(rep\w*) $_$/i) {
+            $prefix = $1;
+            1;
+        }
+    } @synonyms;
+    if ($found) {
+        if (defined $prefix) {
+            $prefix .= ' ';
+        } else {
+            $prefix = '';
+        }
+        $prefix =~ s/^rep\w+/rep\\w+/i;
+        #warn $prefix;
+        $found = grep { $dec_ins =~ m/^${prefix}$_$/i } @synonyms;
+        return ok($found, "op name ok: $dec_ins <=> $des_ins");
+    } 
+    return is($dec_ins, $des_ins, 'op name ok');
+}
+
+sub process_asm {
+    my $asm = shift;
+    $asm =~ s/;[^;]+$//;
+    $asm =~ s/\s+$//;
+    my $pref_pat = qr/rep\w*|lock|O16|a16|a32|O32|[scdefg]s/i;
+    unless ($asm =~ m/^(?:$pref_pat\s+)+\w+/io or $asm =~ m/^\w+/oi) {
+        warn $_;
+        next;
+    }
+    my $ins = $&;
+    $ins =~ s/^($pref_pat\s+)+//i;
+    return (uc($ins), $asm);
+}

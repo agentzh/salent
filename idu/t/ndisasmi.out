@@ -1,0 +1,13 @@
+Interactive disassembler by using ndisasmw
+Copyright (c) 2005 Sal Zhong. All rights reserved.
+
+- Type 'q' or 'Ctrl-Z' to quit the shell
+
+>> >> >> 				add [eax],al
+>> 				cmp dword [ebp+0x8],byte +0x0
+>> 				jnz 0x6
+>> error: Invalid user input.
+>> error: Invalid user input.
+>> error: Invalid user input.
+>> error: Invalid user input.
+>> 

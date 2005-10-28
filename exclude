@@ -1,0 +1,14 @@
+notes*
+Changes
+ChangeLog
+*.pdf
+*.exe
+*.obj
+*.ast
+*.bin
+*.dll
+*.pdb
+*.hex
+*.htm*
+catln.dat~
+catln.dat

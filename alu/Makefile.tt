@@ -1,0 +1,161 @@
+GLOB_AST = ..\Config.ast
+VLOG_TT = alu.v.tt
+PERL_TT = alu.t.tt
+C_TT = alu.c.tt
+DO_TT = alu.do.tt
+VLOG_ALU = ..\alu.v
+RM_F = perl -MExtUtils::Command -e rm_f
+RM_RF = perl -MExtUtils::Command -e rm_rf
+
+# --------------------------------------------------------
+# nmake
+# --------------------------------------------------------
+
+all : $(VLOG_ALU)
+
+$(VLOG_ALU) : $(VLOG_TT) $(GLOB_AST)
+	astt -o $@ -t $(VLOG_TT) $(GLOB_AST)
+
+# --------------------------------------------------------
+# nmake test
+# --------------------------------------------------------
+
+test : all tester run_test
+
+[%- id_list = [1,2,3,4,5] %]
+tester : alu_t[%- FOREACH id IN id_list %] talu[% id %]_t[%- END %] talu6_t
+
+# Test the templates separately:
+
+alu_t : t\alu.t alu.exe.out alu.lst
+
+t\alu.t : $(PERL_TT)
+	tpage $(PERL_TT) > $@
+
+alu.exe.out : alu.exe
+	alu.exe > $@
+
+alu.exe : alu.c
+	cl /nologo alu.c
+
+alu.c : $(C_TT)
+	tpage $(C_TT) > $@
+
+alu.v : $(VLOG_TT)
+	tpage $(VLOG_TT) > $@
+
+alu.do : $(DO_TT)
+	tpage $(DO_TT) > $@
+
+alu.lst : alu.do alu.v
+	vsim -c -quiet -do alu.do
+
+##
+[%- FOREACH id IN id_list %]
+
+# Use TT to generate .op file
+
+BASE = talu[% id %]
+
+OP_FILE = $(BASE).op
+OP_FILE_TT = $(OP_FILE).tt
+AST_FILE = $(OP_FILE).ast
+EXE_FILE = $(OP_FILE).exe
+EXE_OUT = $(EXE_FILE).out
+C_FILE = $(OP_FILE).c
+VLOG_FILE = $(OP_FILE).v
+LST_FILE = $(OP_FILE).lst
+DO_FILE = $(OP_FILE).do
+T_FILE = t\$(OP_FILE).t
+
+$(BASE)_t : $(T_FILE) $(EXE_OUT) $(LST_FILE)
+
+$(T_FILE) : $(AST_FILE) $(GLOB_AST) $(PERL_TT)
+	astt -o $@ -t $(PERL_TT) $(GLOB_AST) $(AST_FILE)
+
+$(AST_FILE) : ast++.pl $(OP_FILE) opc.tt
+	tpage --define op_file=$(OP_FILE) opc.tt > $@
+	perl ast++.pl $@
+
+$(OP_FILE) : $(OP_FILE_TT)
+	tpage $(OP_FILE_TT) > $@
+
+$(EXE_OUT) : $(EXE_FILE)
+	$(EXE_FILE) > $@
+
+$(EXE_FILE) : $(C_FILE)
+	cl /EHs /nologo $(C_FILE)
+
+$(C_FILE) : $(C_TT) $(GLOB_AST) $(AST_FILE)
+	astt -o $@ -t $(C_TT) $(GLOB_AST) $(AST_FILE)
+
+$(LST_FILE) : $(DO_FILE) $(VLOG_FILE)
+	vsim -c -quiet -do $(DO_FILE)
+
+$(VLOG_FILE) : $(VLOG_TT) $(GLOB_AST) $(AST_FILE)
+	astt -o $@ -t $(VLOG_TT) $(GLOB_AST) $(AST_FILE)
+
+$(DO_FILE) : $(DO_TT) $(GLOB_AST) $(AST_FILE)
+	astt -o $@ -t $(DO_TT) $(GLOB_AST) $(AST_FILE)
+
+##
+[%- END %]
+
+# Use perl script to generate .ast file directly:
+
+BASE = talu6
+
+OP_FILE = $(BASE).op
+PERL_FILE = $(BASE).pl
+AST_FILE = $(OP_FILE).ast
+EXE_FILE = $(OP_FILE).exe
+EXE_OUT = $(EXE_FILE).out
+C_FILE = $(OP_FILE).c
+VLOG_FILE = $(OP_FILE).v
+LST_FILE = $(OP_FILE).lst
+DO_FILE = $(OP_FILE).do
+T_FILE = t\$(OP_FILE).t
+
+$(BASE)_t : $(T_FILE) $(EXE_OUT) $(LST_FILE)
+
+$(T_FILE) : $(AST_FILE) $(GLOB_AST) $(PERL_TT)
+	astt -o $@ -t $(PERL_TT) $(GLOB_AST) $(AST_FILE)
+
+$(AST_FILE) : ast++.pl $(PERL_FILE)
+	perl $(PERL_FILE)
+	perl ast++.pl $@
+
+$(EXE_OUT) : $(EXE_FILE)
+	$(EXE_FILE) > $@
+
+$(EXE_FILE) : $(C_FILE)
+	cl /EHs /nologo $(C_FILE)
+
+$(C_FILE) : $(C_TT) $(GLOB_AST) $(AST_FILE)
+	astt -o $@ -t $(C_TT) $(GLOB_AST) $(AST_FILE)
+
+$(LST_FILE) : $(DO_FILE) $(VLOG_FILE)
+	vsim -c -quiet -do $(DO_FILE)
+
+$(VLOG_FILE) : $(VLOG_TT) $(GLOB_AST) $(AST_FILE)
+	astt -o $@ -t $(VLOG_TT) $(GLOB_AST) $(AST_FILE)
+
+$(DO_FILE) : $(DO_TT) $(GLOB_AST) $(AST_FILE)
+	astt -o $@ -t $(DO_TT) $(GLOB_AST) $(AST_FILE)
+
+##
+
+run_test :
+	set HARNESS_OK_SLOW = 1
+	perl -MExtUtils::Command::MM \
+	-e "@ARGV = map glob, @ARGV; test_harness(0, '.', '.');" t\*.t
+
+clean :
+	$(RM_F) $(VLOG_ALU) \
+		vsim.wlf transcript \
+		alu.v alu.do alu.lst alu.c alu.obj alu.exe alu.exe.out alu.pl \
+		*.op.v *.op.pl *.op.do *.op.c *.op.obj *.op.exe* *.op.lst *.op.ast \
+		talu1.op talu2.op talu3.op talu4.op talu5.op \
+		t/talu*.t t/alu.t Makefile *tmp* t/result.lst
+	$(RM_RF) work
+	vlib work

@@ -1,0 +1,60 @@
+<html>
+ <head>
+  <title>D:\Agent2002\Salent\v0.13\ModelSim\idu\t\encoding.ast</title>
+ </head>
+ <body><tt><pre>
+<font color=gray>     1</font>  <a name="line_1"></a>$vars = {
+<font color=gray>     2</font>  <a name="line_2"></a>          'insts' => [
+<font color=gray>     3</font>  <a name="line_3"></a>                       {
+<font color=gray>     4</font>  <a name="line_4"></a>                         'sub_des' => 'register1 to register2',
+<font color=gray>     5</font>  <a name="line_5"></a>                         'op_name' => 'ADC',
+<font color=gray>     6</font>  <a name="line_6"></a>                         'ins_set' => 'General',
+<font color=gray>     7</font>  <a name="line_7"></a>                         'des' => 'ADD with Carry',
+<font color=gray>     8</font>  <a name="line_8"></a>                         'encoding' => '0001 000w : 11 reg1 reg2'
+<font color=gray>     9</font>  <a name="line_9"></a>                       },
+<font color=gray>    10</font>  <a name="line_10"></a>                       {
+<font color=gray>    11</font>  <a name="line_11"></a>                         'sub_des' => 'register2 to register1',
+<font color=gray>    12</font>  <a name="line_12"></a>                         'op_name' => 'ADC',
+<font color=gray>    13</font>  <a name="line_13"></a>                         'ins_set' => 'General',
+<font color=gray>    14</font>  <a name="line_14"></a>                         'des' => 'ADD with Carry',
+<font color=gray>    15</font>  <a name="line_15"></a>                         'encoding' => '0001 001w : 11 reg1 reg2'
+<font color=gray>    16</font>  <a name="line_16"></a>                       },
+<font color=gray>    17</font>  <a name="line_17"></a>                       {
+<font color=gray>    18</font>  <a name="line_18"></a>                         'sub_des' => 'memory to register',
+<font color=gray>    19</font>  <a name="line_19"></a>                         'op_name' => 'ADC',
+<font color=gray>    20</font>  <a name="line_20"></a>                         'ins_set' => 'General',
+<font color=gray>    21</font>  <a name="line_21"></a>                         'des' => 'ADD with Carry',
+<font color=gray>    22</font>  <a name="line_22"></a>                         'encoding' => '0001 001w : mod reg r/m'
+<font color=gray>    23</font>  <a name="line_23"></a>                       },
+<font color=gray>    24</font>  <a name="line_24"></a>                       {
+<font color=gray>    25</font>  <a name="line_25"></a>                         'sub_des' => 'register to memory',
+<font color=gray>    26</font>  <a name="line_26"></a>                         'op_name' => 'ADC',
+<font color=gray>    27</font>  <a name="line_27"></a>                         'ins_set' => 'General',
+<font color=gray>    28</font>  <a name="line_28"></a>                         'des' => 'ADD with Carry',
+<font color=gray>    29</font>  <a name="line_29"></a>                         'encoding' => '0001 000w : mod reg r/m'
+<font color=gray>    30</font>  <a name="line_30"></a>                       },
+<font color=gray>    31</font>  <a name="line_31"></a>                       {
+<font color=gray>    32</font>  <a name="line_32"></a>                         'sub_des' => 'immediate to register',
+<font color=gray>    33</font>  <a name="line_33"></a>                         'op_name' => 'ADC',
+<font color=gray>    34</font>  <a name="line_34"></a>                         'ins_set' => 'General',
+<font color=gray>    35</font>  <a name="line_35"></a>                         'des' => 'ADD with Carry',
+<font color=gray>    36</font>  <a name="line_36"></a>                         'encoding' => '1000 00sw : 11 010 reg : immediate data'
+<font color=gray>    37</font>  <a name="line_37"></a>                       },
+<font color=gray>    38</font>  <a name="line_38"></a>                       {
+<font color=gray>    39</font>  <a name="line_39"></a>                         'sub_des' => 'immediate to AL, AX, or EAX',
+<font color=gray>    40</font>  <a name="line_40"></a>                         'op_name' => 'ADC',
+<font color=gray>    41</font>  <a name="line_41"></a>                         'ins_set' => 'General',
+<font color=gray>    42</font>  <a name="line_42"></a>                         'des' => 'ADD with Carry',
+<font color=gray>    43</font>  <a name="line_43"></a>                         'encoding' => '0001 010w : immediate data'
+<font color=gray>    44</font>  <a name="line_44"></a>                       },
+<font color=gray>    45</font>  <a name="line_45"></a>                       {
+<font color=gray>    46</font>  <a name="line_46"></a>                         'sub_des' => 'immediate to memory',
+<font color=gray>    47</font>  <a name="line_47"></a>                         'op_name' => 'ADC',
+<font color=gray>    48</font>  <a name="line_48"></a>                         'ins_set' => 'General',
+<font color=gray>    49</font>  <a name="line_49"></a>                         'des' => 'ADD with Carry',
+<font color=gray>    50</font>  <a name="line_50"></a>                         'encoding' => '1000 00sw : mod 010 r/m : immediate data'
+<font color=gray>    51</font>  <a name="line_51"></a>                       }
+<font color=gray>    52</font>  <a name="line_52"></a>                     ]
+<font color=gray>    53</font>  <a name="line_53"></a>        };
+ </pre></tt></body>
+</html>

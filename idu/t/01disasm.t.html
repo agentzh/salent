@@ -1,0 +1,182 @@
+<html>
+ <head>
+  <title>D:\Agent2002\Salent\v0.13\ModelSim\idu\t\01disasm.t</title>
+ </head>
+ <body><tt><pre>
+<font color=gray>     1</font>  <a name="line_1"></a>#: 01Disasm.t
+<font color=gray>     2</font>  <a name="line_2"></a>#: Test the inc::Disasm module.
+<font color=gray>     3</font>  <a name="line_3"></a>#: Salent v0.13
+<font color=gray>     4</font>  <a name="line_4"></a>#: Copyright (c) 2005 Agent Zhang
+<font color=gray>     5</font>  <a name="line_5"></a>#: 2005-08-23 2005-08-25
+<font color=gray>     6</font>  <a name="line_6"></a>
+<font color=gray>     7</font>  <a name="line_7"></a>package Disasm;
+<font color=gray>     8</font>  <a name="line_8"></a>
+<font color=gray>     9</font>  <a name="line_9"></a>use strict;
+<font color=gray>    10</font>  <a name="line_10"></a>use warnings;
+<font color=gray>    11</font>  <a name="line_11"></a>
+<font color=gray>    12</font>  <a name="line_12"></a>use C::Idu;
+<font color=gray>    13</font>  <a name="line_13"></a>use Test::More tests => 110;
+<font color=gray>    14</font>  <a name="line_14"></a>BEGIN { use_ok('inc::Disasm'); }
+<font color=gray>    15</font>  <a name="line_15"></a>
+<font color=gray>    16</font>  <a name="line_16"></a>is enc2name('reg', '000'), 'eax';
+<font color=gray>    17</font>  <a name="line_17"></a>is enc2name('reg1', '000', {w=>undef}), 'eax';
+<font color=gray>    18</font>  <a name="line_18"></a>is enc2name('reg2', '000', {w=>undef,bits16=>undef}), 'eax';
+<font color=gray>    19</font>  <a name="line_19"></a>is enc2name('reg', '001'), 'ecx';
+<font color=gray>    20</font>  <a name="line_20"></a>is enc2name('reg', '010'), 'edx';
+<font color=gray>    21</font>  <a name="line_21"></a>is enc2name('reg', '011'), 'ebx';
+<font color=gray>    22</font>  <a name="line_22"></a>is enc2name('reg', '100'), 'esp';
+<font color=gray>    23</font>  <a name="line_23"></a>is enc2name('reg', '101'), 'ebp';
+<font color=gray>    24</font>  <a name="line_24"></a>is enc2name('reg', '110'), 'esi';
+<font color=gray>    25</font>  <a name="line_25"></a>is enc2name('reg', '111'), 'edi';
+<font color=gray>    26</font>  <a name="line_26"></a>
+<font color=gray>    27</font>  <a name="line_27"></a>is enc2name('reg2', '000', {bits16=>1}), 'ax';
+<font color=gray>    28</font>  <a name="line_28"></a>is enc2name('reg', '001', {bits16=>1}), 'cx';
+<font color=gray>    29</font>  <a name="line_29"></a>is enc2name('reg', '010', {bits16=>1}), 'dx';
+<font color=gray>    30</font>  <a name="line_30"></a>is enc2name('reg', '011', {bits16=>1}), 'bx';
+<font color=gray>    31</font>  <a name="line_31"></a>is enc2name('reg', '100', {bits16=>1}), 'sp';
+<font color=gray>    32</font>  <a name="line_32"></a>is enc2name('reg', '101', {bits16=>1}), 'bp';
+<font color=gray>    33</font>  <a name="line_33"></a>is enc2name('reg', '110', {bits16=>1}), 'si';
+<font color=gray>    34</font>  <a name="line_34"></a>is enc2name('reg', '111', {bits16=>1}), 'di';
+<font color=gray>    35</font>  <a name="line_35"></a>
+<font color=gray>    36</font>  <a name="line_36"></a>is enc2name('reg2', '000', {w=>1}), 'eax';
+<font color=gray>    37</font>  <a name="line_37"></a>is enc2name('reg', '001', {w=>1}), 'ecx';
+<font color=gray>    38</font>  <a name="line_38"></a>is enc2name('reg', '010', {w=>1}), 'edx';
+<font color=gray>    39</font>  <a name="line_39"></a>is enc2name('reg', '011', {w=>1}), 'ebx';
+<font color=gray>    40</font>  <a name="line_40"></a>is enc2name('reg', '100', {w=>1}), 'esp';
+<font color=gray>    41</font>  <a name="line_41"></a>is enc2name('reg', '101', {w=>1}), 'ebp';
+<font color=gray>    42</font>  <a name="line_42"></a>is enc2name('reg', '110', {w=>1}), 'esi';
+<font color=gray>    43</font>  <a name="line_43"></a>is enc2name('reg', '111', {w=>1}), 'edi';
+<font color=gray>    44</font>  <a name="line_44"></a>
+<font color=gray>    45</font>  <a name="line_45"></a>is enc2name('reg2', '000', {bits16=>1,w=>1}), 'ax';
+<font color=gray>    46</font>  <a name="line_46"></a>is enc2name('reg', '001', {bits16=>1,w=>1}), 'cx';
+<font color=gray>    47</font>  <a name="line_47"></a>is enc2name('reg', '010', {bits16=>1,w=>1}), 'dx';
+<font color=gray>    48</font>  <a name="line_48"></a>is enc2name('reg', '011', {bits16=>1,w=>1}), 'bx';
+<font color=gray>    49</font>  <a name="line_49"></a>is enc2name('reg', '100', {bits16=>1,w=>1}), 'sp';
+<font color=gray>    50</font>  <a name="line_50"></a>is enc2name('reg', '101', {bits16=>1,w=>1}), 'bp';
+<font color=gray>    51</font>  <a name="line_51"></a>is enc2name('reg', '110', {bits16=>1,w=>1}), 'si';
+<font color=gray>    52</font>  <a name="line_52"></a>is enc2name('reg', '111', {bits16=>1,w=>1}), 'di';
+<font color=gray>    53</font>  <a name="line_53"></a>
+<font color=gray>    54</font>  <a name="line_54"></a>is enc2name('reg1', '000', {w=>0}), 'al';
+<font color=gray>    55</font>  <a name="line_55"></a>is enc2name('reg', '001', {w=>0}), 'cl';
+<font color=gray>    56</font>  <a name="line_56"></a>is enc2name('reg', '010', {w=>0}), 'dl';
+<font color=gray>    57</font>  <a name="line_57"></a>is enc2name('reg', '011', {w=>0}), 'bl';
+<font color=gray>    58</font>  <a name="line_58"></a>is enc2name('reg', '100', {w=>0}), 'ah';
+<font color=gray>    59</font>  <a name="line_59"></a>is enc2name('reg', '101', {w=>0}), 'ch';
+<font color=gray>    60</font>  <a name="line_60"></a>is enc2name('reg', '110', {w=>0}), 'dh';
+<font color=gray>    61</font>  <a name="line_61"></a>is enc2name('reg', '111', {w=>0,bits16=>undef}), 'bh';
+<font color=gray>    62</font>  <a name="line_62"></a>
+<font color=gray>    63</font>  <a name="line_63"></a>is enc2name('reg2', '000', {bits16=>1,w=>0}), 'al';
+<font color=gray>    64</font>  <a name="line_64"></a>is enc2name('reg', '001', {bits16=>1,w=>0}), 'cl';
+<font color=gray>    65</font>  <a name="line_65"></a>is enc2name('reg', '010', {bits16=>1,w=>0}), 'dl';
+<font color=gray>    66</font>  <a name="line_66"></a>is enc2name('reg', '011', {bits16=>1,w=>0}), 'bl';
+<font color=gray>    67</font>  <a name="line_67"></a>is enc2name('reg', '100', {bits16=>1,w=>0}), 'ah';
+<font color=gray>    68</font>  <a name="line_68"></a>is enc2name('reg', '101', {bits16=>1,w=>0}), 'ch';
+<font color=gray>    69</font>  <a name="line_69"></a>is enc2name('reg', '110', {bits16=>1,w=>0}), 'dh';
+<font color=gray>    70</font>  <a name="line_70"></a>is enc2name('reg', '111', {bits16=>1,w=>0}), 'bh';
+<font color=gray>    71</font>  <a name="line_71"></a>
+<font color=gray>    72</font>  <a name="line_72"></a>is enc2name('sreg2', '00'), 'es';
+<font color=gray>    73</font>  <a name="line_73"></a>is enc2name('sreg2', '00', {bits16=>1,w=>0}), 'es';
+<font color=gray>    74</font>  <a name="line_74"></a>is enc2name('sreg2', '01'), 'cs';
+<font color=gray>    75</font>  <a name="line_75"></a>is enc2name('sreg2', '10'), 'ss';
+<font color=gray>    76</font>  <a name="line_76"></a>is enc2name('sreg2', '11'), 'ds';
+<font color=gray>    77</font>  <a name="line_77"></a>
+<font color=gray>    78</font>  <a name="line_78"></a>is enc2name('sreg3', '000'), 'es';
+<font color=gray>    79</font>  <a name="line_79"></a>is enc2name('sreg3', '000', {bits16=>1,w=>0}), 'es';
+<font color=gray>    80</font>  <a name="line_80"></a>is enc2name('sreg3', '001'), 'cs';
+<font color=gray>    81</font>  <a name="line_81"></a>is enc2name('sreg3', '010'), 'ss';
+<font color=gray>    82</font>  <a name="line_82"></a>is enc2name('sreg3', '011'), 'ds';
+<font color=gray>    83</font>  <a name="line_83"></a>is enc2name('sreg3', '100'), 'fs';
+<font color=gray>    84</font>  <a name="line_84"></a>is enc2name('sreg3', '101'), 'gs';
+<font color=gray>    85</font>  <a name="line_85"></a>is enc2name('sreg3', '110'), 'segr6';
+<font color=gray>    86</font>  <a name="line_86"></a>is enc2name('sreg3', '111'), 'segr7';
+<font color=gray>    87</font>  <a name="line_87"></a>
+<font color=gray>    88</font>  <a name="line_88"></a>is enc2name('tttn', '0000'), 'o';
+<font color=gray>    89</font>  <a name="line_89"></a>is enc2name('tttn', '0001'), 'no';
+<font color=gray>    90</font>  <a name="line_90"></a>is enc2name('tttn', '0010'), 'c';
+<font color=gray>    91</font>  <a name="line_91"></a>is enc2name('tttn', '0111'), 'a';
+<font color=gray>    92</font>  <a name="line_92"></a>is enc2name('tttn', '1000'), 's';
+<font color=gray>    93</font>  <a name="line_93"></a>is enc2name('tttn', '1001'), 'ns';
+<font color=gray>    94</font>  <a name="line_94"></a>is enc2name('tttn', '1110'), 'ng';
+<font color=gray>    95</font>  <a name="line_95"></a>is enc2name('tttn', '1111'), 'g';
+<font color=gray>    96</font>  <a name="line_96"></a>
+<font color=gray>    97</font>  <a name="line_97"></a>ok !defined enc2name('eee', '000');
+<font color=gray>    98</font>  <a name="line_98"></a>is enc2name('eee', '000', {eee_type=>'CR'}), 'cr0';
+<font color=gray>    99</font>  <a name="line_99"></a>is enc2name('eee', '001', {eee_type=>'cr'}), 'cr1';
+<font color=gray>   100</font>  <a name="line_100"></a>is enc2name('eee', '010', {eee_type=>'cr'}), 'cr2';
+<font color=gray>   101</font>  <a name="line_101"></a>is enc2name('eee', '011', {eee_type=>'cr'}), 'cr3';
+<font color=gray>   102</font>  <a name="line_102"></a>is enc2name('eee', '100', {eee_type=>'cr'}), 'cr4';
+<font color=gray>   103</font>  <a name="line_103"></a>is enc2name('eee', '101', {eee_type=>'cr'}), 'cr5';
+<font color=gray>   104</font>  <a name="line_104"></a>is enc2name('eee', '110', {eee_type=>'cr'}), 'cr6';
+<font color=gray>   105</font>  <a name="line_105"></a>is enc2name('eee', '111', {eee_type=>'cr'}), 'cr7';
+<font color=gray>   106</font>  <a name="line_106"></a>
+<font color=gray>   107</font>  <a name="line_107"></a>ok !defined enc2name('eee', '011');
+<font color=gray>   108</font>  <a name="line_108"></a>is enc2name('eee', '000', {eee_type=>'dr'}), 'dr0';
+<font color=gray>   109</font>  <a name="line_109"></a>is enc2name('eee', '001', {eee_type=>'dr'}), 'dr1';
+<font color=gray>   110</font>  <a name="line_110"></a>is enc2name('eee', '010', {eee_type=>'dr'}), 'dr2';
+<font color=gray>   111</font>  <a name="line_111"></a>is enc2name('eee', '011', {eee_type=>'dr'}), 'dr3';
+<font color=gray>   112</font>  <a name="line_112"></a>is enc2name('eee', '100', {eee_type=>'dr'}), 'dr4';
+<font color=gray>   113</font>  <a name="line_113"></a>is enc2name('eee', '101', {eee_type=>'dr'}), 'dr5';
+<font color=gray>   114</font>  <a name="line_114"></a>is enc2name('eee', '110', {eee_type=>'dr'}), 'dr6';
+<font color=gray>   115</font>  <a name="line_115"></a>is enc2name('eee', '111', {eee_type=>'dr'}), 'dr7';
+<font color=gray>   116</font>  <a name="line_116"></a>
+<font color=gray>   117</font>  <a name="line_117"></a>is signed('0xff'), '-0x1';
+<font color=gray>   118</font>  <a name="line_118"></a>is signed('ff'), '-0x1';
+<font color=gray>   119</font>  <a name="line_119"></a>is signed('0x53'), '+0x53';
+<font color=gray>   120</font>  <a name="line_120"></a>is signed('53'), '+0x53';
+<font color=gray>   121</font>  <a name="line_121"></a>
+<font color=gray>   122</font>  <a name="line_122"></a># add ebx,[edi] - 0000 001w : mod reg r/m
+<font color=gray>   123</font>  <a name="line_123"></a>my $mac = '03 1F';
+<font color=gray>   124</font>  <a name="line_124"></a>my $res = Idu->decode($mac);
+<font color=gray>   125</font>  <a name="line_125"></a>is enc2name('reg', $res->{reg}, $res), 'ebx';
+<font color=gray>   126</font>  <a name="line_126"></a>is enc2name('reg', $res->{rm}, $res), 'edi';
+<font color=gray>   127</font>  <a name="line_127"></a>is gen_mem($res), '[edi]';
+<font color=gray>   128</font>  <a name="line_128"></a>
+<font color=gray>   129</font>  <a name="line_129"></a># add [0x6d0b5f4f],edx - 0000 000w : mod reg r/m
+<font color=gray>   130</font>  <a name="line_130"></a>$mac = '01 15 4F 5F 0B 6D';
+<font color=gray>   131</font>  <a name="line_131"></a>$res = Idu->decode($mac);
+<font color=gray>   132</font>  <a name="line_132"></a>is gen_mem($res), '[0x6d0b5f4f]';
+<font color=gray>   133</font>  <a name="line_133"></a>
+<font color=gray>   134</font>  <a name="line_134"></a># add [ebx+0x11],bp - 0000 000w : mod reg r/m
+<font color=gray>   135</font>  <a name="line_135"></a>$mac = '66 01 6B 11';
+<font color=gray>   136</font>  <a name="line_136"></a>$res = Idu->decode($mac);
+<font color=gray>   137</font>  <a name="line_137"></a>is gen_mem($res), '[ebx+0x11]';
+<font color=gray>   138</font>  <a name="line_138"></a>
+<font color=gray>   139</font>  <a name="line_139"></a># add word [eax-0xf],0x92c - 1000 00sw : mod 000 r/m : immediate data
+<font color=gray>   140</font>  <a name="line_140"></a>$mac = '66 81 40 F1 2C 09';
+<font color=gray>   141</font>  <a name="line_141"></a>$res = Idu->decode($mac);
+<font color=gray>   142</font>  <a name="line_142"></a>is gen_mem($res), '[eax-0xf]';
+<font color=gray>   143</font>  <a name="line_143"></a>
+<font color=gray>   144</font>  <a name="line_144"></a>$mac = '66 81 40 01 2C 09';
+<font color=gray>   145</font>  <a name="line_145"></a>$res = Idu->decode($mac);
+<font color=gray>   146</font>  <a name="line_146"></a>is gen_mem($res), '[eax+0x1]';
+<font color=gray>   147</font>  <a name="line_147"></a>
+<font color=gray>   148</font>  <a name="line_148"></a># bsf si,[ecx+ecx*2+0x42fcd77f] - 0000 1111 : 1011 1100 : mod reg r/m
+<font color=gray>   149</font>  <a name="line_149"></a>$mac = '66 0F BC B4 49 7F D7 FC 42';
+<font color=gray>   150</font>  <a name="line_150"></a>$res = Idu->decode($mac);
+<font color=gray>   151</font>  <a name="line_151"></a>is enc2name('reg', $res->{reg}, $res), 'si';
+<font color=gray>   152</font>  <a name="line_152"></a>is gen_mem($res), '[ecx+ecx*2+0x42fcd77f]';
+<font color=gray>   153</font>  <a name="line_153"></a>
+<font color=gray>   154</font>  <a name="line_154"></a># bsf si,[ecx+ecx*2+0xfffcd77f] - 0000 1111 : 1011 1100 : mod reg r/m
+<font color=gray>   155</font>  <a name="line_155"></a>$mac = '66 0F BC B4 49 7F D7 FC ff';
+<font color=gray>   156</font>  <a name="line_156"></a>$res = Idu->decode($mac);
+<font color=gray>   157</font>  <a name="line_157"></a>is enc2name('reg', $res->{reg}, $res), 'si';
+<font color=gray>   158</font>  <a name="line_158"></a>is gen_mem($res), '[ecx+ecx*2+0xfffcd77f]';
+<font color=gray>   159</font>  <a name="line_159"></a>
+<font color=gray>   160</font>  <a name="line_160"></a># bsr esp,[edx+0x15f8d6bb] - 0000 1111 : 1011 1101 : mod reg r/m
+<font color=gray>   161</font>  <a name="line_161"></a>$mac = '0F BD A2 BB D6 F8 15';
+<font color=gray>   162</font>  <a name="line_162"></a>$res = Idu->decode($mac);
+<font color=gray>   163</font>  <a name="line_163"></a>is enc2name('reg', $res->{reg}, $res), 'esp';
+<font color=gray>   164</font>  <a name="line_164"></a>is gen_mem($res), '[edx+0x15f8d6bb]';
+<font color=gray>   165</font>  <a name="line_165"></a>
+<font color=gray>   166</font>  <a name="line_166"></a># add dword [ebx+ebx],byte +0x8 - 1000 00sw : mod 000 r/m : immediate data
+<font color=gray>   167</font>  <a name="line_167"></a>$mac = '83 04 1b 08';
+<font color=gray>   168</font>  <a name="line_168"></a>$res = Idu->decode($mac);
+<font color=gray>   169</font>  <a name="line_169"></a>is gen_mem($res), '[ebx+ebx]';
+<font color=gray>   170</font>  <a name="line_170"></a>
+<font color=gray>   171</font>  <a name="line_171"></a># adc word [eax],byte -0x11 - 1000 00sw : mod 010 r/m : immediate data
+<font color=gray>   172</font>  <a name="line_172"></a>$mac = '66 83 14 E0 EF';
+<font color=gray>   173</font>  <a name="line_173"></a>$res = Idu->decode($mac);
+<font color=gray>   174</font>  <a name="line_174"></a>is gen_mem($res), '[eax]';
+<font color=gray>   175</font>  <a name="line_175"></a>
+ </pre></tt></body>
+</html>

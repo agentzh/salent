@@ -1,0 +1,9 @@
+** General **
+ADC - ADD with Carry
+register1 to register2 0001 000w : 11 reg1 reg2
+register2 to register1 0001 001w : 11 reg1 reg2
+memory to register 0001 001w : mod reg r/m
+register to memory 0001 000w : mod reg r/m
+immediate to register 1000 00sw : 11 010 reg : immediate data
+immediate to AL, AX, or EAX 0001 010w : immediate data
+immediate to memory 1000 00sw : mod 010 r/m : immediate data

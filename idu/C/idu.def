@@ -1,0 +1,18 @@
+LIBRARY idu
+EXPORTS
+    set_source       @1
+    get_source       @2
+    get_cur_token    @3
+    get_error_info   @4
+    set_debug        @5
+    readbytes        @6
+    slice            @7
+    match            @8
+    get_imm_len      @9
+    process_ModRM    @10
+    new_res          @11
+    decode           @12
+    dump_byte        @13
+    dump_res         @14
+    dump_res_to_perl @15
+    free_ptr         @16

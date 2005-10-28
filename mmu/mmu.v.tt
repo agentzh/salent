@@ -1,0 +1,113 @@
+[% DEFAULT
+     version = '0.12'
+     word_size = 32
+     addr_size = 32
+     mmu = {
+         delay = 5
+     }
+-%]
+[% USE Perl;
+   USE date;
+   SET
+     last_mod = date.format(template.modtime, '20%y-%m-%d', 'en_GB')
+     year = date.format(template.modtime, '20%y', 'en_GB')
+
+     bytes_per_word = word_size / 8
+     temp = Perl.log(bytes_per_word) / Perl.log(2)
+     byte_addr_size = Perl.sprintf("%.0f", temp)  # rounding
+     fmt = Perl.sprintf("%%0%db", byte_addr_size)
+-%]
+//: mmu.v
+//: Memory Maneagement Units(MMU)
+//: Salent v[% version %]
+//: Copyright (c) [% year %] Wan Xunxin. All rights reserved.
+//: 2005-08-04 [% last_mod %]
+
+module mmu (bus_strb, bus_rw, bus_addr, bus_mfc, bus_data,
+            mfc, strb, rw, mar, byte);
+    parameter ADDR_SIZE = [% addr_size %],
+              WORD_SIZE = [% word_size %];
+
+    output bus_strb, bus_rw;
+    output [ADDR_SIZE-1:0] bus_addr;
+    input  bus_mfc;
+    inout  [WORD_SIZE-1:0] bus_data;
+
+    reg bus_strb,bus_rw;
+    reg [ADDR_SIZE-1:0] bus_addr;
+
+    output mfc;
+    input  strb, rw;
+    input  [ADDR_SIZE-1:0] mar;
+    inout  [7:0] byte;
+
+    reg  mfc;
+
+    reg [WORD_SIZE-1:0] data, datar, dataw ;
+    reg [7:0] bytedata;
+
+    assign byte = bytedata;
+    assign bus_data = dataw;
+    assign address = mar[[% byte_addr_size - 1 %]:0];
+    always begin: mmu
+        reg first_time;
+        mfc = 1'b0;
+        bus_rw = 1'b0;
+        dataw = [% word_size %]'bz;
+        datar = [% word_size %]'bz;
+        data  = [% word_size %]'bz;
+        bytedata = 8'bz;
+        bus_addr = [% addr_size %]'bz;
+        bus_strb = 1'b0;
+        first_time = 1'b1;
+        forever begin
+            @ (posedge strb);  
+            if (first_time == 1'b1 || bus_addr[ADDR_SIZE-1:2] != mar[ADDR_SIZE-1:2]) begin
+                if (first_time == 1'b1) begin
+                    first_time = 1'b0;
+                end
+                bus_addr = mar;
+                bus_rw = 1'b1;
+                bus_strb = 1'b1;
+                @ (posedge bus_mfc);
+                $display(bus_data);
+                data = bus_data;
+                $display(data);
+                bus_strb = 1'b0;
+                #[% mmu.delay %];
+            end
+            if (rw) begin
+                datar = data;
+                case (address)
+        [%- i = bytes_per_word - 1 %]
+        [%- WHILE i >= 0  %]
+                    [% byte_addr_size %]'b[% Perl.sprintf(fmt, i) %]: bytedata = datar[[% i %]*8+7 : [% i %]*8];
+            [%- i = i - 1 %]
+        [%- END %]
+                endcase
+            end else begin
+                dataw = data;
+                bytedata = byte;
+                case (address)
+        [%- i = bytes_per_word - 1 %]
+        [%- WHILE i >= 0  %]
+                    [% byte_addr_size %]'b[% Perl.sprintf(fmt, i) %]: dataw[[% i %]*8+7 : [% i %]*8] = bytedata;
+            [%- i = i - 1 %]
+        [%- END %]
+                endcase
+                data = dataw;
+                bus_addr = mar;
+                bus_rw = 1'b0;
+                bus_strb = 1'b1;
+                @ (posedge bus_mfc);
+                bus_strb = 1'b0;
+            end
+            #[% mmu.delay %];
+            mfc = 1'b1;
+            @ (negedge strb);
+            mfc = 1'b0;
+            dataw = [% word_size %]'bz;
+            bytedata = 8'bz;
+        end
+    end
+endmodule

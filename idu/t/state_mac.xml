@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+
+<graph>
+
+<node id="0">
+    <traits />
+    <arc id="100000.." to="1"/>
+    <arc id="0001001." to="6"/>
+    <arc id="0001010." to="9"/>
+    <arc id="0001000." to="11"/>
+</node>
+
+<node id="1">
+    <traits w="0" pattern="100000.." s="1" />
+    <arc id="11010..." to="4"/>
+    <arc id="..010..." to="2"/>
+</node>
+
+<node id="2">
+    <traits pattern="..010..." mod="1" />
+    <arc id="" to="3"/>
+</node>
+
+<node id="3">
+    <traits op_name="ADC" sub_des="immediate to memory" ins_set="General" des="ADD with Carry" encoding="1000 00sw : mod 010 r/m : immediate data" imm="normal" />
+</node>
+
+<node id="4">
+    <traits pattern="11010..." reg="2:0" />
+    <arc id="" to="5"/>
+</node>
+
+<node id="5">
+    <traits op_name="ADC" sub_des="immediate to register" ins_set="General" des="ADD with Carry" encoding="1000 00sw : 11 010 reg : immediate data" imm="normal" />
+</node>
+
+<node id="6">
+    <traits w="0" pattern="0001001." />
+    <arc id="11......" to="8"/>
+    <arc id="........" to="7"/>
+</node>
+
+<node id="7">
+    <traits op_name="ADC" sub_des="memory to register" ins_set="General" des="ADD with Carry" encoding="0001 001w : mod reg r/m" pattern="........" reg="5:3" mod="1" />
+</node>
+
+<node id="8">
+    <traits op_name="ADC" sub_des="register2 to register1" ins_set="General" des="ADD with Carry" encoding="0001 001w : 11 reg1 reg2" reg1="5:3" pattern="11......" reg2="2:0" />
+</node>
+
+<node id="9">
+    <traits w="0" pattern="0001010." />
+    <arc id="" to="10"/>
+</node>
+
+<node id="10">
+    <traits op_name="ADC" sub_des="immediate to AL, AX, or EAX" ins_set="General" des="ADD with Carry" encoding="0001 010w : immediate data" imm="normal" />
+</node>
+
+<node id="11">
+    <traits w="0" pattern="0001000." />
+    <arc id="11......" to="13"/>
+    <arc id="........" to="12"/>
+</node>
+
+<node id="12">
+    <traits op_name="ADC" sub_des="register to memory" ins_set="General" des="ADD with Carry" encoding="0001 000w : mod reg r/m" pattern="........" reg="5:3" mod="1" />
+</node>
+
+<node id="13">
+    <traits op_name="ADC" sub_des="register1 to register2" ins_set="General" des="ADD with Carry" encoding="0001 000w : 11 reg1 reg2" reg1="5:3" pattern="11......" reg2="2:0" />
+</node>
+
+</graph>

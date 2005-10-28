@@ -1,0 +1,31 @@
+[% DEFAULT
+   word_size = 32 
+   addr_size = 32
+-%]
+word_size: [% word_size %]
+[%     
+    USE Perl;
+    SET 
+        temp = word_size / 4
+        addr_size = Perl.log(temp) / Perl.log(2)
+        last = Perl.pow(2, addr_size)  - 1
+        over = last + 1
+-%]        
+addr_size: [% addr_size %]
+capacity : 2
+delay    : 10
+
+w 'd0 'habcd
+r 'd0 0*abcd
+r 'd[% last %] ?
+r 'd[% over %] 0*abcd
+w 'd[% last %] 'hfffffffe
+r 'd0 0*abcd
+r 'd[% last %] f+e
+r 'd[% over %] 0*abcd
+w 'd[% over %] 'h1234
+r 'd0 0*1234
+r 'd[% last %] f+e
+r 'd[% over %] 0*1234
+
+

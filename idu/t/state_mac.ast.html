@@ -1,0 +1,216 @@
+<html>
+ <head>
+  <title>D:\Agent2002\Salent\v0.13\ModelSim\idu\t\state_mac.ast</title>
+ </head>
+ <body><tt><pre>
+<font color=gray>     1</font>  <a name="line_1"></a>$ast = {
+<font color=gray>     2</font>  <a name="line_2"></a>  'idu' => {
+<font color=gray>     3</font>  <a name="line_3"></a>    'state_machine' => [
+<font color=gray>     4</font>  <a name="line_4"></a>      {
+<font color=gray>     5</font>  <a name="line_5"></a>        'next' => [
+<font color=gray>     6</font>  <a name="line_6"></a>          {
+<font color=gray>     7</font>  <a name="line_7"></a>            'pattern' => '100000..',
+<font color=gray>     8</font>  <a name="line_8"></a>            'state' => 1
+<font color=gray>     9</font>  <a name="line_9"></a>          },
+<font color=gray>    10</font>  <a name="line_10"></a>          {
+<font color=gray>    11</font>  <a name="line_11"></a>            'pattern' => '0001001.',
+<font color=gray>    12</font>  <a name="line_12"></a>            'state' => 6
+<font color=gray>    13</font>  <a name="line_13"></a>          },
+<font color=gray>    14</font>  <a name="line_14"></a>          {
+<font color=gray>    15</font>  <a name="line_15"></a>            'pattern' => '0001010.',
+<font color=gray>    16</font>  <a name="line_16"></a>            'state' => 9
+<font color=gray>    17</font>  <a name="line_17"></a>          },
+<font color=gray>    18</font>  <a name="line_18"></a>          {
+<font color=gray>    19</font>  <a name="line_19"></a>            'pattern' => '0001000.',
+<font color=gray>    20</font>  <a name="line_20"></a>            'state' => 11
+<font color=gray>    21</font>  <a name="line_21"></a>          }
+<font color=gray>    22</font>  <a name="line_22"></a>        ],
+<font color=gray>    23</font>  <a name="line_23"></a>        'state_id' => 0
+<font color=gray>    24</font>  <a name="line_24"></a>      },
+<font color=gray>    25</font>  <a name="line_25"></a>      {
+<font color=gray>    26</font>  <a name="line_26"></a>        'w' => 0,
+<font color=gray>    27</font>  <a name="line_27"></a>        'pattern' => '100000..',
+<font color=gray>    28</font>  <a name="line_28"></a>        'next' => [
+<font color=gray>    29</font>  <a name="line_29"></a>          {
+<font color=gray>    30</font>  <a name="line_30"></a>            'pattern' => '11010...',
+<font color=gray>    31</font>  <a name="line_31"></a>            'state' => 4
+<font color=gray>    32</font>  <a name="line_32"></a>          },
+<font color=gray>    33</font>  <a name="line_33"></a>          {
+<font color=gray>    34</font>  <a name="line_34"></a>            'pattern' => '..010...',
+<font color=gray>    35</font>  <a name="line_35"></a>            'state' => 2
+<font color=gray>    36</font>  <a name="line_36"></a>          }
+<font color=gray>    37</font>  <a name="line_37"></a>        ],
+<font color=gray>    38</font>  <a name="line_38"></a>        'state_id' => 1,
+<font color=gray>    39</font>  <a name="line_39"></a>        's' => 1
+<font color=gray>    40</font>  <a name="line_40"></a>      },
+<font color=gray>    41</font>  <a name="line_41"></a>      {
+<font color=gray>    42</font>  <a name="line_42"></a>        'pattern' => '..010...',
+<font color=gray>    43</font>  <a name="line_43"></a>        'next' => [
+<font color=gray>    44</font>  <a name="line_44"></a>          {
+<font color=gray>    45</font>  <a name="line_45"></a>            'state' => 3
+<font color=gray>    46</font>  <a name="line_46"></a>          }
+<font color=gray>    47</font>  <a name="line_47"></a>        ],
+<font color=gray>    48</font>  <a name="line_48"></a>        'state_id' => 2,
+<font color=gray>    49</font>  <a name="line_49"></a>        'mod' => 1
+<font color=gray>    50</font>  <a name="line_50"></a>      },
+<font color=gray>    51</font>  <a name="line_51"></a>      {
+<font color=gray>    52</font>  <a name="line_52"></a>        'imm' => 'normal',
+<font color=gray>    53</font>  <a name="line_53"></a>        'ins' => {
+<font color=gray>    54</font>  <a name="line_54"></a>          'sub_des' => 'immediate to memory',
+<font color=gray>    55</font>  <a name="line_55"></a>          'op_name' => 'ADC',
+<font color=gray>    56</font>  <a name="line_56"></a>          'ins_set' => 'General',
+<font color=gray>    57</font>  <a name="line_57"></a>          'des' => 'ADD with Carry',
+<font color=gray>    58</font>  <a name="line_58"></a>          'encoding' => '1000 00sw : mod 010 r/m : immediate data'
+<font color=gray>    59</font>  <a name="line_59"></a>        },
+<font color=gray>    60</font>  <a name="line_60"></a>        'state_id' => 3
+<font color=gray>    61</font>  <a name="line_61"></a>      },
+<font color=gray>    62</font>  <a name="line_62"></a>      {
+<font color=gray>    63</font>  <a name="line_63"></a>        'pattern' => '11010...',
+<font color=gray>    64</font>  <a name="line_64"></a>        'next' => [
+<font color=gray>    65</font>  <a name="line_65"></a>          {
+<font color=gray>    66</font>  <a name="line_66"></a>            'state' => 5
+<font color=gray>    67</font>  <a name="line_67"></a>          }
+<font color=gray>    68</font>  <a name="line_68"></a>        ],
+<font color=gray>    69</font>  <a name="line_69"></a>        'reg' => [
+<font color=gray>    70</font>  <a name="line_70"></a>          2,
+<font color=gray>    71</font>  <a name="line_71"></a>          0
+<font color=gray>    72</font>  <a name="line_72"></a>        ],
+<font color=gray>    73</font>  <a name="line_73"></a>        'state_id' => 4
+<font color=gray>    74</font>  <a name="line_74"></a>      },
+<font color=gray>    75</font>  <a name="line_75"></a>      {
+<font color=gray>    76</font>  <a name="line_76"></a>        'imm' => 'normal',
+<font color=gray>    77</font>  <a name="line_77"></a>        'ins' => {
+<font color=gray>    78</font>  <a name="line_78"></a>          'sub_des' => 'immediate to register',
+<font color=gray>    79</font>  <a name="line_79"></a>          'op_name' => 'ADC',
+<font color=gray>    80</font>  <a name="line_80"></a>          'ins_set' => 'General',
+<font color=gray>    81</font>  <a name="line_81"></a>          'des' => 'ADD with Carry',
+<font color=gray>    82</font>  <a name="line_82"></a>          'encoding' => '1000 00sw : 11 010 reg : immediate data'
+<font color=gray>    83</font>  <a name="line_83"></a>        },
+<font color=gray>    84</font>  <a name="line_84"></a>        'state_id' => 5
+<font color=gray>    85</font>  <a name="line_85"></a>      },
+<font color=gray>    86</font>  <a name="line_86"></a>      {
+<font color=gray>    87</font>  <a name="line_87"></a>        'w' => 0,
+<font color=gray>    88</font>  <a name="line_88"></a>        'pattern' => '0001001.',
+<font color=gray>    89</font>  <a name="line_89"></a>        'next' => [
+<font color=gray>    90</font>  <a name="line_90"></a>          {
+<font color=gray>    91</font>  <a name="line_91"></a>            'pattern' => '11......',
+<font color=gray>    92</font>  <a name="line_92"></a>            'state' => 8
+<font color=gray>    93</font>  <a name="line_93"></a>          },
+<font color=gray>    94</font>  <a name="line_94"></a>          {
+<font color=gray>    95</font>  <a name="line_95"></a>            'pattern' => '........',
+<font color=gray>    96</font>  <a name="line_96"></a>            'state' => 7
+<font color=gray>    97</font>  <a name="line_97"></a>          }
+<font color=gray>    98</font>  <a name="line_98"></a>        ],
+<font color=gray>    99</font>  <a name="line_99"></a>        'state_id' => 6
+<font color=gray>   100</font>  <a name="line_100"></a>      },
+<font color=gray>   101</font>  <a name="line_101"></a>      {
+<font color=gray>   102</font>  <a name="line_102"></a>        'ins' => {
+<font color=gray>   103</font>  <a name="line_103"></a>          'sub_des' => 'memory to register',
+<font color=gray>   104</font>  <a name="line_104"></a>          'op_name' => 'ADC',
+<font color=gray>   105</font>  <a name="line_105"></a>          'ins_set' => 'General',
+<font color=gray>   106</font>  <a name="line_106"></a>          'des' => 'ADD with Carry',
+<font color=gray>   107</font>  <a name="line_107"></a>          'encoding' => '0001 001w : mod reg r/m'
+<font color=gray>   108</font>  <a name="line_108"></a>        },
+<font color=gray>   109</font>  <a name="line_109"></a>        'pattern' => '........',
+<font color=gray>   110</font>  <a name="line_110"></a>        'reg' => [
+<font color=gray>   111</font>  <a name="line_111"></a>          5,
+<font color=gray>   112</font>  <a name="line_112"></a>          3
+<font color=gray>   113</font>  <a name="line_113"></a>        ],
+<font color=gray>   114</font>  <a name="line_114"></a>        'state_id' => 7,
+<font color=gray>   115</font>  <a name="line_115"></a>        'mod' => 1
+<font color=gray>   116</font>  <a name="line_116"></a>      },
+<font color=gray>   117</font>  <a name="line_117"></a>      {
+<font color=gray>   118</font>  <a name="line_118"></a>        'reg1' => [
+<font color=gray>   119</font>  <a name="line_119"></a>          5,
+<font color=gray>   120</font>  <a name="line_120"></a>          3
+<font color=gray>   121</font>  <a name="line_121"></a>        ],
+<font color=gray>   122</font>  <a name="line_122"></a>        'ins' => {
+<font color=gray>   123</font>  <a name="line_123"></a>          'sub_des' => 'register2 to register1',
+<font color=gray>   124</font>  <a name="line_124"></a>          'op_name' => 'ADC',
+<font color=gray>   125</font>  <a name="line_125"></a>          'ins_set' => 'General',
+<font color=gray>   126</font>  <a name="line_126"></a>          'des' => 'ADD with Carry',
+<font color=gray>   127</font>  <a name="line_127"></a>          'encoding' => '0001 001w : 11 reg1 reg2'
+<font color=gray>   128</font>  <a name="line_128"></a>        },
+<font color=gray>   129</font>  <a name="line_129"></a>        'pattern' => '11......',
+<font color=gray>   130</font>  <a name="line_130"></a>        'state_id' => 8,
+<font color=gray>   131</font>  <a name="line_131"></a>        'reg2' => [
+<font color=gray>   132</font>  <a name="line_132"></a>          2,
+<font color=gray>   133</font>  <a name="line_133"></a>          0
+<font color=gray>   134</font>  <a name="line_134"></a>        ]
+<font color=gray>   135</font>  <a name="line_135"></a>      },
+<font color=gray>   136</font>  <a name="line_136"></a>      {
+<font color=gray>   137</font>  <a name="line_137"></a>        'w' => 0,
+<font color=gray>   138</font>  <a name="line_138"></a>        'pattern' => '0001010.',
+<font color=gray>   139</font>  <a name="line_139"></a>        'next' => [
+<font color=gray>   140</font>  <a name="line_140"></a>          {
+<font color=gray>   141</font>  <a name="line_141"></a>            'state' => 10
+<font color=gray>   142</font>  <a name="line_142"></a>          }
+<font color=gray>   143</font>  <a name="line_143"></a>        ],
+<font color=gray>   144</font>  <a name="line_144"></a>        'state_id' => 9
+<font color=gray>   145</font>  <a name="line_145"></a>      },
+<font color=gray>   146</font>  <a name="line_146"></a>      {
+<font color=gray>   147</font>  <a name="line_147"></a>        'imm' => 'normal',
+<font color=gray>   148</font>  <a name="line_148"></a>        'ins' => {
+<font color=gray>   149</font>  <a name="line_149"></a>          'sub_des' => 'immediate to AL, AX, or EAX',
+<font color=gray>   150</font>  <a name="line_150"></a>          'op_name' => 'ADC',
+<font color=gray>   151</font>  <a name="line_151"></a>          'ins_set' => 'General',
+<font color=gray>   152</font>  <a name="line_152"></a>          'des' => 'ADD with Carry',
+<font color=gray>   153</font>  <a name="line_153"></a>          'encoding' => '0001 010w : immediate data'
+<font color=gray>   154</font>  <a name="line_154"></a>        },
+<font color=gray>   155</font>  <a name="line_155"></a>        'state_id' => 10
+<font color=gray>   156</font>  <a name="line_156"></a>      },
+<font color=gray>   157</font>  <a name="line_157"></a>      {
+<font color=gray>   158</font>  <a name="line_158"></a>        'w' => 0,
+<font color=gray>   159</font>  <a name="line_159"></a>        'pattern' => '0001000.',
+<font color=gray>   160</font>  <a name="line_160"></a>        'next' => [
+<font color=gray>   161</font>  <a name="line_161"></a>          {
+<font color=gray>   162</font>  <a name="line_162"></a>            'pattern' => '11......',
+<font color=gray>   163</font>  <a name="line_163"></a>            'state' => 13
+<font color=gray>   164</font>  <a name="line_164"></a>          },
+<font color=gray>   165</font>  <a name="line_165"></a>          {
+<font color=gray>   166</font>  <a name="line_166"></a>            'pattern' => '........',
+<font color=gray>   167</font>  <a name="line_167"></a>            'state' => 12
+<font color=gray>   168</font>  <a name="line_168"></a>          }
+<font color=gray>   169</font>  <a name="line_169"></a>        ],
+<font color=gray>   170</font>  <a name="line_170"></a>        'state_id' => 11
+<font color=gray>   171</font>  <a name="line_171"></a>      },
+<font color=gray>   172</font>  <a name="line_172"></a>      {
+<font color=gray>   173</font>  <a name="line_173"></a>        'ins' => {
+<font color=gray>   174</font>  <a name="line_174"></a>          'sub_des' => 'register to memory',
+<font color=gray>   175</font>  <a name="line_175"></a>          'op_name' => 'ADC',
+<font color=gray>   176</font>  <a name="line_176"></a>          'ins_set' => 'General',
+<font color=gray>   177</font>  <a name="line_177"></a>          'des' => 'ADD with Carry',
+<font color=gray>   178</font>  <a name="line_178"></a>          'encoding' => '0001 000w : mod reg r/m'
+<font color=gray>   179</font>  <a name="line_179"></a>        },
+<font color=gray>   180</font>  <a name="line_180"></a>        'pattern' => '........',
+<font color=gray>   181</font>  <a name="line_181"></a>        'reg' => [
+<font color=gray>   182</font>  <a name="line_182"></a>          5,
+<font color=gray>   183</font>  <a name="line_183"></a>          3
+<font color=gray>   184</font>  <a name="line_184"></a>        ],
+<font color=gray>   185</font>  <a name="line_185"></a>        'state_id' => 12,
+<font color=gray>   186</font>  <a name="line_186"></a>        'mod' => 1
+<font color=gray>   187</font>  <a name="line_187"></a>      },
+<font color=gray>   188</font>  <a name="line_188"></a>      {
+<font color=gray>   189</font>  <a name="line_189"></a>        'reg1' => [
+<font color=gray>   190</font>  <a name="line_190"></a>          5,
+<font color=gray>   191</font>  <a name="line_191"></a>          3
+<font color=gray>   192</font>  <a name="line_192"></a>        ],
+<font color=gray>   193</font>  <a name="line_193"></a>        'ins' => {
+<font color=gray>   194</font>  <a name="line_194"></a>          'sub_des' => 'register1 to register2',
+<font color=gray>   195</font>  <a name="line_195"></a>          'op_name' => 'ADC',
+<font color=gray>   196</font>  <a name="line_196"></a>          'ins_set' => 'General',
+<font color=gray>   197</font>  <a name="line_197"></a>          'des' => 'ADD with Carry',
+<font color=gray>   198</font>  <a name="line_198"></a>          'encoding' => '0001 000w : 11 reg1 reg2'
+<font color=gray>   199</font>  <a name="line_199"></a>        },
+<font color=gray>   200</font>  <a name="line_200"></a>        'pattern' => '11......',
+<font color=gray>   201</font>  <a name="line_201"></a>        'state_id' => 13,
+<font color=gray>   202</font>  <a name="line_202"></a>        'reg2' => [
+<font color=gray>   203</font>  <a name="line_203"></a>          2,
+<font color=gray>   204</font>  <a name="line_204"></a>          0
+<font color=gray>   205</font>  <a name="line_205"></a>        ]
+<font color=gray>   206</font>  <a name="line_206"></a>      }
+<font color=gray>   207</font>  <a name="line_207"></a>    ]
+<font color=gray>   208</font>  <a name="line_208"></a>  }
+<font color=gray>   209</font>  <a name="line_209"></a>};
+ </pre></tt></body>
+</html>

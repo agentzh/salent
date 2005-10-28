@@ -1,0 +1,231 @@
+[% DEFAULT
+     lang = 'Default'
+     ops = [
+       { asm = 'o16 aam', bytes = '66 d4 0a'
+         encoding = '1101 0100 : 0000 1010'
+         prefix = '66' }
+       { asm = 'aam 0x0', bytes = 'd4 00'
+         encoding = '1101 0100 : ib'
+         imm = '00' }
+       { asm = 'o16 aam 0x0', bytes = '66 d4 00'
+         encoding = '1101 0100 : ib'
+         imm = '00', prefix = '66' }
+       { asm = 'aas', bytes = '3f'
+         encoding = '0011 1111' }
+       { asm = 'o16 aas', bytes = '66 3f'
+         encoding = '0011 1111'
+         prefix = '66' }
+       { asm = 'adc edx,esp', bytes = '11 e2'
+         encoding = '0001 000w : 11 reg1 reg2'
+         w = 1
+         reg1 = '100' # esp
+         reg2 = '010' # edx
+       }
+       { asm = 'o16 adc bh,cl', bytes = '66 10 cf'
+         encoding = '0001 000w : 11 reg1 reg2'
+         prefix = '66'
+         w = 0
+         reg1 = '001' # cl
+         reg2 = '111' # bh
+       }
+       { asm = 'adc ecx,edx', bytes = '13 ca'
+         encoding = '0001 001w : 11 reg1 reg2'
+         w = 1
+         reg1 = '001' # ecx
+         reg2 = '010' # edx
+       }
+       { asm = 'adc sp,bp', bytes = '66 13 e5'
+         encoding = '0001 001w : 11 reg1 reg2'
+         prefix = '66'
+         w = 1
+         reg1 = '100' # sp
+         reg2 = '101' # bp
+       }
+       { asm = 'adc edi,[ecx+0x4f]', bytes = '13 79 4f'
+         encoding = '0001 001w : mod reg r/m'
+         w = 1
+         'mod' = '01'
+         reg = '111' # edi
+         rm  = '001' # edx
+         disp = '4f' }
+       { asm = 'adc bx,[edx+0xd1e75a4e]', bytes = '66 13 9a 4e 5a e7 d1'
+         encoding = '0001 001w : mod reg r/m'
+         prefix = '66'
+         w = 1
+         'mod' = '10'
+         reg = '011' # bx
+         rm  = '010' # edx
+         disp = '4e 5a e7 d1' }
+       { asm = 'adc [ebx],ecx', bytes = '11 0b'
+         encoding = '0001 000w : mod reg r/m'
+         w = 1
+         'mod' = '00'
+         reg = '001' # ecx
+         rm  = '011' # ebx
+       }
+       { asm = 'adc [esi+0x70e0f729],bx', bytes = '66 11 9e 29 f7 e0 70'
+         encoding = '0001 000w : mod reg r/m'
+         prefix = '66'
+         w = 1
+         'mod' = '10'
+         reg = '011' # bx
+         rm  = '110' # esi
+         disp = '29 f7 e0 70' }
+       { asm = 'adc cl,0x85', bytes = '80 d1 85'
+         encoding = '1000 00sw : 11 010 reg : immediate data'
+         s = 0
+         w = 0
+         reg = '001' # cl
+         imm = '85' }
+       { asm = 'o16 adc dh,0x38', bytes = '66 80 d6 38'
+         encoding = '1000 00sw : 11 010 reg : immediate data'
+         prefix = '66'
+         s = 0
+         w = 0
+         reg = '110' # dh
+         imm = '38' }
+       { asm = 'adc a1,0x4f', bytes = '14 4f'
+         encoding = '0001 010w : immediate data'
+         w = 0
+         imm = '4f' }
+       { asm = 'adc ax,0xfc4b', bytes = '66 15 4b fc'
+         encoding = '0001 010w : immediate data'
+         prefix = '66'
+         w = 1
+         imm = '4b fc' }
+       { asm = 'adc byte [edi-0x5c],0xc0', bytes = '80 57 a4 c0'
+         encoding = '1000 00sw : mod 010 r/m : immediate data'
+         s = 0
+         w = 0
+         'mod' = '01'
+         rm = '111' # edi
+         disp = 'a4'
+         imm = 'c0' }
+       { asm = 'o16 adc byte [esi+edi*2],0x47', bytes = '66 80 14 7e 47'
+         encoding = '1000 00sw : mod 010 r/m : immediate data'
+         prefix = '66'
+         s = 0
+         w = 0
+         'mod' = '00'
+         rm = '100'
+         base_reg  = '110' # esi
+         index_reg = '111' # edi
+         scale = '01'
+         imm = '47' }
+       { asm = 'add dword [ebx+ebx],byte +0x8', bytes = '83 04 1b 08'
+         encoding = '1000 00sw : mod 000 r/m : immediate data'
+         s = 1
+         w = 1
+         'mod' = '00',
+         rm = '100'
+         scale = '00'
+         index_reg = '011' # ebx
+         base_reg  = '011' # ebx
+         imm = '08' }
+       { asm = 'and [ecx+0x2f22d748],ah', bytes = '20 a1 48 d7 22 2f'
+         encoding = '0010 000w : mod reg r/m'
+         w = 0
+         'mod' = '10'
+         reg = '100' # ah
+         rm  = '001' # ecx
+         disp = '48 d7 22 2f' }
+       { asm = 'o16 and [0x672b094f],dh', bytes = '66 20 35 4f 09 2b 67'
+         encoding = '0010 000w : mod reg r/m'
+         prefix = '66'
+         w = 0
+         'mod' = '00'
+         reg = '110' # dh
+         rm  = '101'
+         disp = '4f 09 2b 67' }
+       { asm = 'and dword [esi-0x5],0x4dbe7c8b', bytes = '81 66 fb 8b 7c be 4d'
+         encoding = '1000 00sw : mod 100 r/m : immediate data'
+         s = 0
+         w = 1
+         'mod' = '01'
+         rm = '110' # esi
+         disp = 'fb'
+         imm = '8b 7c be 4d' }
+       { asm = 'bsf sp,[edx+eax*2+0x74]', bytes = '66 0f bc 64 42 74'
+         encoding = '0000 1111 : 1011 1100 : mod reg r/m'
+         prefix = '66'
+         'mod' = '01'
+         reg = '100' # sp
+         rm  = '100'
+         scale = '01'
+         base_reg  = '010' # edx
+         index_reg = '000' # eax
+         disp = '74' }
+       { asm = 'ficomp word [eax*2+0x4457e157]', bytes = 'de 1c 45 57 e1 57 44'
+         encoding = '11011 110 : mod 011 r/m'
+         'mod' = '00'
+         rm = '100'
+         scale = '01'
+         index_reg = '000' # eax
+         disp = '57 e1 57 44' }
+       { asm = 'fmul dword [esi+edx*8+0x20]', bytes = 'd8 4c d6 20'
+         encoding = '11011 000 : mod 001 r/m'
+         'mod' = '01'
+         rm = '100'
+         scale = '11'
+         index_reg = '010' # edx
+         base_reg  = '110' # esi
+         disp = '20' }
+       { asm = 'o16 adc al,[ebp+esi*8+0x7a3a64ba]', bytes = '66 12 84 F5 BA 64 3A 7A'
+         encoding = '0001 001w : mod reg r/m'
+         prefix = '66'
+         w = 0
+         'mod' = '10'
+         reg = '000' # al
+         rm  = '100'
+         scale = '11'
+         index_reg = '110' # esi
+         base_reg  = '101' # ebp
+         disp = 'ba 64 3a 7a' }
+    ]
+    idu = {
+        reg_fields = []
+        bit_fields = []
+    }
+-%]
+[% USE date;
+   SET
+     last_mod = date.format(template.modtime, '20%y-%m-%d', 'en_GB')
+-%]
+#: This file was generated from operand.t.tt
+#: Thoroughly test the decoding result obtained by IDU.
+#: Salent v0.13
+#: Copyright (c) 2005 Agent Zhang
+#: 2005-08-21 [% last_mod %]
+
+use strict;
+use warnings;
+
+use Test::More tests => [% ops.size %] * 23;
+[% IF lang == 'Perl' -%]
+use inc::Idu;
+[% ELSE -%]
+use [% lang %]::Idu;
+[% END -%]
+
+[%- FOREACH op IN ops %]
+[% GET 'my ' IF op == ops.first %]$res = Idu->decode('[% op.bytes %]');
+ok $res, 'res ok - [% op.asm %] - [% op.bytes %]';
+is($res->{encoding}, '[% op.encoding %]', 'encoding ok');
+  [%- flds = ['mod' 'rm' 'base_reg' 'index_reg' 'scale'] %]
+  [%- flds = flds.merge(idu.bit_fields, idu.reg_fields) %]
+  [%- FOREACH fld IN flds %]
+    [%- IF op.$fld.defined %]
+is($res->{[% fld %]}, '[% op.$fld %]', '[% fld %] field ok');
+    [%- ELSE %]
+ok !defined $res->{[% fld %]}, '[% fld %] field undefined';
+    [%- END %]
+  [%- END -%]
+
+  [%- FOREACH fld IN ['prefix' 'imm' 'disp' 'bytes'] %]
+    [%- IF op.$fld %]
+ok eq_array($res->{[% fld %]}, [qw([% op.$fld %])]), '[% fld %] field ok';
+    [%- ELSE %]
+ok !defined $res->{[% fld %]}, '[% fld %] field undefined';
+    [%- END %]
+  [%- END %]
+[% END -%]

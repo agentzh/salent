@@ -1,0 +1,239 @@
+[% TAGS <+ +> -%]
+<+ SET
+    ast = {
+        tpls = {
+            '0011 0111' = 'aaa'
+            '1101 0101 : 0000 1010' = 'aad'
+            '1101 0101 : ib' = 'aad [% imm %]'
+            '1101 0100 : 0000 1010' = 'aam'
+            '1101 0100 : ib' = 'aam [% imm %]'
+            '0011 1111' = 'aas'
+            '0110 0011 : 11 reg1 reg2' = "arpl [% reg2.replace('^e','') %],[% reg1.replace('^e','') %]"
+			'0110 0011 : mod reg r/m' = 'arpl [% mem %],[% reg_16 %]'
+
+            '0110 0010 : modA reg r/m' = 'bound [% reg %],[% mem %]'
+            '0000 1111 : 1100 1 reg' = 'bswap [% reg %]'
+            
+            '1001 1000' = "[%- IF bits16; 'cbw'; ELSE; 'cwde'; END %]"
+            '1001 1001' = "[%- IF bits16; 'cwd'; ELSE; 'cdq'; END %]"
+            '1110 1000 : full displacement' = "call [% GET 'word ' IF bits16 %][% disp %]"
+            '1111 1111 : mod 011 r/m' = "call [% GET 'word ' IF bits16 %]far [% mem %]"
+            # Updated by Agent:
+            '1001 1010 : unsigned full offset, selector' = "call [% GET 'word ' IF bits16 %][% selector %]:[% offset %]"
+            '1111 1000' = 'clc'
+            '1111 1100' = 'cld'
+            '1111 1010' = 'cli'
+            '0000 1111 : 0000 0110' = 'clts'
+            '1111 0101' = 'cmc'
+            '1010 011w' = 'cmps[% suffix %]'
+            '0000 1111 : 1010 0010' = 'cpuid'
+            
+            '0010 0111' = 'daa'
+            '0010 1111' = 'das'
+            '1100 1000 : 24-bit displacement' => 'enter [% imm %],[% level8 %]' # Add by Agent
+            # '1100 1000 : 16-bit displacement : 8-bit level (L)' = 'enter [% imm %],[% level8 %]'
+            
+            '1111 0100' = 'hlt'
+            '0110 110w' = "ins[% suffix %]"
+
+            '1100 1100' = 'int3'
+            '1100 1101 : type' = 'int [% imm %]'
+            '1100 1110' = 'into'
+            '0000 1111 : 0000 1000' = 'invd'
+            '0000 1111 : 0000 0001 : mod 111 r/m' = 'invlpg [% mem %]'
+            '1100 1111' = "iret[% suffix %]"
+            
+            '0111 tttn : 8-bit displacement' = 'j[% tttn %] [% disp %]'
+            '0000 1111 : 1000 tttn : full displacement' = "j[% tttn %] [% IF bits16; 'word'; ELSE; 'near'; END %] [% disp %]"
+            '1110 0011 : 8-bit displacement' = 'jecxz [% disp %]'
+            '1110 1011 : 8-bit displacement' = 'jmp short [% disp %]'
+            '1110 1001 : full displacement'  = "jmp [% GET 'word ' IF bits16 %][% disp %]"
+            '1110 1010 : unsigned full offset, selector' = "jmp [% GET 'word ' IF bits16 %][% selector %]:[% offset %]"
+            '1111 1111 : mod 101 r/m' => "jmp [% GET 'word ' IF bits16 %]far [% mem %]"
+            
+            '1001 1111' = 'lahf'
+            '0000 1111 : 0000 0010 : 11 reg1 reg2' = "lar [% reg1 %],[% reg2 %]"
+            '1100 0101 : modA reg r/m' = 'lds [% reg %],[% mem %]'
+            '1000 1101 : modA reg r/m' = 'lea [% reg %],[% mem %]'
+            '1100 1001' = 'leave'
+            '1100 0100 : modA reg r/m' = 'les [% reg %],[% mem %]'
+            '0000 1111 : 1011 0100 : modA reg r/m' = 'lfs [% reg %],[% mem %]'
+            '0000 1111 : 0000 0001 : modA 010 r/m' = 'lgdt [% mem %]'
+            '0000 1111 : 1011 0101 : modA reg r/m' = 'lgs [% reg %],[% mem %]'
+            '0000 1111 : 0000 0001 : modA 011 r/m' = 'lidt [% mem %]'
+			'0000 1111 : 0000 0000 : 11 010 reg' = 'lldt [% reg_16 %]'
+			'0000 1111 : 0000 0000 : mod 010 r/m' = 'lldt [% mem %]'
+            '0000 1111 : 0000 0001 : 11 110 reg' = "lmsw [% reg_16 %]"
+			'0000 1111 : 0000 0001 : mod 110 r/m' = 'lmsw [% mem %]'
+            '0000 1111 : 0000 0011 : 11 reg1 reg2' = 'lsl [% reg1 %],[% reg2 %]'
+            '1010 110w' = "lods[% suffix %]"
+            '1110 0010 : 8-bit displacement' = 'loop [% disp %]'
+            '1110 0001 : 8-bit displacement' = 'loope [% disp %]'
+            '1110 0000 : 8-bit displacement' = 'loopne [% disp %]'
+            '0000 1111 : 1011 0010 : modA reg r/m' = 'lss [% reg %],[% mem %]'
+			'0000 1111 : 0000 0000 : 11 011 reg' = 'ltr [% reg_16 %]'
+			'0000 1111 : 0000 0000 : mod 011 r/m' = 'ltr [% mem %]'
+
+            '0000 1111 : 0010 0010 : 11 eee reg' = 'mov [% cr %],[% reg_32 %]'
+            '0000 1111 : 0010 0000 : 11 eee reg' = 'mov [% reg_32 %],[% cr %]'
+            '0000 1111 : 0010 0011 : 11 eee reg' = 'mov [% dr %],[% reg_32 %]'
+            '0000 1111 : 0010 0001 : 11 eee reg' = 'mov [% reg_32 %],[% dr %]'
+            '1000 1110 : 11 sreg3 reg' = 'mov [% sreg3 %],[% reg_16 %]'
+            '1000 1110 : mod sreg3 r/m' = 'mov [% sreg3 %],[% mem %]'
+            '1000 1100 : 11 sreg3 reg' = 'mov [% reg %],[% sreg3 %]'
+            '1000 1100 : mod sreg3 r/m' = 'mov [% mem %],[% sreg3 %]'
+            '1010 010w' = "movs[% suffix %]"
+            '0000 1111 : 1011 111w : 11 reg1 reg2' = "movsx [% reg1_32 %],[% GET 'word ' IF bits16 %][% reg2_16 %]"
+            '0000 1111 : 1011 111w : mod reg r/m'  = "movsx [% reg_32 %],[% IF w; 'word'; ELSE; 'byte'; END %] [% mem %]",
+            '0000 1111 : 1011 011w : 11 reg1 reg2' = "movzx [% reg1_32 %],[% GET 'word ' IF bits16 %][% reg2_16 %]"
+            '0000 1111 : 1011 011w : mod reg r/m'  = "movzx [% reg_32 %],[% IF w; 'word'; ELSE; 'byte'; END %] [% mem %]",
+            
+            '1001 0000' = 'nop'
+            
+			'1110 011w : port number' = 'out [% imm %],[% eax_var %]'
+			'1110 111w' = 'out dx,[% eax_var %]'
+            '0110 111w' = "outs[% suffix %]"
+            
+            '000 11 111' = 'pop ds'
+            '000 00 111' = 'pop es'
+            '000 10 111' = 'pop ss'
+            '0000 1111: 10 100 001' = 'pop fs'
+            '0000 1111: 10 101 001' = 'pop gs'
+            '0110 0001' = "popa[% suffix %]"
+            '1001 1101' = "popf[% suffix %]"
+            '000 sreg2 110' = 'push [% sreg2 %]'
+            '0000 1111: 10 100 000' = 'push fs'
+            '0000 1111: 10 101 000' = 'push gs'
+			'0110 10s0 : immediate data' = 'push [% pref_imm %]'
+            '0110 0000' = "pusha[% suffix %]"
+            '1001 1100' = "pushf[% suffix %]"
+            
+			'1101 000w : 11 010 reg' = 'rcl [% reg %],1'
+			'1101 000w : mod 010 r/m' = 'rcl [% pref_mem %],1'
+			'1101 001w : 11 010 reg' = 'rcl [% reg %],cl'
+			'1101 000w : 11 011 reg' = 'rcr [% reg %],1'
+			'1101 000w : mod 011 r/m' = 'rcr [% pref_mem %],1'
+			'1101 001w : 11 011 reg' = 'rcr [% reg %],cl'
+			'1101 000w : 11 000 reg' = 'rol [% reg %],1'
+			'1101 000w : mod 000 r/m' = 'rol [% pref_mem %],1'
+			'1101 001w : 11 000 reg' = 'rol [% reg %],cl'
+			'1101 000w : 11 001 reg' = 'ror [% reg %],1'
+			'1101 000w : mod 001 r/m' = 'ror [% pref_mem %],1'
+			'1101 001w : 11 001 reg' = 'ror [% reg %],cl'
+			'0000 1111 : 0011 0010' = 'rdmsr'
+            '0000 1111 : 0011 0011' = 'rdpmc'
+            '0000 1111 : 0011 0001' = 'rdtsc'
+			'1100 1011' = 'retf'
+			'1100 1010 : 16-bit displacement' = 'retf [% imm %]'
+            '0000 1111 : 1010 1010' = 'rsm'
+
+            '1001 1110' = 'sahf'
+            '1101 0110' = 'salc'
+			'1101 000w : 11 111 reg' = 'sar [% reg %],1'
+			'1101 000w : mod 111 r/m' = 'sar [% pref_mem %],1'
+			'1101 001w : 11 111 reg' = 'sar [% reg %],cl'
+            '1010 111w' = "scas[% suffix %]"
+			'0000 1111 : 1001 tttn : 11 000 reg' = 'set[% tttn %] [% reg_8 %]'
+			'0000 1111 : 1001 tttn : mod 000 r/m' = 'set[% tttn %] [% mem %]'
+            '0000 1111 : 0000 0001 : modA 000 r/m' = 'sgdt [% mem %]'
+			'1101 000w : 11 100 reg' = 'shl [% reg %],1'
+			'1101 000w : mod 100 r/m' = 'shl [% pref_mem %],1'
+			'1101 001w : 11 100 reg' = 'shl [% reg %],cl'
+			'0000 1111 : 1010 0100 : 11 reg2 reg1 : imm8' = 'shld [% reg1 %],[% reg2 %],[% imm %]'
+			'0000 1111 : 1010 0100 : mod reg r/m : imm8' = 'shld [% mem %],[% reg %],[% imm %]'
+			'0000 1111 : 1010 0101 : 11 reg2 reg1' = 'shld [% reg1 %],[% reg2 %],cl'
+			'0000 1111 : 1010 0101 : mod reg r/m' = 'shld [% mem %],[% reg %],cl'
+			'1101 000w : 11 101 reg' = 'shr [% reg %],1'
+			'1101 000w : mod 101 r/m' = 'shr [% pref_mem %],1'
+			'1101 001w : 11 101 reg' = 'shr [% reg %],cl'
+			'0000 1111 : 1010 1100 : 11 reg2 reg1 : imm8' = 'shrd [% reg1 %],[% reg2 %],[% imm %]'
+			'0000 1111 : 1010 1100 : mod reg r/m : imm8' = 'shrd [% mem %],[% reg %],[% imm %]'
+			'0000 1111 : 1010 1101 : 11 reg2 reg1' = 'shrd [% reg1 %],[% reg2 %],cl'
+			'0000 1111 : 1010 1101 : mod reg r/m' = 'shrd [% mem %],[% reg %],cl'
+            '0000 1111 : 0000 0001 : modA 001 r/m' = 'sidt [% mem %]'
+			'0000 1111 : 0000 0000 : 11 000 reg' = 'sldt [% reg_16 %]'
+			'0000 1111 : 0000 0000 : mod 000 r/m' = 'sldt [% mem %]'
+			'0000 1111 : 0000 0001 : 11 100 reg' = 'smsw [% reg_16 %]'
+			'0000 1111 : 0000 0001 : mod 100 r/m' = 'smsw [% mem %]'
+            '1111 1001' = 'stc'
+            '1111 1101' = 'std'
+            '1111 1011' = 'sti'
+            '1010 101w' = "stos[% suffix %]"
+            '0000 1111 : 0000 0000 : 11 001 reg' = 'str [% reg_16 %]'
+            '0000 1111 : 0000 0000 : mod 001 r/m' = 'str [% mem %]'
+            
+            '0000 1111 : 0000 1011' = 'ud2'
+
+			'0000 1111 : 0000 0000 : 11 100 reg' = 'verr [% reg_16 %]'
+			'0000 1111 : 0000 0000 : mod 100 r/m' = 'verr [% mem %]'
+			'0000 1111 : 0000 0000 : 11 101 reg' = 'verw [% reg_16 %]'
+			'0000 1111 : 0000 0000 : mod 101 r/m' = 'verw [% mem %]'
+
+            '1001 1011' = 'wait'
+            '0000 1111 : 0000 1001' = 'wbinvd'
+            '0000 1111 : 0011 0000' = 'wrmsr'
+            
+			'1000 011w : 11 reg1 reg2' = 'xchg [% reg1 %],[% reg2 %]'
+			'1101 0111' = 'xlatb'
+
+            ##----------------------------------------------------------
+
+            '11011 001 : 1111 0000' = 'f2xm1'
+            '11011 001 : 1110 0001' = 'fabs'
+			'11011 111 : mod 100 r/m' = 'fbld tword [% mem %]'
+			'11011 111 : mod 110 r/m' = 'fbstp tword [% mem %]'
+			'11011 001 : 1110 0000' = 'fchs'
+			'11011 110 : 11 011 001' = 'fcompp'
+			'11011 111 : 11 110 ST(i)' = 'fcomip [% ST_i %]'
+			'11011 001 : 1111 1111' = 'fcos'
+			'11011 011 : 1110 0010' = 'fnclex'
+            '11011 001 : 1111 0110' = 'fdecstp'
+            '11011 110 : 1111 1 ST(i)' = 'fdivp [% ST_i %],st0'
+            '11011 101 : 1100 0 ST(i)' = 'ffree [% ST_i %]'
+            '11011 001 : 1111 0111' = 'fincstp'
+            '11011 110 : 1100 1 ST(i)' = 'fmulp [% ST_i %]'
+            '11011 001 : 1101 0000' = 'fnop'
+            '11011 001 : 1111 1011' = 'fsincos'
+            '11011 110 : 1110 0 ST(i)' = 'fsubrp [% ST_i %]'
+            '11011 001 : 1110 1000' = 'fld1'
+            '11011 001 : mod 101 r/m' = 'fldcw [% mem %]'
+            '11011 001 : mod 100 r/m' = 'fldenv [% mem %]'
+            '11011 001 : 1110 1010' = 'fldl2e'
+            '11011 001 : 1110 1001' = 'fldl2t'
+            '11011 001 : 1110 1100' = 'fldlg2'
+            '11011 001 : 1110 1101' = 'fldln2'
+            '11011 001 : 1110 1011' = 'fldpi'
+            '11011 001 : 1110 1110' = 'fldz'
+            '11011 011 : 1110 0011' = 'fninit'
+            '11011 001 : 1111 0011' = 'fpatan'
+            '11011 001 : 1111 1000' = 'fprem'
+            '11011 001 : 1111 0101' = 'fprem1'
+            '11011 001 : 1111 0010' = 'fptan'
+            '11011 001 : 1111 1100' = 'frndint'
+            '11011 101 : mod 100 r/m' = 'frstor [% mem %]'
+            '11011 101 : mod 110 r/m' = 'fnsave [% mem %]'
+            '11011 001 : 1111 1101' = 'fscale'
+            '11011 001 : 1111 1110' = 'fsin'
+            '11011 001 : 1111 1010' = 'fsqrt'
+            '11011 001 : mod 111 r/m' = 'fnstcw [% mem %]'
+            '11011 001 : mod 110 r/m' = 'fnstenv [% mem %]'
+            '11011 111 : 1110 0000' = 'fnstsw ax'
+            '11011 101 : mod 111 r/m' = 'fnstsw [% mem %]'
+            '11011 001 : 1110 0100' = 'ftst'
+            '11011 101 : 1110 0 ST(i)' = 'fucom [% ST_i %]'
+            '11011 101 : 1110 1 ST(i)' = 'fucomp [% ST_i %]'
+            '11011 010 : 1110 1001' = 'fucompp'
+            '11011 011 : 11 101 ST(i)' = 'fucomi [% ST_i %]'
+            '11011 111 : 11 101 ST(i)' = 'fucomip [% ST_i %]'
+            '11011 001 : 1110 0101' = 'fxam'
+            '11011 001 : 1100 1 ST(i)' = 'fxch [% ST_i %]'
+            '11011 001 : 1111 0100' = 'fxtract'
+            '11011 001 : 1111 0001' = 'fyl2x'
+            '11011 001 : 1111 1001' = 'fyl2xp1'
+           
+        }
+    }
+-+>
+<+ USE dumper;
+   dumper.dump(ast)
+-+>

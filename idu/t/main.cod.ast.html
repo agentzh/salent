@@ -1,0 +1,2108 @@
+<html>
+ <head>
+  <title>F:\Agent2002\AISystem1.0\LogicDesign\Salent\v0.10\ModelSim\idu\t\main.cod.ast</title>
+ </head>
+ <body><tt><pre>
+<a name="line_1"></a>$ast = {
+<a name="line_2"></a>         'ops' => [
+<a name="line_3"></a>                    {
+<a name="line_4"></a>                      'mac' => '55',
+<a name="line_5"></a>                      'asm' => 'push	 ebp'
+<a name="line_6"></a>                    },
+<a name="line_7"></a>                    {
+<a name="line_8"></a>                      'mac' => '8b ec',
+<a name="line_9"></a>                      'asm' => 'mov	 ebp, esp'
+<a name="line_10"></a>                    },
+<a name="line_11"></a>                    {
+<a name="line_12"></a>                      'mac' => '51',
+<a name="line_13"></a>                      'asm' => 'push	 ecx'
+<a name="line_14"></a>                    },
+<a name="line_15"></a>                    {
+<a name="line_16"></a>                      'mac' => '6a 10',
+<a name="line_17"></a>                      'asm' => 'push	 16			; 00000010H'
+<a name="line_18"></a>                    },
+<a name="line_19"></a>                    {
+<a name="line_20"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_21"></a>                      'asm' => 'call	 _malloc'
+<a name="line_22"></a>                    },
+<a name="line_23"></a>                    {
+<a name="line_24"></a>                      'mac' => '83 c4 04',
+<a name="line_25"></a>                      'asm' => 'add	 esp, 4'
+<a name="line_26"></a>                    },
+<a name="line_27"></a>                    {
+<a name="line_28"></a>                      'mac' => '89 45 fc',
+<a name="line_29"></a>                      'asm' => 'mov	 DWORD PTR _nodep$[ebp], eax'
+<a name="line_30"></a>                    },
+<a name="line_31"></a>                    {
+<a name="line_32"></a>                      'mac' => '83 7d fc 00',
+<a name="line_33"></a>                      'asm' => 'cmp	 DWORD PTR _nodep$[ebp], 0'
+<a name="line_34"></a>                    },
+<a name="line_35"></a>                    {
+<a name="line_36"></a>                      'mac' => '75 04',
+<a name="line_37"></a>                      'asm' => 'jne	 SHORT $L1144'
+<a name="line_38"></a>                    },
+<a name="line_39"></a>                    {
+<a name="line_40"></a>                      'mac' => '33 c0',
+<a name="line_41"></a>                      'asm' => 'xor	 eax, eax'
+<a name="line_42"></a>                    },
+<a name="line_43"></a>                    {
+<a name="line_44"></a>                      'mac' => 'eb 29',
+<a name="line_45"></a>                      'asm' => 'jmp	 SHORT $L1139'
+<a name="line_46"></a>                    },
+<a name="line_47"></a>                    {
+<a name="line_48"></a>                      'mac' => '8b 45 fc',
+<a name="line_49"></a>                      'asm' => 'mov	 eax, DWORD PTR _nodep$[ebp]'
+<a name="line_50"></a>                    },
+<a name="line_51"></a>                    {
+<a name="line_52"></a>                      'mac' => '8b 4d 08',
+<a name="line_53"></a>                      'asm' => 'mov	 ecx, DWORD PTR _value$[ebp]'
+<a name="line_54"></a>                    },
+<a name="line_55"></a>                    {
+<a name="line_56"></a>                      'mac' => '89 08',
+<a name="line_57"></a>                      'asm' => 'mov	 DWORD PTR [eax], ecx'
+<a name="line_58"></a>                    },
+<a name="line_59"></a>                    {
+<a name="line_60"></a>                      'mac' => '8b 55 fc',
+<a name="line_61"></a>                      'asm' => 'mov	 edx, DWORD PTR _nodep$[ebp]'
+<a name="line_62"></a>                    },
+<a name="line_63"></a>                    {
+<a name="line_64"></a>                      'mac' => 'c7 42 04 00 00 00 00',
+<a name="line_65"></a>                      'asm' => 'mov	 DWORD PTR [edx+4], 0'
+<a name="line_66"></a>                    },
+<a name="line_67"></a>                    {
+<a name="line_68"></a>                      'mac' => '8b 45 fc',
+<a name="line_69"></a>                      'asm' => 'mov	 eax, DWORD PTR _nodep$[ebp]'
+<a name="line_70"></a>                    },
+<a name="line_71"></a>                    {
+<a name="line_72"></a>                      'mac' => 'c7 40 08 00 00 00 00',
+<a name="line_73"></a>                      'asm' => 'mov	 DWORD PTR [eax+8], 0'
+<a name="line_74"></a>                    },
+<a name="line_75"></a>                    {
+<a name="line_76"></a>                      'mac' => '8b 4d fc',
+<a name="line_77"></a>                      'asm' => 'mov	 ecx, DWORD PTR _nodep$[ebp]'
+<a name="line_78"></a>                    },
+<a name="line_79"></a>                    {
+<a name="line_80"></a>                      'mac' => 'c7 41 0c 00 00 00 00',
+<a name="line_81"></a>                      'asm' => 'mov	 DWORD PTR [ecx+12], 0'
+<a name="line_82"></a>                    },
+<a name="line_83"></a>                    {
+<a name="line_84"></a>                      'mac' => '8b 45 fc',
+<a name="line_85"></a>                      'asm' => 'mov	 eax, DWORD PTR _nodep$[ebp]'
+<a name="line_86"></a>                    },
+<a name="line_87"></a>                    {
+<a name="line_88"></a>                      'mac' => '8b e5',
+<a name="line_89"></a>                      'asm' => 'mov	 esp, ebp'
+<a name="line_90"></a>                    },
+<a name="line_91"></a>                    {
+<a name="line_92"></a>                      'mac' => '5d',
+<a name="line_93"></a>                      'asm' => 'pop	 ebp'
+<a name="line_94"></a>                    },
+<a name="line_95"></a>                    {
+<a name="line_96"></a>                      'mac' => 'c3',
+<a name="line_97"></a>                      'asm' => 'ret	 0'
+<a name="line_98"></a>                    },
+<a name="line_99"></a>                    {
+<a name="line_100"></a>                      'mac' => '55',
+<a name="line_101"></a>                      'asm' => 'push	 ebp'
+<a name="line_102"></a>                    },
+<a name="line_103"></a>                    {
+<a name="line_104"></a>                      'mac' => '8b ec',
+<a name="line_105"></a>                      'asm' => 'mov	 ebp, esp'
+<a name="line_106"></a>                    },
+<a name="line_107"></a>                    {
+<a name="line_108"></a>                      'mac' => '83 7d 0c 00',
+<a name="line_109"></a>                      'asm' => 'cmp	 DWORD PTR _newp$[ebp], 0'
+<a name="line_110"></a>                    },
+<a name="line_111"></a>                    {
+<a name="line_112"></a>                      'mac' => '74 09',
+<a name="line_113"></a>                      'asm' => 'je	 SHORT $L1156'
+<a name="line_114"></a>                    },
+<a name="line_115"></a>                    {
+<a name="line_116"></a>                      'mac' => '8b 45 0c',
+<a name="line_117"></a>                      'asm' => 'mov	 eax, DWORD PTR _newp$[ebp]'
+<a name="line_118"></a>                    },
+<a name="line_119"></a>                    {
+<a name="line_120"></a>                      'mac' => '8b 4d 08',
+<a name="line_121"></a>                      'asm' => 'mov	 ecx, DWORD PTR _parentp$[ebp]'
+<a name="line_122"></a>                    },
+<a name="line_123"></a>                    {
+<a name="line_124"></a>                      'mac' => '89 48 04',
+<a name="line_125"></a>                      'asm' => 'mov	 DWORD PTR [eax+4], ecx'
+<a name="line_126"></a>                    },
+<a name="line_127"></a>                    {
+<a name="line_128"></a>                      'mac' => '83 7d 08 00',
+<a name="line_129"></a>                      'asm' => 'cmp	 DWORD PTR _parentp$[ebp], 0'
+<a name="line_130"></a>                    },
+<a name="line_131"></a>                    {
+<a name="line_132"></a>                      'mac' => '74 09',
+<a name="line_133"></a>                      'asm' => 'je	 SHORT $L1154'
+<a name="line_134"></a>                    },
+<a name="line_135"></a>                    {
+<a name="line_136"></a>                      'mac' => '8b 55 08',
+<a name="line_137"></a>                      'asm' => 'mov	 edx, DWORD PTR _parentp$[ebp]'
+<a name="line_138"></a>                    },
+<a name="line_139"></a>                    {
+<a name="line_140"></a>                      'mac' => '8b 45 0c',
+<a name="line_141"></a>                      'asm' => 'mov	 eax, DWORD PTR _newp$[ebp]'
+<a name="line_142"></a>                    },
+<a name="line_143"></a>                    {
+<a name="line_144"></a>                      'mac' => '89 42 08',
+<a name="line_145"></a>                      'asm' => 'mov	 DWORD PTR [edx+8], eax'
+<a name="line_146"></a>                    },
+<a name="line_147"></a>                    {
+<a name="line_148"></a>                      'mac' => '5d',
+<a name="line_149"></a>                      'asm' => 'pop	 ebp'
+<a name="line_150"></a>                    },
+<a name="line_151"></a>                    {
+<a name="line_152"></a>                      'mac' => 'c3',
+<a name="line_153"></a>                      'asm' => 'ret	 0'
+<a name="line_154"></a>                    },
+<a name="line_155"></a>                    {
+<a name="line_156"></a>                      'mac' => '55',
+<a name="line_157"></a>                      'asm' => 'push	 ebp'
+<a name="line_158"></a>                    },
+<a name="line_159"></a>                    {
+<a name="line_160"></a>                      'mac' => '8b ec',
+<a name="line_161"></a>                      'asm' => 'mov	 ebp, esp'
+<a name="line_162"></a>                    },
+<a name="line_163"></a>                    {
+<a name="line_164"></a>                      'mac' => '83 7d 0c 00',
+<a name="line_165"></a>                      'asm' => 'cmp	 DWORD PTR _newp$[ebp], 0'
+<a name="line_166"></a>                    },
+<a name="line_167"></a>                    {
+<a name="line_168"></a>                      'mac' => '74 09',
+<a name="line_169"></a>                      'asm' => 'je	 SHORT $L1166'
+<a name="line_170"></a>                    },
+<a name="line_171"></a>                    {
+<a name="line_172"></a>                      'mac' => '8b 45 0c',
+<a name="line_173"></a>                      'asm' => 'mov	 eax, DWORD PTR _newp$[ebp]'
+<a name="line_174"></a>                    },
+<a name="line_175"></a>                    {
+<a name="line_176"></a>                      'mac' => '8b 4d 08',
+<a name="line_177"></a>                      'asm' => 'mov	 ecx, DWORD PTR _parentp$[ebp]'
+<a name="line_178"></a>                    },
+<a name="line_179"></a>                    {
+<a name="line_180"></a>                      'mac' => '89 48 04',
+<a name="line_181"></a>                      'asm' => 'mov	 DWORD PTR [eax+4], ecx'
+<a name="line_182"></a>                    },
+<a name="line_183"></a>                    {
+<a name="line_184"></a>                      'mac' => '83 7d 08 00',
+<a name="line_185"></a>                      'asm' => 'cmp	 DWORD PTR _parentp$[ebp], 0'
+<a name="line_186"></a>                    },
+<a name="line_187"></a>                    {
+<a name="line_188"></a>                      'mac' => '74 09',
+<a name="line_189"></a>                      'asm' => 'je	 SHORT $L1164'
+<a name="line_190"></a>                    },
+<a name="line_191"></a>                    {
+<a name="line_192"></a>                      'mac' => '8b 55 08',
+<a name="line_193"></a>                      'asm' => 'mov	 edx, DWORD PTR _parentp$[ebp]'
+<a name="line_194"></a>                    },
+<a name="line_195"></a>                    {
+<a name="line_196"></a>                      'mac' => '8b 45 0c',
+<a name="line_197"></a>                      'asm' => 'mov	 eax, DWORD PTR _newp$[ebp]'
+<a name="line_198"></a>                    },
+<a name="line_199"></a>                    {
+<a name="line_200"></a>                      'mac' => '89 42 0c',
+<a name="line_201"></a>                      'asm' => 'mov	 DWORD PTR [edx+12], eax'
+<a name="line_202"></a>                    },
+<a name="line_203"></a>                    {
+<a name="line_204"></a>                      'mac' => '5d',
+<a name="line_205"></a>                      'asm' => 'pop	 ebp'
+<a name="line_206"></a>                    },
+<a name="line_207"></a>                    {
+<a name="line_208"></a>                      'mac' => 'c3',
+<a name="line_209"></a>                      'asm' => 'ret	 0'
+<a name="line_210"></a>                    },
+<a name="line_211"></a>                    {
+<a name="line_212"></a>                      'mac' => '55',
+<a name="line_213"></a>                      'asm' => 'push	 ebp'
+<a name="line_214"></a>                    },
+<a name="line_215"></a>                    {
+<a name="line_216"></a>                      'mac' => '8b ec',
+<a name="line_217"></a>                      'asm' => 'mov	 ebp, esp'
+<a name="line_218"></a>                    },
+<a name="line_219"></a>                    {
+<a name="line_220"></a>                      'mac' => '83 7d 10 00',
+<a name="line_221"></a>                      'asm' => 'cmp	 DWORD PTR _newp$[ebp], 0'
+<a name="line_222"></a>                    },
+<a name="line_223"></a>                    {
+<a name="line_224"></a>                      'mac' => '74 09',
+<a name="line_225"></a>                      'asm' => 'je	 SHORT $L1178'
+<a name="line_226"></a>                    },
+<a name="line_227"></a>                    {
+<a name="line_228"></a>                      'mac' => '8b 45 10',
+<a name="line_229"></a>                      'asm' => 'mov	 eax, DWORD PTR _newp$[ebp]'
+<a name="line_230"></a>                    },
+<a name="line_231"></a>                    {
+<a name="line_232"></a>                      'mac' => '8b 4d 08',
+<a name="line_233"></a>                      'asm' => 'mov	 ecx, DWORD PTR _parentp$[ebp]'
+<a name="line_234"></a>                    },
+<a name="line_235"></a>                    {
+<a name="line_236"></a>                      'mac' => '89 48 04',
+<a name="line_237"></a>                      'asm' => 'mov	 DWORD PTR [eax+4], ecx'
+<a name="line_238"></a>                    },
+<a name="line_239"></a>                    {
+<a name="line_240"></a>                      'mac' => '83 7d 08 00',
+<a name="line_241"></a>                      'asm' => 'cmp	 DWORD PTR _parentp$[ebp], 0'
+<a name="line_242"></a>                    },
+<a name="line_243"></a>                    {
+<a name="line_244"></a>                      'mac' => '75 02',
+<a name="line_245"></a>                      'asm' => 'jne	 SHORT $L1180'
+<a name="line_246"></a>                    },
+<a name="line_247"></a>                    {
+<a name="line_248"></a>                      'mac' => 'eb 1f',
+<a name="line_249"></a>                      'asm' => 'jmp	 SHORT $L1176'
+<a name="line_250"></a>                    },
+<a name="line_251"></a>                    {
+<a name="line_252"></a>                      'mac' => '8b 55 08',
+<a name="line_253"></a>                      'asm' => 'mov	 edx, DWORD PTR _parentp$[ebp]'
+<a name="line_254"></a>                    },
+<a name="line_255"></a>                    {
+<a name="line_256"></a>                      'mac' => '8b 42 08',
+<a name="line_257"></a>                      'asm' => 'mov	 eax, DWORD PTR [edx+8]'
+<a name="line_258"></a>                    },
+<a name="line_259"></a>                    {
+<a name="line_260"></a>                      'mac' => '3b 45 0c',
+<a name="line_261"></a>                      'asm' => 'cmp	 eax, DWORD PTR _oldp$[ebp]'
+<a name="line_262"></a>                    },
+<a name="line_263"></a>                    {
+<a name="line_264"></a>                      'mac' => '75 0b',
+<a name="line_265"></a>                      'asm' => 'jne	 SHORT $L1181'
+<a name="line_266"></a>                    },
+<a name="line_267"></a>                    {
+<a name="line_268"></a>                      'mac' => '8b 4d 08',
+<a name="line_269"></a>                      'asm' => 'mov	 ecx, DWORD PTR _parentp$[ebp]'
+<a name="line_270"></a>                    },
+<a name="line_271"></a>                    {
+<a name="line_272"></a>                      'mac' => '8b 55 10',
+<a name="line_273"></a>                      'asm' => 'mov	 edx, DWORD PTR _newp$[ebp]'
+<a name="line_274"></a>                    },
+<a name="line_275"></a>                    {
+<a name="line_276"></a>                      'mac' => '89 51 08',
+<a name="line_277"></a>                      'asm' => 'mov	 DWORD PTR [ecx+8], edx'
+<a name="line_278"></a>                    },
+<a name="line_279"></a>                    {
+<a name="line_280"></a>                      'mac' => 'eb 09',
+<a name="line_281"></a>                      'asm' => 'jmp	 SHORT $L1176'
+<a name="line_282"></a>                    },
+<a name="line_283"></a>                    {
+<a name="line_284"></a>                      'mac' => '8b 45 08',
+<a name="line_285"></a>                      'asm' => 'mov	 eax, DWORD PTR _parentp$[ebp]'
+<a name="line_286"></a>                    },
+<a name="line_287"></a>                    {
+<a name="line_288"></a>                      'mac' => '8b 4d 10',
+<a name="line_289"></a>                      'asm' => 'mov	 ecx, DWORD PTR _newp$[ebp]'
+<a name="line_290"></a>                    },
+<a name="line_291"></a>                    {
+<a name="line_292"></a>                      'mac' => '89 48 0c',
+<a name="line_293"></a>                      'asm' => 'mov	 DWORD PTR [eax+12], ecx'
+<a name="line_294"></a>                    },
+<a name="line_295"></a>                    {
+<a name="line_296"></a>                      'mac' => '5d',
+<a name="line_297"></a>                      'asm' => 'pop	 ebp'
+<a name="line_298"></a>                    },
+<a name="line_299"></a>                    {
+<a name="line_300"></a>                      'mac' => 'c3',
+<a name="line_301"></a>                      'asm' => 'ret	 0'
+<a name="line_302"></a>                    },
+<a name="line_303"></a>                    {
+<a name="line_304"></a>                      'mac' => '55',
+<a name="line_305"></a>                      'asm' => 'push	 ebp'
+<a name="line_306"></a>                    },
+<a name="line_307"></a>                    {
+<a name="line_308"></a>                      'mac' => '8b ec',
+<a name="line_309"></a>                      'asm' => 'mov	 ebp, esp'
+<a name="line_310"></a>                    },
+<a name="line_311"></a>                    {
+<a name="line_312"></a>                      'mac' => '83 7d 08 00',
+<a name="line_313"></a>                      'asm' => 'cmp	 DWORD PTR _treep$[ebp], 0'
+<a name="line_314"></a>                    },
+<a name="line_315"></a>                    {
+<a name="line_316"></a>                      'mac' => '75 05',
+<a name="line_317"></a>                      'asm' => 'jne	 SHORT $L1190'
+<a name="line_318"></a>                    },
+<a name="line_319"></a>                    {
+<a name="line_320"></a>                      'mac' => '8b 45 0c',
+<a name="line_321"></a>                      'asm' => 'mov	 eax, DWORD PTR _newp$[ebp]'
+<a name="line_322"></a>                    },
+<a name="line_323"></a>                    {
+<a name="line_324"></a>                      'mac' => 'eb 77',
+<a name="line_325"></a>                      'asm' => 'jmp	 SHORT $L1188'
+<a name="line_326"></a>                    },
+<a name="line_327"></a>                    {
+<a name="line_328"></a>                      'mac' => '8b 45 0c',
+<a name="line_329"></a>                      'asm' => 'mov	 eax, DWORD PTR _newp$[ebp]'
+<a name="line_330"></a>                    },
+<a name="line_331"></a>                    {
+<a name="line_332"></a>                      'mac' => '8b 4d 08',
+<a name="line_333"></a>                      'asm' => 'mov	 ecx, DWORD PTR _treep$[ebp]'
+<a name="line_334"></a>                    },
+<a name="line_335"></a>                    {
+<a name="line_336"></a>                      'mac' => '8b 10',
+<a name="line_337"></a>                      'asm' => 'mov	 edx, DWORD PTR [eax]'
+<a name="line_338"></a>                    },
+<a name="line_339"></a>                    {
+<a name="line_340"></a>                      'mac' => '3b 11',
+<a name="line_341"></a>                      'asm' => 'cmp	 edx, DWORD PTR [ecx]'
+<a name="line_342"></a>                    },
+<a name="line_343"></a>                    {
+<a name="line_344"></a>                      'mac' => '75 1a',
+<a name="line_345"></a>                      'asm' => 'jne	 SHORT $L1191'
+<a name="line_346"></a>                    },
+<a name="line_347"></a>                    {
+<a name="line_348"></a>                      'mac' => '8b 45 0c',
+<a name="line_349"></a>                      'asm' => 'mov	 eax, DWORD PTR _newp$[ebp]'
+<a name="line_350"></a>                    },
+<a name="line_351"></a>                    {
+<a name="line_352"></a>                      'mac' => '8b 08',
+<a name="line_353"></a>                      'asm' => 'mov	 ecx, DWORD PTR [eax]'
+<a name="line_354"></a>                    },
+<a name="line_355"></a>                    {
+<a name="line_356"></a>                      'mac' => '51',
+<a name="line_357"></a>                      'asm' => 'push	 ecx'
+<a name="line_358"></a>                    },
+<a name="line_359"></a>                    {
+<a name="line_360"></a>                      'mac' => '68 00 00 00 00',
+<a name="line_361"></a>                      'asm' => 'push	 OFFSET FLAT:$SG1192'
+<a name="line_362"></a>                    },
+<a name="line_363"></a>                    {
+<a name="line_364"></a>                      'mac' => '68 40 00 00 00',
+<a name="line_365"></a>                      'asm' => 'push	 OFFSET FLAT:__iob+64'
+<a name="line_366"></a>                    },
+<a name="line_367"></a>                    {
+<a name="line_368"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_369"></a>                      'asm' => 'call	 _fprintf'
+<a name="line_370"></a>                    },
+<a name="line_371"></a>                    {
+<a name="line_372"></a>                      'mac' => '83 c4 0c',
+<a name="line_373"></a>                      'asm' => 'add	 esp, 12			; 0000000cH'
+<a name="line_374"></a>                    },
+<a name="line_375"></a>                    {
+<a name="line_376"></a>                      'mac' => 'eb 4e',
+<a name="line_377"></a>                      'asm' => 'jmp	 SHORT $L1193'
+<a name="line_378"></a>                    },
+<a name="line_379"></a>                    {
+<a name="line_380"></a>                      'mac' => '8b 55 0c',
+<a name="line_381"></a>                      'asm' => 'mov	 edx, DWORD PTR _newp$[ebp]'
+<a name="line_382"></a>                    },
+<a name="line_383"></a>                    {
+<a name="line_384"></a>                      'mac' => '8b 45 08',
+<a name="line_385"></a>                      'asm' => 'mov	 eax, DWORD PTR _treep$[ebp]'
+<a name="line_386"></a>                    },
+<a name="line_387"></a>                    {
+<a name="line_388"></a>                      'mac' => '8b 0a',
+<a name="line_389"></a>                      'asm' => 'mov	 ecx, DWORD PTR [edx]'
+<a name="line_390"></a>                    },
+<a name="line_391"></a>                    {
+<a name="line_392"></a>                      'mac' => '3b 08',
+<a name="line_393"></a>                      'asm' => 'cmp	 ecx, DWORD PTR [eax]'
+<a name="line_394"></a>                    },
+<a name="line_395"></a>                    {
+<a name="line_396"></a>                      'mac' => '7d 22',
+<a name="line_397"></a>                      'asm' => 'jge	 SHORT $L1194'
+<a name="line_398"></a>                    },
+<a name="line_399"></a>                    {
+<a name="line_400"></a>                      'mac' => '8b 55 0c',
+<a name="line_401"></a>                      'asm' => 'mov	 edx, DWORD PTR _newp$[ebp]'
+<a name="line_402"></a>                    },
+<a name="line_403"></a>                    {
+<a name="line_404"></a>                      'mac' => '52',
+<a name="line_405"></a>                      'asm' => 'push	 edx'
+<a name="line_406"></a>                    },
+<a name="line_407"></a>                    {
+<a name="line_408"></a>                      'mac' => '8b 45 08',
+<a name="line_409"></a>                      'asm' => 'mov	 eax, DWORD PTR _treep$[ebp]'
+<a name="line_410"></a>                    },
+<a name="line_411"></a>                    {
+<a name="line_412"></a>                      'mac' => '8b 48 08',
+<a name="line_413"></a>                      'asm' => 'mov	 ecx, DWORD PTR [eax+8]'
+<a name="line_414"></a>                    },
+<a name="line_415"></a>                    {
+<a name="line_416"></a>                      'mac' => '51',
+<a name="line_417"></a>                      'asm' => 'push	 ecx'
+<a name="line_418"></a>                    },
+<a name="line_419"></a>                    {
+<a name="line_420"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_421"></a>                      'asm' => 'call	 _insert'
+<a name="line_422"></a>                    },
+<a name="line_423"></a>                    {
+<a name="line_424"></a>                      'mac' => '83 c4 08',
+<a name="line_425"></a>                      'asm' => 'add	 esp, 8'
+<a name="line_426"></a>                    },
+<a name="line_427"></a>                    {
+<a name="line_428"></a>                      'mac' => '50',
+<a name="line_429"></a>                      'asm' => 'push	 eax'
+<a name="line_430"></a>                    },
+<a name="line_431"></a>                    {
+<a name="line_432"></a>                      'mac' => '8b 55 08',
+<a name="line_433"></a>                      'asm' => 'mov	 edx, DWORD PTR _treep$[ebp]'
+<a name="line_434"></a>                    },
+<a name="line_435"></a>                    {
+<a name="line_436"></a>                      'mac' => '52',
+<a name="line_437"></a>                      'asm' => 'push	 edx'
+<a name="line_438"></a>                    },
+<a name="line_439"></a>                    {
+<a name="line_440"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_441"></a>                      'asm' => 'call	 _setleft'
+<a name="line_442"></a>                    },
+<a name="line_443"></a>                    {
+<a name="line_444"></a>                      'mac' => '83 c4 08',
+<a name="line_445"></a>                      'asm' => 'add	 esp, 8'
+<a name="line_446"></a>                    },
+<a name="line_447"></a>                    {
+<a name="line_448"></a>                      'mac' => 'eb 20',
+<a name="line_449"></a>                      'asm' => 'jmp	 SHORT $L1193'
+<a name="line_450"></a>                    },
+<a name="line_451"></a>                    {
+<a name="line_452"></a>                      'mac' => '8b 45 0c',
+<a name="line_453"></a>                      'asm' => 'mov	 eax, DWORD PTR _newp$[ebp]'
+<a name="line_454"></a>                    },
+<a name="line_455"></a>                    {
+<a name="line_456"></a>                      'mac' => '50',
+<a name="line_457"></a>                      'asm' => 'push	 eax'
+<a name="line_458"></a>                    },
+<a name="line_459"></a>                    {
+<a name="line_460"></a>                      'mac' => '8b 4d 08',
+<a name="line_461"></a>                      'asm' => 'mov	 ecx, DWORD PTR _treep$[ebp]'
+<a name="line_462"></a>                    },
+<a name="line_463"></a>                    {
+<a name="line_464"></a>                      'mac' => '8b 51 0c',
+<a name="line_465"></a>                      'asm' => 'mov	 edx, DWORD PTR [ecx+12]'
+<a name="line_466"></a>                    },
+<a name="line_467"></a>                    {
+<a name="line_468"></a>                      'mac' => '52',
+<a name="line_469"></a>                      'asm' => 'push	 edx'
+<a name="line_470"></a>                    },
+<a name="line_471"></a>                    {
+<a name="line_472"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_473"></a>                      'asm' => 'call	 _insert'
+<a name="line_474"></a>                    },
+<a name="line_475"></a>                    {
+<a name="line_476"></a>                      'mac' => '83 c4 08',
+<a name="line_477"></a>                      'asm' => 'add	 esp, 8'
+<a name="line_478"></a>                    },
+<a name="line_479"></a>                    {
+<a name="line_480"></a>                      'mac' => '50',
+<a name="line_481"></a>                      'asm' => 'push	 eax'
+<a name="line_482"></a>                    },
+<a name="line_483"></a>                    {
+<a name="line_484"></a>                      'mac' => '8b 45 08',
+<a name="line_485"></a>                      'asm' => 'mov	 eax, DWORD PTR _treep$[ebp]'
+<a name="line_486"></a>                    },
+<a name="line_487"></a>                    {
+<a name="line_488"></a>                      'mac' => '50',
+<a name="line_489"></a>                      'asm' => 'push	 eax'
+<a name="line_490"></a>                    },
+<a name="line_491"></a>                    {
+<a name="line_492"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_493"></a>                      'asm' => 'call	 _setright'
+<a name="line_494"></a>                    },
+<a name="line_495"></a>                    {
+<a name="line_496"></a>                      'mac' => '83 c4 08',
+<a name="line_497"></a>                      'asm' => 'add	 esp, 8'
+<a name="line_498"></a>                    },
+<a name="line_499"></a>                    {
+<a name="line_500"></a>                      'mac' => '8b 45 08',
+<a name="line_501"></a>                      'asm' => 'mov	 eax, DWORD PTR _treep$[ebp]'
+<a name="line_502"></a>                    },
+<a name="line_503"></a>                    {
+<a name="line_504"></a>                      'mac' => '5d',
+<a name="line_505"></a>                      'asm' => 'pop	 ebp'
+<a name="line_506"></a>                    },
+<a name="line_507"></a>                    {
+<a name="line_508"></a>                      'mac' => 'c3',
+<a name="line_509"></a>                      'asm' => 'ret	 0'
+<a name="line_510"></a>                    },
+<a name="line_511"></a>                    {
+<a name="line_512"></a>                      'mac' => '55',
+<a name="line_513"></a>                      'asm' => 'push	 ebp'
+<a name="line_514"></a>                    },
+<a name="line_515"></a>                    {
+<a name="line_516"></a>                      'mac' => '8b ec',
+<a name="line_517"></a>                      'asm' => 'mov	 ebp, esp'
+<a name="line_518"></a>                    },
+<a name="line_519"></a>                    {
+<a name="line_520"></a>                      'mac' => '83 7d 08 00',
+<a name="line_521"></a>                      'asm' => 'cmp	 DWORD PTR _treep$[ebp], 0'
+<a name="line_522"></a>                    },
+<a name="line_523"></a>                    {
+<a name="line_524"></a>                      'mac' => '75 04',
+<a name="line_525"></a>                      'asm' => 'jne	 SHORT $L1203'
+<a name="line_526"></a>                    },
+<a name="line_527"></a>                    {
+<a name="line_528"></a>                      'mac' => '33 c0',
+<a name="line_529"></a>                      'asm' => 'xor	 eax, eax'
+<a name="line_530"></a>                    },
+<a name="line_531"></a>                    {
+<a name="line_532"></a>                      'mac' => 'eb 41',
+<a name="line_533"></a>                      'asm' => 'jmp	 SHORT $L1201'
+<a name="line_534"></a>                    },
+<a name="line_535"></a>                    {
+<a name="line_536"></a>                      'mac' => '8b 45 08',
+<a name="line_537"></a>                      'asm' => 'mov	 eax, DWORD PTR _treep$[ebp]'
+<a name="line_538"></a>                    },
+<a name="line_539"></a>                    {
+<a name="line_540"></a>                      'mac' => '8b 4d 0c',
+<a name="line_541"></a>                      'asm' => 'mov	 ecx, DWORD PTR _value$[ebp]'
+<a name="line_542"></a>                    },
+<a name="line_543"></a>                    {
+<a name="line_544"></a>                      'mac' => '3b 08',
+<a name="line_545"></a>                      'asm' => 'cmp	 ecx, DWORD PTR [eax]'
+<a name="line_546"></a>                    },
+<a name="line_547"></a>                    {
+<a name="line_548"></a>                      'mac' => '75 05',
+<a name="line_549"></a>                      'asm' => 'jne	 SHORT $L1205'
+<a name="line_550"></a>                    },
+<a name="line_551"></a>                    {
+<a name="line_552"></a>                      'mac' => '8b 45 08',
+<a name="line_553"></a>                      'asm' => 'mov	 eax, DWORD PTR _treep$[ebp]'
+<a name="line_554"></a>                    },
+<a name="line_555"></a>                    {
+<a name="line_556"></a>                      'mac' => 'eb 32',
+<a name="line_557"></a>                      'asm' => 'jmp	 SHORT $L1201'
+<a name="line_558"></a>                    },
+<a name="line_559"></a>                    {
+<a name="line_560"></a>                      'mac' => '8b 55 08',
+<a name="line_561"></a>                      'asm' => 'mov	 edx, DWORD PTR _treep$[ebp]'
+<a name="line_562"></a>                    },
+<a name="line_563"></a>                    {
+<a name="line_564"></a>                      'mac' => '8b 45 0c',
+<a name="line_565"></a>                      'asm' => 'mov	 eax, DWORD PTR _value$[ebp]'
+<a name="line_566"></a>                    },
+<a name="line_567"></a>                    {
+<a name="line_568"></a>                      'mac' => '3b 02',
+<a name="line_569"></a>                      'asm' => 'cmp	 eax, DWORD PTR [edx]'
+<a name="line_570"></a>                    },
+<a name="line_571"></a>                    {
+<a name="line_572"></a>                      'mac' => '7d 15',
+<a name="line_573"></a>                      'asm' => 'jge	 SHORT $L1207'
+<a name="line_574"></a>                    },
+<a name="line_575"></a>                    {
+<a name="line_576"></a>                      'mac' => '8b 4d 0c',
+<a name="line_577"></a>                      'asm' => 'mov	 ecx, DWORD PTR _value$[ebp]'
+<a name="line_578"></a>                    },
+<a name="line_579"></a>                    {
+<a name="line_580"></a>                      'mac' => '51',
+<a name="line_581"></a>                      'asm' => 'push	 ecx'
+<a name="line_582"></a>                    },
+<a name="line_583"></a>                    {
+<a name="line_584"></a>                      'mac' => '8b 55 08',
+<a name="line_585"></a>                      'asm' => 'mov	 edx, DWORD PTR _treep$[ebp]'
+<a name="line_586"></a>                    },
+<a name="line_587"></a>                    {
+<a name="line_588"></a>                      'mac' => '8b 42 08',
+<a name="line_589"></a>                      'asm' => 'mov	 eax, DWORD PTR [edx+8]'
+<a name="line_590"></a>                    },
+<a name="line_591"></a>                    {
+<a name="line_592"></a>                      'mac' => '50',
+<a name="line_593"></a>                      'asm' => 'push	 eax'
+<a name="line_594"></a>                    },
+<a name="line_595"></a>                    {
+<a name="line_596"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_597"></a>                      'asm' => 'call	 _lookup'
+<a name="line_598"></a>                    },
+<a name="line_599"></a>                    {
+<a name="line_600"></a>                      'mac' => '83 c4 08',
+<a name="line_601"></a>                      'asm' => 'add	 esp, 8'
+<a name="line_602"></a>                    },
+<a name="line_603"></a>                    {
+<a name="line_604"></a>                      'mac' => 'eb 13',
+<a name="line_605"></a>                      'asm' => 'jmp	 SHORT $L1201'
+<a name="line_606"></a>                    },
+<a name="line_607"></a>                    {
+<a name="line_608"></a>                      'mac' => '8b 4d 0c',
+<a name="line_609"></a>                      'asm' => 'mov	 ecx, DWORD PTR _value$[ebp]'
+<a name="line_610"></a>                    },
+<a name="line_611"></a>                    {
+<a name="line_612"></a>                      'mac' => '51',
+<a name="line_613"></a>                      'asm' => 'push	 ecx'
+<a name="line_614"></a>                    },
+<a name="line_615"></a>                    {
+<a name="line_616"></a>                      'mac' => '8b 55 08',
+<a name="line_617"></a>                      'asm' => 'mov	 edx, DWORD PTR _treep$[ebp]'
+<a name="line_618"></a>                    },
+<a name="line_619"></a>                    {
+<a name="line_620"></a>                      'mac' => '8b 42 0c',
+<a name="line_621"></a>                      'asm' => 'mov	 eax, DWORD PTR [edx+12]'
+<a name="line_622"></a>                    },
+<a name="line_623"></a>                    {
+<a name="line_624"></a>                      'mac' => '50',
+<a name="line_625"></a>                      'asm' => 'push	 eax'
+<a name="line_626"></a>                    },
+<a name="line_627"></a>                    {
+<a name="line_628"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_629"></a>                      'asm' => 'call	 _lookup'
+<a name="line_630"></a>                    },
+<a name="line_631"></a>                    {
+<a name="line_632"></a>                      'mac' => '83 c4 08',
+<a name="line_633"></a>                      'asm' => 'add	 esp, 8'
+<a name="line_634"></a>                    },
+<a name="line_635"></a>                    {
+<a name="line_636"></a>                      'mac' => '5d',
+<a name="line_637"></a>                      'asm' => 'pop	 ebp'
+<a name="line_638"></a>                    },
+<a name="line_639"></a>                    {
+<a name="line_640"></a>                      'mac' => 'c3',
+<a name="line_641"></a>                      'asm' => 'ret	 0'
+<a name="line_642"></a>                    },
+<a name="line_643"></a>                    {
+<a name="line_644"></a>                      'mac' => '55',
+<a name="line_645"></a>                      'asm' => 'push	 ebp'
+<a name="line_646"></a>                    },
+<a name="line_647"></a>                    {
+<a name="line_648"></a>                      'mac' => '8b ec',
+<a name="line_649"></a>                      'asm' => 'mov	 ebp, esp'
+<a name="line_650"></a>                    },
+<a name="line_651"></a>                    {
+<a name="line_652"></a>                      'mac' => '83 7d 08 00',
+<a name="line_653"></a>                      'asm' => 'cmp	 DWORD PTR _treep$[ebp], 0'
+<a name="line_654"></a>                    },
+<a name="line_655"></a>                    {
+<a name="line_656"></a>                      'mac' => '75 02',
+<a name="line_657"></a>                      'asm' => 'jne	 SHORT $L1214'
+<a name="line_658"></a>                    },
+<a name="line_659"></a>                    {
+<a name="line_660"></a>                      'mac' => 'eb 31',
+<a name="line_661"></a>                      'asm' => 'jmp	 SHORT $L1212'
+<a name="line_662"></a>                    },
+<a name="line_663"></a>                    {
+<a name="line_664"></a>                      'mac' => '8b 45 08',
+<a name="line_665"></a>                      'asm' => 'mov	 eax, DWORD PTR _treep$[ebp]'
+<a name="line_666"></a>                    },
+<a name="line_667"></a>                    {
+<a name="line_668"></a>                      'mac' => '8b 48 08',
+<a name="line_669"></a>                      'asm' => 'mov	 ecx, DWORD PTR [eax+8]'
+<a name="line_670"></a>                    },
+<a name="line_671"></a>                    {
+<a name="line_672"></a>                      'mac' => '51',
+<a name="line_673"></a>                      'asm' => 'push	 ecx'
+<a name="line_674"></a>                    },
+<a name="line_675"></a>                    {
+<a name="line_676"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_677"></a>                      'asm' => 'call	 _printinorder'
+<a name="line_678"></a>                    },
+<a name="line_679"></a>                    {
+<a name="line_680"></a>                      'mac' => '83 c4 04',
+<a name="line_681"></a>                      'asm' => 'add	 esp, 4'
+<a name="line_682"></a>                    },
+<a name="line_683"></a>                    {
+<a name="line_684"></a>                      'mac' => '8b 55 08',
+<a name="line_685"></a>                      'asm' => 'mov	 edx, DWORD PTR _treep$[ebp]'
+<a name="line_686"></a>                    },
+<a name="line_687"></a>                    {
+<a name="line_688"></a>                      'mac' => '8b 02',
+<a name="line_689"></a>                      'asm' => 'mov	 eax, DWORD PTR [edx]'
+<a name="line_690"></a>                    },
+<a name="line_691"></a>                    {
+<a name="line_692"></a>                      'mac' => '50',
+<a name="line_693"></a>                      'asm' => 'push	 eax'
+<a name="line_694"></a>                    },
+<a name="line_695"></a>                    {
+<a name="line_696"></a>                      'mac' => '68 00 00 00 00',
+<a name="line_697"></a>                      'asm' => 'push	 OFFSET FLAT:$SG1215'
+<a name="line_698"></a>                    },
+<a name="line_699"></a>                    {
+<a name="line_700"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_701"></a>                      'asm' => 'call	 _printf'
+<a name="line_702"></a>                    },
+<a name="line_703"></a>                    {
+<a name="line_704"></a>                      'mac' => '83 c4 08',
+<a name="line_705"></a>                      'asm' => 'add	 esp, 8'
+<a name="line_706"></a>                    },
+<a name="line_707"></a>                    {
+<a name="line_708"></a>                      'mac' => '8b 4d 08',
+<a name="line_709"></a>                      'asm' => 'mov	 ecx, DWORD PTR _treep$[ebp]'
+<a name="line_710"></a>                    },
+<a name="line_711"></a>                    {
+<a name="line_712"></a>                      'mac' => '8b 51 0c',
+<a name="line_713"></a>                      'asm' => 'mov	 edx, DWORD PTR [ecx+12]'
+<a name="line_714"></a>                    },
+<a name="line_715"></a>                    {
+<a name="line_716"></a>                      'mac' => '52',
+<a name="line_717"></a>                      'asm' => 'push	 edx'
+<a name="line_718"></a>                    },
+<a name="line_719"></a>                    {
+<a name="line_720"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_721"></a>                      'asm' => 'call	 _printinorder'
+<a name="line_722"></a>                    },
+<a name="line_723"></a>                    {
+<a name="line_724"></a>                      'mac' => '83 c4 04',
+<a name="line_725"></a>                      'asm' => 'add	 esp, 4'
+<a name="line_726"></a>                    },
+<a name="line_727"></a>                    {
+<a name="line_728"></a>                      'mac' => '5d',
+<a name="line_729"></a>                      'asm' => 'pop	 ebp'
+<a name="line_730"></a>                    },
+<a name="line_731"></a>                    {
+<a name="line_732"></a>                      'mac' => 'c3',
+<a name="line_733"></a>                      'asm' => 'ret	 0'
+<a name="line_734"></a>                    },
+<a name="line_735"></a>                    {
+<a name="line_736"></a>                      'mac' => '55',
+<a name="line_737"></a>                      'asm' => 'push	 ebp'
+<a name="line_738"></a>                    },
+<a name="line_739"></a>                    {
+<a name="line_740"></a>                      'mac' => '8b ec',
+<a name="line_741"></a>                      'asm' => 'mov	 ebp, esp'
+<a name="line_742"></a>                    },
+<a name="line_743"></a>                    {
+<a name="line_744"></a>                      'mac' => '83 7d 08 00',
+<a name="line_745"></a>                      'asm' => 'cmp	 DWORD PTR _treep$[ebp], 0'
+<a name="line_746"></a>                    },
+<a name="line_747"></a>                    {
+<a name="line_748"></a>                      'mac' => '75 04',
+<a name="line_749"></a>                      'asm' => 'jne	 SHORT $L1221'
+<a name="line_750"></a>                    },
+<a name="line_751"></a>                    {
+<a name="line_752"></a>                      'mac' => '33 c0',
+<a name="line_753"></a>                      'asm' => 'xor	 eax, eax'
+<a name="line_754"></a>                    },
+<a name="line_755"></a>                    {
+<a name="line_756"></a>                      'mac' => 'eb 59',
+<a name="line_757"></a>                      'asm' => 'jmp	 SHORT $L1219'
+<a name="line_758"></a>                    },
+<a name="line_759"></a>                    {
+<a name="line_760"></a>                      'mac' => '8b 45 08',
+<a name="line_761"></a>                      'asm' => 'mov	 eax, DWORD PTR _treep$[ebp]'
+<a name="line_762"></a>                    },
+<a name="line_763"></a>                    {
+<a name="line_764"></a>                      'mac' => '8b 48 08',
+<a name="line_765"></a>                      'asm' => 'mov	 ecx, DWORD PTR [eax+8]'
+<a name="line_766"></a>                    },
+<a name="line_767"></a>                    {
+<a name="line_768"></a>                      'mac' => '51',
+<a name="line_769"></a>                      'asm' => 'push	 ecx'
+<a name="line_770"></a>                    },
+<a name="line_771"></a>                    {
+<a name="line_772"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_773"></a>                      'asm' => 'call	 _freeall'
+<a name="line_774"></a>                    },
+<a name="line_775"></a>                    {
+<a name="line_776"></a>                      'mac' => '83 c4 04',
+<a name="line_777"></a>                      'asm' => 'add	 esp, 4'
+<a name="line_778"></a>                    },
+<a name="line_779"></a>                    {
+<a name="line_780"></a>                      'mac' => '8b 55 08',
+<a name="line_781"></a>                      'asm' => 'mov	 edx, DWORD PTR _treep$[ebp]'
+<a name="line_782"></a>                    },
+<a name="line_783"></a>                    {
+<a name="line_784"></a>                      'mac' => '89 42 08',
+<a name="line_785"></a>                      'asm' => 'mov	 DWORD PTR [edx+8], eax'
+<a name="line_786"></a>                    },
+<a name="line_787"></a>                    {
+<a name="line_788"></a>                      'mac' => '8b 45 08',
+<a name="line_789"></a>                      'asm' => 'mov	 eax, DWORD PTR _treep$[ebp]'
+<a name="line_790"></a>                    },
+<a name="line_791"></a>                    {
+<a name="line_792"></a>                      'mac' => '8b 48 0c',
+<a name="line_793"></a>                      'asm' => 'mov	 ecx, DWORD PTR [eax+12]'
+<a name="line_794"></a>                    },
+<a name="line_795"></a>                    {
+<a name="line_796"></a>                      'mac' => '51',
+<a name="line_797"></a>                      'asm' => 'push	 ecx'
+<a name="line_798"></a>                    },
+<a name="line_799"></a>                    {
+<a name="line_800"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_801"></a>                      'asm' => 'call	 _freeall'
+<a name="line_802"></a>                    },
+<a name="line_803"></a>                    {
+<a name="line_804"></a>                      'mac' => '83 c4 04',
+<a name="line_805"></a>                      'asm' => 'add	 esp, 4'
+<a name="line_806"></a>                    },
+<a name="line_807"></a>                    {
+<a name="line_808"></a>                      'mac' => '8b 55 08',
+<a name="line_809"></a>                      'asm' => 'mov	 edx, DWORD PTR _treep$[ebp]'
+<a name="line_810"></a>                    },
+<a name="line_811"></a>                    {
+<a name="line_812"></a>                      'mac' => '89 42 0c',
+<a name="line_813"></a>                      'asm' => 'mov	 DWORD PTR [edx+12], eax'
+<a name="line_814"></a>                    },
+<a name="line_815"></a>                    {
+<a name="line_816"></a>                      'mac' => 'b8 01 00 00 00',
+<a name="line_817"></a>                      'asm' => 'mov	 eax, 1'
+<a name="line_818"></a>                    },
+<a name="line_819"></a>                    {
+<a name="line_820"></a>                      'mac' => '85 c0',
+<a name="line_821"></a>                      'asm' => 'test	 eax, eax'
+<a name="line_822"></a>                    },
+<a name="line_823"></a>                    {
+<a name="line_824"></a>                      'mac' => '74 18',
+<a name="line_825"></a>                      'asm' => 'je	 SHORT $L1223'
+<a name="line_826"></a>                    },
+<a name="line_827"></a>                    {
+<a name="line_828"></a>                      'mac' => '8b 4d 08',
+<a name="line_829"></a>                      'asm' => 'mov	 ecx, DWORD PTR _treep$[ebp]'
+<a name="line_830"></a>                    },
+<a name="line_831"></a>                    {
+<a name="line_832"></a>                      'mac' => '8b 11',
+<a name="line_833"></a>                      'asm' => 'mov	 edx, DWORD PTR [ecx]'
+<a name="line_834"></a>                    },
+<a name="line_835"></a>                    {
+<a name="line_836"></a>                      'mac' => '52',
+<a name="line_837"></a>                      'asm' => 'push	 edx'
+<a name="line_838"></a>                    },
+<a name="line_839"></a>                    {
+<a name="line_840"></a>                      'mac' => '68 00 00 00 00',
+<a name="line_841"></a>                      'asm' => 'push	 OFFSET FLAT:$SG1224'
+<a name="line_842"></a>                    },
+<a name="line_843"></a>                    {
+<a name="line_844"></a>                      'mac' => '68 40 00 00 00',
+<a name="line_845"></a>                      'asm' => 'push	 OFFSET FLAT:__iob+64'
+<a name="line_846"></a>                    },
+<a name="line_847"></a>                    {
+<a name="line_848"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_849"></a>                      'asm' => 'call	 _fprintf'
+<a name="line_850"></a>                    },
+<a name="line_851"></a>                    {
+<a name="line_852"></a>                      'mac' => '83 c4 0c',
+<a name="line_853"></a>                      'asm' => 'add	 esp, 12			; 0000000cH'
+<a name="line_854"></a>                    },
+<a name="line_855"></a>                    {
+<a name="line_856"></a>                      'mac' => '8b 45 08',
+<a name="line_857"></a>                      'asm' => 'mov	 eax, DWORD PTR _treep$[ebp]'
+<a name="line_858"></a>                    },
+<a name="line_859"></a>                    {
+<a name="line_860"></a>                      'mac' => '50',
+<a name="line_861"></a>                      'asm' => 'push	 eax'
+<a name="line_862"></a>                    },
+<a name="line_863"></a>                    {
+<a name="line_864"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_865"></a>                      'asm' => 'call	 _free'
+<a name="line_866"></a>                    },
+<a name="line_867"></a>                    {
+<a name="line_868"></a>                      'mac' => '83 c4 04',
+<a name="line_869"></a>                      'asm' => 'add	 esp, 4'
+<a name="line_870"></a>                    },
+<a name="line_871"></a>                    {
+<a name="line_872"></a>                      'mac' => '33 c0',
+<a name="line_873"></a>                      'asm' => 'xor	 eax, eax'
+<a name="line_874"></a>                    },
+<a name="line_875"></a>                    {
+<a name="line_876"></a>                      'mac' => '5d',
+<a name="line_877"></a>                      'asm' => 'pop	 ebp'
+<a name="line_878"></a>                    },
+<a name="line_879"></a>                    {
+<a name="line_880"></a>                      'mac' => 'c3',
+<a name="line_881"></a>                      'asm' => 'ret	 0'
+<a name="line_882"></a>                    },
+<a name="line_883"></a>                    {
+<a name="line_884"></a>                      'mac' => '55',
+<a name="line_885"></a>                      'asm' => 'push	 ebp'
+<a name="line_886"></a>                    },
+<a name="line_887"></a>                    {
+<a name="line_888"></a>                      'mac' => '8b ec',
+<a name="line_889"></a>                      'asm' => 'mov	 ebp, esp'
+<a name="line_890"></a>                    },
+<a name="line_891"></a>                    {
+<a name="line_892"></a>                      'mac' => '83 7d 08 00',
+<a name="line_893"></a>                      'asm' => 'cmp	 DWORD PTR _treep$[ebp], 0'
+<a name="line_894"></a>                    },
+<a name="line_895"></a>                    {
+<a name="line_896"></a>                      'mac' => '75 04',
+<a name="line_897"></a>                      'asm' => 'jne	 SHORT $L1234'
+<a name="line_898"></a>                    },
+<a name="line_899"></a>                    {
+<a name="line_900"></a>                      'mac' => '33 c0',
+<a name="line_901"></a>                      'asm' => 'xor	 eax, eax'
+<a name="line_902"></a>                    },
+<a name="line_903"></a>                    {
+<a name="line_904"></a>                      'mac' => 'eb 24',
+<a name="line_905"></a>                      'asm' => 'jmp	 SHORT $L1229'
+<a name="line_906"></a>                    },
+<a name="line_907"></a>                    {
+<a name="line_908"></a>                      'mac' => 'b8 01 00 00 00',
+<a name="line_909"></a>                      'asm' => 'mov	 eax, 1'
+<a name="line_910"></a>                    },
+<a name="line_911"></a>                    {
+<a name="line_912"></a>                      'mac' => '85 c0',
+<a name="line_913"></a>                      'asm' => 'test	 eax, eax'
+<a name="line_914"></a>                    },
+<a name="line_915"></a>                    {
+<a name="line_916"></a>                      'mac' => '74 19',
+<a name="line_917"></a>                      'asm' => 'je	 SHORT $L1235'
+<a name="line_918"></a>                    },
+<a name="line_919"></a>                    {
+<a name="line_920"></a>                      'mac' => '8b 4d 08',
+<a name="line_921"></a>                      'asm' => 'mov	 ecx, DWORD PTR _treep$[ebp]'
+<a name="line_922"></a>                    },
+<a name="line_923"></a>                    {
+<a name="line_924"></a>                      'mac' => '83 79 08 00',
+<a name="line_925"></a>                      'asm' => 'cmp	 DWORD PTR [ecx+8], 0'
+<a name="line_926"></a>                    },
+<a name="line_927"></a>                    {
+<a name="line_928"></a>                      'mac' => '75 05',
+<a name="line_929"></a>                      'asm' => 'jne	 SHORT $L1237'
+<a name="line_930"></a>                    },
+<a name="line_931"></a>                    {
+<a name="line_932"></a>                      'mac' => '8b 45 08',
+<a name="line_933"></a>                      'asm' => 'mov	 eax, DWORD PTR _treep$[ebp]'
+<a name="line_934"></a>                    },
+<a name="line_935"></a>                    {
+<a name="line_936"></a>                      'mac' => 'eb 0d',
+<a name="line_937"></a>                      'asm' => 'jmp	 SHORT $L1229'
+<a name="line_938"></a>                    },
+<a name="line_939"></a>                    {
+<a name="line_940"></a>                      'mac' => '8b 55 08',
+<a name="line_941"></a>                      'asm' => 'mov	 edx, DWORD PTR _treep$[ebp]'
+<a name="line_942"></a>                    },
+<a name="line_943"></a>                    {
+<a name="line_944"></a>                      'mac' => '8b 42 08',
+<a name="line_945"></a>                      'asm' => 'mov	 eax, DWORD PTR [edx+8]'
+<a name="line_946"></a>                    },
+<a name="line_947"></a>                    {
+<a name="line_948"></a>                      'mac' => '89 45 08',
+<a name="line_949"></a>                      'asm' => 'mov	 DWORD PTR _treep$[ebp], eax'
+<a name="line_950"></a>                    },
+<a name="line_951"></a>                    {
+<a name="line_952"></a>                      'mac' => 'eb de',
+<a name="line_953"></a>                      'asm' => 'jmp	 SHORT $L1234'
+<a name="line_954"></a>                    },
+<a name="line_955"></a>                    {
+<a name="line_956"></a>                      'mac' => '33 c0',
+<a name="line_957"></a>                      'asm' => 'xor	 eax, eax'
+<a name="line_958"></a>                    },
+<a name="line_959"></a>                    {
+<a name="line_960"></a>                      'mac' => '5d',
+<a name="line_961"></a>                      'asm' => 'pop	 ebp'
+<a name="line_962"></a>                    },
+<a name="line_963"></a>                    {
+<a name="line_964"></a>                      'mac' => 'c3',
+<a name="line_965"></a>                      'asm' => 'ret	 0'
+<a name="line_966"></a>                    },
+<a name="line_967"></a>                    {
+<a name="line_968"></a>                      'mac' => '55',
+<a name="line_969"></a>                      'asm' => 'push	 ebp'
+<a name="line_970"></a>                    },
+<a name="line_971"></a>                    {
+<a name="line_972"></a>                      'mac' => '8b ec',
+<a name="line_973"></a>                      'asm' => 'mov	 ebp, esp'
+<a name="line_974"></a>                    },
+<a name="line_975"></a>                    {
+<a name="line_976"></a>                      'mac' => '51',
+<a name="line_977"></a>                      'asm' => 'push	 ecx'
+<a name="line_978"></a>                    },
+<a name="line_979"></a>                    {
+<a name="line_980"></a>                      'mac' => '83 7d 08 00',
+<a name="line_981"></a>                      'asm' => 'cmp	 DWORD PTR _treep$[ebp], 0'
+<a name="line_982"></a>                    },
+<a name="line_983"></a>                    {
+<a name="line_984"></a>                      'mac' => '74 06',
+<a name="line_985"></a>                      'asm' => 'je	 SHORT $L1248'
+<a name="line_986"></a>                    },
+<a name="line_987"></a>                    {
+<a name="line_988"></a>                      'mac' => '83 7d 0c 00',
+<a name="line_989"></a>                      'asm' => 'cmp	 DWORD PTR _nodep$[ebp], 0'
+<a name="line_990"></a>                    },
+<a name="line_991"></a>                    {
+<a name="line_992"></a>                      'mac' => '75 08',
+<a name="line_993"></a>                      'asm' => 'jne	 SHORT $L1247'
+<a name="line_994"></a>                    },
+<a name="line_995"></a>                    {
+<a name="line_996"></a>                      'mac' => '8b 45 08',
+<a name="line_997"></a>                      'asm' => 'mov	 eax, DWORD PTR _treep$[ebp]'
+<a name="line_998"></a>                    },
+<a name="line_999"></a>                    {
+<a name="line_1000"></a>                      'mac' => 'e9 36 01 00 00',
+<a name="line_1001"></a>                      'asm' => 'jmp	 $L1244'
+<a name="line_1002"></a>                    },
+<a name="line_1003"></a>                    {
+<a name="line_1004"></a>                      'mac' => '8b 45 0c',
+<a name="line_1005"></a>                      'asm' => 'mov	 eax, DWORD PTR _nodep$[ebp]'
+<a name="line_1006"></a>                    },
+<a name="line_1007"></a>                    {
+<a name="line_1008"></a>                      'mac' => '83 78 08 00',
+<a name="line_1009"></a>                      'asm' => 'cmp	 DWORD PTR [eax+8], 0'
+<a name="line_1010"></a>                    },
+<a name="line_1011"></a>                    {
+<a name="line_1012"></a>                      'mac' => '0f 85 80 00 00 00',
+<a name="line_1013"></a>                      'asm' => 'jne	 $L1250'
+<a name="line_1014"></a>                    },
+<a name="line_1015"></a>                    {
+<a name="line_1016"></a>                      'mac' => '8b 4d 0c',
+<a name="line_1017"></a>                      'asm' => 'mov	 ecx, DWORD PTR _nodep$[ebp]'
+<a name="line_1018"></a>                    },
+<a name="line_1019"></a>                    {
+<a name="line_1020"></a>                      'mac' => '83 79 0c 00',
+<a name="line_1021"></a>                      'asm' => 'cmp	 DWORD PTR [ecx+12], 0'
+<a name="line_1022"></a>                    },
+<a name="line_1023"></a>                    {
+<a name="line_1024"></a>                      'mac' => '75 38',
+<a name="line_1025"></a>                      'asm' => 'jne	 SHORT $L1252'
+<a name="line_1026"></a>                    },
+<a name="line_1027"></a>                    {
+<a name="line_1028"></a>                      'mac' => '8b 55 0c',
+<a name="line_1029"></a>                      'asm' => 'mov	 edx, DWORD PTR _nodep$[ebp]'
+<a name="line_1030"></a>                    },
+<a name="line_1031"></a>                    {
+<a name="line_1032"></a>                      'mac' => '3b 55 08',
+<a name="line_1033"></a>                      'asm' => 'cmp	 edx, DWORD PTR _treep$[ebp]'
+<a name="line_1034"></a>                    },
+<a name="line_1035"></a>                    {
+<a name="line_1036"></a>                      'mac' => '75 07',
+<a name="line_1037"></a>                      'asm' => 'jne	 SHORT $L1253'
+<a name="line_1038"></a>                    },
+<a name="line_1039"></a>                    {
+<a name="line_1040"></a>                      'mac' => 'c7 45 08 00 00 00 00',
+<a name="line_1041"></a>                      'asm' => 'mov	 DWORD PTR _treep$[ebp], 0'
+<a name="line_1042"></a>                    },
+<a name="line_1043"></a>                    {
+<a name="line_1044"></a>                      'mac' => '6a 00',
+<a name="line_1045"></a>                      'asm' => 'push	 0'
+<a name="line_1046"></a>                    },
+<a name="line_1047"></a>                    {
+<a name="line_1048"></a>                      'mac' => '8b 45 0c',
+<a name="line_1049"></a>                      'asm' => 'mov	 eax, DWORD PTR _nodep$[ebp]'
+<a name="line_1050"></a>                    },
+<a name="line_1051"></a>                    {
+<a name="line_1052"></a>                      'mac' => '50',
+<a name="line_1053"></a>                      'asm' => 'push	 eax'
+<a name="line_1054"></a>                    },
+<a name="line_1055"></a>                    {
+<a name="line_1056"></a>                      'mac' => '8b 4d 0c',
+<a name="line_1057"></a>                      'asm' => 'mov	 ecx, DWORD PTR _nodep$[ebp]'
+<a name="line_1058"></a>                    },
+<a name="line_1059"></a>                    {
+<a name="line_1060"></a>                      'mac' => '8b 51 04',
+<a name="line_1061"></a>                      'asm' => 'mov	 edx, DWORD PTR [ecx+4]'
+<a name="line_1062"></a>                    },
+<a name="line_1063"></a>                    {
+<a name="line_1064"></a>                      'mac' => '52',
+<a name="line_1065"></a>                      'asm' => 'push	 edx'
+<a name="line_1066"></a>                    },
+<a name="line_1067"></a>                    {
+<a name="line_1068"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_1069"></a>                      'asm' => 'call	 _resetchild'
+<a name="line_1070"></a>                    },
+<a name="line_1071"></a>                    {
+<a name="line_1072"></a>                      'mac' => '83 c4 0c',
+<a name="line_1073"></a>                      'asm' => 'add	 esp, 12			; 0000000cH'
+<a name="line_1074"></a>                    },
+<a name="line_1075"></a>                    {
+<a name="line_1076"></a>                      'mac' => '8b 45 0c',
+<a name="line_1077"></a>                      'asm' => 'mov	 eax, DWORD PTR _nodep$[ebp]'
+<a name="line_1078"></a>                    },
+<a name="line_1079"></a>                    {
+<a name="line_1080"></a>                      'mac' => '50',
+<a name="line_1081"></a>                      'asm' => 'push	 eax'
+<a name="line_1082"></a>                    },
+<a name="line_1083"></a>                    {
+<a name="line_1084"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_1085"></a>                      'asm' => 'call	 _free'
+<a name="line_1086"></a>                    },
+<a name="line_1087"></a>                    {
+<a name="line_1088"></a>                      'mac' => '83 c4 04',
+<a name="line_1089"></a>                      'asm' => 'add	 esp, 4'
+<a name="line_1090"></a>                    },
+<a name="line_1091"></a>                    {
+<a name="line_1092"></a>                      'mac' => '8b 45 08',
+<a name="line_1093"></a>                      'asm' => 'mov	 eax, DWORD PTR _treep$[ebp]'
+<a name="line_1094"></a>                    },
+<a name="line_1095"></a>                    {
+<a name="line_1096"></a>                      'mac' => 'e9 e8 00 00 00',
+<a name="line_1097"></a>                      'asm' => 'jmp	 $L1244'
+<a name="line_1098"></a>                    },
+<a name="line_1099"></a>                    {
+<a name="line_1100"></a>                      'mac' => '8b 4d 0c',
+<a name="line_1101"></a>                      'asm' => 'mov	 ecx, DWORD PTR _nodep$[ebp]'
+<a name="line_1102"></a>                    },
+<a name="line_1103"></a>                    {
+<a name="line_1104"></a>                      'mac' => '3b 4d 08',
+<a name="line_1105"></a>                      'asm' => 'cmp	 ecx, DWORD PTR _treep$[ebp]'
+<a name="line_1106"></a>                    },
+<a name="line_1107"></a>                    {
+<a name="line_1108"></a>                      'mac' => '75 09',
+<a name="line_1109"></a>                      'asm' => 'jne	 SHORT $L1257'
+<a name="line_1110"></a>                    },
+<a name="line_1111"></a>                    {
+<a name="line_1112"></a>                      'mac' => '8b 55 0c',
+<a name="line_1113"></a>                      'asm' => 'mov	 edx, DWORD PTR _nodep$[ebp]'
+<a name="line_1114"></a>                    },
+<a name="line_1115"></a>                    {
+<a name="line_1116"></a>                      'mac' => '8b 42 0c',
+<a name="line_1117"></a>                      'asm' => 'mov	 eax, DWORD PTR [edx+12]'
+<a name="line_1118"></a>                    },
+<a name="line_1119"></a>                    {
+<a name="line_1120"></a>                      'mac' => '89 45 08',
+<a name="line_1121"></a>                      'asm' => 'mov	 DWORD PTR _treep$[ebp], eax'
+<a name="line_1122"></a>                    },
+<a name="line_1123"></a>                    {
+<a name="line_1124"></a>                      'mac' => '8b 4d 0c',
+<a name="line_1125"></a>                      'asm' => 'mov	 ecx, DWORD PTR _nodep$[ebp]'
+<a name="line_1126"></a>                    },
+<a name="line_1127"></a>                    {
+<a name="line_1128"></a>                      'mac' => '8b 51 0c',
+<a name="line_1129"></a>                      'asm' => 'mov	 edx, DWORD PTR [ecx+12]'
+<a name="line_1130"></a>                    },
+<a name="line_1131"></a>                    {
+<a name="line_1132"></a>                      'mac' => '52',
+<a name="line_1133"></a>                      'asm' => 'push	 edx'
+<a name="line_1134"></a>                    },
+<a name="line_1135"></a>                    {
+<a name="line_1136"></a>                      'mac' => '8b 45 0c',
+<a name="line_1137"></a>                      'asm' => 'mov	 eax, DWORD PTR _nodep$[ebp]'
+<a name="line_1138"></a>                    },
+<a name="line_1139"></a>                    {
+<a name="line_1140"></a>                      'mac' => '50',
+<a name="line_1141"></a>                      'asm' => 'push	 eax'
+<a name="line_1142"></a>                    },
+<a name="line_1143"></a>                    {
+<a name="line_1144"></a>                      'mac' => '8b 4d 0c',
+<a name="line_1145"></a>                      'asm' => 'mov	 ecx, DWORD PTR _nodep$[ebp]'
+<a name="line_1146"></a>                    },
+<a name="line_1147"></a>                    {
+<a name="line_1148"></a>                      'mac' => '8b 51 04',
+<a name="line_1149"></a>                      'asm' => 'mov	 edx, DWORD PTR [ecx+4]'
+<a name="line_1150"></a>                    },
+<a name="line_1151"></a>                    {
+<a name="line_1152"></a>                      'mac' => '52',
+<a name="line_1153"></a>                      'asm' => 'push	 edx'
+<a name="line_1154"></a>                    },
+<a name="line_1155"></a>                    {
+<a name="line_1156"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_1157"></a>                      'asm' => 'call	 _resetchild'
+<a name="line_1158"></a>                    },
+<a name="line_1159"></a>                    {
+<a name="line_1160"></a>                      'mac' => '83 c4 0c',
+<a name="line_1161"></a>                      'asm' => 'add	 esp, 12			; 0000000cH'
+<a name="line_1162"></a>                    },
+<a name="line_1163"></a>                    {
+<a name="line_1164"></a>                      'mac' => '8b 45 0c',
+<a name="line_1165"></a>                      'asm' => 'mov	 eax, DWORD PTR _nodep$[ebp]'
+<a name="line_1166"></a>                    },
+<a name="line_1167"></a>                    {
+<a name="line_1168"></a>                      'mac' => '50',
+<a name="line_1169"></a>                      'asm' => 'push	 eax'
+<a name="line_1170"></a>                    },
+<a name="line_1171"></a>                    {
+<a name="line_1172"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_1173"></a>                      'asm' => 'call	 _free'
+<a name="line_1174"></a>                    },
+<a name="line_1175"></a>                    {
+<a name="line_1176"></a>                      'mac' => '83 c4 04',
+<a name="line_1177"></a>                      'asm' => 'add	 esp, 4'
+<a name="line_1178"></a>                    },
+<a name="line_1179"></a>                    {
+<a name="line_1180"></a>                      'mac' => '8b 45 08',
+<a name="line_1181"></a>                      'asm' => 'mov	 eax, DWORD PTR _treep$[ebp]'
+<a name="line_1182"></a>                    },
+<a name="line_1183"></a>                    {
+<a name="line_1184"></a>                      'mac' => 'e9 a9 00 00 00',
+<a name="line_1185"></a>                      'asm' => 'jmp	 $L1244'
+<a name="line_1186"></a>                    },
+<a name="line_1187"></a>                    {
+<a name="line_1188"></a>                      'mac' => '8b 4d 0c',
+<a name="line_1189"></a>                      'asm' => 'mov	 ecx, DWORD PTR _nodep$[ebp]'
+<a name="line_1190"></a>                    },
+<a name="line_1191"></a>                    {
+<a name="line_1192"></a>                      'mac' => '83 79 0c 00',
+<a name="line_1193"></a>                      'asm' => 'cmp	 DWORD PTR [ecx+12], 0'
+<a name="line_1194"></a>                    },
+<a name="line_1195"></a>                    {
+<a name="line_1196"></a>                      'mac' => '75 3c',
+<a name="line_1197"></a>                      'asm' => 'jne	 SHORT $L1260'
+<a name="line_1198"></a>                    },
+<a name="line_1199"></a>                    {
+<a name="line_1200"></a>                      'mac' => '8b 55 0c',
+<a name="line_1201"></a>                      'asm' => 'mov	 edx, DWORD PTR _nodep$[ebp]'
+<a name="line_1202"></a>                    },
+<a name="line_1203"></a>                    {
+<a name="line_1204"></a>                      'mac' => '3b 55 08',
+<a name="line_1205"></a>                      'asm' => 'cmp	 edx, DWORD PTR _treep$[ebp]'
+<a name="line_1206"></a>                    },
+<a name="line_1207"></a>                    {
+<a name="line_1208"></a>                      'mac' => '75 09',
+<a name="line_1209"></a>                      'asm' => 'jne	 SHORT $L1261'
+<a name="line_1210"></a>                    },
+<a name="line_1211"></a>                    {
+<a name="line_1212"></a>                      'mac' => '8b 45 0c',
+<a name="line_1213"></a>                      'asm' => 'mov	 eax, DWORD PTR _nodep$[ebp]'
+<a name="line_1214"></a>                    },
+<a name="line_1215"></a>                    {
+<a name="line_1216"></a>                      'mac' => '8b 48 08',
+<a name="line_1217"></a>                      'asm' => 'mov	 ecx, DWORD PTR [eax+8]'
+<a name="line_1218"></a>                    },
+<a name="line_1219"></a>                    {
+<a name="line_1220"></a>                      'mac' => '89 4d 08',
+<a name="line_1221"></a>                      'asm' => 'mov	 DWORD PTR _treep$[ebp], ecx'
+<a name="line_1222"></a>                    },
+<a name="line_1223"></a>                    {
+<a name="line_1224"></a>                      'mac' => '8b 55 0c',
+<a name="line_1225"></a>                      'asm' => 'mov	 edx, DWORD PTR _nodep$[ebp]'
+<a name="line_1226"></a>                    },
+<a name="line_1227"></a>                    {
+<a name="line_1228"></a>                      'mac' => '8b 42 08',
+<a name="line_1229"></a>                      'asm' => 'mov	 eax, DWORD PTR [edx+8]'
+<a name="line_1230"></a>                    },
+<a name="line_1231"></a>                    {
+<a name="line_1232"></a>                      'mac' => '50',
+<a name="line_1233"></a>                      'asm' => 'push	 eax'
+<a name="line_1234"></a>                    },
+<a name="line_1235"></a>                    {
+<a name="line_1236"></a>                      'mac' => '8b 4d 0c',
+<a name="line_1237"></a>                      'asm' => 'mov	 ecx, DWORD PTR _nodep$[ebp]'
+<a name="line_1238"></a>                    },
+<a name="line_1239"></a>                    {
+<a name="line_1240"></a>                      'mac' => '51',
+<a name="line_1241"></a>                      'asm' => 'push	 ecx'
+<a name="line_1242"></a>                    },
+<a name="line_1243"></a>                    {
+<a name="line_1244"></a>                      'mac' => '8b 55 0c',
+<a name="line_1245"></a>                      'asm' => 'mov	 edx, DWORD PTR _nodep$[ebp]'
+<a name="line_1246"></a>                    },
+<a name="line_1247"></a>                    {
+<a name="line_1248"></a>                      'mac' => '8b 42 04',
+<a name="line_1249"></a>                      'asm' => 'mov	 eax, DWORD PTR [edx+4]'
+<a name="line_1250"></a>                    },
+<a name="line_1251"></a>                    {
+<a name="line_1252"></a>                      'mac' => '50',
+<a name="line_1253"></a>                      'asm' => 'push	 eax'
+<a name="line_1254"></a>                    },
+<a name="line_1255"></a>                    {
+<a name="line_1256"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_1257"></a>                      'asm' => 'call	 _resetchild'
+<a name="line_1258"></a>                    },
+<a name="line_1259"></a>                    {
+<a name="line_1260"></a>                      'mac' => '83 c4 0c',
+<a name="line_1261"></a>                      'asm' => 'add	 esp, 12			; 0000000cH'
+<a name="line_1262"></a>                    },
+<a name="line_1263"></a>                    {
+<a name="line_1264"></a>                      'mac' => '8b 4d 0c',
+<a name="line_1265"></a>                      'asm' => 'mov	 ecx, DWORD PTR _nodep$[ebp]'
+<a name="line_1266"></a>                    },
+<a name="line_1267"></a>                    {
+<a name="line_1268"></a>                      'mac' => '51',
+<a name="line_1269"></a>                      'asm' => 'push	 ecx'
+<a name="line_1270"></a>                    },
+<a name="line_1271"></a>                    {
+<a name="line_1272"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_1273"></a>                      'asm' => 'call	 _free'
+<a name="line_1274"></a>                    },
+<a name="line_1275"></a>                    {
+<a name="line_1276"></a>                      'mac' => '83 c4 04',
+<a name="line_1277"></a>                      'asm' => 'add	 esp, 4'
+<a name="line_1278"></a>                    },
+<a name="line_1279"></a>                    {
+<a name="line_1280"></a>                      'mac' => '8b 45 08',
+<a name="line_1281"></a>                      'asm' => 'mov	 eax, DWORD PTR _treep$[ebp]'
+<a name="line_1282"></a>                    },
+<a name="line_1283"></a>                    {
+<a name="line_1284"></a>                      'mac' => 'eb 64',
+<a name="line_1285"></a>                      'asm' => 'jmp	 SHORT $L1244'
+<a name="line_1286"></a>                    },
+<a name="line_1287"></a>                    {
+<a name="line_1288"></a>                      'mac' => '8b 55 0c',
+<a name="line_1289"></a>                      'asm' => 'mov	 edx, DWORD PTR _nodep$[ebp]'
+<a name="line_1290"></a>                    },
+<a name="line_1291"></a>                    {
+<a name="line_1292"></a>                      'mac' => '8b 42 0c',
+<a name="line_1293"></a>                      'asm' => 'mov	 eax, DWORD PTR [edx+12]'
+<a name="line_1294"></a>                    },
+<a name="line_1295"></a>                    {
+<a name="line_1296"></a>                      'mac' => '50',
+<a name="line_1297"></a>                      'asm' => 'push	 eax'
+<a name="line_1298"></a>                    },
+<a name="line_1299"></a>                    {
+<a name="line_1300"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_1301"></a>                      'asm' => 'call	 _findmin'
+<a name="line_1302"></a>                    },
+<a name="line_1303"></a>                    {
+<a name="line_1304"></a>                      'mac' => '83 c4 04',
+<a name="line_1305"></a>                      'asm' => 'add	 esp, 4'
+<a name="line_1306"></a>                    },
+<a name="line_1307"></a>                    {
+<a name="line_1308"></a>                      'mac' => '89 45 fc',
+<a name="line_1309"></a>                      'asm' => 'mov	 DWORD PTR _minp$1263[ebp], eax'
+<a name="line_1310"></a>                    },
+<a name="line_1311"></a>                    {
+<a name="line_1312"></a>                      'mac' => '8b 4d 0c',
+<a name="line_1313"></a>                      'asm' => 'mov	 ecx, DWORD PTR _nodep$[ebp]'
+<a name="line_1314"></a>                    },
+<a name="line_1315"></a>                    {
+<a name="line_1316"></a>                      'mac' => '8b 55 fc',
+<a name="line_1317"></a>                      'asm' => 'mov	 edx, DWORD PTR _minp$1263[ebp]'
+<a name="line_1318"></a>                    },
+<a name="line_1319"></a>                    {
+<a name="line_1320"></a>                      'mac' => '3b 51 0c',
+<a name="line_1321"></a>                      'asm' => 'cmp	 edx, DWORD PTR [ecx+12]'
+<a name="line_1322"></a>                    },
+<a name="line_1323"></a>                    {
+<a name="line_1324"></a>                      'mac' => '75 18',
+<a name="line_1325"></a>                      'asm' => 'jne	 SHORT $L1264'
+<a name="line_1326"></a>                    },
+<a name="line_1327"></a>                    {
+<a name="line_1328"></a>                      'mac' => '8b 45 fc',
+<a name="line_1329"></a>                      'asm' => 'mov	 eax, DWORD PTR _minp$1263[ebp]'
+<a name="line_1330"></a>                    },
+<a name="line_1331"></a>                    {
+<a name="line_1332"></a>                      'mac' => '8b 48 0c',
+<a name="line_1333"></a>                      'asm' => 'mov	 ecx, DWORD PTR [eax+12]'
+<a name="line_1334"></a>                    },
+<a name="line_1335"></a>                    {
+<a name="line_1336"></a>                      'mac' => '51',
+<a name="line_1337"></a>                      'asm' => 'push	 ecx'
+<a name="line_1338"></a>                    },
+<a name="line_1339"></a>                    {
+<a name="line_1340"></a>                      'mac' => '8b 55 fc',
+<a name="line_1341"></a>                      'asm' => 'mov	 edx, DWORD PTR _minp$1263[ebp]'
+<a name="line_1342"></a>                    },
+<a name="line_1343"></a>                    {
+<a name="line_1344"></a>                      'mac' => '8b 42 04',
+<a name="line_1345"></a>                      'asm' => 'mov	 eax, DWORD PTR [edx+4]'
+<a name="line_1346"></a>                    },
+<a name="line_1347"></a>                    {
+<a name="line_1348"></a>                      'mac' => '50',
+<a name="line_1349"></a>                      'asm' => 'push	 eax'
+<a name="line_1350"></a>                    },
+<a name="line_1351"></a>                    {
+<a name="line_1352"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_1353"></a>                      'asm' => 'call	 _setright'
+<a name="line_1354"></a>                    },
+<a name="line_1355"></a>                    {
+<a name="line_1356"></a>                      'mac' => '83 c4 08',
+<a name="line_1357"></a>                      'asm' => 'add	 esp, 8'
+<a name="line_1358"></a>                    },
+<a name="line_1359"></a>                    {
+<a name="line_1360"></a>                      'mac' => 'eb 16',
+<a name="line_1361"></a>                      'asm' => 'jmp	 SHORT $L1265'
+<a name="line_1362"></a>                    },
+<a name="line_1363"></a>                    {
+<a name="line_1364"></a>                      'mac' => '8b 4d fc',
+<a name="line_1365"></a>                      'asm' => 'mov	 ecx, DWORD PTR _minp$1263[ebp]'
+<a name="line_1366"></a>                    },
+<a name="line_1367"></a>                    {
+<a name="line_1368"></a>                      'mac' => '8b 51 0c',
+<a name="line_1369"></a>                      'asm' => 'mov	 edx, DWORD PTR [ecx+12]'
+<a name="line_1370"></a>                    },
+<a name="line_1371"></a>                    {
+<a name="line_1372"></a>                      'mac' => '52',
+<a name="line_1373"></a>                      'asm' => 'push	 edx'
+<a name="line_1374"></a>                    },
+<a name="line_1375"></a>                    {
+<a name="line_1376"></a>                      'mac' => '8b 45 fc',
+<a name="line_1377"></a>                      'asm' => 'mov	 eax, DWORD PTR _minp$1263[ebp]'
+<a name="line_1378"></a>                    },
+<a name="line_1379"></a>                    {
+<a name="line_1380"></a>                      'mac' => '8b 48 04',
+<a name="line_1381"></a>                      'asm' => 'mov	 ecx, DWORD PTR [eax+4]'
+<a name="line_1382"></a>                    },
+<a name="line_1383"></a>                    {
+<a name="line_1384"></a>                      'mac' => '51',
+<a name="line_1385"></a>                      'asm' => 'push	 ecx'
+<a name="line_1386"></a>                    },
+<a name="line_1387"></a>                    {
+<a name="line_1388"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_1389"></a>                      'asm' => 'call	 _setleft'
+<a name="line_1390"></a>                    },
+<a name="line_1391"></a>                    {
+<a name="line_1392"></a>                      'mac' => '83 c4 08',
+<a name="line_1393"></a>                      'asm' => 'add	 esp, 8'
+<a name="line_1394"></a>                    },
+<a name="line_1395"></a>                    {
+<a name="line_1396"></a>                      'mac' => '8b 55 0c',
+<a name="line_1397"></a>                      'asm' => 'mov	 edx, DWORD PTR _nodep$[ebp]'
+<a name="line_1398"></a>                    },
+<a name="line_1399"></a>                    {
+<a name="line_1400"></a>                      'mac' => '8b 45 fc',
+<a name="line_1401"></a>                      'asm' => 'mov	 eax, DWORD PTR _minp$1263[ebp]'
+<a name="line_1402"></a>                    },
+<a name="line_1403"></a>                    {
+<a name="line_1404"></a>                      'mac' => '8b 08',
+<a name="line_1405"></a>                      'asm' => 'mov	 ecx, DWORD PTR [eax]'
+<a name="line_1406"></a>                    },
+<a name="line_1407"></a>                    {
+<a name="line_1408"></a>                      'mac' => '89 0a',
+<a name="line_1409"></a>                      'asm' => 'mov	 DWORD PTR [edx], ecx'
+<a name="line_1410"></a>                    },
+<a name="line_1411"></a>                    {
+<a name="line_1412"></a>                      'mac' => '8b 55 fc',
+<a name="line_1413"></a>                      'asm' => 'mov	 edx, DWORD PTR _minp$1263[ebp]'
+<a name="line_1414"></a>                    },
+<a name="line_1415"></a>                    {
+<a name="line_1416"></a>                      'mac' => '52',
+<a name="line_1417"></a>                      'asm' => 'push	 edx'
+<a name="line_1418"></a>                    },
+<a name="line_1419"></a>                    {
+<a name="line_1420"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_1421"></a>                      'asm' => 'call	 _free'
+<a name="line_1422"></a>                    },
+<a name="line_1423"></a>                    {
+<a name="line_1424"></a>                      'mac' => '83 c4 04',
+<a name="line_1425"></a>                      'asm' => 'add	 esp, 4'
+<a name="line_1426"></a>                    },
+<a name="line_1427"></a>                    {
+<a name="line_1428"></a>                      'mac' => '8b 45 08',
+<a name="line_1429"></a>                      'asm' => 'mov	 eax, DWORD PTR _treep$[ebp]'
+<a name="line_1430"></a>                    },
+<a name="line_1431"></a>                    {
+<a name="line_1432"></a>                      'mac' => '8b e5',
+<a name="line_1433"></a>                      'asm' => 'mov	 esp, ebp'
+<a name="line_1434"></a>                    },
+<a name="line_1435"></a>                    {
+<a name="line_1436"></a>                      'mac' => '5d',
+<a name="line_1437"></a>                      'asm' => 'pop	 ebp'
+<a name="line_1438"></a>                    },
+<a name="line_1439"></a>                    {
+<a name="line_1440"></a>                      'mac' => 'c3',
+<a name="line_1441"></a>                      'asm' => 'ret	 0'
+<a name="line_1442"></a>                    },
+<a name="line_1443"></a>                    {
+<a name="line_1444"></a>                      'mac' => '55',
+<a name="line_1445"></a>                      'asm' => 'push	 ebp'
+<a name="line_1446"></a>                    },
+<a name="line_1447"></a>                    {
+<a name="line_1448"></a>                      'mac' => '8b ec',
+<a name="line_1449"></a>                      'asm' => 'mov	 ebp, esp'
+<a name="line_1450"></a>                    },
+<a name="line_1451"></a>                    {
+<a name="line_1452"></a>                      'mac' => '51',
+<a name="line_1453"></a>                      'asm' => 'push	 ecx'
+<a name="line_1454"></a>                    },
+<a name="line_1455"></a>                    {
+<a name="line_1456"></a>                      'mac' => 'c7 45 fc 00 00 00 00',
+<a name="line_1457"></a>                      'asm' => 'mov	 DWORD PTR _i$[ebp], 0'
+<a name="line_1458"></a>                    },
+<a name="line_1459"></a>                    {
+<a name="line_1460"></a>                      'mac' => 'eb 09',
+<a name="line_1461"></a>                      'asm' => 'jmp	 SHORT $L1275'
+<a name="line_1462"></a>                    },
+<a name="line_1463"></a>                    {
+<a name="line_1464"></a>                      'mac' => '8b 45 fc',
+<a name="line_1465"></a>                      'asm' => 'mov	 eax, DWORD PTR _i$[ebp]'
+<a name="line_1466"></a>                    },
+<a name="line_1467"></a>                    {
+<a name="line_1468"></a>                      'mac' => '83 c0 01',
+<a name="line_1469"></a>                      'asm' => 'add	 eax, 1'
+<a name="line_1470"></a>                    },
+<a name="line_1471"></a>                    {
+<a name="line_1472"></a>                      'mac' => '89 45 fc',
+<a name="line_1473"></a>                      'asm' => 'mov	 DWORD PTR _i$[ebp], eax'
+<a name="line_1474"></a>                    },
+<a name="line_1475"></a>                    {
+<a name="line_1476"></a>                      'mac' => '8b 4d fc',
+<a name="line_1477"></a>                      'asm' => 'mov	 ecx, DWORD PTR _i$[ebp]'
+<a name="line_1478"></a>                    },
+<a name="line_1479"></a>                    {
+<a name="line_1480"></a>                      'mac' => '3b 0d 00 00 00 00',
+<a name="line_1481"></a>                      'asm' => 'cmp	 ecx, DWORD PTR ?curLevel@?1??dumptree@@9@9'
+<a name="line_1482"></a>                    },
+<a name="line_1483"></a>                    {
+<a name="line_1484"></a>                      'mac' => '7d 0e',
+<a name="line_1485"></a>                      'asm' => 'jge	 SHORT $L1277'
+<a name="line_1486"></a>                    },
+<a name="line_1487"></a>                    {
+<a name="line_1488"></a>                      'mac' => '8b 55 0c',
+<a name="line_1489"></a>                      'asm' => 'mov	 edx, DWORD PTR _indent$[ebp]'
+<a name="line_1490"></a>                    },
+<a name="line_1491"></a>                    {
+<a name="line_1492"></a>                      'mac' => '52',
+<a name="line_1493"></a>                      'asm' => 'push	 edx'
+<a name="line_1494"></a>                    },
+<a name="line_1495"></a>                    {
+<a name="line_1496"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_1497"></a>                      'asm' => 'call	 _printf'
+<a name="line_1498"></a>                    },
+<a name="line_1499"></a>                    {
+<a name="line_1500"></a>                      'mac' => '83 c4 04',
+<a name="line_1501"></a>                      'asm' => 'add	 esp, 4'
+<a name="line_1502"></a>                    },
+<a name="line_1503"></a>                    {
+<a name="line_1504"></a>                      'mac' => 'eb de',
+<a name="line_1505"></a>                      'asm' => 'jmp	 SHORT $L1276'
+<a name="line_1506"></a>                    },
+<a name="line_1507"></a>                    {
+<a name="line_1508"></a>                      'mac' => '83 7d 08 00',
+<a name="line_1509"></a>                      'asm' => 'cmp	 DWORD PTR _treep$[ebp], 0'
+<a name="line_1510"></a>                    },
+<a name="line_1511"></a>                    {
+<a name="line_1512"></a>                      'mac' => '75 0f',
+<a name="line_1513"></a>                      'asm' => 'jne	 SHORT $L1279'
+<a name="line_1514"></a>                    },
+<a name="line_1515"></a>                    {
+<a name="line_1516"></a>                      'mac' => '68 00 00 00 00',
+<a name="line_1517"></a>                      'asm' => 'push	 OFFSET FLAT:$SG1280'
+<a name="line_1518"></a>                    },
+<a name="line_1519"></a>                    {
+<a name="line_1520"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_1521"></a>                      'asm' => 'call	 _printf'
+<a name="line_1522"></a>                    },
+<a name="line_1523"></a>                    {
+<a name="line_1524"></a>                      'mac' => '83 c4 04',
+<a name="line_1525"></a>                      'asm' => 'add	 esp, 4'
+<a name="line_1526"></a>                    },
+<a name="line_1527"></a>                    {
+<a name="line_1528"></a>                      'mac' => 'eb 69',
+<a name="line_1529"></a>                      'asm' => 'jmp	 SHORT $L1271'
+<a name="line_1530"></a>                    },
+<a name="line_1531"></a>                    {
+<a name="line_1532"></a>                      'mac' => '8b 45 08',
+<a name="line_1533"></a>                      'asm' => 'mov	 eax, DWORD PTR _treep$[ebp]'
+<a name="line_1534"></a>                    },
+<a name="line_1535"></a>                    {
+<a name="line_1536"></a>                      'mac' => '8b 08',
+<a name="line_1537"></a>                      'asm' => 'mov	 ecx, DWORD PTR [eax]'
+<a name="line_1538"></a>                    },
+<a name="line_1539"></a>                    {
+<a name="line_1540"></a>                      'mac' => '51',
+<a name="line_1541"></a>                      'asm' => 'push	 ecx'
+<a name="line_1542"></a>                    },
+<a name="line_1543"></a>                    {
+<a name="line_1544"></a>                      'mac' => '68 00 00 00 00',
+<a name="line_1545"></a>                      'asm' => 'push	 OFFSET FLAT:$SG1281'
+<a name="line_1546"></a>                    },
+<a name="line_1547"></a>                    {
+<a name="line_1548"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_1549"></a>                      'asm' => 'call	 _printf'
+<a name="line_1550"></a>                    },
+<a name="line_1551"></a>                    {
+<a name="line_1552"></a>                      'mac' => '83 c4 08',
+<a name="line_1553"></a>                      'asm' => 'add	 esp, 8'
+<a name="line_1554"></a>                    },
+<a name="line_1555"></a>                    {
+<a name="line_1556"></a>                      'mac' => '8b 55 08',
+<a name="line_1557"></a>                      'asm' => 'mov	 edx, DWORD PTR _treep$[ebp]'
+<a name="line_1558"></a>                    },
+<a name="line_1559"></a>                    {
+<a name="line_1560"></a>                      'mac' => '83 7a 08 00',
+<a name="line_1561"></a>                      'asm' => 'cmp	 DWORD PTR [edx+8], 0'
+<a name="line_1562"></a>                    },
+<a name="line_1563"></a>                    {
+<a name="line_1564"></a>                      'mac' => '75 09',
+<a name="line_1565"></a>                      'asm' => 'jne	 SHORT $L1285'
+<a name="line_1566"></a>                    },
+<a name="line_1567"></a>                    {
+<a name="line_1568"></a>                      'mac' => '8b 45 08',
+<a name="line_1569"></a>                      'asm' => 'mov	 eax, DWORD PTR _treep$[ebp]'
+<a name="line_1570"></a>                    },
+<a name="line_1571"></a>                    {
+<a name="line_1572"></a>                      'mac' => '83 78 0c 00',
+<a name="line_1573"></a>                      'asm' => 'cmp	 DWORD PTR [eax+12], 0'
+<a name="line_1574"></a>                    },
+<a name="line_1575"></a>                    {
+<a name="line_1576"></a>                      'mac' => '74 44',
+<a name="line_1577"></a>                      'asm' => 'je	 SHORT $L1271'
+<a name="line_1578"></a>                    },
+<a name="line_1579"></a>                    {
+<a name="line_1580"></a>                      'mac' => '8b 0d 00 00 00 00',
+<a name="line_1581"></a>                      'asm' => 'mov	 ecx, DWORD PTR ?curLevel@?1??dumptree@@9@9'
+<a name="line_1582"></a>                    },
+<a name="line_1583"></a>                    {
+<a name="line_1584"></a>                      'mac' => '83 c1 01',
+<a name="line_1585"></a>                      'asm' => 'add	 ecx, 1'
+<a name="line_1586"></a>                    },
+<a name="line_1587"></a>                    {
+<a name="line_1588"></a>                      'mac' => '89 0d 00 00 00 00',
+<a name="line_1589"></a>                      'asm' => 'mov	 DWORD PTR ?curLevel@?1??dumptree@@9@9, ecx'
+<a name="line_1590"></a>                    },
+<a name="line_1591"></a>                    {
+<a name="line_1592"></a>                      'mac' => '8b 55 0c',
+<a name="line_1593"></a>                      'asm' => 'mov	 edx, DWORD PTR _indent$[ebp]'
+<a name="line_1594"></a>                    },
+<a name="line_1595"></a>                    {
+<a name="line_1596"></a>                      'mac' => '52',
+<a name="line_1597"></a>                      'asm' => 'push	 edx'
+<a name="line_1598"></a>                    },
+<a name="line_1599"></a>                    {
+<a name="line_1600"></a>                      'mac' => '8b 45 08',
+<a name="line_1601"></a>                      'asm' => 'mov	 eax, DWORD PTR _treep$[ebp]'
+<a name="line_1602"></a>                    },
+<a name="line_1603"></a>                    {
+<a name="line_1604"></a>                      'mac' => '8b 48 08',
+<a name="line_1605"></a>                      'asm' => 'mov	 ecx, DWORD PTR [eax+8]'
+<a name="line_1606"></a>                    },
+<a name="line_1607"></a>                    {
+<a name="line_1608"></a>                      'mac' => '51',
+<a name="line_1609"></a>                      'asm' => 'push	 ecx'
+<a name="line_1610"></a>                    },
+<a name="line_1611"></a>                    {
+<a name="line_1612"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_1613"></a>                      'asm' => 'call	 _dumptree'
+<a name="line_1614"></a>                    },
+<a name="line_1615"></a>                    {
+<a name="line_1616"></a>                      'mac' => '83 c4 08',
+<a name="line_1617"></a>                      'asm' => 'add	 esp, 8'
+<a name="line_1618"></a>                    },
+<a name="line_1619"></a>                    {
+<a name="line_1620"></a>                      'mac' => '8b 55 0c',
+<a name="line_1621"></a>                      'asm' => 'mov	 edx, DWORD PTR _indent$[ebp]'
+<a name="line_1622"></a>                    },
+<a name="line_1623"></a>                    {
+<a name="line_1624"></a>                      'mac' => '52',
+<a name="line_1625"></a>                      'asm' => 'push	 edx'
+<a name="line_1626"></a>                    },
+<a name="line_1627"></a>                    {
+<a name="line_1628"></a>                      'mac' => '8b 45 08',
+<a name="line_1629"></a>                      'asm' => 'mov	 eax, DWORD PTR _treep$[ebp]'
+<a name="line_1630"></a>                    },
+<a name="line_1631"></a>                    {
+<a name="line_1632"></a>                      'mac' => '8b 48 0c',
+<a name="line_1633"></a>                      'asm' => 'mov	 ecx, DWORD PTR [eax+12]'
+<a name="line_1634"></a>                    },
+<a name="line_1635"></a>                    {
+<a name="line_1636"></a>                      'mac' => '51',
+<a name="line_1637"></a>                      'asm' => 'push	 ecx'
+<a name="line_1638"></a>                    },
+<a name="line_1639"></a>                    {
+<a name="line_1640"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_1641"></a>                      'asm' => 'call	 _dumptree'
+<a name="line_1642"></a>                    },
+<a name="line_1643"></a>                    {
+<a name="line_1644"></a>                      'mac' => '83 c4 08',
+<a name="line_1645"></a>                      'asm' => 'add	 esp, 8'
+<a name="line_1646"></a>                    },
+<a name="line_1647"></a>                    {
+<a name="line_1648"></a>                      'mac' => '8b 15 00 00 00 00',
+<a name="line_1649"></a>                      'asm' => 'mov	 edx, DWORD PTR ?curLevel@?1??dumptree@@9@9'
+<a name="line_1650"></a>                    },
+<a name="line_1651"></a>                    {
+<a name="line_1652"></a>                      'mac' => '83 ea 01',
+<a name="line_1653"></a>                      'asm' => 'sub	 edx, 1'
+<a name="line_1654"></a>                    },
+<a name="line_1655"></a>                    {
+<a name="line_1656"></a>                      'mac' => '89 15 00 00 00 00',
+<a name="line_1657"></a>                      'asm' => 'mov	 DWORD PTR ?curLevel@?1??dumptree@@9@9, edx'
+<a name="line_1658"></a>                    },
+<a name="line_1659"></a>                    {
+<a name="line_1660"></a>                      'mac' => '8b e5',
+<a name="line_1661"></a>                      'asm' => 'mov	 esp, ebp'
+<a name="line_1662"></a>                    },
+<a name="line_1663"></a>                    {
+<a name="line_1664"></a>                      'mac' => '5d',
+<a name="line_1665"></a>                      'asm' => 'pop	 ebp'
+<a name="line_1666"></a>                    },
+<a name="line_1667"></a>                    {
+<a name="line_1668"></a>                      'mac' => 'c3',
+<a name="line_1669"></a>                      'asm' => 'ret	 0'
+<a name="line_1670"></a>                    },
+<a name="line_1671"></a>                    {
+<a name="line_1672"></a>                      'mac' => '55',
+<a name="line_1673"></a>                      'asm' => 'push	 ebp'
+<a name="line_1674"></a>                    },
+<a name="line_1675"></a>                    {
+<a name="line_1676"></a>                      'mac' => '8b ec',
+<a name="line_1677"></a>                      'asm' => 'mov	 ebp, esp'
+<a name="line_1678"></a>                    },
+<a name="line_1679"></a>                    {
+<a name="line_1680"></a>                      'mac' => '51',
+<a name="line_1681"></a>                      'asm' => 'push	 ecx'
+<a name="line_1682"></a>                    },
+<a name="line_1683"></a>                    {
+<a name="line_1684"></a>                      'mac' => '8d 45 fc',
+<a name="line_1685"></a>                      'asm' => 'lea	 eax, DWORD PTR _val$[ebp]'
+<a name="line_1686"></a>                    },
+<a name="line_1687"></a>                    {
+<a name="line_1688"></a>                      'mac' => '50',
+<a name="line_1689"></a>                      'asm' => 'push	 eax'
+<a name="line_1690"></a>                    },
+<a name="line_1691"></a>                    {
+<a name="line_1692"></a>                      'mac' => '68 00 00 00 00',
+<a name="line_1693"></a>                      'asm' => 'push	 OFFSET FLAT:$SG1290'
+<a name="line_1694"></a>                    },
+<a name="line_1695"></a>                    {
+<a name="line_1696"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_1697"></a>                      'asm' => 'call	 _scanf'
+<a name="line_1698"></a>                    },
+<a name="line_1699"></a>                    {
+<a name="line_1700"></a>                      'mac' => '83 c4 08',
+<a name="line_1701"></a>                      'asm' => 'add	 esp, 8'
+<a name="line_1702"></a>                    },
+<a name="line_1703"></a>                    {
+<a name="line_1704"></a>                      'mac' => '8b 45 fc',
+<a name="line_1705"></a>                      'asm' => 'mov	 eax, DWORD PTR _val$[ebp]'
+<a name="line_1706"></a>                    },
+<a name="line_1707"></a>                    {
+<a name="line_1708"></a>                      'mac' => '8b e5',
+<a name="line_1709"></a>                      'asm' => 'mov	 esp, ebp'
+<a name="line_1710"></a>                    },
+<a name="line_1711"></a>                    {
+<a name="line_1712"></a>                      'mac' => '5d',
+<a name="line_1713"></a>                      'asm' => 'pop	 ebp'
+<a name="line_1714"></a>                    },
+<a name="line_1715"></a>                    {
+<a name="line_1716"></a>                      'mac' => 'c3',
+<a name="line_1717"></a>                      'asm' => 'ret	 0'
+<a name="line_1718"></a>                    },
+<a name="line_1719"></a>                    {
+<a name="line_1720"></a>                      'mac' => '55',
+<a name="line_1721"></a>                      'asm' => 'push	 ebp'
+<a name="line_1722"></a>                    },
+<a name="line_1723"></a>                    {
+<a name="line_1724"></a>                      'mac' => '8b ec',
+<a name="line_1725"></a>                      'asm' => 'mov	 ebp, esp'
+<a name="line_1726"></a>                    },
+<a name="line_1727"></a>                    {
+<a name="line_1728"></a>                      'mac' => '83 ec 0c',
+<a name="line_1729"></a>                      'asm' => 'sub	 esp, 12			; 0000000cH'
+<a name="line_1730"></a>                    },
+<a name="line_1731"></a>                    {
+<a name="line_1732"></a>                      'mac' => 'c7 45 f4 00 00 00 00',
+<a name="line_1733"></a>                      'asm' => 'mov	 DWORD PTR _treep$[ebp], 0'
+<a name="line_1734"></a>                    },
+<a name="line_1735"></a>                    {
+<a name="line_1736"></a>                      'mac' => '68 00 00 00 00',
+<a name="line_1737"></a>                      'asm' => 'push	 OFFSET FLAT:$SG1298'
+<a name="line_1738"></a>                    },
+<a name="line_1739"></a>                    {
+<a name="line_1740"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_1741"></a>                      'asm' => 'call	 _printf'
+<a name="line_1742"></a>                    },
+<a name="line_1743"></a>                    {
+<a name="line_1744"></a>                      'mac' => '83 c4 04',
+<a name="line_1745"></a>                      'asm' => 'add	 esp, 4'
+<a name="line_1746"></a>                    },
+<a name="line_1747"></a>                    {
+<a name="line_1748"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_1749"></a>                      'asm' => 'call	 _getval'
+<a name="line_1750"></a>                    },
+<a name="line_1751"></a>                    {
+<a name="line_1752"></a>                      'mac' => '89 45 f8',
+<a name="line_1753"></a>                      'asm' => 'mov	 DWORD PTR _val$[ebp], eax'
+<a name="line_1754"></a>                    },
+<a name="line_1755"></a>                    {
+<a name="line_1756"></a>                      'mac' => '83 7d f8 ff',
+<a name="line_1757"></a>                      'asm' => 'cmp	 DWORD PTR _val$[ebp], -1'
+<a name="line_1758"></a>                    },
+<a name="line_1759"></a>                    {
+<a name="line_1760"></a>                      'mac' => '74 1e',
+<a name="line_1761"></a>                      'asm' => 'je	 SHORT $L1301'
+<a name="line_1762"></a>                    },
+<a name="line_1763"></a>                    {
+<a name="line_1764"></a>                      'mac' => '8b 45 f8',
+<a name="line_1765"></a>                      'asm' => 'mov	 eax, DWORD PTR _val$[ebp]'
+<a name="line_1766"></a>                    },
+<a name="line_1767"></a>                    {
+<a name="line_1768"></a>                      'mac' => '50',
+<a name="line_1769"></a>                      'asm' => 'push	 eax'
+<a name="line_1770"></a>                    },
+<a name="line_1771"></a>                    {
+<a name="line_1772"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_1773"></a>                      'asm' => 'call	 _newnode'
+<a name="line_1774"></a>                    },
+<a name="line_1775"></a>                    {
+<a name="line_1776"></a>                      'mac' => '83 c4 04',
+<a name="line_1777"></a>                      'asm' => 'add	 esp, 4'
+<a name="line_1778"></a>                    },
+<a name="line_1779"></a>                    {
+<a name="line_1780"></a>                      'mac' => '50',
+<a name="line_1781"></a>                      'asm' => 'push	 eax'
+<a name="line_1782"></a>                    },
+<a name="line_1783"></a>                    {
+<a name="line_1784"></a>                      'mac' => '8b 4d f4',
+<a name="line_1785"></a>                      'asm' => 'mov	 ecx, DWORD PTR _treep$[ebp]'
+<a name="line_1786"></a>                    },
+<a name="line_1787"></a>                    {
+<a name="line_1788"></a>                      'mac' => '51',
+<a name="line_1789"></a>                      'asm' => 'push	 ecx'
+<a name="line_1790"></a>                    },
+<a name="line_1791"></a>                    {
+<a name="line_1792"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_1793"></a>                      'asm' => 'call	 _insert'
+<a name="line_1794"></a>                    },
+<a name="line_1795"></a>                    {
+<a name="line_1796"></a>                      'mac' => '83 c4 08',
+<a name="line_1797"></a>                      'asm' => 'add	 esp, 8'
+<a name="line_1798"></a>                    },
+<a name="line_1799"></a>                    {
+<a name="line_1800"></a>                      'mac' => '89 45 f4',
+<a name="line_1801"></a>                      'asm' => 'mov	 DWORD PTR _treep$[ebp], eax'
+<a name="line_1802"></a>                    },
+<a name="line_1803"></a>                    {
+<a name="line_1804"></a>                      'mac' => 'eb d4',
+<a name="line_1805"></a>                      'asm' => 'jmp	 SHORT $L1300'
+<a name="line_1806"></a>                    },
+<a name="line_1807"></a>                    {
+<a name="line_1808"></a>                      'mac' => '68 00 00 00 00',
+<a name="line_1809"></a>                      'asm' => 'push	 OFFSET FLAT:$SG1302'
+<a name="line_1810"></a>                    },
+<a name="line_1811"></a>                    {
+<a name="line_1812"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_1813"></a>                      'asm' => 'call	 _printf'
+<a name="line_1814"></a>                    },
+<a name="line_1815"></a>                    {
+<a name="line_1816"></a>                      'mac' => '83 c4 04',
+<a name="line_1817"></a>                      'asm' => 'add	 esp, 4'
+<a name="line_1818"></a>                    },
+<a name="line_1819"></a>                    {
+<a name="line_1820"></a>                      'mac' => '8b 55 f4',
+<a name="line_1821"></a>                      'asm' => 'mov	 edx, DWORD PTR _treep$[ebp]'
+<a name="line_1822"></a>                    },
+<a name="line_1823"></a>                    {
+<a name="line_1824"></a>                      'mac' => '52',
+<a name="line_1825"></a>                      'asm' => 'push	 edx'
+<a name="line_1826"></a>                    },
+<a name="line_1827"></a>                    {
+<a name="line_1828"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_1829"></a>                      'asm' => 'call	 _printinorder'
+<a name="line_1830"></a>                    },
+<a name="line_1831"></a>                    {
+<a name="line_1832"></a>                      'mac' => '83 c4 04',
+<a name="line_1833"></a>                      'asm' => 'add	 esp, 4'
+<a name="line_1834"></a>                    },
+<a name="line_1835"></a>                    {
+<a name="line_1836"></a>                      'mac' => '68 00 00 00 00',
+<a name="line_1837"></a>                      'asm' => 'push	 OFFSET FLAT:$SG1303'
+<a name="line_1838"></a>                    },
+<a name="line_1839"></a>                    {
+<a name="line_1840"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_1841"></a>                      'asm' => 'call	 _printf'
+<a name="line_1842"></a>                    },
+<a name="line_1843"></a>                    {
+<a name="line_1844"></a>                      'mac' => '83 c4 04',
+<a name="line_1845"></a>                      'asm' => 'add	 esp, 4'
+<a name="line_1846"></a>                    },
+<a name="line_1847"></a>                    {
+<a name="line_1848"></a>                      'mac' => '68 00 00 00 00',
+<a name="line_1849"></a>                      'asm' => 'push	 OFFSET FLAT:$SG1304'
+<a name="line_1850"></a>                    },
+<a name="line_1851"></a>                    {
+<a name="line_1852"></a>                      'mac' => '8b 45 f4',
+<a name="line_1853"></a>                      'asm' => 'mov	 eax, DWORD PTR _treep$[ebp]'
+<a name="line_1854"></a>                    },
+<a name="line_1855"></a>                    {
+<a name="line_1856"></a>                      'mac' => '50',
+<a name="line_1857"></a>                      'asm' => 'push	 eax'
+<a name="line_1858"></a>                    },
+<a name="line_1859"></a>                    {
+<a name="line_1860"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_1861"></a>                      'asm' => 'call	 _dumptree'
+<a name="line_1862"></a>                    },
+<a name="line_1863"></a>                    {
+<a name="line_1864"></a>                      'mac' => '83 c4 08',
+<a name="line_1865"></a>                      'asm' => 'add	 esp, 8'
+<a name="line_1866"></a>                    },
+<a name="line_1867"></a>                    {
+<a name="line_1868"></a>                      'mac' => '68 00 00 00 00',
+<a name="line_1869"></a>                      'asm' => 'push	 OFFSET FLAT:$SG1305'
+<a name="line_1870"></a>                    },
+<a name="line_1871"></a>                    {
+<a name="line_1872"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_1873"></a>                      'asm' => 'call	 _printf'
+<a name="line_1874"></a>                    },
+<a name="line_1875"></a>                    {
+<a name="line_1876"></a>                      'mac' => '83 c4 04',
+<a name="line_1877"></a>                      'asm' => 'add	 esp, 4'
+<a name="line_1878"></a>                    },
+<a name="line_1879"></a>                    {
+<a name="line_1880"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_1881"></a>                      'asm' => 'call	 _getval'
+<a name="line_1882"></a>                    },
+<a name="line_1883"></a>                    {
+<a name="line_1884"></a>                      'mac' => '89 45 f8',
+<a name="line_1885"></a>                      'asm' => 'mov	 DWORD PTR _val$[ebp], eax'
+<a name="line_1886"></a>                    },
+<a name="line_1887"></a>                    {
+<a name="line_1888"></a>                      'mac' => '8b 4d f8',
+<a name="line_1889"></a>                      'asm' => 'mov	 ecx, DWORD PTR _val$[ebp]'
+<a name="line_1890"></a>                    },
+<a name="line_1891"></a>                    {
+<a name="line_1892"></a>                      'mac' => '51',
+<a name="line_1893"></a>                      'asm' => 'push	 ecx'
+<a name="line_1894"></a>                    },
+<a name="line_1895"></a>                    {
+<a name="line_1896"></a>                      'mac' => '8b 55 f4',
+<a name="line_1897"></a>                      'asm' => 'mov	 edx, DWORD PTR _treep$[ebp]'
+<a name="line_1898"></a>                    },
+<a name="line_1899"></a>                    {
+<a name="line_1900"></a>                      'mac' => '52',
+<a name="line_1901"></a>                      'asm' => 'push	 edx'
+<a name="line_1902"></a>                    },
+<a name="line_1903"></a>                    {
+<a name="line_1904"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_1905"></a>                      'asm' => 'call	 _lookup'
+<a name="line_1906"></a>                    },
+<a name="line_1907"></a>                    {
+<a name="line_1908"></a>                      'mac' => '83 c4 08',
+<a name="line_1909"></a>                      'asm' => 'add	 esp, 8'
+<a name="line_1910"></a>                    },
+<a name="line_1911"></a>                    {
+<a name="line_1912"></a>                      'mac' => '89 45 fc',
+<a name="line_1913"></a>                      'asm' => 'mov	 DWORD PTR _p$[ebp], eax'
+<a name="line_1914"></a>                    },
+<a name="line_1915"></a>                    {
+<a name="line_1916"></a>                      'mac' => '83 7d fc 00',
+<a name="line_1917"></a>                      'asm' => 'cmp	 DWORD PTR _p$[ebp], 0'
+<a name="line_1918"></a>                    },
+<a name="line_1919"></a>                    {
+<a name="line_1920"></a>                      'mac' => '75 18',
+<a name="line_1921"></a>                      'asm' => 'jne	 SHORT $L1307'
+<a name="line_1922"></a>                    },
+<a name="line_1923"></a>                    {
+<a name="line_1924"></a>                      'mac' => '8b 45 f8',
+<a name="line_1925"></a>                      'asm' => 'mov	 eax, DWORD PTR _val$[ebp]'
+<a name="line_1926"></a>                    },
+<a name="line_1927"></a>                    {
+<a name="line_1928"></a>                      'mac' => '50',
+<a name="line_1929"></a>                      'asm' => 'push	 eax'
+<a name="line_1930"></a>                    },
+<a name="line_1931"></a>                    {
+<a name="line_1932"></a>                      'mac' => '68 00 00 00 00',
+<a name="line_1933"></a>                      'asm' => 'push	 OFFSET FLAT:$SG1308'
+<a name="line_1934"></a>                    },
+<a name="line_1935"></a>                    {
+<a name="line_1936"></a>                      'mac' => '68 40 00 00 00',
+<a name="line_1937"></a>                      'asm' => 'push	 OFFSET FLAT:__iob+64'
+<a name="line_1938"></a>                    },
+<a name="line_1939"></a>                    {
+<a name="line_1940"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_1941"></a>                      'asm' => 'call	 _fprintf'
+<a name="line_1942"></a>                    },
+<a name="line_1943"></a>                    {
+<a name="line_1944"></a>                      'mac' => '83 c4 0c',
+<a name="line_1945"></a>                      'asm' => 'add	 esp, 12			; 0000000cH'
+<a name="line_1946"></a>                    },
+<a name="line_1947"></a>                    {
+<a name="line_1948"></a>                      'mac' => 'eb 39',
+<a name="line_1949"></a>                      'asm' => 'jmp	 SHORT $L1309'
+<a name="line_1950"></a>                    },
+<a name="line_1951"></a>                    {
+<a name="line_1952"></a>                      'mac' => '8b 4d fc',
+<a name="line_1953"></a>                      'asm' => 'mov	 ecx, DWORD PTR _p$[ebp]'
+<a name="line_1954"></a>                    },
+<a name="line_1955"></a>                    {
+<a name="line_1956"></a>                      'mac' => '51',
+<a name="line_1957"></a>                      'asm' => 'push	 ecx'
+<a name="line_1958"></a>                    },
+<a name="line_1959"></a>                    {
+<a name="line_1960"></a>                      'mac' => '8b 55 f4',
+<a name="line_1961"></a>                      'asm' => 'mov	 edx, DWORD PTR _treep$[ebp]'
+<a name="line_1962"></a>                    },
+<a name="line_1963"></a>                    {
+<a name="line_1964"></a>                      'mac' => '52',
+<a name="line_1965"></a>                      'asm' => 'push	 edx'
+<a name="line_1966"></a>                    },
+<a name="line_1967"></a>                    {
+<a name="line_1968"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_1969"></a>                      'asm' => 'call	 _delnode'
+<a name="line_1970"></a>                    },
+<a name="line_1971"></a>                    {
+<a name="line_1972"></a>                      'mac' => '83 c4 08',
+<a name="line_1973"></a>                      'asm' => 'add	 esp, 8'
+<a name="line_1974"></a>                    },
+<a name="line_1975"></a>                    {
+<a name="line_1976"></a>                      'mac' => '89 45 f4',
+<a name="line_1977"></a>                      'asm' => 'mov	 DWORD PTR _treep$[ebp], eax'
+<a name="line_1978"></a>                    },
+<a name="line_1979"></a>                    {
+<a name="line_1980"></a>                      'mac' => '68 00 00 00 00',
+<a name="line_1981"></a>                      'asm' => 'push	 OFFSET FLAT:$SG1310'
+<a name="line_1982"></a>                    },
+<a name="line_1983"></a>                    {
+<a name="line_1984"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_1985"></a>                      'asm' => 'call	 _printf'
+<a name="line_1986"></a>                    },
+<a name="line_1987"></a>                    {
+<a name="line_1988"></a>                      'mac' => '83 c4 04',
+<a name="line_1989"></a>                      'asm' => 'add	 esp, 4'
+<a name="line_1990"></a>                    },
+<a name="line_1991"></a>                    {
+<a name="line_1992"></a>                      'mac' => '8b 45 f4',
+<a name="line_1993"></a>                      'asm' => 'mov	 eax, DWORD PTR _treep$[ebp]'
+<a name="line_1994"></a>                    },
+<a name="line_1995"></a>                    {
+<a name="line_1996"></a>                      'mac' => '50',
+<a name="line_1997"></a>                      'asm' => 'push	 eax'
+<a name="line_1998"></a>                    },
+<a name="line_1999"></a>                    {
+<a name="line_2000"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_2001"></a>                      'asm' => 'call	 _printinorder'
+<a name="line_2002"></a>                    },
+<a name="line_2003"></a>                    {
+<a name="line_2004"></a>                      'mac' => '83 c4 04',
+<a name="line_2005"></a>                      'asm' => 'add	 esp, 4'
+<a name="line_2006"></a>                    },
+<a name="line_2007"></a>                    {
+<a name="line_2008"></a>                      'mac' => '68 00 00 00 00',
+<a name="line_2009"></a>                      'asm' => 'push	 OFFSET FLAT:$SG1311'
+<a name="line_2010"></a>                    },
+<a name="line_2011"></a>                    {
+<a name="line_2012"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_2013"></a>                      'asm' => 'call	 _printf'
+<a name="line_2014"></a>                    },
+<a name="line_2015"></a>                    {
+<a name="line_2016"></a>                      'mac' => '83 c4 04',
+<a name="line_2017"></a>                      'asm' => 'add	 esp, 4'
+<a name="line_2018"></a>                    },
+<a name="line_2019"></a>                    {
+<a name="line_2020"></a>                      'mac' => '68 00 00 00 00',
+<a name="line_2021"></a>                      'asm' => 'push	 OFFSET FLAT:$SG1312'
+<a name="line_2022"></a>                    },
+<a name="line_2023"></a>                    {
+<a name="line_2024"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_2025"></a>                      'asm' => 'call	 _printf'
+<a name="line_2026"></a>                    },
+<a name="line_2027"></a>                    {
+<a name="line_2028"></a>                      'mac' => '83 c4 04',
+<a name="line_2029"></a>                      'asm' => 'add	 esp, 4'
+<a name="line_2030"></a>                    },
+<a name="line_2031"></a>                    {
+<a name="line_2032"></a>                      'mac' => '68 00 00 00 00',
+<a name="line_2033"></a>                      'asm' => 'push	 OFFSET FLAT:$SG1313'
+<a name="line_2034"></a>                    },
+<a name="line_2035"></a>                    {
+<a name="line_2036"></a>                      'mac' => '8b 4d f4',
+<a name="line_2037"></a>                      'asm' => 'mov	 ecx, DWORD PTR _treep$[ebp]'
+<a name="line_2038"></a>                    },
+<a name="line_2039"></a>                    {
+<a name="line_2040"></a>                      'mac' => '51',
+<a name="line_2041"></a>                      'asm' => 'push	 ecx'
+<a name="line_2042"></a>                    },
+<a name="line_2043"></a>                    {
+<a name="line_2044"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_2045"></a>                      'asm' => 'call	 _dumptree'
+<a name="line_2046"></a>                    },
+<a name="line_2047"></a>                    {
+<a name="line_2048"></a>                      'mac' => '83 c4 08',
+<a name="line_2049"></a>                      'asm' => 'add	 esp, 8'
+<a name="line_2050"></a>                    },
+<a name="line_2051"></a>                    {
+<a name="line_2052"></a>                      'mac' => '68 00 00 00 00',
+<a name="line_2053"></a>                      'asm' => 'push	 OFFSET FLAT:$SG1314'
+<a name="line_2054"></a>                    },
+<a name="line_2055"></a>                    {
+<a name="line_2056"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_2057"></a>                      'asm' => 'call	 _printf'
+<a name="line_2058"></a>                    },
+<a name="line_2059"></a>                    {
+<a name="line_2060"></a>                      'mac' => '83 c4 04',
+<a name="line_2061"></a>                      'asm' => 'add	 esp, 4'
+<a name="line_2062"></a>                    },
+<a name="line_2063"></a>                    {
+<a name="line_2064"></a>                      'mac' => '8b 55 f4',
+<a name="line_2065"></a>                      'asm' => 'mov	 edx, DWORD PTR _treep$[ebp]'
+<a name="line_2066"></a>                    },
+<a name="line_2067"></a>                    {
+<a name="line_2068"></a>                      'mac' => '52',
+<a name="line_2069"></a>                      'asm' => 'push	 edx'
+<a name="line_2070"></a>                    },
+<a name="line_2071"></a>                    {
+<a name="line_2072"></a>                      'mac' => 'e8 00 00 00 00',
+<a name="line_2073"></a>                      'asm' => 'call	 _freeall'
+<a name="line_2074"></a>                    },
+<a name="line_2075"></a>                    {
+<a name="line_2076"></a>                      'mac' => '83 c4 04',
+<a name="line_2077"></a>                      'asm' => 'add	 esp, 4'
+<a name="line_2078"></a>                    },
+<a name="line_2079"></a>                    {
+<a name="line_2080"></a>                      'mac' => '89 45 f4',
+<a name="line_2081"></a>                      'asm' => 'mov	 DWORD PTR _treep$[ebp], eax'
+<a name="line_2082"></a>                    },
+<a name="line_2083"></a>                    {
+<a name="line_2084"></a>                      'mac' => '33 c0',
+<a name="line_2085"></a>                      'asm' => 'xor	 eax, eax'
+<a name="line_2086"></a>                    },
+<a name="line_2087"></a>                    {
+<a name="line_2088"></a>                      'mac' => '8b e5',
+<a name="line_2089"></a>                      'asm' => 'mov	 esp, ebp'
+<a name="line_2090"></a>                    },
+<a name="line_2091"></a>                    {
+<a name="line_2092"></a>                      'mac' => '5d',
+<a name="line_2093"></a>                      'asm' => 'pop	 ebp'
+<a name="line_2094"></a>                    },
+<a name="line_2095"></a>                    {
+<a name="line_2096"></a>                      'mac' => 'c3',
+<a name="line_2097"></a>                      'asm' => 'ret	 0'
+<a name="line_2098"></a>                    }
+<a name="line_2099"></a>                  ],
+<a name="line_2100"></a>         'cod_file' => 'main.cod'
+<a name="line_2101"></a>       };
+ </pre></tt></body>
+</html>

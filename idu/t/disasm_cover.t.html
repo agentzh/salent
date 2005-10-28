@@ -1,0 +1,43 @@
+<html>
+ <head>
+  <title>D:\Agent2002\Salent\v0.13\ModelSim\idu\t\disasm_cover.t</title>
+ </head>
+ <body><tt><pre>
+<font color=gray>     1</font>  <a name="line_1"></a>#: disasm_cover.t
+<font color=gray>     2</font>  <a name="line_2"></a>#: Test the disassembler
+<font color=gray>     3</font>  <a name="line_3"></a>#: Salent v0.13
+<font color=gray>     4</font>  <a name="line_4"></a>#: Copyright (c) 2005 Agent Zhang
+<font color=gray>     5</font>  <a name="line_5"></a>#: 2005-08-24 2005-08-25
+<font color=gray>     6</font>  <a name="line_6"></a>
+<font color=gray>     7</font>  <a name="line_7"></a>use strict;
+<font color=gray>     8</font>  <a name="line_8"></a>use warnings;
+<font color=gray>     9</font>  <a name="line_9"></a>
+<font color=gray>    10</font>  <a name="line_10"></a>use Template::Ast;
+<font color=gray>    11</font>  <a name="line_11"></a>use Test::More tests => 744;
+<font color=gray>    12</font>  <a name="line_12"></a>use inc::Disasm;
+<font color=gray>    13</font>  <a name="line_13"></a>
+<font color=gray>    14</font>  <a name="line_14"></a>my $astfile = 't/pat_cover.ast.ast';
+<font color=gray>    15</font>  <a name="line_15"></a>ok -f $astfile, "$astfile exists";
+<font color=gray>    16</font>  <a name="line_16"></a>my $ast = Template::Ast->read($astfile);
+<font color=gray>    17</font>  <a name="line_17"></a>ok $ast, "Ast read ok";
+<font color=gray>    18</font>  <a name="line_18"></a>$ast or die Template::Ast->error();
+<font color=gray>    19</font>  <a name="line_19"></a>
+<font color=gray>    20</font>  <a name="line_20"></a>my @insts = @{$ast->{ops}};
+<font color=gray>    21</font>  <a name="line_21"></a>foreach (@insts) {
+<font color=gray>    22</font>  <a name="line_22"></a>    my $mac = $_->{mac};
+<font color=gray>    23</font>  <a name="line_23"></a>    my $asm = Disasm->disasm($mac);
+<font color=gray>    24</font>  <a name="line_24"></a>    unless ($asm) {
+<font color=gray>    25</font>  <a name="line_25"></a>        ok(0, "$mac - $_->{asm}: (null)");
+<font color=gray>    26</font>  <a name="line_26"></a>        next;
+<font color=gray>    27</font>  <a name="line_27"></a>    }
+<font color=gray>    28</font>  <a name="line_28"></a>    $_->{asm} =~ s/^o16\s+//g;
+<font color=gray>    29</font>  <a name="line_29"></a>    SKIP: {
+<font color=gray>    30</font>  <a name="line_30"></a>        skip "Ndisasm can't disassemble 'fisttp' correctly", 1
+<font color=gray>    31</font>  <a name="line_31"></a>            if $asm =~ m/fisttp/i;
+<font color=gray>    32</font>  <a name="line_32"></a>        is($asm, $_->{asm}, "$mac - $_->{asm}: $asm");
+<font color=gray>    33</font>  <a name="line_33"></a>    }
+<font color=gray>    34</font>  <a name="line_34"></a>    #warn "ASM: $_->{asm}";
+<font color=gray>    35</font>  <a name="line_35"></a>    #warn "MAC: $mac";
+<font color=gray>    36</font>  <a name="line_36"></a>}
+ </pre></tt></body>
+</html>

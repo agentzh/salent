@@ -1,0 +1,397 @@
+[% DEFAULT
+    version = '0.13'
+    idu = {
+        reg_fields = []
+        bit_fields = []
+        state_machine = []
+        prefixes = []
+    }
+    addr_size = 32
+    rev_insts = {
+        '0001 000w : 11 reg1 reg2' => 0,
+        '0001 001w : 11 reg1 reg2' => 1,
+        '0001 001w : mod reg r/m'  => 2,
+        '0001 000w : mod reg r/m'  => 3,
+        '1000 00sw : 11 010 reg : immediate data' => 4,
+    }
+-%]
+[% USE date;
+   USE Perl;
+   USE POSIX -%]
+[% SET
+     last_mod = date.format(template.modtime, '20%y-%m-%d', 'en_GB')
+     states = idu.state_machine
+-%]
+//: idu.v
+//: Verilog implemetation of Instruction Decoding Unit (IDU)
+//: Salent v[% version %]
+//: Copyright (c) 2005 Agent Zhang
+//: 2005-09-11 [% last_mod %]
+
+module idu (strb, rw, addr, mfc, data,
+            ins, mod, rm, scale, index_reg, base_reg,
+            bits16, disp, disp_len, imm, imm_len, bits16,
+            [% idu.bit_fields.join(', ') %],
+            reg1, reg2, sreg2, sreg3, eee, tttn, ST_i,
+            rdy, pc_out, pc_in, reset, run, clk,
+            error);
+
+    parameter ADDR_SIZE = [% addr_size %];
+    parameter DISP_LEN  = 4;
+    parameter IMM_LEN   = 6;
+
+    parameter SYNTAX_ERROR = 0;
+    parameter END_ERROR    = 1;
+
+[%- MACRO output BLOCK %]
+  [%- IF len.match('^\d+$') %]
+    [%- IF len == 1 %]
+    output [% reg_name %];
+    reg    [% reg_name %];
+    [%- ELSE %]
+    output [[% len - 1 %]:0] [% reg_name %];
+    reg    [[% len - 1 %]:0] [% reg_name %];
+    [%- END %]
+  [%- ELSE %]
+    output [[% len %]-1:0] [% reg_name %];
+    reg    [[% len %]-1:0] [% reg_name %];
+  [%- END -%]
+[% END -%]
+
+[%- output(len=1,reg_name='strb') %]
+    output rw;
+[% output(len='ADDR_SIZE',reg_name='addr') %]
+
+    input mfc;
+
+    inout[7:0] data;
+
+[%- ins_sz = Perl.log(rev_insts.size) / Perl.log(2);
+    ins_sz = POSIX.ceil(ins_sz); -%]
+[% output(len=ins_sz,reg_name='ins') %]
+[% output(len=2,reg_name='mod') %]
+[% output(len=3,reg_name='rm') %]
+[% output(len=2,reg_name='scale') %]
+[% output(len=3,reg_name='index_reg') %]
+[% output(len=3,reg_name='base_reg') -%]
+
+[% output(len=1,reg_name='bits16') %]
+
+[%- output(len='DISP_LEN*8',reg_name='disp') %]
+[% output(len=3,reg_name='disp_len') -%]
+
+[% output(len='IMM_LEN*8',reg_name='imm') %]
+[% output(len=3,reg_name='imm_len') -%]
+
+[%- output(len=1,reg_name=idu.bit_fields.join(', ')) -%]
+
+[% output(len=3,reg_name='reg1, reg2, sreg3, eee, ST_i') %]
+[% output(len=2,reg_name='sreg2') %]
+
+[%- output(len=4,reg_name='tttn') -%]
+
+[% output(len=1,reg_name='rdy') %]
+
+    output [ADDR_SIZE-1:0] pc_out;
+    reg    [ADDR_SIZE-1:0] pc_out;
+
+    input [ADDR_SIZE-1:0] pc_in;
+    input reset, run, clk;
+
+[%- output(len=1,reg_name='error') %]
+
+    //////////////////////////////////////////////////////////////////////////
+
+[% len = states.size + 5;
+   state_sz = Perl.log(len) / Perl.log(2);
+   state_sz = POSIX.ceil(state_sz);
+   fmt = Perl.sprintf("%d'b%%0%db", state_sz, state_sz) -%]
+[% i = 0 -%]
+[% FOREACH state IN states -%]
+    [%- param = 'S_' _ state.state_id -%]
+    parameter [% Perl.sprintf("%-5s", param) %] = [% Perl.sprintf(fmt, i) %];
+
+    [%- i = i + 1 -%]
+[% END -%]
+[% FOREACH state IN ['S_START' 'S_PREFIX' 'S_END_ERROR' 'S_SYN_ERROR'] -%]
+    parameter [% Perl.sprintf("%-15s", state) %] = [% Perl.sprintf(fmt, i) %];
+
+    [%- i = i + 1 -%]
+[% END -%]
+
+    //////////////////////////////////////////////////////////////////////////
+
+    reg [[% state_sz %]-1:0] state;
+    reg [[% state_sz %]-1:0] next_state;
+    reg [7:0] byte;
+
+    task read_byte;
+      begin
+        // read one byte:
+        addr = pc_out;
+        strb = 1'b1;
+        @ (posedge mfc);
+        byte = data;
+        strb = 1'b0;
+        pc_out = pc_out + 1;
+      end
+    endtask
+
+[%- FOREACH len = [1,4] %]
+    task read_disp[% len %];
+      begin
+    [%- i = 0 -%]
+    [%- WHILE i < len %]
+
+        // read one byte:
+        read_byte;
+        disp[[% i*8 + 7 %]:[% i*8 %]] = byte;
+        [%- i = i + 1 %]
+    [%- END %]
+        disp_len = [% len %];
+      end
+    endtask
+[% END -%]
+
+[%- imm_len_set = [1,2,3,4,6] %]
+[%- FOREACH len = imm_len_set %]
+    task read_imm_data[% len %];
+      begin
+    [%- i = 0 -%]
+    [%- WHILE i < len %]
+
+        // read one byte:
+        read_byte;
+        imm[[% i*8 + 7 %]:[% i*8 %]] = byte;
+        [%- i = i + 1 %]
+    [%- END %]
+        imm_len = [% len %];
+      end
+    endtask
+[% END -%]
+
+[%- MACRO defined BLOCK -%]
+([% var %] != 'bz)
+[%- END -%]
+
+    task get_imm_len;
+      begin
+        if ([% defined(var='s') %] && ![% defined(var='w') %])
+          begin
+            if (s == 1'b1) // 8-bit imm size
+                imm_len = 1;
+            else // full size imm size
+              begin
+                if (bits16 == 1'b1)
+                    imm_len = 2;
+                else
+                    imm_len = 4;
+              end
+          end
+        else if ([% defined(var='w') %] && ![% defined(var='s') %])
+          begin
+            if (w == 0) // 8-bit imm size
+                imm_len = 1;
+            else // full size imm size
+              begin
+                if (bits16 == 1'b1)
+                    imm_len = 2;
+                else
+                    imm_len = 4;
+              end
+          end
+        else if ([% defined(var='w') %] && [% defined(var='s') %])
+          begin
+            if (s == 1) // 8-bit imm size
+                imm_len = 1;
+            else if (w == 0) // 8-bit imm size
+                imm_len = 1;
+          end
+        else // both w and s fields are absent
+          begin
+            if (bits16 == 1'b1)
+                imm_len = 2;
+            else
+                imm_len = 4;
+          end
+      end
+    endtask
+
+    // Process the ModR/M byte:
+    task process_ModRM;
+        reg [2:0] base;
+      begin
+        mod = byte[7:6];
+        rm  = byte[2:0];
+        if (mod == 2'b00)   // Direct: EA = Disp32
+            read_disp4;
+        else if (rm == 3'b100)  // Base with index (uses SIB byte)
+          begin
+            // Get SIB byte:
+            read_byte;
+            scale = byte[7:6];
+            index_reg = byte[5:3];
+            base = byte[2:0];
+            if (base == 3'b101)   // Base == EBP: EA = [Index] x Scale + Disp32
+                read_disp4;     // Get 32-bit displacement:
+            else   // EA = [Base] + [Index] x Scale
+                base_reg = base;
+          end
+        else if (mod == 2'b01)
+            if (rm == 3'b100)  // EA = [Base] + [Index] x Scale + Disp8
+              begin
+                // Get SIB byte:
+                read_byte;
+                scale = byte[7:6];
+                index_reg = byte[5:3];
+                base_reg  = byte[2:0];
+                // Get 8-bit displacement:
+                read_disp1;
+              end
+            else  // EA = [Reg] + Disp8
+                read_disp1;   // Get 8-bit displacement:
+        else if (mod == 2'b10)
+          begin
+            if (rm == 3'b100)  // EA = [Base] + [Index] x Scale + Disp32
+                // Get SIB byte:
+                read_byte;
+                scale = byte[7:6];
+                index_reg = byte[5:3];
+                base_reg  = byte[2:0];
+                // Get 32-bit displacement:
+                read_disp4;
+              end
+            else   // EA = [Reg] + Disp32
+                read_disp4;   // Get 32-bit displacement:
+      end
+    endtask
+
+    assign rw = 1'b1;  // always read from ram
+
+    always @ (run or clk or reset) begin
+        if (reset == 1'b1)
+            state = S_START;
+        else if (run == 1'b1)
+            state = next_state;
+        else
+            state = state;
+    end
+
+    always @ (run or reset or state) begin
+        case(state)
+        S_START:
+          begin
+            read_byte;
+          end
+        S_PREFIX:
+          begin
+            // Process preffix byte (if any):
+            case(byte)
+            [%- FOREACH prefix IN idu.prefixes %]
+              8'h[% prefix %]:
+                begin
+                [%- IF prefix == '66' %]
+                    bits16 = 1'b1;
+                [%- END %]
+                    read_byte;
+                    next_state = S_PREFIX;
+                end
+            [%- END %]
+            default:
+                next_state = S_[% states.0.state_id %];
+            endcase
+          end
+
+        [%- FOREACH state IN states %]
+        S_[% state.state_id %]:
+          begin
+
+          [%- # Process the various fields (if any) -%]
+
+          [%- IF state.item('mod') OR state.modA %]
+            // Process the current ModR/M byte:
+            process_ModRM;
+          [%- END %]
+
+          [%- FOREACH bit IN idu.bit_fields %]
+              [%- NEXT UNLESS state.$bit.defined %]
+            // Get the [% bit %] field from the current byte:
+            [% bit %] = byte[[% state.$bit %]:[% state.$bit %]];
+          [%- END -%]
+
+          [%- FOREACH reg IN idu.reg_fields %]
+            [%- NEXT UNLESS state.$reg %]
+        [%- reg_name = reg == 'reg' ? 'reg1' : reg %]
+            // Get the [% reg %] field from the current byte:
+            [% reg_name %] = byte[[% state.$reg.0 %]:[% state.$reg.1 %]];
+          [%- END -%]
+
+          [%- IF state.imm == 'full' %]
+            // Get full immediate data:
+            imm_len = bits16 == 1'b1 ? 2 : 4;
+            if (bits16 == 1'b1)
+                read_imm_data2;
+            else
+                read_imm_data4;
+          [%- ELSIF state.imm == 'normal' %]
+            // Get immediate data:
+            get_imm_len;
+            case (imm_len)
+            [%- FOREACH len = imm_len_set %]
+              [% len %]:
+                  read_imm_data[% len %];
+            [%- END %]
+            endcase
+
+          [%- ELSIF state.imm == 'pointer' %]
+            // Get immediate data:
+            imm_len = bits16 == 1'b1 ? 4 : 6;
+            if (bits16 == 1'b1)
+                read_imm_data4;
+            else
+                read_imm_data6;
+          [%- ELSIF state.imm %]
+            [%- nbytes = state.imm / 8;
+                nbytes = Perl.int(nbytes) %]
+            // Get [% state.imm %]-bit immediate data:
+            [%- IF state.pattern and nbytes == 1 %]
+            imm[7:0] = byte;
+            imm_len = 1;
+            [%- ELSE %]
+            read_imm_data[% nbytes %];
+            [%- END -%]
+          [%- END %]
+
+          [%- # Determine the next state -%]
+
+          [%- IF state.next.0.pattern  # Conditional switch %]
+            [%- UNLESS state == states.0 %]
+            read_byte;
+            [%- END -%]
+            casex (byte)
+            [%- FOREACH next_state IN state.next %]
+              [%- regex = next_state.pattern.replace('\.', 'x') %]
+              8'b[% regex %]:
+                next_state = S_[% next_state.state %];
+            [%- END %]
+              default:
+                next_state = S_SYN_ERROR;
+            endcase
+          [%- ELSIF state.next.0  # Unconditional switch %]
+            next_state = S_[% state.next.0.state %];
+          [%- ELSE  # Reach the end of the instruction %]
+            ins = [% state.ins.id %];
+            rdy = 1;
+            @ (negedge run);
+            next_state = S_START;
+            rdy = 0;
+          [%- END %]
+          end
+        [%- END %]
+        endcase
+   end
+
+   initial begin
+       rdy = 0;
+   end
+endmodule

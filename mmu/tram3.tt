@@ -1,0 +1,52 @@
+[% DEFAULT
+   word_size = 32 
+   addr_size = 32
+-%]
+word_size: [% word_size %]
+[%     
+    USE Perl;
+    SET 
+        temp      = word_size / 4
+        addr_size = Perl.log(temp) / Perl.log(2)
+        last      = Perl.pow(2, addr_size)  - 1
+        over      = last + 1        
+        temp      = temp / 2
+        last      = Perl.pow(2,addr_size)  - 1
+        dindex    = 2*temp
+        tindex    = 3*temp
+        findex    = 4*temp
+-%]        
+addr_size: [% addr_size %]
+capacity : 4
+delay    : 10
+
+w 'd0 'habcd
+r 'd0 0*abcd
+r 'd[% last %] ?
+r 'd[% dindex %] 0*abcd
+r 'd[% tindex %] ?
+r 'd[% findex %] 0*abcd 
+w 'd[% last %] 'hfffffffe
+r 'd0 0*abcd
+r 'd[% last %] f+e
+r 'd[% dindex %] 0*abcd
+r 'd[% tindex %] f+e
+r 'd[% findex %] 0*abcd
+w 'd[% dindex %] 'h1234
+r 'd0 0*1234
+r 'd[% last %] f+e
+r 'd[% dindex %] 0*1234
+r 'd[% tindex %] f+e
+r 'd[% findex %] 0*1234
+w 'd[% tindex %] 'h5678
+r 'd0 0*1234
+r 'd[% last %] 0*5678
+r 'd[% dindex %] 0*1234
+r 'd[% tindex %] 0*5678
+r 'd[% findex %] 0*1234
+w 'd[% findex %] 'haaaaaaaf
+r 'd0 h+f
+r 'd[% last %] 0*5678
+r 'd[% dindex %] h+f
+r 'd[% tindex %] 0*5678
+r 'd[% findex %] h+f

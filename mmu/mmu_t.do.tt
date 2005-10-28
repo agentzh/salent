@@ -1,0 +1,51 @@
+[% DEFAULT
+     list_file = 'mmu_t.lst'
+     vlog_file = 'mmu_t.v'
+     ops = [
+        { rw   = 0,       rw_time = 1,
+          addr = '16#0',       addr_time = 2,
+          data = '16#FF', data_time = 1,
+          strb_up = 3, strb_down = 60,
+          run_time = 70 }
+        { rw   = 0,       rw_time = 1,
+          addr = '16#1',       addr_time = 2,
+          data = '16#AB', data_time = 1,
+          strb_up = 3, strb_down = 60,
+          run_time = 70}
+        { rw   = 1,       rw_time = 2,
+          addr = '16#0',       addr_time = 3,
+          strb_up = 4, strb_down = 60,
+          run_time = 70}
+        { rw   = 1,       rw_time = 2,
+          addr = '16#1',       addr_time = 1,
+          strb_up = 3, strb_down = 55,
+          run_time = 70 }
+     ]
+-%]
+vlog -nologo -quiet -incr -vlog95compat ram.v
+vlog -nologo -quiet -incr -vlog95compat mmu.v
+vlog -nologo -quiet -incr -vlog95compat [% vlog_file %]
+vsim -quiet work.mmu_t
+add wave -hex /Mmu/dataw /Mmu/datar /Mmu/data /Mmu/address rw strb mfc -hex mar byte /Mmu/bytedata bus_addr bus_data bus_strb   bus_mfc  bus_rw  /Ram/mem(0) /Ram/mem(1)
+add list -nodelta -hex mfc byte
+
+force strb 0
+force rw 1'bz
+force mar 'bz
+force byte 'bz
+
+[% FOREACH ops -%]
+# [% des %]
+force rw [% rw %] [% rw_time %]
+force mar [% addr %] [% addr_time %]
+[% IF rw == 0 -%]
+force byte -cancel [% strb_down %] 
+    [%- data %] [% data_time %]
+[% END -%]
+force strb 1 [% strb_up %]
+force strb 0 [% strb_down %]
+run [% run_time %]
+
+[% END -%]
+write list -event [% list_file %]
+# quit

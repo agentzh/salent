@@ -1,0 +1,39 @@
+[% DEFAULT
+    op_file = 'talu1.op'
+-%]
+[% SET
+     ast = {
+         c_file = op_file _ '.c',
+         vlog_file = op_file _ '.v',
+         perl_file = op_file _ '.t',
+         list_file = op_file _ '.lst',
+         solu_file = op_file _ '.exe.out'
+
+         alu = {},
+         ops = [],
+     };
+   USE data = datafile(op_file, delim = ':');
+   FOREACH record IN data;
+     IF record.delay.defined;
+        ast.alu.delay = record.delay;
+     END;
+     IF record.word_size.defined;
+         ast.word_size = record.word_size;
+     END;
+     NEXT IF !record.op;
+     op = { op = record.op };
+     op.A = record.A;
+     IF record.B.defined;
+         op.B = record.B;
+     END;
+     IF record.D.defined;
+         op.D = record.D;
+     END;
+     IF record.cin.defined;
+         op.cin = record.cin;
+     END;
+     ast.ops.push(op);
+   END;
+   USE dumper;
+   dumper.dump(ast);
+-%]

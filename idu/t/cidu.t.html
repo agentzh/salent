@@ -1,0 +1,244 @@
+<html>
+ <head>
+  <title>D:\Agent2002\Salent\v0.13\ModelSim\idu\t\cidu.t</title>
+ </head>
+ <body><tt><pre>
+<font color=gray>     1</font>  <a name="line_1"></a>#: cidu.t
+<font color=gray>     2</font>  <a name="line_2"></a>#: Test the C implementation for IDU
+<font color=gray>     3</font>  <a name="line_3"></a>#: Salent v0.13
+<font color=gray>     4</font>  <a name="line_4"></a>#: Copyright (c) 2005 Agent Zhang
+<font color=gray>     5</font>  <a name="line_5"></a>#: 2005-08-17 2005-08-22
+<font color=gray>     6</font>  <a name="line_6"></a>
+<font color=gray>     7</font>  <a name="line_7"></a>package Idu;
+<font color=gray>     8</font>  <a name="line_8"></a>
+<font color=gray>     9</font>  <a name="line_9"></a>use strict;
+<font color=gray>    10</font>  <a name="line_10"></a>use warnings;
+<font color=gray>    11</font>  <a name="line_11"></a>
+<font color=gray>    12</font>  <a name="line_12"></a>use C::Idu;
+<font color=gray>    13</font>  <a name="line_13"></a>use inc::Idu::Util 'bin2dec';
+<font color=gray>    14</font>  <a name="line_14"></a>use Test::More tests => 158;
+<font color=gray>    15</font>  <a name="line_15"></a>
+<font color=gray>    16</font>  <a name="line_16"></a># Test sub slice2
+<font color=gray>    17</font>  <a name="line_17"></a>my $val = +bin2dec '10001011';
+<font color=gray>    18</font>  <a name="line_18"></a>is slice2($val, 2, 0), bin2dec('011');
+<font color=gray>    19</font>  <a name="line_19"></a>is slice2($val, 3, 0), bin2dec('1011');
+<font color=gray>    20</font>  <a name="line_20"></a>is slice2($val, 3, 1), bin2dec('101');
+<font color=gray>    21</font>  <a name="line_21"></a>is slice2($val, 3, 3), bin2dec('1');
+<font color=gray>    22</font>  <a name="line_22"></a>is slice2($val, 2, 2), '0';
+<font color=gray>    23</font>  <a name="line_23"></a>is slice2($val, 7, 7), '1';
+<font color=gray>    24</font>  <a name="line_24"></a>is slice2($val, 7, 7), '1';
+<font color=gray>    25</font>  <a name="line_25"></a>is slice2($val, 7, 0), bin2dec('10001011');
+<font color=gray>    26</font>  <a name="line_26"></a>is slice2($val, 7, 1), bin2dec('1000101');
+<font color=gray>    27</font>  <a name="line_27"></a>is slice2($val, 7, 2), bin2dec('100010');
+<font color=gray>    28</font>  <a name="line_28"></a>is slice2($val, 6, 2), bin2dec('00010');
+<font color=gray>    29</font>  <a name="line_29"></a>
+<font color=gray>    30</font>  <a name="line_30"></a>is slice2(0x80, 7, 7), 1;
+<font color=gray>    31</font>  <a name="line_31"></a>is slice2(0x80, 7, 5), 4;
+<font color=gray>    32</font>  <a name="line_32"></a>is slice2(0xD5, 4, 2), 5;
+<font color=gray>    33</font>  <a name="line_33"></a>is slice2(0xD5, 1, 1), 0;
+<font color=gray>    34</font>  <a name="line_34"></a>is slice2(0xD5, 0, 0), 1;
+<font color=gray>    35</font>  <a name="line_35"></a>
+<font color=gray>    36</font>  <a name="line_36"></a># Test sub match2:
+<font color=gray>    37</font>  <a name="line_37"></a>is match2(0x88, '100..000'), 1;
+<font color=gray>    38</font>  <a name="line_38"></a>is match2(0xD5, '11010101'), 1;
+<font color=gray>    39</font>  <a name="line_39"></a>is match2(0xD5, '11010.01'), 1;
+<font color=gray>    40</font>  <a name="line_40"></a>is match2(0xD5, '1.01..01'), 1;
+<font color=gray>    41</font>  <a name="line_41"></a>is match2(0xD5, '1001..01'), 0;
+<font color=gray>    42</font>  <a name="line_42"></a>is match2(1, '.......0'), 0;
+<font color=gray>    43</font>  <a name="line_43"></a>is match2(0, '.......1'), 0;
+<font color=gray>    44</font>  <a name="line_44"></a>is match2(0, '......1.'), 0;
+<font color=gray>    45</font>  <a name="line_45"></a>
+<font color=gray>    46</font>  <a name="line_46"></a># Test subs set_source, get_source, get_cur_token, and readbytes2:
+<font color=gray>    47</font>  <a name="line_47"></a>my $buf = "A1 B2 32";
+<font color=gray>    48</font>  <a name="line_48"></a>set_source($buf);
+<font color=gray>    49</font>  <a name="line_49"></a>is get_source(), $buf;
+<font color=gray>    50</font>  <a name="line_50"></a>is get_cur_token(), '';
+<font color=gray>    51</font>  <a name="line_51"></a>my $rlist;
+<font color=gray>    52</font>  <a name="line_52"></a>is readbytes2($rlist, 2), 2;
+<font color=gray>    53</font>  <a name="line_53"></a>ok $rlist;
+<font color=gray>    54</font>  <a name="line_54"></a>is ref $rlist, 'ARRAY';
+<font color=gray>    55</font>  <a name="line_55"></a>my @list = @$rlist;
+<font color=gray>    56</font>  <a name="line_56"></a>is scalar(@list), 2;
+<font color=gray>    57</font>  <a name="line_57"></a>is $list[0], 0xA1;
+<font color=gray>    58</font>  <a name="line_58"></a>is $list[1], 0xB2;
+<font color=gray>    59</font>  <a name="line_59"></a>is get_source(), ' 32';
+<font color=gray>    60</font>  <a name="line_60"></a>is get_cur_token(), 'B2';
+<font color=gray>    61</font>  <a name="line_61"></a>
+<font color=gray>    62</font>  <a name="line_62"></a>is readbytes2($rlist, 1), 1;
+<font color=gray>    63</font>  <a name="line_63"></a>ok $rlist;
+<font color=gray>    64</font>  <a name="line_64"></a>is ref $rlist, 'ARRAY';
+<font color=gray>    65</font>  <a name="line_65"></a>@list = @$rlist;
+<font color=gray>    66</font>  <a name="line_66"></a>is scalar(@list), 1;
+<font color=gray>    67</font>  <a name="line_67"></a>is $list[0], 0x32;
+<font color=gray>    68</font>  <a name="line_68"></a>is get_source(), '';
+<font color=gray>    69</font>  <a name="line_69"></a>is get_cur_token(), '32';
+<font color=gray>    70</font>  <a name="line_70"></a>
+<font color=gray>    71</font>  <a name="line_71"></a>undef $rlist;
+<font color=gray>    72</font>  <a name="line_72"></a>is readbytes2($rlist, 1), -1;
+<font color=gray>    73</font>  <a name="line_73"></a>ok $rlist;
+<font color=gray>    74</font>  <a name="line_74"></a>is ref $rlist, 'ARRAY';
+<font color=gray>    75</font>  <a name="line_75"></a>@list = @$rlist;
+<font color=gray>    76</font>  <a name="line_76"></a>is scalar(@list), 0;
+<font color=gray>    77</font>  <a name="line_77"></a>is get_source(), '';
+<font color=gray>    78</font>  <a name="line_78"></a>is get_cur_token(), '32';
+<font color=gray>    79</font>  <a name="line_79"></a>
+<font color=gray>    80</font>  <a name="line_80"></a>$buf = "00 01 3A";
+<font color=gray>    81</font>  <a name="line_81"></a>set_source($buf);
+<font color=gray>    82</font>  <a name="line_82"></a>is get_source(), $buf;
+<font color=gray>    83</font>  <a name="line_83"></a>is get_cur_token(), '';
+<font color=gray>    84</font>  <a name="line_84"></a>is readbytes2($rlist, 3), 3;
+<font color=gray>    85</font>  <a name="line_85"></a>ok $rlist;
+<font color=gray>    86</font>  <a name="line_86"></a>is ref $rlist, 'ARRAY';
+<font color=gray>    87</font>  <a name="line_87"></a>@list = @$rlist;
+<font color=gray>    88</font>  <a name="line_88"></a>is scalar(@list), 3;
+<font color=gray>    89</font>  <a name="line_89"></a>is $list[0], 0x00;
+<font color=gray>    90</font>  <a name="line_90"></a>is $list[1], 0x01;
+<font color=gray>    91</font>  <a name="line_91"></a>is $list[2], 0x3A;
+<font color=gray>    92</font>  <a name="line_92"></a>is get_source(), '';
+<font color=gray>    93</font>  <a name="line_93"></a>is get_cur_token(), '3A';
+<font color=gray>    94</font>  <a name="line_94"></a>
+<font color=gray>    95</font>  <a name="line_95"></a>$buf = "00 01 3A";
+<font color=gray>    96</font>  <a name="line_96"></a>set_source($buf);
+<font color=gray>    97</font>  <a name="line_97"></a>is get_source(), $buf;
+<font color=gray>    98</font>  <a name="line_98"></a>is get_cur_token(), '';
+<font color=gray>    99</font>  <a name="line_99"></a>is readbytes2($rlist, 4), '-1';
+<font color=gray>   100</font>  <a name="line_100"></a>ok $rlist;
+<font color=gray>   101</font>  <a name="line_101"></a>is ref $rlist, 'ARRAY';
+<font color=gray>   102</font>  <a name="line_102"></a>@list = @$rlist;
+<font color=gray>   103</font>  <a name="line_103"></a>is scalar(@list), 0;
+<font color=gray>   104</font>  <a name="line_104"></a>is get_source(), '';
+<font color=gray>   105</font>  <a name="line_105"></a>is get_cur_token(), '3A';
+<font color=gray>   106</font>  <a name="line_106"></a>
+<font color=gray>   107</font>  <a name="line_107"></a>$buf = 'ZZZZZ';
+<font color=gray>   108</font>  <a name="line_108"></a>set_source($buf);
+<font color=gray>   109</font>  <a name="line_109"></a>is get_source(), $buf;
+<font color=gray>   110</font>  <a name="line_110"></a>is get_cur_token(), '';
+<font color=gray>   111</font>  <a name="line_111"></a>is readbytes2($rlist, 1), 0;
+<font color=gray>   112</font>  <a name="line_112"></a>ok $rlist;
+<font color=gray>   113</font>  <a name="line_113"></a>is ref $rlist, 'ARRAY';
+<font color=gray>   114</font>  <a name="line_114"></a>@list = @$rlist;
+<font color=gray>   115</font>  <a name="line_115"></a>is scalar(@list), 0;
+<font color=gray>   116</font>  <a name="line_116"></a>is get_source(), '';
+<font color=gray>   117</font>  <a name="line_117"></a>is get_cur_token(), $buf;
+<font color=gray>   118</font>  <a name="line_118"></a>
+<font color=gray>   119</font>  <a name="line_119"></a>$buf = 'Z';
+<font color=gray>   120</font>  <a name="line_120"></a>set_source($buf);
+<font color=gray>   121</font>  <a name="line_121"></a>is get_source(), $buf;
+<font color=gray>   122</font>  <a name="line_122"></a>is get_cur_token(), '';
+<font color=gray>   123</font>  <a name="line_123"></a>is readbytes2($rlist, 1), 0;
+<font color=gray>   124</font>  <a name="line_124"></a>ok $rlist;
+<font color=gray>   125</font>  <a name="line_125"></a>is ref $rlist, 'ARRAY';
+<font color=gray>   126</font>  <a name="line_126"></a>@list = @$rlist;
+<font color=gray>   127</font>  <a name="line_127"></a>is scalar(@list), 0;
+<font color=gray>   128</font>  <a name="line_128"></a>is get_source(), '';
+<font color=gray>   129</font>  <a name="line_129"></a>is get_cur_token(), $buf;
+<font color=gray>   130</font>  <a name="line_130"></a>
+<font color=gray>   131</font>  <a name="line_131"></a>$buf = '7';
+<font color=gray>   132</font>  <a name="line_132"></a>set_source($buf);
+<font color=gray>   133</font>  <a name="line_133"></a>is get_source(), $buf;
+<font color=gray>   134</font>  <a name="line_134"></a>is get_cur_token(), '';
+<font color=gray>   135</font>  <a name="line_135"></a>is readbytes2($rlist, 1), 0;
+<font color=gray>   136</font>  <a name="line_136"></a>ok $rlist;
+<font color=gray>   137</font>  <a name="line_137"></a>is ref $rlist, 'ARRAY';
+<font color=gray>   138</font>  <a name="line_138"></a>@list = @$rlist;
+<font color=gray>   139</font>  <a name="line_139"></a>is scalar(@list), 0;
+<font color=gray>   140</font>  <a name="line_140"></a>is get_source(), '';
+<font color=gray>   141</font>  <a name="line_141"></a>is get_cur_token(), $buf;
+<font color=gray>   142</font>  <a name="line_142"></a>
+<font color=gray>   143</font>  <a name="line_143"></a>$buf = '787';
+<font color=gray>   144</font>  <a name="line_144"></a>set_source($buf);
+<font color=gray>   145</font>  <a name="line_145"></a>is get_source(), $buf;
+<font color=gray>   146</font>  <a name="line_146"></a>is get_cur_token(), '';
+<font color=gray>   147</font>  <a name="line_147"></a>is readbytes2($rlist, 2), 0;
+<font color=gray>   148</font>  <a name="line_148"></a>ok $rlist;
+<font color=gray>   149</font>  <a name="line_149"></a>is ref $rlist, 'ARRAY';
+<font color=gray>   150</font>  <a name="line_150"></a>@list = @$rlist;
+<font color=gray>   151</font>  <a name="line_151"></a>is scalar(@list), 0;
+<font color=gray>   152</font>  <a name="line_152"></a>is get_source(), '';
+<font color=gray>   153</font>  <a name="line_153"></a>is get_cur_token(), '787';
+<font color=gray>   154</font>  <a name="line_154"></a>
+<font color=gray>   155</font>  <a name="line_155"></a>$buf = '32 I';
+<font color=gray>   156</font>  <a name="line_156"></a>set_source($buf);
+<font color=gray>   157</font>  <a name="line_157"></a>is get_source(), $buf;
+<font color=gray>   158</font>  <a name="line_158"></a>is get_cur_token(), '';
+<font color=gray>   159</font>  <a name="line_159"></a>is readbytes2($rlist, 2), 0;
+<font color=gray>   160</font>  <a name="line_160"></a>ok $rlist;
+<font color=gray>   161</font>  <a name="line_161"></a>is ref $rlist, 'ARRAY';
+<font color=gray>   162</font>  <a name="line_162"></a>@list = @$rlist;
+<font color=gray>   163</font>  <a name="line_163"></a>is scalar(@list), 0;
+<font color=gray>   164</font>  <a name="line_164"></a>is get_source(), '';
+<font color=gray>   165</font>  <a name="line_165"></a>is get_cur_token(), 'I';
+<font color=gray>   166</font>  <a name="line_166"></a>
+<font color=gray>   167</font>  <a name="line_167"></a>$buf = ' 0c 01';
+<font color=gray>   168</font>  <a name="line_168"></a>set_source($buf);
+<font color=gray>   169</font>  <a name="line_169"></a>is get_source(), $buf;
+<font color=gray>   170</font>  <a name="line_170"></a>is get_cur_token(), '';
+<font color=gray>   171</font>  <a name="line_171"></a>is readbytes2($rlist, 2), 2;
+<font color=gray>   172</font>  <a name="line_172"></a>ok $rlist;
+<font color=gray>   173</font>  <a name="line_173"></a>is ref $rlist, 'ARRAY';
+<font color=gray>   174</font>  <a name="line_174"></a>@list = @$rlist;
+<font color=gray>   175</font>  <a name="line_175"></a>is scalar(@list), 2;
+<font color=gray>   176</font>  <a name="line_176"></a>is get_source(), '';
+<font color=gray>   177</font>  <a name="line_177"></a>is get_cur_token(), '01';
+<font color=gray>   178</font>  <a name="line_178"></a>
+<font color=gray>   179</font>  <a name="line_179"></a># Test sub get_imm_len:
+<font color=gray>   180</font>  <a name="line_180"></a>is get_imm_len(1,1,1), 1;
+<font color=gray>   181</font>  <a name="line_181"></a>is get_imm_len(1,1,-1), 1;
+<font color=gray>   182</font>  <a name="line_182"></a>is get_imm_len(1,1,0), 1;
+<font color=gray>   183</font>  <a name="line_183"></a>
+<font color=gray>   184</font>  <a name="line_184"></a>is get_imm_len(1,0,1), 1;
+<font color=gray>   185</font>  <a name="line_185"></a>is get_imm_len(1,0,-1), 1;
+<font color=gray>   186</font>  <a name="line_186"></a>is get_imm_len(1,0,0), 1;
+<font color=gray>   187</font>  <a name="line_187"></a>
+<font color=gray>   188</font>  <a name="line_188"></a>is get_imm_len(0,1,1), 2;
+<font color=gray>   189</font>  <a name="line_189"></a>is get_imm_len(0,1,-1), 4;
+<font color=gray>   190</font>  <a name="line_190"></a>is get_imm_len(0,1,0), 4;
+<font color=gray>   191</font>  <a name="line_191"></a>
+<font color=gray>   192</font>  <a name="line_192"></a>is get_imm_len(0,0,1), 1;
+<font color=gray>   193</font>  <a name="line_193"></a>is get_imm_len(0,0,-1), 1;
+<font color=gray>   194</font>  <a name="line_194"></a>is get_imm_len(0,0,0), 1;
+<font color=gray>   195</font>  <a name="line_195"></a>
+<font color=gray>   196</font>  <a name="line_196"></a>is get_imm_len(-1,0,1), 1;
+<font color=gray>   197</font>  <a name="line_197"></a>is get_imm_len(-1,0,-1), 1;
+<font color=gray>   198</font>  <a name="line_198"></a>is get_imm_len(-1,0,0), 1;
+<font color=gray>   199</font>  <a name="line_199"></a>
+<font color=gray>   200</font>  <a name="line_200"></a>is get_imm_len(-1,1,1), 2;
+<font color=gray>   201</font>  <a name="line_201"></a>is get_imm_len(-1,1,-1), 4;
+<font color=gray>   202</font>  <a name="line_202"></a>is get_imm_len(-1,1,0), 4;
+<font color=gray>   203</font>  <a name="line_203"></a>
+<font color=gray>   204</font>  <a name="line_204"></a>is get_imm_len(0,-1,1), 2;
+<font color=gray>   205</font>  <a name="line_205"></a>is get_imm_len(0,-1,-1), 4;
+<font color=gray>   206</font>  <a name="line_206"></a>is get_imm_len(0,-1,0), 4;
+<font color=gray>   207</font>  <a name="line_207"></a>
+<font color=gray>   208</font>  <a name="line_208"></a>is get_imm_len(1,-1,1), 1;
+<font color=gray>   209</font>  <a name="line_209"></a>is get_imm_len(1,-1,-1), 1;
+<font color=gray>   210</font>  <a name="line_210"></a>is get_imm_len(1,-1,0), 1;
+<font color=gray>   211</font>  <a name="line_211"></a>
+<font color=gray>   212</font>  <a name="line_212"></a>is get_imm_len(-1,-1,1), 2;
+<font color=gray>   213</font>  <a name="line_213"></a>is get_imm_len(-1,-1,-1), 4;
+<font color=gray>   214</font>  <a name="line_214"></a>is get_imm_len(-1,-1,0), 4;
+<font color=gray>   215</font>  <a name="line_215"></a>
+<font color=gray>   216</font>  <a name="line_216"></a># Test sub error:
+<font color=gray>   217</font>  <a name="line_217"></a>is error(), '';
+<font color=gray>   218</font>  <a name="line_218"></a>
+<font color=gray>   219</font>  <a name="line_219"></a># Test sub set_debug:
+<font color=gray>   220</font>  <a name="line_220"></a>is set_debug(1), 0;
+<font color=gray>   221</font>  <a name="line_221"></a>is set_debug(1), 1;
+<font color=gray>   222</font>  <a name="line_222"></a>is set_debug(0), 1;
+<font color=gray>   223</font>  <a name="line_223"></a>is set_debug(0), 0;
+<font color=gray>   224</font>  <a name="line_224"></a>is set_debug(1), 0;
+<font color=gray>   225</font>  <a name="line_225"></a>is set_debug(0), 1;
+<font color=gray>   226</font>  <a name="line_226"></a>
+<font color=gray>   227</font>  <a name="line_227"></a># Test sub dump_byte2:
+<font color=gray>   228</font>  <a name="line_228"></a>like dump_byte2(0), qr/^0{8}$/;
+<font color=gray>   229</font>  <a name="line_229"></a>like dump_byte2(1), qr/^0{7}1$/;
+<font color=gray>   230</font>  <a name="line_230"></a>like dump_byte2(2), qr/^0{6}10$/;
+<font color=gray>   231</font>  <a name="line_231"></a>like dump_byte2(3), qr/^0{6}11$/;
+<font color=gray>   232</font>  <a name="line_232"></a>like dump_byte2(4), qr/^0{5}100$/;
+<font color=gray>   233</font>  <a name="line_233"></a>like dump_byte2(5), qr/^0{5}101$/;
+<font color=gray>   234</font>  <a name="line_234"></a>like dump_byte2(255), qr/^1{8}$/;
+<font color=gray>   235</font>  <a name="line_235"></a>like dump_byte2(-128), qr/^10{7}$/;
+<font color=gray>   236</font>  <a name="line_236"></a>like dump_byte2(-127), qr/^10{6}1$/;
+<font color=gray>   237</font>  <a name="line_237"></a>like dump_byte2(-1), qr/^1{8}$/;
+ </pre></tt></body>
+</html>

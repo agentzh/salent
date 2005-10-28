@@ -1,0 +1,78 @@
+[% SET
+  ast = {
+	ops = [
+           {
+             mac = '59',
+             op  = 'pop',
+             asm = 'pop ecx'
+           },
+           {
+             mac = '5E',
+             op  = 'pop',
+             asm = 'pop esi'
+           },
+           {
+             mac = 'C3',
+             op  = 'ret',
+             asm = 'ret'
+           },
+           {
+             mac = '0F 84 A3 1D 00 00',
+             op  = 'jz',
+             asm = 'jz near 0x1dfc'
+           },
+           {
+             mac = '0F 95 C0',
+             op  = 'setnz',
+             asm = 'setnz al'
+           },
+           {
+             mac = 'AE',
+             op  = 'scasb',
+             asm = 'scasb'
+           }
+           {
+             mac = '99',
+             op  = 'cdq',
+             asm = 'cdq'
+           }
+           {
+             mac = 'CC',
+             op  = 'int3',
+             asm = 'int3'
+           }
+           {
+             mac = 'F3 A6',
+             op  = 'repe cmpsb',
+             asm = 'repe cmpsb'
+           }
+           {
+             mac = '26 40',
+             op  = 'ES INC',
+             asm = 'es inc eax'
+           }
+           {
+             mac = '8F',
+             op  = 'DB',
+             asm = 'db 0x8F'
+           }
+           {
+             mac = '6C',
+             op  = 'INSB',
+             asm = 'insb'
+           }
+           {
+             mac = 'f3 a6',
+             op  = 'REPZ CMPSB',
+             asm = 'repz cmpsb'
+           }
+           {
+             mac = '90',
+             op  = 'XCHG',
+             asm = 'xchg eax , eax'
+           }
+    ]
+  }
+-%]
+[% USE dumper;
+   dumper.dump(ast) -%]

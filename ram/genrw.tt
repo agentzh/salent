@@ -1,0 +1,31 @@
+[% DEFAULT
+    word_size = 32
+    addr_size = 32
+    capacity = 4
+    delay = 10
+    items = [        
+        {
+            rw    = '0',
+            addr  = "'d0",
+            data  = "'habcd"
+        }
+        {
+            rw   = '1',
+            addr = "'d8",
+            data = "!z+"
+        }
+            ]
+-%]
+word_size:  [% word_size %]
+addr_size:  32
+capacity :  [% capacity %]
+delay    :  [% delay %]
+
+[%- FOREACH item IN items -%]
+[%- IF item.rw == 1 -%]
+r [%- item.addr -%]  [% item.data -%]
+[% ELSE %]
+w [%- item.addr -%]  [% item.data -%]
+[% END %]
+[% END %]
+

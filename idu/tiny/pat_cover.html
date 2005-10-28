@@ -1,0 +1,4659 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>NAME</title>
+<link rel="stylesheet" href="docstyle.css" type="text/css" />
+<link rev="made" href="mailto:" />
+</head>
+
+<body>
+<table border="0" width="100%" cellspacing="0" cellpadding="3">
+<tr><td class="block" valign="middle">
+<big><strong><span class="block">&nbsp;NAME</span></strong></big>
+</td></tr>
+</table>
+
+<p><a name="__index__"></a></p>
+<!-- INDEX BEGIN -->
+
+<ul>
+
+	<li><a href="#name">NAME</a></li>
+	<li><a href="#ast20structure">AST STRUCTURE</a></li>
+	<ul>
+
+		<ul>
+
+			<li><a href="#aaa">aaa</a></li>
+			<li><a href="#o1620aaa">o16 aaa</a></li>
+			<li><a href="#aad">aad</a></li>
+			<li><a href="#o1620aad">o16 aad</a></li>
+			<li><a href="#aad200x0">aad 0x0</a></li>
+			<li><a href="#o1620aad200x0">o16 aad 0x0</a></li>
+			<li><a href="#aam">aam</a></li>
+			<li><a href="#o1620aam">o16 aam</a></li>
+			<li><a href="#aam200x0">aam 0x0</a></li>
+			<li><a href="#o1620aam200x0">o16 aam 0x0</a></li>
+			<li><a href="#aas">aas</a></li>
+			<li><a href="#o1620aas">o16 aas</a></li>
+			<li><a href="#adc20bl2cah">adc bl,ah</a></li>
+			<li><a href="#o1620adc20bh2cah">o16 adc bh,ah</a></li>
+			<li><a href="#adc20dl2cdl">adc dl,dl</a></li>
+			<li><a href="#adc20dx2ccx">adc dx,cx</a></li>
+			<li><a href="#adc20ebp2c5bebp2b0x31fb51c5d">adc ebp,[ebp+0x31fb51c]</a></li>
+			<li><a href="#o1620adc20al2c5besi5d">o16 adc al,[esi]</a></li>
+			<li><a href="#adc205bebx2beax2a22b0x2eea563b5d2cebx">adc [ebx+eax*2+0x2eea563b],ebx</a></li>
+			<li><a href="#adc205becx2besi2a80x565d2cbx">adc [ecx+esi*8-0x56],bx</a></li>
+			<li><a href="#adc20dh2c0x4c">adc dh,0x4c</a></li>
+			<li><a href="#o1620adc20dl2c0xe0">o16 adc dl,0xe0</a></li>
+			<li><a href="#adc20al2c0x37">adc al,0x37</a></li>
+			<li><a href="#adc20ax2c0x5d2c">adc ax,0x5d2c</a></li>
+			<li><a href="#adc20byte205beax5d2c0xd6">adc byte [eax],0xd6</a></li>
+			<li><a href="#o1620adc20byte205besi2b0x225d2c0xb2">o16 adc byte [esi+0x22],0xb2</a></li>
+			<li><a href="#add20esi2cedi">add esi,edi</a></li>
+			<li><a href="#o1620add20cl2cah">o16 add cl,ah</a></li>
+			<li><a href="#add20esp2cesi">add esp,esi</a></li>
+			<li><a href="#o1620add20bh2cah">o16 add bh,ah</a></li>
+			<li><a href="#add20ebp2c5becx2b0x7e5d">add ebp,[ecx+0x7e]</a></li>
+			<li><a href="#add20di2c5bebx0x275d">add di,[ebx-0x27]</a></li>
+			<li><a href="#add205becx2b0x1fc6a225d2cdl">add [ecx+0x1fc6a22],dl</a></li>
+			<li><a href="#o1620add205bebp2beax2a82b0x1f0be02b5d2cal">o16 add [ebp+eax*8+0x1f0be02b],al</a></li>
+			<li><a href="#add20bl2c0x0">add bl,0x0</a></li>
+			<li><a href="#o1620add20cl2c0x54">o16 add cl,0x54</a></li>
+			<li><a href="#add20al2c0x65">add al,0x65</a></li>
+			<li><a href="#add20ax2c0x4e66">add ax,0x4e66</a></li>
+			<li><a href="#add20byte205besi5d2c0x1e">add byte [esi],0x1e</a></li>
+			<li><a href="#o1620add20byte205besi2b0x9e28dab15d2c0x79">o16 add byte [esi+0x9e28dab1],0x79</a></li>
+			<li><a href="#and20eax2cebp">and eax,ebp</a></li>
+			<li><a href="#and20di2cbx">and di,bx</a></li>
+			<li><a href="#and20esp2cebp">and esp,ebp</a></li>
+			<li><a href="#and20di2cax">and di,ax</a></li>
+			<li><a href="#and20bl2c5becx5d">and bl,[ecx]</a></li>
+			<li><a href="#and20cx2c5besi2b0xe7ee47d55d">and cx,[esi+0xe7ee47d5]</a></li>
+			<li><a href="#and205besi2beax2a45d2cebp">and [esi+eax*4],ebp</a></li>
+			<li><a href="#and205becx5d2cbp">and [ecx],bp</a></li>
+			<li><a href="#and20ecx2cbyte200x16">and ecx,byte -0x16</a></li>
+			<li><a href="#o1620and20ch2c0xbb">o16 and ch,0xbb</a></li>
+			<li><a href="#and20eax2c0x3d484c17">and eax,0x3d484c17</a></li>
+			<li><a href="#and20ax2c0xd2d3">and ax,0xd2d3</a></li>
+			<li><a href="#and20dword205besi5d2cbyte200x5c">and dword [esi],byte -0x5c</a></li>
+			<li><a href="#o1620and20byte205besi0x4e5d2c0xf1">o16 and byte [esi-0x4e],0xf1</a></li>
+			<li><a href="#arpl20bx2cdi">arpl bx,di</a></li>
+			<li><a href="#o1620arpl20dx2cbx">o16 arpl dx,bx</a></li>
+			<li><a href="#arpl205bedx2b0xae3d5dfc5d2cbx">arpl [edx+0xae3d5dfc],bx</a></li>
+			<li><a href="#o1620arpl205bebp0x7f5d2cax">o16 arpl [ebp-0x7f],ax</a></li>
+			<li><a href="#bound20ebx2c5b0x85b78e2d5d">bound ebx,[0x85b78e2d]</a></li>
+			<li><a href="#bound20bp2c5besi2bebp5d">bound bp,[esi+ebp]</a></li>
+			<li><a href="#bsf20edx2cesp">bsf edx,esp</a></li>
+			<li><a href="#bsf20ax2csi">bsf ax,si</a></li>
+			<li><a href="#bsf20eax2c5bedi5d">bsf eax,[edi]</a></li>
+			<li><a href="#bsf20cx2c5becx2b0x993db6615d">bsf cx,[ecx+0x993db661]</a></li>
+			<li><a href="#bsr20esp2ceax">bsr esp,eax</a></li>
+			<li><a href="#bsr20bx2cax">bsr bx,ax</a></li>
+			<li><a href="#bsr20ebp2c5bedi2b0xcf5298c25d">bsr ebp,[edi+0xcf5298c2]</a></li>
+			<li><a href="#bsr20bp2c5bedi2bedx2a42b0x2b86396f5d">bsr bp,[edi+edx*4+0x2b86396f]</a></li>
+			<li><a href="#bswap20eax">bswap eax</a></li>
+			<li><a href="#db200x66">db 0x66</a></li>
+			<li><a href="#bswap20ebp">bswap ebp</a></li>
+			<li><a href="#bt20edi2c0x6">bt edi,0x6</a></li>
+			<li><a href="#bt20dx2c0xbc">bt dx,0xbc</a></li>
+			<li><a href="#bt20dword205beax2b0x115d2c0xcc">bt dword [eax+0x11],0xcc</a></li>
+			<li><a href="#bt20word205beax0x285d2c0x11">bt word [eax-0x28],0x11</a></li>
+			<li><a href="#bt20esi2cebx">bt esi,ebx</a></li>
+			<li><a href="#bt20si2cbx">bt si,bx</a></li>
+			<li><a href="#bt205b0x1dab9bc95d2cesi">bt [0x1dab9bc9],esi</a></li>
+			<li><a href="#bt205beax5d2cdx">bt [eax],dx</a></li>
+			<li><a href="#btc20edi2c0x7b">btc edi,0x7b</a></li>
+			<li><a href="#btc20ax2c0xf">btc ax,0xf</a></li>
+			<li><a href="#btc20dword205becx2b0xba3cc6c25d2c0xee">btc dword [ecx+0xba3cc6c2],0xee</a></li>
+			<li><a href="#btc20word205bebx5d2c0x1a">btc word [ebx],0x1a</a></li>
+			<li><a href="#btc20ebp2cesi">btc ebp,esi</a></li>
+			<li><a href="#btc20di2csp">btc di,sp</a></li>
+			<li><a href="#btc205bebx2b0x7a5d2cesi">btc [ebx+0x7a],esi</a></li>
+			<li><a href="#btc205bebp2b0x275d2cbp">btc [ebp+0x27],bp</a></li>
+			<li><a href="#btr20esp2c0xde">btr esp,0xde</a></li>
+			<li><a href="#btr20bx2c0x88">btr bx,0x88</a></li>
+			<li><a href="#btr20dword205bedi2bedi2a25d2c0xbd">btr dword [edi+edi*2],0xbd</a></li>
+			<li><a href="#btr20word205bedx2b0x4e5d2c0xcd">btr word [edx+0x4e],0xcd</a></li>
+			<li><a href="#btr20ebx2cesp">btr ebx,esp</a></li>
+			<li><a href="#btr20ax2cdi">btr ax,di</a></li>
+			<li><a href="#btr205besi2b0x1170fa295d2cesp">btr [esi+0x1170fa29],esp</a></li>
+			<li><a href="#btr205besi5d2cdi">btr [esi],di</a></li>
+			<li><a href="#bts20eax2c0xe6">bts eax,0xe6</a></li>
+			<li><a href="#bts20cx2c0x6d">bts cx,0x6d</a></li>
+			<li><a href="#bts20dword205besi5d2c0x96">bts dword [esi],0x96</a></li>
+			<li><a href="#bts20word205bebp0x25d2c0x51">bts word [ebp-0x2],0x51</a></li>
+			<li><a href="#bts20edx2cesp">bts edx,esp</a></li>
+			<li><a href="#bts20dx2cdi">bts dx,di</a></li>
+			<li><a href="#bts205bebp2b0x99cf8a1a5d2cecx">bts [ebp+0x99cf8a1a],ecx</a></li>
+			<li><a href="#bts205becx5d2cdx">bts [ecx],dx</a></li>
+			<li><a href="#call200xe2568d8c">call 0xe2568d8c</a></li>
+			<li><a href="#call20word200x3a5">call word 0x3a5</a></li>
+			<li><a href="#call20esi">call esi</a></li>
+			<li><a href="#call20bx">call bx</a></li>
+			<li><a href="#call20near205beax2becx2a85d">call near [eax+ecx*8]</a></li>
+			<li><a href="#call20word20near205bebp2b0x45d">call word near [ebp+0x4]</a></li>
+			<li><a href="#call200x14d43a0x2fd7b9a1">call 0x14d4:0x2fd7b9a1</a></li>
+			<li><a href="#call20word200x6a733a0x4fb7">call word 0x6a73:0x4fb7</a></li>
+			<li><a href="#call20far205bebx5d">call far [ebx]</a></li>
+			<li><a href="#call20word20far205besi5d">call word far [esi]</a></li>
+			<li><a href="#cdq">cdq</a></li>
+			<li><a href="#cwd">cwd</a></li>
+			<li><a href="#clc">clc</a></li>
+			<li><a href="#o1620clc">o16 clc</a></li>
+			<li><a href="#cld">cld</a></li>
+			<li><a href="#o1620cld">o16 cld</a></li>
+			<li><a href="#cli">cli</a></li>
+			<li><a href="#o1620cli">o16 cli</a></li>
+			<li><a href="#clts">clts</a></li>
+			<li><a href="#o1620clts">o16 clts</a></li>
+			<li><a href="#cmc">cmc</a></li>
+			<li><a href="#o1620cmc">o16 cmc</a></li>
+			<li><a href="#cmp20al2cal">cmp al,al</a></li>
+			<li><a href="#o1620cmp20al2cal">o16 cmp al,al</a></li>
+			<li><a href="#cmp20esp2cesi">cmp esp,esi</a></li>
+			<li><a href="#o1620cmp20dh2cal">o16 cmp dh,al</a></li>
+			<li><a href="#cmp205bebx5d2cdh">cmp [ebx],dh</a></li>
+			<li><a href="#cmp205bedx2b0x225d2cdx">cmp [edx+0x22],dx</a></li>
+			<li><a href="#cmp20ebx2c5becx5d">cmp ebx,[ecx]</a></li>
+			<li><a href="#o1620cmp20bh2c5bebp2b0xd0d59cd95d">o16 cmp bh,[ebp+0xd0d59cd9]</a></li>
+			<li><a href="#cmp20ebx2cbyte202b0x41">cmp ebx,byte +0x41</a></li>
+			<li><a href="#o1620cmp20ah2c0x73">o16 cmp ah,0x73</a></li>
+			<li><a href="#cmp20al2c0xd9">cmp al,0xd9</a></li>
+			<li><a href="#cmp20ax2c0x7109">cmp ax,0x7109</a></li>
+			<li><a href="#cmp20byte205beax2b0x446fabf15d2c0xfd">cmp byte [eax+0x446fabf1],0xfd</a></li>
+			<li><a href="#o1620cmp20byte205besi2b0x9e7d66975d2c0xb1">o16 cmp byte [esi+0x9e7d6697],0xb1</a></li>
+			<li><a href="#cmpsd">cmpsd</a></li>
+			<li><a href="#o1620cmpsb">o16 cmpsb</a></li>
+			<li><a href="#cmpxchg20edi2ceax">cmpxchg edi,eax</a></li>
+			<li><a href="#o1620cmpxchg20ch2ccl">o16 cmpxchg ch,cl</a></li>
+			<li><a href="#cmpxchg205becx5d2cal">cmpxchg [ecx],al</a></li>
+			<li><a href="#o1620cmpxchg205bebx5d2cdl">o16 cmpxchg [ebx],dl</a></li>
+			<li><a href="#cpuid">cpuid</a></li>
+			<li><a href="#o1620cpuid">o16 cpuid</a></li>
+			<li><a href="#cwde">cwde</a></li>
+			<li><a href="#cbw">cbw</a></li>
+			<li><a href="#daa">daa</a></li>
+			<li><a href="#o1620daa">o16 daa</a></li>
+			<li><a href="#das">das</a></li>
+			<li><a href="#o1620das">o16 das</a></li>
+			<li><a href="#dec20ch">dec ch</a></li>
+			<li><a href="#o1620dec20ch">o16 dec ch</a></li>
+			<li><a href="#dec20ebp">dec ebp</a></li>
+			<li><a href="#dec20ax">dec ax</a></li>
+			<li><a href="#dec20ebp">dec ebp</a></li>
+			<li><a href="#dec20bx">dec bx</a></li>
+			<li><a href="#dec20byte205b0x3efe81f55d">dec byte [0x3efe81f5]</a></li>
+			<li><a href="#o1620dec20byte205bebp2b0x58d5a83e5d">o16 dec byte [ebp+0x58d5a83e]</a></li>
+			<li><a href="#dec20dword205bebx0x1b5d">dec dword [ebx-0x1b]</a></li>
+			<li><a href="#dec20word205bedx5d">dec word [edx]</a></li>
+			<li><a href="#div20ebx">div ebx</a></li>
+			<li><a href="#div20sp">div sp</a></li>
+			<li><a href="#div20dword205bedx2bebp2a42b0xa353d8a45d">div dword [edx+ebp*4+0xa353d8a4]</a></li>
+			<li><a href="#div20word205bedx2b0x4f8d53655d">div word [edx+0x4f8d5365]</a></li>
+			<li><a href="#enter200x6cc82c0xf0">enter 0x6cc8,0xf0</a></li>
+			<li><a href="#o1620enter200x4bce2c0x7">o16 enter 0x4bce,0x7</a></li>
+			<li><a href="#hlt">hlt</a></li>
+			<li><a href="#o1620hlt">o16 hlt</a></li>
+			<li><a href="#idiv20ah">idiv ah</a></li>
+			<li><a href="#idiv20bx">idiv bx</a></li>
+			<li><a href="#idiv20byte205besi5d">idiv byte [esi]</a></li>
+			<li><a href="#idiv20word205bedx5d">idiv word [edx]</a></li>
+			<li><a href="#imul20dh">imul dh</a></li>
+			<li><a href="#imul20ax">imul ax</a></li>
+			<li><a href="#imul20dword205bedx5d">imul dword [edx]</a></li>
+			<li><a href="#imul20word205bebx0x3d5d">imul word [ebx-0x3d]</a></li>
+			<li><a href="#imul20esi2cecx">imul esi,ecx</a></li>
+			<li><a href="#imul20sp2csp">imul sp,sp</a></li>
+			<li><a href="#imul20esi2c5bebp0x7d5d">imul esi,[ebp-0x7d]</a></li>
+			<li><a href="#imul20si2c5beax5d">imul si,[eax]</a></li>
+			<li><a href="#imul20ebp2cedi2cdword200x950b3862">imul ebp,edi,dword 0x950b3862</a></li>
+			<li><a href="#imul20bx2cdi2cword200xde98">imul bx,di,word 0xde98</a></li>
+			<li><a href="#imul20ecx2c5besi2bedi2b0x355d2cdword200x6115d676">imul ecx,[esi+edi+0x35],dword 0x6115d676</a></li>
+			<li><a href="#imul20di2c5bebx2b0x655d2cword200x2705">imul di,[ebx+0x65],word 0x2705</a></li>
+			<li><a href="#in20al2c0x89">in al,0x89</a></li>
+			<li><a href="#in20ax2c0x69">in ax,0x69</a></li>
+			<li><a href="#in20al2cdx">in al,dx</a></li>
+			<li><a href="#o1620in20al2cdx">o16 in al,dx</a></li>
+			<li><a href="#inc20ch">inc ch</a></li>
+			<li><a href="#o1620inc20cl">o16 inc cl</a></li>
+			<li><a href="#inc20edi">inc edi</a></li>
+			<li><a href="#inc20bx">inc bx</a></li>
+			<li><a href="#inc20esp">inc esp</a></li>
+			<li><a href="#inc20di">inc di</a></li>
+			<li><a href="#inc20byte205becx2b0x5c5d">inc byte [ecx+0x5c]</a></li>
+			<li><a href="#o1620inc20byte205bedi2becx2a25d">o16 inc byte [edi+ecx*2]</a></li>
+			<li><a href="#inc20dword205bebx5d">inc dword [ebx]</a></li>
+			<li><a href="#inc20word205besi2b0x565d">inc word [esi+0x56]</a></li>
+			<li><a href="#insb">insb</a></li>
+			<li><a href="#o1620insb">o16 insb</a></li>
+			<li><a href="#int200x76">int 0x76</a></li>
+			<li><a href="#o1620int200xe7">o16 int 0xe7</a></li>
+			<li><a href="#int3">int3</a></li>
+			<li><a href="#o1620int3">o16 int3</a></li>
+			<li><a href="#into">into</a></li>
+			<li><a href="#o1620into">o16 into</a></li>
+			<li><a href="#invd">invd</a></li>
+			<li><a href="#o1620invd">o16 invd</a></li>
+			<li><a href="#invlpg205bedx2b0xb58604c15d">invlpg [edx+0xb58604c1]</a></li>
+			<li><a href="#o1620invlpg205bebx2b0x6553cbec5d">o16 invlpg [ebx+0x6553cbec]</a></li>
+			<li><a href="#iret">iret</a></li>
+			<li><a href="#iretw">iretw</a></li>
+			<li><a href="#jz200x2a9">jz 0x2a9</a></li>
+			<li><a href="#o1620jo200x321">o16 jo 0x321</a></li>
+			<li><a href="#jnl20near200x1558de90">jnl near 0x1558de90</a></li>
+			<li><a href="#ja20word200xf763">ja word 0xf763</a></li>
+			<li><a href="#jecxz200x30c">jecxz 0x30c</a></li>
+			<li><a href="#o1620jecxz200x325">o16 jecxz 0x325</a></li>
+			<li><a href="#jmp20short200x33a">jmp short 0x33a</a></li>
+			<li><a href="#o1620jmp20short200x2b4">o16 jmp short 0x2b4</a></li>
+			<li><a href="#jmp200xcdaa93ba">jmp 0xcdaa93ba</a></li>
+			<li><a href="#jmp20word200xc5fb">jmp word 0xc5fb</a></li>
+			<li><a href="#jmp20esp">jmp esp</a></li>
+			<li><a href="#jmp20di">jmp di</a></li>
+			<li><a href="#jmp20near205bedx5d">jmp near [edx]</a></li>
+			<li><a href="#jmp20word20near205becx5d">jmp word near [ecx]</a></li>
+			<li><a href="#jmp200x9f383a0xb7cece2f">jmp 0x9f38:0xb7cece2f</a></li>
+			<li><a href="#jmp20word200x35213a0xf53">jmp word 0x3521:0xf53</a></li>
+			<li><a href="#jmp20far205bedi5d">jmp far [edi]</a></li>
+			<li><a href="#jmp20word20far205besi5d">jmp word far [esi]</a></li>
+			<li><a href="#lahf">lahf</a></li>
+			<li><a href="#o1620lahf">o16 lahf</a></li>
+			<li><a href="#lar20ebp2cebp">lar ebp,ebp</a></li>
+			<li><a href="#lar20sp2cax">lar sp,ax</a></li>
+			<li><a href="#lar20edx2c5besi2b0xdd8e19405d">lar edx,[esi+0xdd8e1940]</a></li>
+			<li><a href="#lar20si2c5bebx2bedx5d">lar si,[ebx+edx]</a></li>
+			<li><a href="#lds20ecx2c5bedx2b0x4df7b5e05d">lds ecx,[edx+0x4df7b5e0]</a></li>
+			<li><a href="#lds20si2c5bedi5d">lds si,[edi]</a></li>
+			<li><a href="#lea20esp2c5beax5d">lea esp,[eax]</a></li>
+			<li><a href="#lea20si2c5besi5d">lea si,[esi]</a></li>
+			<li><a href="#leave">leave</a></li>
+			<li><a href="#o1620leave">o16 leave</a></li>
+			<li><a href="#les20esi2c5bedx2b0xbffb5c335d">les esi,[edx+0xbffb5c33]</a></li>
+			<li><a href="#les20bx2c5besi2b0x4a5d">les bx,[esi+0x4a]</a></li>
+			<li><a href="#lfs20ecx2c5becx0x675d">lfs ecx,[ecx-0x67]</a></li>
+			<li><a href="#lfs20di2c5beax2b0x535d">lfs di,[eax+0x53]</a></li>
+			<li><a href="#lgdt205besi5d">lgdt [esi]</a></li>
+			<li><a href="#o1620lgdt205beax0x615d">o16 lgdt [eax-0x61]</a></li>
+			<li><a href="#lgs20esi2c5becx2b0xb7add80a5d">lgs esi,[ecx+0xb7add80a]</a></li>
+			<li><a href="#lgs20si2c5bebx2b0xf7ed5e635d">lgs si,[ebx+0xf7ed5e63]</a></li>
+			<li><a href="#lidt205bebx2b0x20cf847a5d">lidt [ebx+0x20cf847a]</a></li>
+			<li><a href="#o1620lidt205besi2b0x8f28757a5d">o16 lidt [esi+0x8f28757a]</a></li>
+			<li><a href="#lldt20ax">lldt ax</a></li>
+			<li><a href="#o1620lldt20cx">o16 lldt cx</a></li>
+			<li><a href="#lldt205bedx2b0xa57aa6a35d">lldt [edx+0xa57aa6a3]</a></li>
+			<li><a href="#o1620lldt205becx5d">o16 lldt [ecx]</a></li>
+			<li><a href="#lmsw20sp">lmsw sp</a></li>
+			<li><a href="#o1620lmsw20si">o16 lmsw si</a></li>
+			<li><a href="#lmsw205becx5d">lmsw [ecx]</a></li>
+			<li><a href="#o1620lmsw205becx5d">o16 lmsw [ecx]</a></li>
+			<li><a href="#lodsb">lodsb</a></li>
+			<li><a href="#lodsw">lodsw</a></li>
+			<li><a href="#loop200x3f2">loop 0x3f2</a></li>
+			<li><a href="#o1620loop200x3bc">o16 loop 0x3bc</a></li>
+			<li><a href="#loope200x397">loope 0x397</a></li>
+			<li><a href="#o1620loope200x3d0">o16 loope 0x3d0</a></li>
+			<li><a href="#loopne200x37f">loopne 0x37f</a></li>
+			<li><a href="#o1620loopne200x363">o16 loopne 0x363</a></li>
+			<li><a href="#lsl20eax2cesp">lsl eax,esp</a></li>
+			<li><a href="#lsl20sp2ccx">lsl sp,cx</a></li>
+			<li><a href="#lsl20ecx2c5bebx2beax2a25d">lsl ecx,[ebx+eax*2]</a></li>
+			<li><a href="#lsl20dx2c5bebp2b0xd028da3d5d">lsl dx,[ebp+0xd028da3d]</a></li>
+			<li><a href="#lss20eax2c5bedx2b0x3d0ed8f85d">lss eax,[edx+0x3d0ed8f8]</a></li>
+			<li><a href="#lss20di2c5besi2becx2a22b0x3c453d695d">lss di,[esi+ecx*2+0x3c453d69]</a></li>
+			<li><a href="#ltr20di">ltr di</a></li>
+			<li><a href="#o1620ltr20si">o16 ltr si</a></li>
+			<li><a href="#ltr205beax2b0x75310b585d">ltr [eax+0x75310b58]</a></li>
+			<li><a href="#o1620ltr205besi5d">o16 ltr [esi]</a></li>
+			<li><a href="#mov20eax2cecx">mov eax,ecx</a></li>
+			<li><a href="#mov20sp2csi">mov sp,si</a></li>
+			<li><a href="#mov20ch2ccl">mov ch,cl</a></li>
+			<li><a href="#mov20ax2csp">mov ax,sp</a></li>
+			<li><a href="#mov20ebx2c5beax5d">mov ebx,[eax]</a></li>
+			<li><a href="#o1620mov20ah2c5bebx5d">o16 mov ah,[ebx]</a></li>
+			<li><a href="#mov205becx2b0x5209a7af5d2cebx">mov [ecx+0x5209a7af],ebx</a></li>
+			<li><a href="#mov205becx2b0x575d2ccx">mov [ecx+0x57],cx</a></li>
+			<li><a href="#mov20bl2c0x43">mov bl,0x43</a></li>
+			<li><a href="#o1620mov20dh2c0xfa">o16 mov dh,0xfa</a></li>
+			<li><a href="#mov20esi2c0x27189710">mov esi,0x27189710</a></li>
+			<li><a href="#o1620mov20cl2c0x49">o16 mov cl,0x49</a></li>
+			<li><a href="#mov20byte205b0xf60890f45d2c0xf2">mov byte [0xf60890f4],0xf2</a></li>
+			<li><a href="#mov20word205b0xcd234bb5d2c0x9113">mov word [0xcd234bb],0x9113</a></li>
+			<li><a href="#mov20eax2c5b0x96cd97595d">mov eax,[0x96cd9759]</a></li>
+			<li><a href="#mov20ax2c5b0xe553f4a25d">mov ax,[0xe553f4a2]</a></li>
+			<li><a href="#mov205b0xdcea88075d2ceax">mov [0xdcea8807],eax</a></li>
+			<li><a href="#mov205b0x7fbb82ff5d2cax">mov [0x7fbb82ff],ax</a></li>
+			<li><a href="#mov20cr02cecx">mov cr0,ecx</a></li>
+			<li><a href="#o1620mov20cr02cebx">o16 mov cr0,ebx</a></li>
+			<li><a href="#mov20cr22cecx">mov cr2,ecx</a></li>
+			<li><a href="#o1620mov20cr22cebp">o16 mov cr2,ebp</a></li>
+			<li><a href="#mov20cr32ceax">mov cr3,eax</a></li>
+			<li><a href="#o1620mov20cr32cedi">o16 mov cr3,edi</a></li>
+			<li><a href="#mov20cr42cesp">mov cr4,esp</a></li>
+			<li><a href="#o1620mov20cr42cebx">o16 mov cr4,ebx</a></li>
+			<li><a href="#mov20eax2ccr0">mov eax,cr0</a></li>
+			<li><a href="#o1620mov20esi2ccr1">o16 mov esi,cr1</a></li>
+			<li><a href="#mov20dr52cedx">mov dr5,edx</a></li>
+			<li><a href="#o1620mov20dr62cebx">o16 mov dr6,ebx</a></li>
+			<li><a href="#mov20dr42cebp">mov dr4,ebp</a></li>
+			<li><a href="#o1620mov20dr32ceax">o16 mov dr3,eax</a></li>
+			<li><a href="#mov20dr32cesi">mov dr3,esi</a></li>
+			<li><a href="#o1620mov20dr52cedi">o16 mov dr5,edi</a></li>
+			<li><a href="#mov20esp2cdr7">mov esp,dr7</a></li>
+			<li><a href="#o1620mov20eax2cdr4">o16 mov eax,dr4</a></li>
+			<li><a href="#mov20edx2cdr7">mov edx,dr7</a></li>
+			<li><a href="#o1620mov20edi2cdr5">o16 mov edi,dr5</a></li>
+			<li><a href="#mov20edx2cdr6">mov edx,dr6</a></li>
+			<li><a href="#o1620mov20ecx2cdr1">o16 mov ecx,dr1</a></li>
+			<li><a href="#mov20segr62cdi">mov segr6,di</a></li>
+			<li><a href="#o1620mov20ds2csi">o16 mov ds,si</a></li>
+			<li><a href="#mov20fs2cbx">mov fs,bx</a></li>
+			<li><a href="#o1620mov20fs2cdi">o16 mov fs,di</a></li>
+			<li><a href="#mov20cs2c5bedx2b0xe2dd69555d">mov cs,[edx+0xe2dd6955]</a></li>
+			<li><a href="#o1620mov20fs2c5bedx5d">o16 mov fs,[edx]</a></li>
+			<li><a href="#mov20gs2c5bebx5d">mov gs,[ebx]</a></li>
+			<li><a href="#o1620mov20segr62c5beax2bebp2a85d">o16 mov segr6,[eax+ebp*8]</a></li>
+			<li><a href="#mov20edx2ces">mov edx,es</a></li>
+			<li><a href="#mov20ax2cgs">mov ax,gs</a></li>
+			<li><a href="#mov205b0xea332995d2css">mov [0xea33299],ss</a></li>
+			<li><a href="#o1620mov205bedx2b0x2f49f7335d2css">o16 mov [edx+0x2f49f733],ss</a></li>
+			<li><a href="#movsb">movsb</a></li>
+			<li><a href="#o1620movsb">o16 movsb</a></li>
+			<li><a href="#movsx20ecx2csp">movsx ecx,sp</a></li>
+			<li><a href="#movsx20sp2cch">movsx sp,ch</a></li>
+			<li><a href="#movsx20ebp2cbyte205becx2b0x1558418b5d">movsx ebp,byte [ecx+0x1558418b]</a></li>
+			<li><a href="#movsx20ax2c5becx5d">movsx ax,[ecx]</a></li>
+			<li><a href="#movzx20ecx2cal">movzx ecx,al</a></li>
+			<li><a href="#db200x66">db 0x66</a></li>
+			<li><a href="#movzx20esp2cbp">movzx esp,bp</a></li>
+			<li><a href="#movzx20edx2cbyte205besi5d">movzx edx,byte [esi]</a></li>
+			<li><a href="#db200x66">db 0x66</a></li>
+			<li><a href="#movzx20edi2cword205b0x57eb94c75d">movzx edi,word [0x57eb94c7]</a></li>
+			<li><a href="#mul20ah">mul ah</a></li>
+			<li><a href="#o1620mul20ch">o16 mul ch</a></li>
+			<li><a href="#mul20dword205bedx0x3c5d">mul dword [edx-0x3c]</a></li>
+			<li><a href="#mul20word205bedi5d">mul word [edi]</a></li>
+			<li><a href="#neg20esp">neg esp</a></li>
+			<li><a href="#o1620neg20ah">o16 neg ah</a></li>
+			<li><a href="#neg20byte205beax5d">neg byte [eax]</a></li>
+			<li><a href="#neg20word205becx0x755d">neg word [ecx-0x75]</a></li>
+			<li><a href="#not20ebp">not ebp</a></li>
+			<li><a href="#not20ax">not ax</a></li>
+			<li><a href="#not20dword205bebx5d">not dword [ebx]</a></li>
+			<li><a href="#not20word205becx5d">not word [ecx]</a></li>
+			<li><a href="#or20dh2cal">or dh,al</a></li>
+			<li><a href="#o1620or20dl2cdh">o16 or dl,dh</a></li>
+			<li><a href="#or20ebp2ceax">or ebp,eax</a></li>
+			<li><a href="#or20si2cbp">or si,bp</a></li>
+			<li><a href="#or20cl2c5bedi2b0x33c31c655d">or cl,[edi+0x33c31c65]</a></li>
+			<li><a href="#or20bp2c5besi2b0x4f36bdbe5d">or bp,[esi+0x4f36bdbe]</a></li>
+			<li><a href="#or205besp2besi2a80x115d2cch">or [esp+esi*8-0x11],ch</a></li>
+			<li><a href="#or205bedi0x2b5d2csp">or [edi-0x2b],sp</a></li>
+			<li><a href="#or20ah2c0x94">or ah,0x94</a></li>
+			<li><a href="#o1620or20ah2c0xf">o16 or ah,0xf</a></li>
+			<li><a href="#or20eax2c0xf2aaf926">or eax,0xf2aaf926</a></li>
+			<li><a href="#or20ax2c0x2bf0">or ax,0x2bf0</a></li>
+			<li><a href="#or20dword205bedx5d2cbyte200x39">or dword [edx],byte -0x39</a></li>
+			<li><a href="#or20word205besi2bebp2a82b0x85d2c0xe05f">or word [esi+ebp*8+0x8],0xe05f</a></li>
+			<li><a href="#out200x812ceax">out 0x81,eax</a></li>
+			<li><a href="#o1620out200x892cal">o16 out 0x89,al</a></li>
+			<li><a href="#out20dx2cal">out dx,al</a></li>
+			<li><a href="#o1620out20dx2cal">o16 out dx,al</a></li>
+			<li><a href="#outsd">outsd</a></li>
+			<li><a href="#o1620outsb">o16 outsb</a></li>
+			<li><a href="#pop20ecx">pop ecx</a></li>
+			<li><a href="#pop20cx">pop cx</a></li>
+			<li><a href="#pop20ecx">pop ecx</a></li>
+			<li><a href="#pop20si">pop si</a></li>
+			<li><a href="#pop20dword205bedx2becx5d">pop dword [edx+ecx]</a></li>
+			<li><a href="#pop20word205bebx5d">pop word [ebx]</a></li>
+			<li><a href="#pop20ds">pop ds</a></li>
+			<li><a href="#o1620pop20ds">o16 pop ds</a></li>
+			<li><a href="#pop20es">pop es</a></li>
+			<li><a href="#o1620pop20es">o16 pop es</a></li>
+			<li><a href="#pop20ss">pop ss</a></li>
+			<li><a href="#o1620pop20ss">o16 pop ss</a></li>
+			<li><a href="#pop20fs">pop fs</a></li>
+			<li><a href="#o1620pop20fs">o16 pop fs</a></li>
+			<li><a href="#pop20gs">pop gs</a></li>
+			<li><a href="#o1620pop20gs">o16 pop gs</a></li>
+			<li><a href="#popa">popa</a></li>
+			<li><a href="#popaw">popaw</a></li>
+			<li><a href="#popf">popf</a></li>
+			<li><a href="#popfw">popfw</a></li>
+			<li><a href="#push20edx">push edx</a></li>
+			<li><a href="#push20bx">push bx</a></li>
+			<li><a href="#push20edx">push edx</a></li>
+			<li><a href="#push20sp">push sp</a></li>
+			<li><a href="#push20dword205beax5d">push dword [eax]</a></li>
+			<li><a href="#push20word205bebx2b0xbb8e2f5f5d">push word [ebx+0xbb8e2f5f]</a></li>
+			<li><a href="#push20byte202b0x8">push byte +0x8</a></li>
+			<li><a href="#push20word200x367b">push word 0x367b</a></li>
+			<li><a href="#push20es">push es</a></li>
+			<li><a href="#o1620push20cs">o16 push cs</a></li>
+			<li><a href="#push20fs">push fs</a></li>
+			<li><a href="#o1620push20fs">o16 push fs</a></li>
+			<li><a href="#push20gs">push gs</a></li>
+			<li><a href="#o1620push20gs">o16 push gs</a></li>
+			<li><a href="#pusha">pusha</a></li>
+			<li><a href="#pushaw">pushaw</a></li>
+			<li><a href="#pushf">pushf</a></li>
+			<li><a href="#pushfw">pushfw</a></li>
+			<li><a href="#rcl20edi2c1">rcl edi,1</a></li>
+			<li><a href="#rcl20cx2c1">rcl cx,1</a></li>
+			<li><a href="#rcl20byte205becx5d2c1">rcl byte [ecx],1</a></li>
+			<li><a href="#o1620rcl20byte205beax5d2c1">o16 rcl byte [eax],1</a></li>
+			<li><a href="#rcl20ebx2ccl">rcl ebx,cl</a></li>
+			<li><a href="#rcl20bp2ccl">rcl bp,cl</a></li>
+			<li><a href="#rcl20byte205bebx5d2ccl">rcl byte [ebx],cl</a></li>
+			<li><a href="#o1620rcl20byte205besi0x35d2ccl">o16 rcl byte [esi-0x3],cl</a></li>
+			<li><a href="#rcl20dl2c0x83">rcl dl,0x83</a></li>
+			<li><a href="#rcl20ax2c0x53">rcl ax,0x53</a></li>
+			<li><a href="#rcl20dword205bedi2bebp2a80x415d2c0xa0">rcl dword [edi+ebp*8-0x41],0xa0</a></li>
+			<li><a href="#rcl20word205bedi2b0x705d2c0x82">rcl word [edi+0x70],0x82</a></li>
+			<li><a href="#rcr20ebp2c1">rcr ebp,1</a></li>
+			<li><a href="#rcr20ax2c1">rcr ax,1</a></li>
+			<li><a href="#rcr20dword205beax5d2c1">rcr dword [eax],1</a></li>
+			<li><a href="#o1620rcr20byte205becx5d2c1">o16 rcr byte [ecx],1</a></li>
+			<li><a href="#rcr20esp2ccl">rcr esp,cl</a></li>
+			<li><a href="#o1620rcr20ah2ccl">o16 rcr ah,cl</a></li>
+			<li><a href="#rcr20dword205bedx2b0x45d2ccl">rcr dword [edx+0x4],cl</a></li>
+			<li><a href="#o1620rcr20byte205becx5d2ccl">o16 rcr byte [ecx],cl</a></li>
+			<li><a href="#rcr20ebx2c0x6b">rcr ebx,0x6b</a></li>
+			<li><a href="#rcr20bx2c0xfb">rcr bx,0xfb</a></li>
+			<li><a href="#rcr20dword205bedx2bedi5d2c0xe5">rcr dword [edx+edi],0xe5</a></li>
+			<li><a href="#o1620rcr20byte205beax2b0x6c268a335d2c0xd7">o16 rcr byte [eax+0x6c268a33],0xd7</a></li>
+			<li><a href="#rdmsr">rdmsr</a></li>
+			<li><a href="#o1620rdmsr">o16 rdmsr</a></li>
+			<li><a href="#rdpmc">rdpmc</a></li>
+			<li><a href="#o1620rdpmc">o16 rdpmc</a></li>
+			<li><a href="#rdtsc">rdtsc</a></li>
+			<li><a href="#o1620rdtsc">o16 rdtsc</a></li>
+			<li><a href="#ret">ret</a></li>
+			<li><a href="#o1620ret">o16 ret</a></li>
+			<li><a href="#ret200x77bd">ret 0x77bd</a></li>
+			<li><a href="#o1620ret200xc0e3">o16 ret 0xc0e3</a></li>
+			<li><a href="#retf">retf</a></li>
+			<li><a href="#o1620retf">o16 retf</a></li>
+			<li><a href="#retf200xe575">retf 0xe575</a></li>
+			<li><a href="#o1620retf200x9004">o16 retf 0x9004</a></li>
+			<li><a href="#rol20cl2c1">rol cl,1</a></li>
+			<li><a href="#rol20bp2c1">rol bp,1</a></li>
+			<li><a href="#rol20dword205bedx2b0xd3a08a015d2c1">rol dword [edx+0xd3a08a01],1</a></li>
+			<li><a href="#rol20word205bebx5d2c1">rol word [ebx],1</a></li>
+			<li><a href="#rol20edi2ccl">rol edi,cl</a></li>
+			<li><a href="#rol20cx2ccl">rol cx,cl</a></li>
+			<li><a href="#rol20dword205bedx5d2ccl">rol dword [edx],cl</a></li>
+			<li><a href="#rol20word205bebp2b0x6bf6f7605d2ccl">rol word [ebp+0x6bf6f760],cl</a></li>
+			<li><a href="#rol20ecx2c0x4">rol ecx,0x4</a></li>
+			<li><a href="#rol20si2c0xe3">rol si,0xe3</a></li>
+			<li><a href="#rol20byte205becx2b0x89704d265d2c0x5e">rol byte [ecx+0x89704d26],0x5e</a></li>
+			<li><a href="#o1620rol20byte205bebp2b0x73b42ae45d2c0x4f">o16 rol byte [ebp+0x73b42ae4],0x4f</a></li>
+			<li><a href="#ror20cl2c1">ror cl,1</a></li>
+			<li><a href="#o1620ror20al2c1">o16 ror al,1</a></li>
+			<li><a href="#ror20byte205becx2bedi2a85d2c1">ror byte [ecx+edi*8],1</a></li>
+			<li><a href="#ror20word205bedx0x1d5d2c1">ror word [edx-0x1d],1</a></li>
+			<li><a href="#ror20ebp2ccl">ror ebp,cl</a></li>
+			<li><a href="#o1620ror20ah2ccl">o16 ror ah,cl</a></li>
+			<li><a href="#ror20byte205becx2b0x26ce7dab5d2ccl">ror byte [ecx+0x26ce7dab],cl</a></li>
+			<li><a href="#ror20word205bebx2b0x373c8b815d2ccl">ror word [ebx+0x373c8b81],cl</a></li>
+			<li><a href="#ror20al2c0x15">ror al,0x15</a></li>
+			<li><a href="#o1620ror20bh2c0xf4">o16 ror bh,0xf4</a></li>
+			<li><a href="#ror20dword205besi5d2c0x94">ror dword [esi],0x94</a></li>
+			<li><a href="#o1620ror20byte205bebx5d2c0x1">o16 ror byte [ebx],0x1</a></li>
+			<li><a href="#rsm">rsm</a></li>
+			<li><a href="#o1620rsm">o16 rsm</a></li>
+			<li><a href="#sahf">sahf</a></li>
+			<li><a href="#o1620sahf">o16 sahf</a></li>
+			<li><a href="#salc">salc</a></li>
+			<li><a href="#o1620salc">o16 salc</a></li>
+			<li><a href="#sar20ecx2c1">sar ecx,1</a></li>
+			<li><a href="#sar20si2c1">sar si,1</a></li>
+			<li><a href="#sar20byte205bedi0xd5d2c1">sar byte [edi-0xd],1</a></li>
+			<li><a href="#sar20word205bebx2b0x22bc21765d2c1">sar word [ebx+0x22bc2176],1</a></li>
+			<li><a href="#sar20edi2ccl">sar edi,cl</a></li>
+			<li><a href="#o1620sar20ah2ccl">o16 sar ah,cl</a></li>
+			<li><a href="#sar20dword205bedx5d2ccl">sar dword [edx],cl</a></li>
+			<li><a href="#sar20word205becx2b0x5b5d2ccl">sar word [ecx+0x5b],cl</a></li>
+			<li><a href="#sar20eax2c0x2d">sar eax,0x2d</a></li>
+			<li><a href="#o1620sar20dl2c0x1b">o16 sar dl,0x1b</a></li>
+			<li><a href="#sar20byte205b0xd906ee1c5d2c0x3a">sar byte [0xd906ee1c],0x3a</a></li>
+			<li><a href="#sar20word205beax5d2c0x3c">sar word [eax],0x3c</a></li>
+			<li><a href="#sbb20dl2ccl">sbb dl,cl</a></li>
+			<li><a href="#o1620sbb20bh2cbh">o16 sbb bh,bh</a></li>
+			<li><a href="#sbb20esp2cebx">sbb esp,ebx</a></li>
+			<li><a href="#o1620sbb20ch2cbl">o16 sbb ch,bl</a></li>
+			<li><a href="#sbb20bl2c5bebx0x185d">sbb bl,[ebx-0x18]</a></li>
+			<li><a href="#o1620sbb20bl2c5becx0x6a5d">o16 sbb bl,[ecx-0x6a]</a></li>
+			<li><a href="#sbb205beax5d2cebp">sbb [eax],ebp</a></li>
+			<li><a href="#sbb205besi5d2cax">sbb [esi],ax</a></li>
+			<li><a href="#sbb20ebp2cbyte202b0x0">sbb ebp,byte +0x0</a></li>
+			<li><a href="#sbb20cx2c0xfa22">sbb cx,0xfa22</a></li>
+			<li><a href="#sbb20eax2c0x6558fd26">sbb eax,0x6558fd26</a></li>
+			<li><a href="#o1620sbb20al2c0x24">o16 sbb al,0x24</a></li>
+			<li><a href="#sbb20byte205bebx0x725d2c0xc6">sbb byte [ebx-0x72],0xc6</a></li>
+			<li><a href="#sbb20word205bedx5d2c0xb6b9">sbb word [edx],0xb6b9</a></li>
+			<li><a href="#scasd">scasd</a></li>
+			<li><a href="#scasw">scasw</a></li>
+			<li><a href="#seta20al">seta al</a></li>
+			<li><a href="#o1620setnl20bh">o16 setnl bh</a></li>
+			<li><a href="#setns205beax5d">setns [eax]</a></li>
+			<li><a href="#o1620setpo205becx5d">o16 setpo [ecx]</a></li>
+			<li><a href="#sgdt205beax5d">sgdt [eax]</a></li>
+			<li><a href="#o1620sgdt205becx2a82b0x96e17585d">o16 sgdt [ecx*8+0x96e1758]</a></li>
+			<li><a href="#shl20ebp2c1">shl ebp,1</a></li>
+			<li><a href="#shl20bx2c1">shl bx,1</a></li>
+			<li><a href="#shl20dword205bedx5d2c1">shl dword [edx],1</a></li>
+			<li><a href="#o1620shl20byte205bedx2b0x8c050fcb5d2c1">o16 shl byte [edx+0x8c050fcb],1</a></li>
+			<li><a href="#shl20dh2ccl">shl dh,cl</a></li>
+			<li><a href="#o1620shl20al2ccl">o16 shl al,cl</a></li>
+			<li><a href="#shl20dword205bebx5d2ccl">shl dword [ebx],cl</a></li>
+			<li><a href="#o1620shl20byte205beax5d2ccl">o16 shl byte [eax],cl</a></li>
+			<li><a href="#shl20dh2c0x56">shl dh,0x56</a></li>
+			<li><a href="#o1620shl20dl2c0xc0">o16 shl dl,0xc0</a></li>
+			<li><a href="#shl20dword205bebp2b0x9847979d5d2c0x5b">shl dword [ebp+0x9847979d],0x5b</a></li>
+			<li><a href="#shl20word205bebp0x165d2c0xa8">shl word [ebp-0x16],0xa8</a></li>
+			<li><a href="#shld20ecx2cedx2c0x1c">shld ecx,edx,0x1c</a></li>
+			<li><a href="#shld20si2cdi2c0x42">shld si,di,0x42</a></li>
+			<li><a href="#shld205bedx2b0xe30f039c5d2cebx2c0xc7">shld [edx+0xe30f039c],ebx,0xc7</a></li>
+			<li><a href="#shld205b0xaa8926445d2cdi2c0xc2">shld [0xaa892644],di,0xc2</a></li>
+			<li><a href="#shld20ebx2cedx2ccl">shld ebx,edx,cl</a></li>
+			<li><a href="#shld20dx2cdi2ccl">shld dx,di,cl</a></li>
+			<li><a href="#shld205besi5d2ceax2ccl">shld [esi],eax,cl</a></li>
+			<li><a href="#shld205becx2bedi2a45d2cdx2ccl">shld [ecx+edi*4],dx,cl</a></li>
+			<li><a href="#shr20ebx2c1">shr ebx,1</a></li>
+			<li><a href="#o1620shr20dh2c1">o16 shr dh,1</a></li>
+			<li><a href="#shr20dword205becx2besi2a25d2c1">shr dword [ecx+esi*2],1</a></li>
+			<li><a href="#shr20word205besi2beax2b0xc16c8e7d5d2c1">shr word [esi+eax+0xc16c8e7d],1</a></li>
+			<li><a href="#shr20ch2ccl">shr ch,cl</a></li>
+			<li><a href="#shr20si2ccl">shr si,cl</a></li>
+			<li><a href="#shr20dword205bedi5d2ccl">shr dword [edi],cl</a></li>
+			<li><a href="#o1620shr20byte205b0xddbcd93c5d2ccl">o16 shr byte [0xddbcd93c],cl</a></li>
+			<li><a href="#shr20eax2c0xb1">shr eax,0xb1</a></li>
+			<li><a href="#shr20dx2c0xf0">shr dx,0xf0</a></li>
+			<li><a href="#shr20byte205besi2b0x665d2c0x2c">shr byte [esi+0x66],0x2c</a></li>
+			<li><a href="#shr20word205bebx2b0xc55d4acf5d2c0xa3">shr word [ebx+0xc55d4acf],0xa3</a></li>
+			<li><a href="#shrd20esi2cebx2c0x7b">shrd esi,ebx,0x7b</a></li>
+			<li><a href="#shrd20bp2csp2c0xdd">shrd bp,sp,0xdd</a></li>
+			<li><a href="#shrd205bedi5d2ceax2c0xe9">shrd [edi],eax,0xe9</a></li>
+			<li><a href="#shrd205besi2beax2a25d2ccx2c0x87">shrd [esi+eax*2],cx,0x87</a></li>
+			<li><a href="#shrd20edi2cesi2ccl">shrd edi,esi,cl</a></li>
+			<li><a href="#shrd20sp2csp2ccl">shrd sp,sp,cl</a></li>
+			<li><a href="#shrd205beax2bebp2b0x24db5f9a5d2cesp2ccl">shrd [eax+ebp+0x24db5f9a],esp,cl</a></li>
+			<li><a href="#shrd205bedx5d2cdi2ccl">shrd [edx],di,cl</a></li>
+			<li><a href="#sidt205bedx0x75d">sidt [edx-0x7]</a></li>
+			<li><a href="#o1620sidt205bedi2b0xdab1b0e45d">o16 sidt [edi+0xdab1b0e4]</a></li>
+			<li><a href="#sldt20bx">sldt bx</a></li>
+			<li><a href="#o1620sldt20di">o16 sldt di</a></li>
+			<li><a href="#sldt205becx5d">sldt [ecx]</a></li>
+			<li><a href="#o1620sldt205besi5d">o16 sldt [esi]</a></li>
+			<li><a href="#smsw20cx">smsw cx</a></li>
+			<li><a href="#o1620smsw20ax">o16 smsw ax</a></li>
+			<li><a href="#smsw205beax2bedi5d">smsw [eax+edi]</a></li>
+			<li><a href="#o1620smsw205bedx5d">o16 smsw [edx]</a></li>
+			<li><a href="#stc">stc</a></li>
+			<li><a href="#o1620stc">o16 stc</a></li>
+			<li><a href="#std">std</a></li>
+			<li><a href="#o1620std">o16 std</a></li>
+			<li><a href="#sti">sti</a></li>
+			<li><a href="#o1620sti">o16 sti</a></li>
+			<li><a href="#stosb">stosb</a></li>
+			<li><a href="#stosw">stosw</a></li>
+			<li><a href="#str20si">str si</a></li>
+			<li><a href="#o1620str20sp">o16 str sp</a></li>
+			<li><a href="#str205beax0x1c5d">str [eax-0x1c]</a></li>
+			<li><a href="#o1620str205besi5d">o16 str [esi]</a></li>
+			<li><a href="#sub20dl2ccl">sub dl,cl</a></li>
+			<li><a href="#o1620sub20bh2cbh">o16 sub bh,bh</a></li>
+			<li><a href="#sub20ch2ccl">sub ch,cl</a></li>
+			<li><a href="#o1620sub20dh2cdh">o16 sub dh,dh</a></li>
+			<li><a href="#sub20bl2c5besi2b0x645d">sub bl,[esi+0x64]</a></li>
+			<li><a href="#sub20bp2c5bedi5d">sub bp,[edi]</a></li>
+			<li><a href="#sub205besp2beax2a45d2cbh">sub [esp+eax*4],bh</a></li>
+			<li><a href="#o1620sub205bedx2besi2a20x505d2cdh">o16 sub [edx+esi*2-0x50],dh</a></li>
+			<li><a href="#sub20al2c0x4b">sub al,0x4b</a></li>
+			<li><a href="#o1620sub20al2c0x89">o16 sub al,0x89</a></li>
+			<li><a href="#sub20eax2c0x80ab7b79">sub eax,0x80ab7b79</a></li>
+			<li><a href="#o1620sub20al2c0x21">o16 sub al,0x21</a></li>
+			<li><a href="#sub20dword205becx2besi2a80x345d2cbyte202b0x62">sub dword [ecx+esi*8-0x34],byte +0x62</a></li>
+			<li><a href="#sub20word205b0x8db520f05d2c0x63b4">sub word [0x8db520f0],0x63b4</a></li>
+			<li><a href="#test20ebp2cesp">test ebp,esp</a></li>
+			<li><a href="#o1620test20dh2cah">o16 test dh,ah</a></li>
+			<li><a href="#test205bebx2bebp0x4e5d2cebx">test [ebx+ebp-0x4e],ebx</a></li>
+			<li><a href="#test205bedx2b0x7274f2a75d2csp">test [edx+0x7274f2a7],sp</a></li>
+			<li><a href="#test20cl2c0xd">test cl,0xd</a></li>
+			<li><a href="#o1620test20cl2c0xff">o16 test cl,0xff</a></li>
+			<li><a href="#test20eax2c0x481f8e8c">test eax,0x481f8e8c</a></li>
+			<li><a href="#test20ax2c0x5d4b">test ax,0x5d4b</a></li>
+			<li><a href="#test20dword205beax5d2c0x3a88774d">test dword [eax],0x3a88774d</a></li>
+			<li><a href="#o1620test20byte205bedi0x455d2c0x30">o16 test byte [edi-0x45],0x30</a></li>
+			<li><a href="#ud2">ud2</a></li>
+			<li><a href="#o1620ud2">o16 ud2</a></li>
+			<li><a href="#verr20si">verr si</a></li>
+			<li><a href="#o1620verr20ax">o16 verr ax</a></li>
+			<li><a href="#verr205bedx5d">verr [edx]</a></li>
+			<li><a href="#o1620verr205beax2b0xebdd851c5d">o16 verr [eax+0xebdd851c]</a></li>
+			<li><a href="#verw20ax">verw ax</a></li>
+			<li><a href="#o1620verw20ax">o16 verw ax</a></li>
+			<li><a href="#verw205besi5d">verw [esi]</a></li>
+			<li><a href="#o1620verw205bebx2b0xcae6d5335d">o16 verw [ebx+0xcae6d533]</a></li>
+			<li><a href="#wait">wait</a></li>
+			<li><a href="#o1620wait">o16 wait</a></li>
+			<li><a href="#wbinvd">wbinvd</a></li>
+			<li><a href="#o1620wbinvd">o16 wbinvd</a></li>
+			<li><a href="#wrmsr">wrmsr</a></li>
+			<li><a href="#o1620wrmsr">o16 wrmsr</a></li>
+			<li><a href="#xadd20ch2cbh">xadd ch,bh</a></li>
+			<li><a href="#xadd20ax2cbp">xadd ax,bp</a></li>
+			<li><a href="#xadd205bedx5d2cesi">xadd [edx],esi</a></li>
+			<li><a href="#xadd205besp2besi2a45d2cax">xadd [esp+esi*4],ax</a></li>
+			<li><a href="#xchg20ebp2cedx">xchg ebp,edx</a></li>
+			<li><a href="#xchg20sp2ccx">xchg sp,cx</a></li>
+			<li><a href="#xchg20eax2cebx">xchg eax,ebx</a></li>
+			<li><a href="#xchg20ax2cbp">xchg ax,bp</a></li>
+			<li><a href="#xchg20cl2c5beax2b0x5eaa43875d">xchg cl,[eax+0x5eaa4387]</a></li>
+			<li><a href="#xchg20cx2c5bedx2b0x8cce6a6b5d">xchg cx,[edx+0x8cce6a6b]</a></li>
+			<li><a href="#xlatb">xlatb</a></li>
+			<li><a href="#o1620xlatb">o16 xlatb</a></li>
+			<li><a href="#xor20esp2cedi">xor esp,edi</a></li>
+			<li><a href="#xor20sp2cbx">xor sp,bx</a></li>
+			<li><a href="#xor20bl2cal">xor bl,al</a></li>
+			<li><a href="#o1620xor20cl2cch">o16 xor cl,ch</a></li>
+			<li><a href="#xor20ch2c5bebx2b0x3a323bcc5d">xor ch,[ebx+0x3a323bcc]</a></li>
+			<li><a href="#xor20cx2c5bebp2b0xfd6386a75d">xor cx,[ebp+0xfd6386a7]</a></li>
+			<li><a href="#xor205bebp2b0x235d2cal">xor [ebp+0x23],al</a></li>
+			<li><a href="#o1620xor205b0x9e6906ce5d2cah">o16 xor [0x9e6906ce],ah</a></li>
+			<li><a href="#xor20esi2cbyte202b0x7e">xor esi,byte +0x7e</a></li>
+			<li><a href="#xor20bx2cbyte202b0x65">xor bx,byte +0x65</a></li>
+			<li><a href="#xor20al2c0xa5">xor al,0xa5</a></li>
+			<li><a href="#o1620xor20al2c0x23">o16 xor al,0x23</a></li>
+			<li><a href="#xor20dword205beax5d2cbyte202b0x2b">xor dword [eax],byte +0x2b</a></li>
+			<li><a href="#xor20word205bedi5d2c0x5f5a">xor word [edi],0x5f5a</a></li>
+			<li><a href="#f2xm1">f2xm1</a></li>
+			<li><a href="#fabs">fabs</a></li>
+			<li><a href="#fadd20dword205beax2b0x50c1a8bc5d">fadd dword [eax+0x50c1a8bc]</a></li>
+			<li><a href="#fadd20qword205bedx2b0x5d5d">fadd qword [edx+0x5d]</a></li>
+			<li><a href="#fadd20st5">fadd st5</a></li>
+			<li><a href="#fadd20to20st1">fadd to st1</a></li>
+			<li><a href="#faddp20st2">faddp st2</a></li>
+			<li><a href="#fbld20tword205bedx2b0xd0a704185d">fbld tword [edx+0xd0a70418]</a></li>
+			<li><a href="#fbstp20tword205bebx2bebp2a42b0xd903880d5d">fbstp tword [ebx+ebp*4+0xd903880d]</a></li>
+			<li><a href="#fchs">fchs</a></li>
+			<li><a href="#fnclex">fnclex</a></li>
+			<li><a href="#fcom20dword205besi2b0x8d22484a5d">fcom dword [esi+0x8d22484a]</a></li>
+			<li><a href="#fcom20qword205bedx5d">fcom qword [edx]</a></li>
+			<li><a href="#fcom20st5">fcom st5</a></li>
+			<li><a href="#fcomp20dword205bebx2b0x63b078c5d">fcomp dword [ebx+0x63b078c]</a></li>
+			<li><a href="#fcomp20qword205besi2b0x8450698c5d">fcomp qword [esi+0x8450698c]</a></li>
+			<li><a href="#fcomp20st2">fcomp st2</a></li>
+			<li><a href="#fcompp">fcompp</a></li>
+			<li><a href="#fcomip20st3">fcomip st3</a></li>
+			<li><a href="#fcos">fcos</a></li>
+			<li><a href="#fdecstp">fdecstp</a></li>
+			<li><a href="#fdiv20dword205besi2besi2b0x5f5d">fdiv dword [esi+esi+0x5f]</a></li>
+			<li><a href="#fdiv20qword205bedi5d">fdiv qword [edi]</a></li>
+			<li><a href="#fdiv20st4">fdiv st4</a></li>
+			<li><a href="#fdivr20to20st3">fdivr to st3</a></li>
+			<li><a href="#fdivp20st22cst0">fdivp st2,st0</a></li>
+			<li><a href="#fdivr20dword205bebx2b0x128bbccb5d">fdivr dword [ebx+0x128bbccb]</a></li>
+			<li><a href="#fdivr20qword205besi2a82b0xe1be32175d">fdivr qword [esi*8+0xe1be3217]</a></li>
+			<li><a href="#fdivr20st0">fdivr st0</a></li>
+			<li><a href="#fdiv20to20st6">fdiv to st6</a></li>
+			<li><a href="#fdivrp20st6">fdivrp st6</a></li>
+			<li><a href="#ffree20st3">ffree st3</a></li>
+			<li><a href="#fiadd20word205bebx2b0xde6aec0b5d">fiadd word [ebx+0xde6aec0b]</a></li>
+			<li><a href="#fiadd20dword205bedx0x515d">fiadd dword [edx-0x51]</a></li>
+			<li><a href="#ficom20word205bedx5d">ficom word [edx]</a></li>
+			<li><a href="#ficom20dword205besi0x485d">ficom dword [esi-0x48]</a></li>
+			<li><a href="#ficomp20word205bedx2b0x59571805d">ficomp word [edx+0x5957180]</a></li>
+			<li><a href="#ficomp20dword205beax0x7f5d">ficomp dword [eax-0x7f]</a></li>
+			<li><a href="#fidiv20word205besi5d">fidiv word [esi]</a></li>
+			<li><a href="#fidiv20dword205bedi5d">fidiv dword [edi]</a></li>
+			<li><a href="#fidivr20word205bebx2bebp2a82b0x465d">fidivr word [ebx+ebp*8+0x46]</a></li>
+			<li><a href="#fidivr20dword205becx5d">fidivr dword [ecx]</a></li>
+			<li><a href="#fild20word205beax0x245d">fild word [eax-0x24]</a></li>
+			<li><a href="#fild20dword205bedx2b0xa49b7f825d">fild dword [edx+0xa49b7f82]</a></li>
+			<li><a href="#fild20qword205beax2becx2a40x6e5d">fild qword [eax+ecx*4-0x6e]</a></li>
+			<li><a href="#fimul20word205becx2b0xe4ebedd15d">fimul word [ecx+0xe4ebedd1]</a></li>
+			<li><a href="#fimul20dword205bedi2becx2a25d">fimul dword [edi+ecx*2]</a></li>
+			<li><a href="#fincstp">fincstp</a></li>
+			<li><a href="#fist20word205becx2bebx2a40x2a5d">fist word [ecx+ebx*4-0x2a]</a></li>
+			<li><a href="#fist20dword205bebx2b0x6ce26fab5d">fist dword [ebx+0x6ce26fab]</a></li>
+			<li><a href="#fistp20word205besi2becx2a80x505d">fistp word [esi+ecx*8-0x50]</a></li>
+			<li><a href="#fistp20dword205becx2b0x205d">fistp dword [ecx+0x20]</a></li>
+			<li><a href="#fistp20qword205bedi5d">fistp qword [edi]</a></li>
+			<li><a href="#fisttp20qword205becx2b0x71f65b4c5d">fisttp qword [ecx+0x71f65b4c]</a></li>
+			<li><a href="#fisttp20word205bebp2b0xd4e846eb5d">fisttp word [ebp+0xd4e846eb]</a></li>
+			<li><a href="#fisttp20dword205bedx0x1d5d">fisttp dword [edx-0x1d]</a></li>
+			<li><a href="#fisub20word205bedi5d">fisub word [edi]</a></li>
+			<li><a href="#fisub20dword205beax5d">fisub dword [eax]</a></li>
+			<li><a href="#fisubr20word205becx5d">fisubr word [ecx]</a></li>
+			<li><a href="#fisubr20dword205b0xee402b3d5d">fisubr dword [0xee402b3d]</a></li>
+			<li><a href="#fld20dword205bebx5d">fld dword [ebx]</a></li>
+			<li><a href="#fld20qword205becx5d">fld qword [ecx]</a></li>
+			<li><a href="#fld20tword205beax2b0xb97b64ee5d">fld tword [eax+0xb97b64ee]</a></li>
+			<li><a href="#fld20st2">fld st2</a></li>
+			<li><a href="#fld1">fld1</a></li>
+			<li><a href="#fldcw205bebx5d">fldcw [ebx]</a></li>
+			<li><a href="#fldenv205besp2beax2a45d">fldenv [esp+eax*4]</a></li>
+			<li><a href="#fldl2e">fldl2e</a></li>
+			<li><a href="#fldl2t">fldl2t</a></li>
+			<li><a href="#fldlg2">fldlg2</a></li>
+			<li><a href="#fldln2">fldln2</a></li>
+			<li><a href="#fldpi">fldpi</a></li>
+			<li><a href="#fldz">fldz</a></li>
+			<li><a href="#fmul20dword205b0xf38028c35d">fmul dword [0xf38028c3]</a></li>
+			<li><a href="#fmul20qword205bedx5d">fmul qword [edx]</a></li>
+			<li><a href="#fmul20st3">fmul st3</a></li>
+			<li><a href="#fmul20to20st0">fmul to st0</a></li>
+			<li><a href="#fmulp20st3">fmulp st3</a></li>
+			<li><a href="#fninit">fninit</a></li>
+			<li><a href="#fnop">fnop</a></li>
+			<li><a href="#fpatan">fpatan</a></li>
+			<li><a href="#fprem">fprem</a></li>
+			<li><a href="#fprem1">fprem1</a></li>
+			<li><a href="#fptan">fptan</a></li>
+			<li><a href="#frndint">frndint</a></li>
+			<li><a href="#frstor205beax5d">frstor [eax]</a></li>
+			<li><a href="#fnsave205bedi5d">fnsave [edi]</a></li>
+			<li><a href="#fscale">fscale</a></li>
+			<li><a href="#fsin">fsin</a></li>
+			<li><a href="#fsincos">fsincos</a></li>
+			<li><a href="#fsqrt">fsqrt</a></li>
+			<li><a href="#fst20dword205beax2besi2b0xf3ace6675d">fst dword [eax+esi+0xf3ace667]</a></li>
+			<li><a href="#fst20qword205becx2b0xc70c9fbb5d">fst qword [ecx+0xc70c9fbb]</a></li>
+			<li><a href="#fst20st2">fst st2</a></li>
+			<li><a href="#fnstcw205bedi0x285d">fnstcw [edi-0x28]</a></li>
+			<li><a href="#fnstenv205beax2b0x2f5d">fnstenv [eax+0x2f]</a></li>
+			<li><a href="#fstp20dword205bedx2b0x87d5d8705d">fstp dword [edx+0x87d5d870]</a></li>
+			<li><a href="#fstp20qword205bedx0x385d">fstp qword [edx-0x38]</a></li>
+			<li><a href="#fstp20tword205bedi0x35d">fstp tword [edi-0x3]</a></li>
+			<li><a href="#fstp20st7">fstp st7</a></li>
+			<li><a href="#fnstsw20ax">fnstsw ax</a></li>
+			<li><a href="#fnstsw205besp0x5b5d">fnstsw [esp-0x5b]</a></li>
+			<li><a href="#fsub20dword205bedi2b0x8f7923f45d">fsub dword [edi+0x8f7923f4]</a></li>
+			<li><a href="#fsub20qword205beax5d">fsub qword [eax]</a></li>
+			<li><a href="#fsub20st7">fsub st7</a></li>
+			<li><a href="#fsubr20to20st0">fsubr to st0</a></li>
+			<li><a href="#fsubp20st0">fsubp st0</a></li>
+			<li><a href="#fsubr20dword205besi0x305d">fsubr dword [esi-0x30]</a></li>
+			<li><a href="#fsubr20qword205becx5d">fsubr qword [ecx]</a></li>
+			<li><a href="#fsubr20st3">fsubr st3</a></li>
+			<li><a href="#fsub20to20st0">fsub to st0</a></li>
+			<li><a href="#fsubrp20st5">fsubrp st5</a></li>
+			<li><a href="#ftst">ftst</a></li>
+			<li><a href="#fucom20st5">fucom st5</a></li>
+			<li><a href="#fucomp20st6">fucomp st6</a></li>
+			<li><a href="#fucompp">fucompp</a></li>
+			<li><a href="#fucomi20st1">fucomi st1</a></li>
+			<li><a href="#fucomip20st0">fucomip st0</a></li>
+			<li><a href="#fxam">fxam</a></li>
+			<li><a href="#fxch20st0">fxch st0</a></li>
+			<li><a href="#fxtract">fxtract</a></li>
+			<li><a href="#fyl2x">fyl2x</a></li>
+			<li><a href="#fyl2xp1">fyl2xp1</a></li>
+		</ul>
+
+	</ul>
+
+</ul>
+<!-- INDEX END -->
+
+<hr />
+<p>
+</p>
+<h1><a name="name">NAME</a></h1>
+<p>IDU Tester AST</p>
+<p>
+</p>
+<hr />
+<h1><a name="ast20structure">AST STRUCTURE</a></h1>
+<p>
+</p>
+<h3><a name="aaa">aaa</a></h3>
+<pre>
+    37</pre>
+<p>
+</p>
+<h3><a name="o1620aaa">o16 aaa</a></h3>
+<pre>
+    66 37</pre>
+<p>
+</p>
+<h3><a name="aad">aad</a></h3>
+<pre>
+    D5 0A</pre>
+<p>
+</p>
+<h3><a name="o1620aad">o16 aad</a></h3>
+<pre>
+    66 D5 0A</pre>
+<p>
+</p>
+<h3><a name="aad200x0">aad 0x0</a></h3>
+<pre>
+    D5 00</pre>
+<p>
+</p>
+<h3><a name="o1620aad200x0">o16 aad 0x0</a></h3>
+<pre>
+    66 D5 00</pre>
+<p>
+</p>
+<h3><a name="aam">aam</a></h3>
+<pre>
+    D4 0A</pre>
+<p>
+</p>
+<h3><a name="o1620aam">o16 aam</a></h3>
+<pre>
+    66 D4 0A</pre>
+<p>
+</p>
+<h3><a name="aam200x0">aam 0x0</a></h3>
+<pre>
+    D4 00</pre>
+<p>
+</p>
+<h3><a name="o1620aam200x0">o16 aam 0x0</a></h3>
+<pre>
+    66 D4 00</pre>
+<p>
+</p>
+<h3><a name="aas">aas</a></h3>
+<pre>
+    3F</pre>
+<p>
+</p>
+<h3><a name="o1620aas">o16 aas</a></h3>
+<pre>
+    66 3F</pre>
+<p>
+</p>
+<h3><a name="adc20bl2cah">adc bl,ah</a></h3>
+<pre>
+    10 E3</pre>
+<p>
+</p>
+<h3><a name="o1620adc20bh2cah">o16 adc bh,ah</a></h3>
+<pre>
+    66 10 E7</pre>
+<p>
+</p>
+<h3><a name="adc20dl2cdl">adc dl,dl</a></h3>
+<pre>
+    12 D2</pre>
+<p>
+</p>
+<h3><a name="adc20dx2ccx">adc dx,cx</a></h3>
+<pre>
+    66 13 D1</pre>
+<p>
+</p>
+<h3><a name="adc20ebp2c5bebp2b0x31fb51c5d">adc ebp,[ebp+0x31fb51c]</a></h3>
+<pre>
+    13 AD 1C B5 1F 03</pre>
+<p>
+</p>
+<h3><a name="o1620adc20al2c5besi5d">o16 adc al,[esi]</a></h3>
+<pre>
+    66 12 06</pre>
+<p>
+</p>
+<h3><a name="adc205bebx2beax2a22b0x2eea563b5d2cebx">adc [ebx+eax*2+0x2eea563b],ebx</a></h3>
+<pre>
+    11 9C 43 3B 56 EA 2E</pre>
+<p>
+</p>
+<h3><a name="adc205becx2besi2a80x565d2cbx">adc [ecx+esi*8-0x56],bx</a></h3>
+<pre>
+    66 11 5C F1 AA</pre>
+<p>
+</p>
+<h3><a name="adc20dh2c0x4c">adc dh,0x4c</a></h3>
+<pre>
+    80 D6 4C</pre>
+<p>
+</p>
+<h3><a name="o1620adc20dl2c0xe0">o16 adc dl,0xe0</a></h3>
+<pre>
+    66 80 D2 E0</pre>
+<p>
+</p>
+<h3><a name="adc20al2c0x37">adc al,0x37</a></h3>
+<pre>
+    14 37</pre>
+<p>
+</p>
+<h3><a name="adc20ax2c0x5d2c">adc ax,0x5d2c</a></h3>
+<pre>
+    66 15 2C 5D</pre>
+<p>
+</p>
+<h3><a name="adc20byte205beax5d2c0xd6">adc byte [eax],0xd6</a></h3>
+<pre>
+    80 10 D6</pre>
+<p>
+</p>
+<h3><a name="o1620adc20byte205besi2b0x225d2c0xb2">o16 adc byte [esi+0x22],0xb2</a></h3>
+<pre>
+    66 80 56 22 B2</pre>
+<p>
+</p>
+<h3><a name="add20esi2cedi">add esi,edi</a></h3>
+<pre>
+    01 FE</pre>
+<p>
+</p>
+<h3><a name="o1620add20cl2cah">o16 add cl,ah</a></h3>
+<pre>
+    66 00 E1</pre>
+<p>
+</p>
+<h3><a name="add20esp2cesi">add esp,esi</a></h3>
+<pre>
+    03 E6</pre>
+<p>
+</p>
+<h3><a name="o1620add20bh2cah">o16 add bh,ah</a></h3>
+<pre>
+    66 02 FC</pre>
+<p>
+</p>
+<h3><a name="add20ebp2c5becx2b0x7e5d">add ebp,[ecx+0x7e]</a></h3>
+<pre>
+    03 69 7E</pre>
+<p>
+</p>
+<h3><a name="add20di2c5bebx0x275d">add di,[ebx-0x27]</a></h3>
+<pre>
+    66 03 7B D9</pre>
+<p>
+</p>
+<h3><a name="add205becx2b0x1fc6a225d2cdl">add [ecx+0x1fc6a22],dl</a></h3>
+<pre>
+    00 91 22 6A FC 01</pre>
+<p>
+</p>
+<h3><a name="o1620add205bebp2beax2a82b0x1f0be02b5d2cal">o16 add [ebp+eax*8+0x1f0be02b],al</a></h3>
+<pre>
+    66 00 84 C5 2B E0 0B 1F</pre>
+<p>
+</p>
+<h3><a name="add20bl2c0x0">add bl,0x0</a></h3>
+<pre>
+    80 C3 00</pre>
+<p>
+</p>
+<h3><a name="o1620add20cl2c0x54">o16 add cl,0x54</a></h3>
+<pre>
+    66 80 C1 54</pre>
+<p>
+</p>
+<h3><a name="add20al2c0x65">add al,0x65</a></h3>
+<pre>
+    04 65</pre>
+<p>
+</p>
+<h3><a name="add20ax2c0x4e66">add ax,0x4e66</a></h3>
+<pre>
+    66 05 66 4E</pre>
+<p>
+</p>
+<h3><a name="add20byte205besi5d2c0x1e">add byte [esi],0x1e</a></h3>
+<pre>
+    80 06 1E</pre>
+<p>
+</p>
+<h3><a name="o1620add20byte205besi2b0x9e28dab15d2c0x79">o16 add byte [esi+0x9e28dab1],0x79</a></h3>
+<pre>
+    66 80 86 B1 DA 28 9E 79</pre>
+<p>
+</p>
+<h3><a name="and20eax2cebp">and eax,ebp</a></h3>
+<pre>
+    21 E8</pre>
+<p>
+</p>
+<h3><a name="and20di2cbx">and di,bx</a></h3>
+<pre>
+    66 21 DF</pre>
+<p>
+</p>
+<h3><a name="and20esp2cebp">and esp,ebp</a></h3>
+<pre>
+    23 E5</pre>
+<p>
+</p>
+<h3><a name="and20di2cax">and di,ax</a></h3>
+<pre>
+    66 23 F8</pre>
+<p>
+</p>
+<h3><a name="and20bl2c5becx5d">and bl,[ecx]</a></h3>
+<pre>
+    22 19</pre>
+<p>
+</p>
+<h3><a name="and20cx2c5besi2b0xe7ee47d55d">and cx,[esi+0xe7ee47d5]</a></h3>
+<pre>
+    66 23 8E D5 47 EE E7</pre>
+<p>
+</p>
+<h3><a name="and205besi2beax2a45d2cebp">and [esi+eax*4],ebp</a></h3>
+<pre>
+    21 2C 86</pre>
+<p>
+</p>
+<h3><a name="and205becx5d2cbp">and [ecx],bp</a></h3>
+<pre>
+    66 21 29</pre>
+<p>
+</p>
+<h3><a name="and20ecx2cbyte200x16">and ecx,byte -0x16</a></h3>
+<pre>
+    83 E1 EA</pre>
+<p>
+</p>
+<h3><a name="o1620and20ch2c0xbb">o16 and ch,0xbb</a></h3>
+<pre>
+    66 80 E5 BB</pre>
+<p>
+</p>
+<h3><a name="and20eax2c0x3d484c17">and eax,0x3d484c17</a></h3>
+<pre>
+    25 17 4C 48 3D</pre>
+<p>
+</p>
+<h3><a name="and20ax2c0xd2d3">and ax,0xd2d3</a></h3>
+<pre>
+    66 25 D3 D2</pre>
+<p>
+</p>
+<h3><a name="and20dword205besi5d2cbyte200x5c">and dword [esi],byte -0x5c</a></h3>
+<pre>
+    83 26 A4</pre>
+<p>
+</p>
+<h3><a name="o1620and20byte205besi0x4e5d2c0xf1">o16 and byte [esi-0x4e],0xf1</a></h3>
+<pre>
+    66 80 66 B2 F1</pre>
+<p>
+</p>
+<h3><a name="arpl20bx2cdi">arpl bx,di</a></h3>
+<pre>
+    63 FB</pre>
+<p>
+</p>
+<h3><a name="o1620arpl20dx2cbx">o16 arpl dx,bx</a></h3>
+<pre>
+    66 63 DA</pre>
+<p>
+</p>
+<h3><a name="arpl205bedx2b0xae3d5dfc5d2cbx">arpl [edx+0xae3d5dfc],bx</a></h3>
+<pre>
+    63 9A FC 5D 3D AE</pre>
+<p>
+</p>
+<h3><a name="o1620arpl205bebp0x7f5d2cax">o16 arpl [ebp-0x7f],ax</a></h3>
+<pre>
+    66 63 45 81</pre>
+<p>
+</p>
+<h3><a name="bound20ebx2c5b0x85b78e2d5d">bound ebx,[0x85b78e2d]</a></h3>
+<pre>
+    62 1D 2D 8E B7 85</pre>
+<p>
+</p>
+<h3><a name="bound20bp2c5besi2bebp5d">bound bp,[esi+ebp]</a></h3>
+<pre>
+    66 62 2C 2E</pre>
+<p>
+</p>
+<h3><a name="bsf20edx2cesp">bsf edx,esp</a></h3>
+<pre>
+    0F BC D4</pre>
+<p>
+</p>
+<h3><a name="bsf20ax2csi">bsf ax,si</a></h3>
+<pre>
+    66 0F BC C6</pre>
+<p>
+</p>
+<h3><a name="bsf20eax2c5bedi5d">bsf eax,[edi]</a></h3>
+<pre>
+    0F BC 07</pre>
+<p>
+</p>
+<h3><a name="bsf20cx2c5becx2b0x993db6615d">bsf cx,[ecx+0x993db661]</a></h3>
+<pre>
+    66 0F BC 89 61 B6 3D 99</pre>
+<p>
+</p>
+<h3><a name="bsr20esp2ceax">bsr esp,eax</a></h3>
+<pre>
+    0F BD E0</pre>
+<p>
+</p>
+<h3><a name="bsr20bx2cax">bsr bx,ax</a></h3>
+<pre>
+    66 0F BD D8</pre>
+<p>
+</p>
+<h3><a name="bsr20ebp2c5bedi2b0xcf5298c25d">bsr ebp,[edi+0xcf5298c2]</a></h3>
+<pre>
+    0F BD AF C2 98 52 CF</pre>
+<p>
+</p>
+<h3><a name="bsr20bp2c5bedi2bedx2a42b0x2b86396f5d">bsr bp,[edi+edx*4+0x2b86396f]</a></h3>
+<pre>
+    66 0F BD AC 97 6F 39 86 2B</pre>
+<p>
+</p>
+<h3><a name="bswap20eax">bswap eax</a></h3>
+<pre>
+    0F C8</pre>
+<p>
+</p>
+<h3><a name="db200x66">db 0x66</a></h3>
+<pre>
+    66</pre>
+<p>
+</p>
+<h3><a name="bswap20ebp">bswap ebp</a></h3>
+<pre>
+    0F CD</pre>
+<p>
+</p>
+<h3><a name="bt20edi2c0x6">bt edi,0x6</a></h3>
+<pre>
+    0F BA E7 06</pre>
+<p>
+</p>
+<h3><a name="bt20dx2c0xbc">bt dx,0xbc</a></h3>
+<pre>
+    66 0F BA E2 BC</pre>
+<p>
+</p>
+<h3><a name="bt20dword205beax2b0x115d2c0xcc">bt dword [eax+0x11],0xcc</a></h3>
+<pre>
+    0F BA 60 11 CC</pre>
+<p>
+</p>
+<h3><a name="bt20word205beax0x285d2c0x11">bt word [eax-0x28],0x11</a></h3>
+<pre>
+    66 0F BA 60 D8 11</pre>
+<p>
+</p>
+<h3><a name="bt20esi2cebx">bt esi,ebx</a></h3>
+<pre>
+    0F A3 DE</pre>
+<p>
+</p>
+<h3><a name="bt20si2cbx">bt si,bx</a></h3>
+<pre>
+    66 0F A3 DE</pre>
+<p>
+</p>
+<h3><a name="bt205b0x1dab9bc95d2cesi">bt [0x1dab9bc9],esi</a></h3>
+<pre>
+    0F A3 35 C9 9B AB 1D</pre>
+<p>
+</p>
+<h3><a name="bt205beax5d2cdx">bt [eax],dx</a></h3>
+<pre>
+    66 0F A3 10</pre>
+<p>
+</p>
+<h3><a name="btc20edi2c0x7b">btc edi,0x7b</a></h3>
+<pre>
+    0F BA FF 7B</pre>
+<p>
+</p>
+<h3><a name="btc20ax2c0xf">btc ax,0xf</a></h3>
+<pre>
+    66 0F BA F8 0F</pre>
+<p>
+</p>
+<h3><a name="btc20dword205becx2b0xba3cc6c25d2c0xee">btc dword [ecx+0xba3cc6c2],0xee</a></h3>
+<pre>
+    0F BA B9 C2 C6 3C BA EE</pre>
+<p>
+</p>
+<h3><a name="btc20word205bebx5d2c0x1a">btc word [ebx],0x1a</a></h3>
+<pre>
+    66 0F BA 3B 1A</pre>
+<p>
+</p>
+<h3><a name="btc20ebp2cesi">btc ebp,esi</a></h3>
+<pre>
+    0F BB F5</pre>
+<p>
+</p>
+<h3><a name="btc20di2csp">btc di,sp</a></h3>
+<pre>
+    66 0F BB E7</pre>
+<p>
+</p>
+<h3><a name="btc205bebx2b0x7a5d2cesi">btc [ebx+0x7a],esi</a></h3>
+<pre>
+    0F BB 73 7A</pre>
+<p>
+</p>
+<h3><a name="btc205bebp2b0x275d2cbp">btc [ebp+0x27],bp</a></h3>
+<pre>
+    66 0F BB 6D 27</pre>
+<p>
+</p>
+<h3><a name="btr20esp2c0xde">btr esp,0xde</a></h3>
+<pre>
+    0F BA F4 DE</pre>
+<p>
+</p>
+<h3><a name="btr20bx2c0x88">btr bx,0x88</a></h3>
+<pre>
+    66 0F BA F3 88</pre>
+<p>
+</p>
+<h3><a name="btr20dword205bedi2bedi2a25d2c0xbd">btr dword [edi+edi*2],0xbd</a></h3>
+<pre>
+    0F BA 34 7F BD</pre>
+<p>
+</p>
+<h3><a name="btr20word205bedx2b0x4e5d2c0xcd">btr word [edx+0x4e],0xcd</a></h3>
+<pre>
+    66 0F BA 72 4E CD</pre>
+<p>
+</p>
+<h3><a name="btr20ebx2cesp">btr ebx,esp</a></h3>
+<pre>
+    0F B3 E3</pre>
+<p>
+</p>
+<h3><a name="btr20ax2cdi">btr ax,di</a></h3>
+<pre>
+    66 0F B3 F8</pre>
+<p>
+</p>
+<h3><a name="btr205besi2b0x1170fa295d2cesp">btr [esi+0x1170fa29],esp</a></h3>
+<pre>
+    0F B3 A6 29 FA 70 11</pre>
+<p>
+</p>
+<h3><a name="btr205besi5d2cdi">btr [esi],di</a></h3>
+<pre>
+    66 0F B3 3E</pre>
+<p>
+</p>
+<h3><a name="bts20eax2c0xe6">bts eax,0xe6</a></h3>
+<pre>
+    0F BA E8 E6</pre>
+<p>
+</p>
+<h3><a name="bts20cx2c0x6d">bts cx,0x6d</a></h3>
+<pre>
+    66 0F BA E9 6D</pre>
+<p>
+</p>
+<h3><a name="bts20dword205besi5d2c0x96">bts dword [esi],0x96</a></h3>
+<pre>
+    0F BA 2E 96</pre>
+<p>
+</p>
+<h3><a name="bts20word205bebp0x25d2c0x51">bts word [ebp-0x2],0x51</a></h3>
+<pre>
+    66 0F BA 6D FE 51</pre>
+<p>
+</p>
+<h3><a name="bts20edx2cesp">bts edx,esp</a></h3>
+<pre>
+    0F AB E2</pre>
+<p>
+</p>
+<h3><a name="bts20dx2cdi">bts dx,di</a></h3>
+<pre>
+    66 0F AB FA</pre>
+<p>
+</p>
+<h3><a name="bts205bebp2b0x99cf8a1a5d2cecx">bts [ebp+0x99cf8a1a],ecx</a></h3>
+<pre>
+    0F AB 8D 1A 8A CF 99</pre>
+<p>
+</p>
+<h3><a name="bts205becx5d2cdx">bts [ecx],dx</a></h3>
+<pre>
+    66 0F AB 11</pre>
+<p>
+</p>
+<h3><a name="call200xe2568d8c">call 0xe2568d8c</a></h3>
+<pre>
+    E8 F3 8B 56 E2</pre>
+<p>
+</p>
+<h3><a name="call20word200x3a5">call word 0x3a5</a></h3>
+<pre>
+    66 E8 08 02</pre>
+<p>
+</p>
+<h3><a name="call20esi">call esi</a></h3>
+<pre>
+    FF D6</pre>
+<p>
+</p>
+<h3><a name="call20bx">call bx</a></h3>
+<pre>
+    66 FF D3</pre>
+<p>
+</p>
+<h3><a name="call20near205beax2becx2a85d">call near [eax+ecx*8]</a></h3>
+<pre>
+    FF 14 C8</pre>
+<p>
+</p>
+<h3><a name="call20word20near205bebp2b0x45d">call word near [ebp+0x4]</a></h3>
+<pre>
+    66 FF 55 04</pre>
+<p>
+</p>
+<h3><a name="call200x14d43a0x2fd7b9a1">call 0x14d4:0x2fd7b9a1</a></h3>
+<pre>
+    9A A1 B9 D7 2F D4 14</pre>
+<p>
+</p>
+<h3><a name="call20word200x6a733a0x4fb7">call word 0x6a73:0x4fb7</a></h3>
+<pre>
+    66 9A B7 4F 73 6A</pre>
+<p>
+</p>
+<h3><a name="call20far205bebx5d">call far [ebx]</a></h3>
+<pre>
+    FF 1C A3</pre>
+<p>
+</p>
+<h3><a name="call20word20far205besi5d">call word far [esi]</a></h3>
+<pre>
+    66 FF 1E</pre>
+<p>
+</p>
+<h3><a name="cdq">cdq</a></h3>
+<pre>
+    99</pre>
+<p>
+</p>
+<h3><a name="cwd">cwd</a></h3>
+<pre>
+    66 99</pre>
+<p>
+</p>
+<h3><a name="clc">clc</a></h3>
+<pre>
+    F8</pre>
+<p>
+</p>
+<h3><a name="o1620clc">o16 clc</a></h3>
+<pre>
+    66 F8</pre>
+<p>
+</p>
+<h3><a name="cld">cld</a></h3>
+<pre>
+    FC</pre>
+<p>
+</p>
+<h3><a name="o1620cld">o16 cld</a></h3>
+<pre>
+    66 FC</pre>
+<p>
+</p>
+<h3><a name="cli">cli</a></h3>
+<pre>
+    FA</pre>
+<p>
+</p>
+<h3><a name="o1620cli">o16 cli</a></h3>
+<pre>
+    66 FA</pre>
+<p>
+</p>
+<h3><a name="clts">clts</a></h3>
+<pre>
+    0F 06</pre>
+<p>
+</p>
+<h3><a name="o1620clts">o16 clts</a></h3>
+<pre>
+    66 0F 06</pre>
+<p>
+</p>
+<h3><a name="cmc">cmc</a></h3>
+<pre>
+    F5</pre>
+<p>
+</p>
+<h3><a name="o1620cmc">o16 cmc</a></h3>
+<pre>
+    66 F5</pre>
+<p>
+</p>
+<h3><a name="cmp20al2cal">cmp al,al</a></h3>
+<pre>
+    38 C0</pre>
+<p>
+</p>
+<h3><a name="o1620cmp20al2cal">o16 cmp al,al</a></h3>
+<pre>
+    66 38 C0</pre>
+<p>
+</p>
+<h3><a name="cmp20esp2cesi">cmp esp,esi</a></h3>
+<pre>
+    3B E6</pre>
+<p>
+</p>
+<h3><a name="o1620cmp20dh2cal">o16 cmp dh,al</a></h3>
+<pre>
+    66 3A F0</pre>
+<p>
+</p>
+<h3><a name="cmp205bebx5d2cdh">cmp [ebx],dh</a></h3>
+<pre>
+    38 33</pre>
+<p>
+</p>
+<h3><a name="cmp205bedx2b0x225d2cdx">cmp [edx+0x22],dx</a></h3>
+<pre>
+    66 39 52 22</pre>
+<p>
+</p>
+<h3><a name="cmp20ebx2c5becx5d">cmp ebx,[ecx]</a></h3>
+<pre>
+    3B 19</pre>
+<p>
+</p>
+<h3><a name="o1620cmp20bh2c5bebp2b0xd0d59cd95d">o16 cmp bh,[ebp+0xd0d59cd9]</a></h3>
+<pre>
+    66 3A BC 25 D9 9C D5 D0</pre>
+<p>
+</p>
+<h3><a name="cmp20ebx2cbyte202b0x41">cmp ebx,byte +0x41</a></h3>
+<pre>
+    83 FB 41</pre>
+<p>
+</p>
+<h3><a name="o1620cmp20ah2c0x73">o16 cmp ah,0x73</a></h3>
+<pre>
+    66 80 FC 73</pre>
+<p>
+</p>
+<h3><a name="cmp20al2c0xd9">cmp al,0xd9</a></h3>
+<pre>
+    3C D9</pre>
+<p>
+</p>
+<h3><a name="cmp20ax2c0x7109">cmp ax,0x7109</a></h3>
+<pre>
+    66 3D 09 71</pre>
+<p>
+</p>
+<h3><a name="cmp20byte205beax2b0x446fabf15d2c0xfd">cmp byte [eax+0x446fabf1],0xfd</a></h3>
+<pre>
+    80 B8 F1 AB 6F 44 FD</pre>
+<p>
+</p>
+<h3><a name="o1620cmp20byte205besi2b0x9e7d66975d2c0xb1">o16 cmp byte [esi+0x9e7d6697],0xb1</a></h3>
+<pre>
+    66 80 BE 97 66 7D 9E B1</pre>
+<p>
+</p>
+<h3><a name="cmpsd">cmpsd</a></h3>
+<pre>
+    A7</pre>
+<p>
+</p>
+<h3><a name="o1620cmpsb">o16 cmpsb</a></h3>
+<pre>
+    66 A6</pre>
+<p>
+</p>
+<h3><a name="cmpxchg20edi2ceax">cmpxchg edi,eax</a></h3>
+<pre>
+    0F B1 C7</pre>
+<p>
+</p>
+<h3><a name="o1620cmpxchg20ch2ccl">o16 cmpxchg ch,cl</a></h3>
+<pre>
+    66 0F B0 CD</pre>
+<p>
+</p>
+<h3><a name="cmpxchg205becx5d2cal">cmpxchg [ecx],al</a></h3>
+<pre>
+    0F B0 01</pre>
+<p>
+</p>
+<h3><a name="o1620cmpxchg205bebx5d2cdl">o16 cmpxchg [ebx],dl</a></h3>
+<pre>
+    66 0F B0 13</pre>
+<p>
+</p>
+<h3><a name="cpuid">cpuid</a></h3>
+<pre>
+    0F A2</pre>
+<p>
+</p>
+<h3><a name="o1620cpuid">o16 cpuid</a></h3>
+<pre>
+    66 0F A2</pre>
+<p>
+</p>
+<h3><a name="cwde">cwde</a></h3>
+<pre>
+    98</pre>
+<p>
+</p>
+<h3><a name="cbw">cbw</a></h3>
+<pre>
+    66 98</pre>
+<p>
+</p>
+<h3><a name="daa">daa</a></h3>
+<pre>
+    27</pre>
+<p>
+</p>
+<h3><a name="o1620daa">o16 daa</a></h3>
+<pre>
+    66 27</pre>
+<p>
+</p>
+<h3><a name="das">das</a></h3>
+<pre>
+    2F</pre>
+<p>
+</p>
+<h3><a name="o1620das">o16 das</a></h3>
+<pre>
+    66 2F</pre>
+<p>
+</p>
+<h3><a name="dec20ch">dec ch</a></h3>
+<pre>
+    FE CD</pre>
+<p>
+</p>
+<h3><a name="o1620dec20ch">o16 dec ch</a></h3>
+<pre>
+    66 FE CD</pre>
+<p>
+</p>
+<h3><a name="dec20ebp">dec ebp</a></h3>
+<pre>
+    FF CD</pre>
+<p>
+</p>
+<h3><a name="dec20ax">dec ax</a></h3>
+<pre>
+    66 FF C8</pre>
+<p>
+</p>
+<h3><a name="dec20ebp">dec ebp</a></h3>
+<pre>
+    4D</pre>
+<p>
+</p>
+<h3><a name="dec20bx">dec bx</a></h3>
+<pre>
+    66 4B</pre>
+<p>
+</p>
+<h3><a name="dec20byte205b0x3efe81f55d">dec byte [0x3efe81f5]</a></h3>
+<pre>
+    FE 0D F5 81 FE 3E</pre>
+<p>
+</p>
+<h3><a name="o1620dec20byte205bebp2b0x58d5a83e5d">o16 dec byte [ebp+0x58d5a83e]</a></h3>
+<pre>
+    66 FE 8D 3E A8 D5 58</pre>
+<p>
+</p>
+<h3><a name="dec20dword205bebx0x1b5d">dec dword [ebx-0x1b]</a></h3>
+<pre>
+    FF 4B E5</pre>
+<p>
+</p>
+<h3><a name="dec20word205bedx5d">dec word [edx]</a></h3>
+<pre>
+    66 FF 0C 22</pre>
+<p>
+</p>
+<h3><a name="div20ebx">div ebx</a></h3>
+<pre>
+    F7 F3</pre>
+<p>
+</p>
+<h3><a name="div20sp">div sp</a></h3>
+<pre>
+    66 F7 F4</pre>
+<p>
+</p>
+<h3><a name="div20dword205bedx2bebp2a42b0xa353d8a45d">div dword [edx+ebp*4+0xa353d8a4]</a></h3>
+<pre>
+    F7 B4 AA A4 D8 53 A3</pre>
+<p>
+</p>
+<h3><a name="div20word205bedx2b0x4f8d53655d">div word [edx+0x4f8d5365]</a></h3>
+<pre>
+    66 F7 B2 65 53 8D 4F</pre>
+<p>
+</p>
+<h3><a name="enter200x6cc82c0xf0">enter 0x6cc8,0xf0</a></h3>
+<pre>
+    C8 C8 6C F0</pre>
+<p>
+</p>
+<h3><a name="o1620enter200x4bce2c0x7">o16 enter 0x4bce,0x7</a></h3>
+<pre>
+    66 C8 CE 4B 07</pre>
+<p>
+</p>
+<h3><a name="hlt">hlt</a></h3>
+<pre>
+    F4</pre>
+<p>
+</p>
+<h3><a name="o1620hlt">o16 hlt</a></h3>
+<pre>
+    66 F4</pre>
+<p>
+</p>
+<h3><a name="idiv20ah">idiv ah</a></h3>
+<pre>
+    F6 FC</pre>
+<p>
+</p>
+<h3><a name="idiv20bx">idiv bx</a></h3>
+<pre>
+    66 F7 FB</pre>
+<p>
+</p>
+<h3><a name="idiv20byte205besi5d">idiv byte [esi]</a></h3>
+<pre>
+    F6 3E</pre>
+<p>
+</p>
+<h3><a name="idiv20word205bedx5d">idiv word [edx]</a></h3>
+<pre>
+    66 F7 3A</pre>
+<p>
+</p>
+<h3><a name="imul20dh">imul dh</a></h3>
+<pre>
+    F6 EE</pre>
+<p>
+</p>
+<h3><a name="imul20ax">imul ax</a></h3>
+<pre>
+    66 F7 E8</pre>
+<p>
+</p>
+<h3><a name="imul20dword205bedx5d">imul dword [edx]</a></h3>
+<pre>
+    F7 2A</pre>
+<p>
+</p>
+<h3><a name="imul20word205bebx0x3d5d">imul word [ebx-0x3d]</a></h3>
+<pre>
+    66 F7 6B C3</pre>
+<p>
+</p>
+<h3><a name="imul20esi2cecx">imul esi,ecx</a></h3>
+<pre>
+    0F AF F1</pre>
+<p>
+</p>
+<h3><a name="imul20sp2csp">imul sp,sp</a></h3>
+<pre>
+    66 0F AF E4</pre>
+<p>
+</p>
+<h3><a name="imul20esi2c5bebp0x7d5d">imul esi,[ebp-0x7d]</a></h3>
+<pre>
+    0F AF 75 83</pre>
+<p>
+</p>
+<h3><a name="imul20si2c5beax5d">imul si,[eax]</a></h3>
+<pre>
+    66 0F AF 30</pre>
+<p>
+</p>
+<h3><a name="imul20ebp2cedi2cdword200x950b3862">imul ebp,edi,dword 0x950b3862</a></h3>
+<pre>
+    69 EF 62 38 0B 95</pre>
+<p>
+</p>
+<h3><a name="imul20bx2cdi2cword200xde98">imul bx,di,word 0xde98</a></h3>
+<pre>
+    66 69 DF 98 DE</pre>
+<p>
+</p>
+<h3><a name="imul20ecx2c5besi2bedi2b0x355d2cdword200x6115d676">imul ecx,[esi+edi+0x35],dword 0x6115d676</a></h3>
+<pre>
+    69 4C 3E 35 76 D6 15 61</pre>
+<p>
+</p>
+<h3><a name="imul20di2c5bebx2b0x655d2cword200x2705">imul di,[ebx+0x65],word 0x2705</a></h3>
+<pre>
+    66 69 7B 65 05 27</pre>
+<p>
+</p>
+<h3><a name="in20al2c0x89">in al,0x89</a></h3>
+<pre>
+    E4 89</pre>
+<p>
+</p>
+<h3><a name="in20ax2c0x69">in ax,0x69</a></h3>
+<pre>
+    66 E5 69</pre>
+<p>
+</p>
+<h3><a name="in20al2cdx">in al,dx</a></h3>
+<pre>
+    EC</pre>
+<p>
+</p>
+<h3><a name="o1620in20al2cdx">o16 in al,dx</a></h3>
+<pre>
+    66 EC</pre>
+<p>
+</p>
+<h3><a name="inc20ch">inc ch</a></h3>
+<pre>
+    FE C5</pre>
+<p>
+</p>
+<h3><a name="o1620inc20cl">o16 inc cl</a></h3>
+<pre>
+    66 FE C1</pre>
+<p>
+</p>
+<h3><a name="inc20edi">inc edi</a></h3>
+<pre>
+    FF C7</pre>
+<p>
+</p>
+<h3><a name="inc20bx">inc bx</a></h3>
+<pre>
+    66 FF C3</pre>
+<p>
+</p>
+<h3><a name="inc20esp">inc esp</a></h3>
+<pre>
+    44</pre>
+<p>
+</p>
+<h3><a name="inc20di">inc di</a></h3>
+<pre>
+    66 47</pre>
+<p>
+</p>
+<h3><a name="inc20byte205becx2b0x5c5d">inc byte [ecx+0x5c]</a></h3>
+<pre>
+    FE 41 5C</pre>
+<p>
+</p>
+<h3><a name="o1620inc20byte205bedi2becx2a25d">o16 inc byte [edi+ecx*2]</a></h3>
+<pre>
+    66 FE 04 4F</pre>
+<p>
+</p>
+<h3><a name="inc20dword205bebx5d">inc dword [ebx]</a></h3>
+<pre>
+    FF 03</pre>
+<p>
+</p>
+<h3><a name="inc20word205besi2b0x565d">inc word [esi+0x56]</a></h3>
+<pre>
+    66 FF 46 56</pre>
+<p>
+</p>
+<h3><a name="insb">insb</a></h3>
+<pre>
+    6C</pre>
+<p>
+</p>
+<h3><a name="o1620insb">o16 insb</a></h3>
+<pre>
+    66 6C</pre>
+<p>
+</p>
+<h3><a name="int200x76">int 0x76</a></h3>
+<pre>
+    CD 76</pre>
+<p>
+</p>
+<h3><a name="o1620int200xe7">o16 int 0xe7</a></h3>
+<pre>
+    66 CD E7</pre>
+<p>
+</p>
+<h3><a name="int3">int3</a></h3>
+<pre>
+    CC</pre>
+<p>
+</p>
+<h3><a name="o1620int3">o16 int3</a></h3>
+<pre>
+    66 CC</pre>
+<p>
+</p>
+<h3><a name="into">into</a></h3>
+<pre>
+    CE</pre>
+<p>
+</p>
+<h3><a name="o1620into">o16 into</a></h3>
+<pre>
+    66 CE</pre>
+<p>
+</p>
+<h3><a name="invd">invd</a></h3>
+<pre>
+    0F 08</pre>
+<p>
+</p>
+<h3><a name="o1620invd">o16 invd</a></h3>
+<pre>
+    66 0F 08</pre>
+<p>
+</p>
+<h3><a name="invlpg205bedx2b0xb58604c15d">invlpg [edx+0xb58604c1]</a></h3>
+<pre>
+    0F 01 BA C1 04 86 B5</pre>
+<p>
+</p>
+<h3><a name="o1620invlpg205bebx2b0x6553cbec5d">o16 invlpg [ebx+0x6553cbec]</a></h3>
+<pre>
+    66 0F 01 BB EC CB 53 65</pre>
+<p>
+</p>
+<h3><a name="iret">iret</a></h3>
+<pre>
+    CF</pre>
+<p>
+</p>
+<h3><a name="iretw">iretw</a></h3>
+<pre>
+    66 CF</pre>
+<p>
+</p>
+<h3><a name="jz200x2a9">jz 0x2a9</a></h3>
+<pre>
+    74 BE</pre>
+<p>
+</p>
+<h3><a name="o1620jo200x321">o16 jo 0x321</a></h3>
+<pre>
+    66 70 33</pre>
+<p>
+</p>
+<h3><a name="jnl20near200x1558de90">jnl near 0x1558de90</a></h3>
+<pre>
+    0F 8D 9C DB 58 15</pre>
+<p>
+</p>
+<h3><a name="ja20word200xf763">ja word 0xf763</a></h3>
+<pre>
+    66 0F 87 6A F4</pre>
+<p>
+</p>
+<h3><a name="jecxz200x30c">jecxz 0x30c</a></h3>
+<pre>
+    E3 11</pre>
+<p>
+</p>
+<h3><a name="o1620jecxz200x325">o16 jecxz 0x325</a></h3>
+<pre>
+    66 E3 27</pre>
+<p>
+</p>
+<h3><a name="jmp20short200x33a">jmp short 0x33a</a></h3>
+<pre>
+    EB 3A</pre>
+<p>
+</p>
+<h3><a name="o1620jmp20short200x2b4">o16 jmp short 0x2b4</a></h3>
+<pre>
+    66 EB B1</pre>
+<p>
+</p>
+<h3><a name="jmp200xcdaa93ba">jmp 0xcdaa93ba</a></h3>
+<pre>
+    E9 B2 90 AA CD</pre>
+<p>
+</p>
+<h3><a name="jmp20word200xc5fb">jmp word 0xc5fb</a></h3>
+<pre>
+    66 E9 EF C2</pre>
+<p>
+</p>
+<h3><a name="jmp20esp">jmp esp</a></h3>
+<pre>
+    FF E4</pre>
+<p>
+</p>
+<h3><a name="jmp20di">jmp di</a></h3>
+<pre>
+    66 FF E7</pre>
+<p>
+</p>
+<h3><a name="jmp20near205bedx5d">jmp near [edx]</a></h3>
+<pre>
+    FF 22</pre>
+<p>
+</p>
+<h3><a name="jmp20word20near205becx5d">jmp word near [ecx]</a></h3>
+<pre>
+    66 FF 21</pre>
+<p>
+</p>
+<h3><a name="jmp200x9f383a0xb7cece2f">jmp 0x9f38:0xb7cece2f</a></h3>
+<pre>
+    EA 2F CE CE B7 38 9F</pre>
+<p>
+</p>
+<h3><a name="jmp20word200x35213a0xf53">jmp word 0x3521:0xf53</a></h3>
+<pre>
+    66 EA 53 0F 21 35</pre>
+<p>
+</p>
+<h3><a name="jmp20far205bedi5d">jmp far [edi]</a></h3>
+<pre>
+    FF 2F</pre>
+<p>
+</p>
+<h3><a name="jmp20word20far205besi5d">jmp word far [esi]</a></h3>
+<pre>
+    66 FF 2E</pre>
+<p>
+</p>
+<h3><a name="lahf">lahf</a></h3>
+<pre>
+    9F</pre>
+<p>
+</p>
+<h3><a name="o1620lahf">o16 lahf</a></h3>
+<pre>
+    66 9F</pre>
+<p>
+</p>
+<h3><a name="lar20ebp2cebp">lar ebp,ebp</a></h3>
+<pre>
+    0F 02 ED</pre>
+<p>
+</p>
+<h3><a name="lar20sp2cax">lar sp,ax</a></h3>
+<pre>
+    66 0F 02 E0</pre>
+<p>
+</p>
+<h3><a name="lar20edx2c5besi2b0xdd8e19405d">lar edx,[esi+0xdd8e1940]</a></h3>
+<pre>
+    0F 02 14 35 40 19 8E DD</pre>
+<p>
+</p>
+<h3><a name="lar20si2c5bebx2bedx5d">lar si,[ebx+edx]</a></h3>
+<pre>
+    66 0F 02 34 13</pre>
+<p>
+</p>
+<h3><a name="lds20ecx2c5bedx2b0x4df7b5e05d">lds ecx,[edx+0x4df7b5e0]</a></h3>
+<pre>
+    C5 8A E0 B5 F7 4D</pre>
+<p>
+</p>
+<h3><a name="lds20si2c5bedi5d">lds si,[edi]</a></h3>
+<pre>
+    66 C5 37</pre>
+<p>
+</p>
+<h3><a name="lea20esp2c5beax5d">lea esp,[eax]</a></h3>
+<pre>
+    8D 20</pre>
+<p>
+</p>
+<h3><a name="lea20si2c5besi5d">lea si,[esi]</a></h3>
+<pre>
+    66 8D 36</pre>
+<p>
+</p>
+<h3><a name="leave">leave</a></h3>
+<pre>
+    C9</pre>
+<p>
+</p>
+<h3><a name="o1620leave">o16 leave</a></h3>
+<pre>
+    66 C9</pre>
+<p>
+</p>
+<h3><a name="les20esi2c5bedx2b0xbffb5c335d">les esi,[edx+0xbffb5c33]</a></h3>
+<pre>
+    C4 B2 33 5C FB BF</pre>
+<p>
+</p>
+<h3><a name="les20bx2c5besi2b0x4a5d">les bx,[esi+0x4a]</a></h3>
+<pre>
+    66 C4 5E 4A</pre>
+<p>
+</p>
+<h3><a name="lfs20ecx2c5becx0x675d">lfs ecx,[ecx-0x67]</a></h3>
+<pre>
+    0F B4 49 99</pre>
+<p>
+</p>
+<h3><a name="lfs20di2c5beax2b0x535d">lfs di,[eax+0x53]</a></h3>
+<pre>
+    66 0F B4 78 53</pre>
+<p>
+</p>
+<h3><a name="lgdt205besi5d">lgdt [esi]</a></h3>
+<pre>
+    0F 01 16</pre>
+<p>
+</p>
+<h3><a name="o1620lgdt205beax0x615d">o16 lgdt [eax-0x61]</a></h3>
+<pre>
+    66 0F 01 50 9F</pre>
+<p>
+</p>
+<h3><a name="lgs20esi2c5becx2b0xb7add80a5d">lgs esi,[ecx+0xb7add80a]</a></h3>
+<pre>
+    0F B5 B1 0A D8 AD B7</pre>
+<p>
+</p>
+<h3><a name="lgs20si2c5bebx2b0xf7ed5e635d">lgs si,[ebx+0xf7ed5e63]</a></h3>
+<pre>
+    66 0F B5 B3 63 5E ED F7</pre>
+<p>
+</p>
+<h3><a name="lidt205bebx2b0x20cf847a5d">lidt [ebx+0x20cf847a]</a></h3>
+<pre>
+    0F 01 9B 7A 84 CF 20</pre>
+<p>
+</p>
+<h3><a name="o1620lidt205besi2b0x8f28757a5d">o16 lidt [esi+0x8f28757a]</a></h3>
+<pre>
+    66 0F 01 9C A6 7A 75 28 8F</pre>
+<p>
+</p>
+<h3><a name="lldt20ax">lldt ax</a></h3>
+<pre>
+    0F 00 D0</pre>
+<p>
+</p>
+<h3><a name="o1620lldt20cx">o16 lldt cx</a></h3>
+<pre>
+    66 0F 00 D1</pre>
+<p>
+</p>
+<h3><a name="lldt205bedx2b0xa57aa6a35d">lldt [edx+0xa57aa6a3]</a></h3>
+<pre>
+    0F 00 92 A3 A6 7A A5</pre>
+<p>
+</p>
+<h3><a name="o1620lldt205becx5d">o16 lldt [ecx]</a></h3>
+<pre>
+    66 0F 00 11</pre>
+<p>
+</p>
+<h3><a name="lmsw20sp">lmsw sp</a></h3>
+<pre>
+    0F 01 F4</pre>
+<p>
+</p>
+<h3><a name="o1620lmsw20si">o16 lmsw si</a></h3>
+<pre>
+    66 0F 01 F6</pre>
+<p>
+</p>
+<h3><a name="lmsw205becx5d">lmsw [ecx]</a></h3>
+<pre>
+    0F 01 31</pre>
+<p>
+</p>
+<h3><a name="o1620lmsw205becx5d">o16 lmsw [ecx]</a></h3>
+<pre>
+    66 0F 01 31</pre>
+<p>
+</p>
+<h3><a name="lodsb">lodsb</a></h3>
+<pre>
+    AC</pre>
+<p>
+</p>
+<h3><a name="lodsw">lodsw</a></h3>
+<pre>
+    66 AD</pre>
+<p>
+</p>
+<h3><a name="loop200x3f2">loop 0x3f2</a></h3>
+<pre>
+    E2 43</pre>
+<p>
+</p>
+<h3><a name="o1620loop200x3bc">o16 loop 0x3bc</a></h3>
+<pre>
+    66 E2 0A</pre>
+<p>
+</p>
+<h3><a name="loope200x397">loope 0x397</a></h3>
+<pre>
+    E1 E3</pre>
+<p>
+</p>
+<h3><a name="o1620loope200x3d0">o16 loope 0x3d0</a></h3>
+<pre>
+    66 E1 19</pre>
+<p>
+</p>
+<h3><a name="loopne200x37f">loopne 0x37f</a></h3>
+<pre>
+    E0 C6</pre>
+<p>
+</p>
+<h3><a name="o1620loopne200x363">o16 loopne 0x363</a></h3>
+<pre>
+    66 E0 A7</pre>
+<p>
+</p>
+<h3><a name="lsl20eax2cesp">lsl eax,esp</a></h3>
+<pre>
+    0F 03 C4</pre>
+<p>
+</p>
+<h3><a name="lsl20sp2ccx">lsl sp,cx</a></h3>
+<pre>
+    66 0F 03 E1</pre>
+<p>
+</p>
+<h3><a name="lsl20ecx2c5bebx2beax2a25d">lsl ecx,[ebx+eax*2]</a></h3>
+<pre>
+    0F 03 0C 43</pre>
+<p>
+</p>
+<h3><a name="lsl20dx2c5bebp2b0xd028da3d5d">lsl dx,[ebp+0xd028da3d]</a></h3>
+<pre>
+    66 0F 03 95 3D DA 28 D0</pre>
+<p>
+</p>
+<h3><a name="lss20eax2c5bedx2b0x3d0ed8f85d">lss eax,[edx+0x3d0ed8f8]</a></h3>
+<pre>
+    0F B2 82 F8 D8 0E 3D</pre>
+<p>
+</p>
+<h3><a name="lss20di2c5besi2becx2a22b0x3c453d695d">lss di,[esi+ecx*2+0x3c453d69]</a></h3>
+<pre>
+    66 0F B2 BC 4E 69 3D 45 3C</pre>
+<p>
+</p>
+<h3><a name="ltr20di">ltr di</a></h3>
+<pre>
+    0F 00 DF</pre>
+<p>
+</p>
+<h3><a name="o1620ltr20si">o16 ltr si</a></h3>
+<pre>
+    66 0F 00 DE</pre>
+<p>
+</p>
+<h3><a name="ltr205beax2b0x75310b585d">ltr [eax+0x75310b58]</a></h3>
+<pre>
+    0F 00 98 58 0B 31 75</pre>
+<p>
+</p>
+<h3><a name="o1620ltr205besi5d">o16 ltr [esi]</a></h3>
+<pre>
+    66 0F 00 1E</pre>
+<p>
+</p>
+<h3><a name="mov20eax2cecx">mov eax,ecx</a></h3>
+<pre>
+    89 C8</pre>
+<p>
+</p>
+<h3><a name="mov20sp2csi">mov sp,si</a></h3>
+<pre>
+    66 89 F4</pre>
+<p>
+</p>
+<h3><a name="mov20ch2ccl">mov ch,cl</a></h3>
+<pre>
+    8A E9</pre>
+<p>
+</p>
+<h3><a name="mov20ax2csp">mov ax,sp</a></h3>
+<pre>
+    66 8B C4</pre>
+<p>
+</p>
+<h3><a name="mov20ebx2c5beax5d">mov ebx,[eax]</a></h3>
+<pre>
+    8B 18</pre>
+<p>
+</p>
+<h3><a name="o1620mov20ah2c5bebx5d">o16 mov ah,[ebx]</a></h3>
+<pre>
+    66 8A 23</pre>
+<p>
+</p>
+<h3><a name="mov205becx2b0x5209a7af5d2cebx">mov [ecx+0x5209a7af],ebx</a></h3>
+<pre>
+    89 99 AF A7 09 52</pre>
+<p>
+</p>
+<h3><a name="mov205becx2b0x575d2ccx">mov [ecx+0x57],cx</a></h3>
+<pre>
+    66 89 49 57</pre>
+<p>
+</p>
+<h3><a name="mov20bl2c0x43">mov bl,0x43</a></h3>
+<pre>
+    C6 C3 43</pre>
+<p>
+</p>
+<h3><a name="o1620mov20dh2c0xfa">o16 mov dh,0xfa</a></h3>
+<pre>
+    66 C6 C6 FA</pre>
+<p>
+</p>
+<h3><a name="mov20esi2c0x27189710">mov esi,0x27189710</a></h3>
+<pre>
+    BE 10 97 18 27</pre>
+<p>
+</p>
+<h3><a name="o1620mov20cl2c0x49">o16 mov cl,0x49</a></h3>
+<pre>
+    66 B1 49</pre>
+<p>
+</p>
+<h3><a name="mov20byte205b0xf60890f45d2c0xf2">mov byte [0xf60890f4],0xf2</a></h3>
+<pre>
+    C6 05 F4 90 08 F6 F2</pre>
+<p>
+</p>
+<h3><a name="mov20word205b0xcd234bb5d2c0x9113">mov word [0xcd234bb],0x9113</a></h3>
+<pre>
+    66 C7 05 BB 34 D2 0C 13 91</pre>
+<p>
+</p>
+<h3><a name="mov20eax2c5b0x96cd97595d">mov eax,[0x96cd9759]</a></h3>
+<pre>
+    A1 59 97 CD 96</pre>
+<p>
+</p>
+<h3><a name="mov20ax2c5b0xe553f4a25d">mov ax,[0xe553f4a2]</a></h3>
+<pre>
+    66 A1 A2 F4 53 E5</pre>
+<p>
+</p>
+<h3><a name="mov205b0xdcea88075d2ceax">mov [0xdcea8807],eax</a></h3>
+<pre>
+    A3 07 88 EA DC</pre>
+<p>
+</p>
+<h3><a name="mov205b0x7fbb82ff5d2cax">mov [0x7fbb82ff],ax</a></h3>
+<pre>
+    66 A3 FF 82 BB 7F</pre>
+<p>
+</p>
+<h3><a name="mov20cr02cecx">mov cr0,ecx</a></h3>
+<pre>
+    0F 22 C1</pre>
+<p>
+</p>
+<h3><a name="o1620mov20cr02cebx">o16 mov cr0,ebx</a></h3>
+<pre>
+    66 0F 22 C3</pre>
+<p>
+</p>
+<h3><a name="mov20cr22cecx">mov cr2,ecx</a></h3>
+<pre>
+    0F 22 D1</pre>
+<p>
+</p>
+<h3><a name="o1620mov20cr22cebp">o16 mov cr2,ebp</a></h3>
+<pre>
+    66 0F 22 D5</pre>
+<p>
+</p>
+<h3><a name="mov20cr32ceax">mov cr3,eax</a></h3>
+<pre>
+    0F 22 D8</pre>
+<p>
+</p>
+<h3><a name="o1620mov20cr32cedi">o16 mov cr3,edi</a></h3>
+<pre>
+    66 0F 22 DF</pre>
+<p>
+</p>
+<h3><a name="mov20cr42cesp">mov cr4,esp</a></h3>
+<pre>
+    0F 22 E4</pre>
+<p>
+</p>
+<h3><a name="o1620mov20cr42cebx">o16 mov cr4,ebx</a></h3>
+<pre>
+    66 0F 22 E3</pre>
+<p>
+</p>
+<h3><a name="mov20eax2ccr0">mov eax,cr0</a></h3>
+<pre>
+    0F 20 C0</pre>
+<p>
+</p>
+<h3><a name="o1620mov20esi2ccr1">o16 mov esi,cr1</a></h3>
+<pre>
+    66 0F 20 CE</pre>
+<p>
+</p>
+<h3><a name="mov20dr52cedx">mov dr5,edx</a></h3>
+<pre>
+    0F 23 EA</pre>
+<p>
+</p>
+<h3><a name="o1620mov20dr62cebx">o16 mov dr6,ebx</a></h3>
+<pre>
+    66 0F 23 F3</pre>
+<p>
+</p>
+<h3><a name="mov20dr42cebp">mov dr4,ebp</a></h3>
+<pre>
+    0F 23 E5</pre>
+<p>
+</p>
+<h3><a name="o1620mov20dr32ceax">o16 mov dr3,eax</a></h3>
+<pre>
+    66 0F 23 D8</pre>
+<p>
+</p>
+<h3><a name="mov20dr32cesi">mov dr3,esi</a></h3>
+<pre>
+    0F 23 DE</pre>
+<p>
+</p>
+<h3><a name="o1620mov20dr52cedi">o16 mov dr5,edi</a></h3>
+<pre>
+    66 0F 23 EF</pre>
+<p>
+</p>
+<h3><a name="mov20esp2cdr7">mov esp,dr7</a></h3>
+<pre>
+    0F 21 FC</pre>
+<p>
+</p>
+<h3><a name="o1620mov20eax2cdr4">o16 mov eax,dr4</a></h3>
+<pre>
+    66 0F 21 E0</pre>
+<p>
+</p>
+<h3><a name="mov20edx2cdr7">mov edx,dr7</a></h3>
+<pre>
+    0F 21 FA</pre>
+<p>
+</p>
+<h3><a name="o1620mov20edi2cdr5">o16 mov edi,dr5</a></h3>
+<pre>
+    66 0F 21 EF</pre>
+<p>
+</p>
+<h3><a name="mov20edx2cdr6">mov edx,dr6</a></h3>
+<pre>
+    0F 21 F2</pre>
+<p>
+</p>
+<h3><a name="o1620mov20ecx2cdr1">o16 mov ecx,dr1</a></h3>
+<pre>
+    66 0F 21 C9</pre>
+<p>
+</p>
+<h3><a name="mov20segr62cdi">mov segr6,di</a></h3>
+<pre>
+    8E F7</pre>
+<p>
+</p>
+<h3><a name="o1620mov20ds2csi">o16 mov ds,si</a></h3>
+<pre>
+    66 8E DE</pre>
+<p>
+</p>
+<h3><a name="mov20fs2cbx">mov fs,bx</a></h3>
+<pre>
+    8E E3</pre>
+<p>
+</p>
+<h3><a name="o1620mov20fs2cdi">o16 mov fs,di</a></h3>
+<pre>
+    66 8E E7</pre>
+<p>
+</p>
+<h3><a name="mov20cs2c5bedx2b0xe2dd69555d">mov cs,[edx+0xe2dd6955]</a></h3>
+<pre>
+    8E 8A 55 69 DD E2</pre>
+<p>
+</p>
+<h3><a name="o1620mov20fs2c5bedx5d">o16 mov fs,[edx]</a></h3>
+<pre>
+    66 8E 22</pre>
+<p>
+</p>
+<h3><a name="mov20gs2c5bebx5d">mov gs,[ebx]</a></h3>
+<pre>
+    8E 2B</pre>
+<p>
+</p>
+<h3><a name="o1620mov20segr62c5beax2bebp2a85d">o16 mov segr6,[eax+ebp*8]</a></h3>
+<pre>
+    66 8E 34 E8</pre>
+<p>
+</p>
+<h3><a name="mov20edx2ces">mov edx,es</a></h3>
+<pre>
+    8C C2</pre>
+<p>
+</p>
+<h3><a name="mov20ax2cgs">mov ax,gs</a></h3>
+<pre>
+    66 8C E8</pre>
+<p>
+</p>
+<h3><a name="mov205b0xea332995d2css">mov [0xea33299],ss</a></h3>
+<pre>
+    8C 15 99 32 A3 0E</pre>
+<p>
+</p>
+<h3><a name="o1620mov205bedx2b0x2f49f7335d2css">o16 mov [edx+0x2f49f733],ss</a></h3>
+<pre>
+    66 8C 92 33 F7 49 2F</pre>
+<p>
+</p>
+<h3><a name="movsb">movsb</a></h3>
+<pre>
+    A4</pre>
+<p>
+</p>
+<h3><a name="o1620movsb">o16 movsb</a></h3>
+<pre>
+    66 A4</pre>
+<p>
+</p>
+<h3><a name="movsx20ecx2csp">movsx ecx,sp</a></h3>
+<pre>
+    0F BF CC</pre>
+<p>
+</p>
+<h3><a name="movsx20sp2cch">movsx sp,ch</a></h3>
+<pre>
+    66 0F BE E5</pre>
+<p>
+</p>
+<h3><a name="movsx20ebp2cbyte205becx2b0x1558418b5d">movsx ebp,byte [ecx+0x1558418b]</a></h3>
+<pre>
+    0F BE A9 8B 41 58 15</pre>
+<p>
+</p>
+<h3><a name="movsx20ax2c5becx5d">movsx ax,[ecx]</a></h3>
+<pre>
+    66 0F BE 01</pre>
+<p>
+</p>
+<h3><a name="movzx20ecx2cal">movzx ecx,al</a></h3>
+<pre>
+    0F B6 C8</pre>
+<p>
+</p>
+<h3><a name="db200x66">db 0x66</a></h3>
+<pre>
+    66</pre>
+<p>
+</p>
+<h3><a name="movzx20esp2cbp">movzx esp,bp</a></h3>
+<pre>
+    0F B7 E5</pre>
+<p>
+</p>
+<h3><a name="movzx20edx2cbyte205besi5d">movzx edx,byte [esi]</a></h3>
+<pre>
+    0F B6 16</pre>
+<p>
+</p>
+<h3><a name="db200x66">db 0x66</a></h3>
+<pre>
+    66</pre>
+<p>
+</p>
+<h3><a name="movzx20edi2cword205b0x57eb94c75d">movzx edi,word [0x57eb94c7]</a></h3>
+<pre>
+    0F B7 3D C7 94 EB 57</pre>
+<p>
+</p>
+<h3><a name="mul20ah">mul ah</a></h3>
+<pre>
+    F6 E4</pre>
+<p>
+</p>
+<h3><a name="o1620mul20ch">o16 mul ch</a></h3>
+<pre>
+    66 F6 E5</pre>
+<p>
+</p>
+<h3><a name="mul20dword205bedx0x3c5d">mul dword [edx-0x3c]</a></h3>
+<pre>
+    F7 62 C4</pre>
+<p>
+</p>
+<h3><a name="mul20word205bedi5d">mul word [edi]</a></h3>
+<pre>
+    66 F7 27</pre>
+<p>
+</p>
+<h3><a name="neg20esp">neg esp</a></h3>
+<pre>
+    F7 DC</pre>
+<p>
+</p>
+<h3><a name="o1620neg20ah">o16 neg ah</a></h3>
+<pre>
+    66 F6 DC</pre>
+<p>
+</p>
+<h3><a name="neg20byte205beax5d">neg byte [eax]</a></h3>
+<pre>
+    F6 18</pre>
+<p>
+</p>
+<h3><a name="neg20word205becx0x755d">neg word [ecx-0x75]</a></h3>
+<pre>
+    66 F7 59 8B</pre>
+<p>
+</p>
+<h3><a name="not20ebp">not ebp</a></h3>
+<pre>
+    F7 D5</pre>
+<p>
+</p>
+<h3><a name="not20ax">not ax</a></h3>
+<pre>
+    66 F7 D0</pre>
+<p>
+</p>
+<h3><a name="not20dword205bebx5d">not dword [ebx]</a></h3>
+<pre>
+    F7 13</pre>
+<p>
+</p>
+<h3><a name="not20word205becx5d">not word [ecx]</a></h3>
+<pre>
+    66 F7 11</pre>
+<p>
+</p>
+<h3><a name="or20dh2cal">or dh,al</a></h3>
+<pre>
+    08 C6</pre>
+<p>
+</p>
+<h3><a name="o1620or20dl2cdh">o16 or dl,dh</a></h3>
+<pre>
+    66 08 F2</pre>
+<p>
+</p>
+<h3><a name="or20ebp2ceax">or ebp,eax</a></h3>
+<pre>
+    0B E8</pre>
+<p>
+</p>
+<h3><a name="or20si2cbp">or si,bp</a></h3>
+<pre>
+    66 0B F5</pre>
+<p>
+</p>
+<h3><a name="or20cl2c5bedi2b0x33c31c655d">or cl,[edi+0x33c31c65]</a></h3>
+<pre>
+    0A 8F 65 1C C3 33</pre>
+<p>
+</p>
+<h3><a name="or20bp2c5besi2b0x4f36bdbe5d">or bp,[esi+0x4f36bdbe]</a></h3>
+<pre>
+    66 0B AE BE BD 36 4F</pre>
+<p>
+</p>
+<h3><a name="or205besp2besi2a80x115d2cch">or [esp+esi*8-0x11],ch</a></h3>
+<pre>
+    08 6C F4 EF</pre>
+<p>
+</p>
+<h3><a name="or205bedi0x2b5d2csp">or [edi-0x2b],sp</a></h3>
+<pre>
+    66 09 67 D5</pre>
+<p>
+</p>
+<h3><a name="or20ah2c0x94">or ah,0x94</a></h3>
+<pre>
+    80 CC 94</pre>
+<p>
+</p>
+<h3><a name="o1620or20ah2c0xf">o16 or ah,0xf</a></h3>
+<pre>
+    66 80 CC 0F</pre>
+<p>
+</p>
+<h3><a name="or20eax2c0xf2aaf926">or eax,0xf2aaf926</a></h3>
+<pre>
+    0D 26 F9 AA F2</pre>
+<p>
+</p>
+<h3><a name="or20ax2c0x2bf0">or ax,0x2bf0</a></h3>
+<pre>
+    66 0D F0 2B</pre>
+<p>
+</p>
+<h3><a name="or20dword205bedx5d2cbyte200x39">or dword [edx],byte -0x39</a></h3>
+<pre>
+    83 0A C7</pre>
+<p>
+</p>
+<h3><a name="or20word205besi2bebp2a82b0x85d2c0xe05f">or word [esi+ebp*8+0x8],0xe05f</a></h3>
+<pre>
+    66 81 4C EE 08 5F E0</pre>
+<p>
+</p>
+<h3><a name="out200x812ceax">out 0x81,eax</a></h3>
+<pre>
+    E7 81</pre>
+<p>
+</p>
+<h3><a name="o1620out200x892cal">o16 out 0x89,al</a></h3>
+<pre>
+    66 E6 89</pre>
+<p>
+</p>
+<h3><a name="out20dx2cal">out dx,al</a></h3>
+<pre>
+    EE</pre>
+<p>
+</p>
+<h3><a name="o1620out20dx2cal">o16 out dx,al</a></h3>
+<pre>
+    66 EE</pre>
+<p>
+</p>
+<h3><a name="outsd">outsd</a></h3>
+<pre>
+    6F</pre>
+<p>
+</p>
+<h3><a name="o1620outsb">o16 outsb</a></h3>
+<pre>
+    66 6E</pre>
+<p>
+</p>
+<h3><a name="pop20ecx">pop ecx</a></h3>
+<pre>
+    8F C1</pre>
+<p>
+</p>
+<h3><a name="pop20cx">pop cx</a></h3>
+<pre>
+    66 8F C1</pre>
+<p>
+</p>
+<h3><a name="pop20ecx">pop ecx</a></h3>
+<pre>
+    59</pre>
+<p>
+</p>
+<h3><a name="pop20si">pop si</a></h3>
+<pre>
+    66 5E</pre>
+<p>
+</p>
+<h3><a name="pop20dword205bedx2becx5d">pop dword [edx+ecx]</a></h3>
+<pre>
+    8F 04 0A</pre>
+<p>
+</p>
+<h3><a name="pop20word205bebx5d">pop word [ebx]</a></h3>
+<pre>
+    66 8F 03</pre>
+<p>
+</p>
+<h3><a name="pop20ds">pop ds</a></h3>
+<pre>
+    1F</pre>
+<p>
+</p>
+<h3><a name="o1620pop20ds">o16 pop ds</a></h3>
+<pre>
+    66 1F</pre>
+<p>
+</p>
+<h3><a name="pop20es">pop es</a></h3>
+<pre>
+    07</pre>
+<p>
+</p>
+<h3><a name="o1620pop20es">o16 pop es</a></h3>
+<pre>
+    66 07</pre>
+<p>
+</p>
+<h3><a name="pop20ss">pop ss</a></h3>
+<pre>
+    17</pre>
+<p>
+</p>
+<h3><a name="o1620pop20ss">o16 pop ss</a></h3>
+<pre>
+    66 17</pre>
+<p>
+</p>
+<h3><a name="pop20fs">pop fs</a></h3>
+<pre>
+    0F A1</pre>
+<p>
+</p>
+<h3><a name="o1620pop20fs">o16 pop fs</a></h3>
+<pre>
+    66 0F A1</pre>
+<p>
+</p>
+<h3><a name="pop20gs">pop gs</a></h3>
+<pre>
+    0F A9</pre>
+<p>
+</p>
+<h3><a name="o1620pop20gs">o16 pop gs</a></h3>
+<pre>
+    66 0F A9</pre>
+<p>
+</p>
+<h3><a name="popa">popa</a></h3>
+<pre>
+    61</pre>
+<p>
+</p>
+<h3><a name="popaw">popaw</a></h3>
+<pre>
+    66 61</pre>
+<p>
+</p>
+<h3><a name="popf">popf</a></h3>
+<pre>
+    9D</pre>
+<p>
+</p>
+<h3><a name="popfw">popfw</a></h3>
+<pre>
+    66 9D</pre>
+<p>
+</p>
+<h3><a name="push20edx">push edx</a></h3>
+<pre>
+    FF F2</pre>
+<p>
+</p>
+<h3><a name="push20bx">push bx</a></h3>
+<pre>
+    66 FF F3</pre>
+<p>
+</p>
+<h3><a name="push20edx">push edx</a></h3>
+<pre>
+    52</pre>
+<p>
+</p>
+<h3><a name="push20sp">push sp</a></h3>
+<pre>
+    66 54</pre>
+<p>
+</p>
+<h3><a name="push20dword205beax5d">push dword [eax]</a></h3>
+<pre>
+    FF 30</pre>
+<p>
+</p>
+<h3><a name="push20word205bebx2b0xbb8e2f5f5d">push word [ebx+0xbb8e2f5f]</a></h3>
+<pre>
+    66 FF B3 5F 2F 8E BB</pre>
+<p>
+</p>
+<h3><a name="push20byte202b0x8">push byte +0x8</a></h3>
+<pre>
+    6A 08</pre>
+<p>
+</p>
+<h3><a name="push20word200x367b">push word 0x367b</a></h3>
+<pre>
+    66 68 7B 36</pre>
+<p>
+</p>
+<h3><a name="push20es">push es</a></h3>
+<pre>
+    06</pre>
+<p>
+</p>
+<h3><a name="o1620push20cs">o16 push cs</a></h3>
+<pre>
+    66 0E</pre>
+<p>
+</p>
+<h3><a name="push20fs">push fs</a></h3>
+<pre>
+    0F A0</pre>
+<p>
+</p>
+<h3><a name="o1620push20fs">o16 push fs</a></h3>
+<pre>
+    66 0F A0</pre>
+<p>
+</p>
+<h3><a name="push20gs">push gs</a></h3>
+<pre>
+    0F A8</pre>
+<p>
+</p>
+<h3><a name="o1620push20gs">o16 push gs</a></h3>
+<pre>
+    66 0F A8</pre>
+<p>
+</p>
+<h3><a name="pusha">pusha</a></h3>
+<pre>
+    60</pre>
+<p>
+</p>
+<h3><a name="pushaw">pushaw</a></h3>
+<pre>
+    66 60</pre>
+<p>
+</p>
+<h3><a name="pushf">pushf</a></h3>
+<pre>
+    9C</pre>
+<p>
+</p>
+<h3><a name="pushfw">pushfw</a></h3>
+<pre>
+    66 9C</pre>
+<p>
+</p>
+<h3><a name="rcl20edi2c1">rcl edi,1</a></h3>
+<pre>
+    D1 D7</pre>
+<p>
+</p>
+<h3><a name="rcl20cx2c1">rcl cx,1</a></h3>
+<pre>
+    66 D1 D1</pre>
+<p>
+</p>
+<h3><a name="rcl20byte205becx5d2c1">rcl byte [ecx],1</a></h3>
+<pre>
+    D0 11</pre>
+<p>
+</p>
+<h3><a name="o1620rcl20byte205beax5d2c1">o16 rcl byte [eax],1</a></h3>
+<pre>
+    66 D0 10</pre>
+<p>
+</p>
+<h3><a name="rcl20ebx2ccl">rcl ebx,cl</a></h3>
+<pre>
+    D3 D3</pre>
+<p>
+</p>
+<h3><a name="rcl20bp2ccl">rcl bp,cl</a></h3>
+<pre>
+    66 D3 D5</pre>
+<p>
+</p>
+<h3><a name="rcl20byte205bebx5d2ccl">rcl byte [ebx],cl</a></h3>
+<pre>
+    D2 13</pre>
+<p>
+</p>
+<h3><a name="o1620rcl20byte205besi0x35d2ccl">o16 rcl byte [esi-0x3],cl</a></h3>
+<pre>
+    66 D2 56 FD</pre>
+<p>
+</p>
+<h3><a name="rcl20dl2c0x83">rcl dl,0x83</a></h3>
+<pre>
+    C0 D2 83</pre>
+<p>
+</p>
+<h3><a name="rcl20ax2c0x53">rcl ax,0x53</a></h3>
+<pre>
+    66 C1 D0 53</pre>
+<p>
+</p>
+<h3><a name="rcl20dword205bedi2bebp2a80x415d2c0xa0">rcl dword [edi+ebp*8-0x41],0xa0</a></h3>
+<pre>
+    C1 54 EF BF A0</pre>
+<p>
+</p>
+<h3><a name="rcl20word205bedi2b0x705d2c0x82">rcl word [edi+0x70],0x82</a></h3>
+<pre>
+    66 C1 57 70 82</pre>
+<p>
+</p>
+<h3><a name="rcr20ebp2c1">rcr ebp,1</a></h3>
+<pre>
+    D1 DD</pre>
+<p>
+</p>
+<h3><a name="rcr20ax2c1">rcr ax,1</a></h3>
+<pre>
+    66 D1 D8</pre>
+<p>
+</p>
+<h3><a name="rcr20dword205beax5d2c1">rcr dword [eax],1</a></h3>
+<pre>
+    D1 18</pre>
+<p>
+</p>
+<h3><a name="o1620rcr20byte205becx5d2c1">o16 rcr byte [ecx],1</a></h3>
+<pre>
+    66 D0 19</pre>
+<p>
+</p>
+<h3><a name="rcr20esp2ccl">rcr esp,cl</a></h3>
+<pre>
+    D3 DC</pre>
+<p>
+</p>
+<h3><a name="o1620rcr20ah2ccl">o16 rcr ah,cl</a></h3>
+<pre>
+    66 D2 DC</pre>
+<p>
+</p>
+<h3><a name="rcr20dword205bedx2b0x45d2ccl">rcr dword [edx+0x4],cl</a></h3>
+<pre>
+    D3 5A 04</pre>
+<p>
+</p>
+<h3><a name="o1620rcr20byte205becx5d2ccl">o16 rcr byte [ecx],cl</a></h3>
+<pre>
+    66 D2 19</pre>
+<p>
+</p>
+<h3><a name="rcr20ebx2c0x6b">rcr ebx,0x6b</a></h3>
+<pre>
+    C1 DB 6B</pre>
+<p>
+</p>
+<h3><a name="rcr20bx2c0xfb">rcr bx,0xfb</a></h3>
+<pre>
+    66 C1 DB FB</pre>
+<p>
+</p>
+<h3><a name="rcr20dword205bedx2bedi5d2c0xe5">rcr dword [edx+edi],0xe5</a></h3>
+<pre>
+    C1 1C 3A E5</pre>
+<p>
+</p>
+<h3><a name="o1620rcr20byte205beax2b0x6c268a335d2c0xd7">o16 rcr byte [eax+0x6c268a33],0xd7</a></h3>
+<pre>
+    66 C0 98 33 8A 26 6C D7</pre>
+<p>
+</p>
+<h3><a name="rdmsr">rdmsr</a></h3>
+<pre>
+    0F 32</pre>
+<p>
+</p>
+<h3><a name="o1620rdmsr">o16 rdmsr</a></h3>
+<pre>
+    66 0F 32</pre>
+<p>
+</p>
+<h3><a name="rdpmc">rdpmc</a></h3>
+<pre>
+    0F 33</pre>
+<p>
+</p>
+<h3><a name="o1620rdpmc">o16 rdpmc</a></h3>
+<pre>
+    66 0F 33</pre>
+<p>
+</p>
+<h3><a name="rdtsc">rdtsc</a></h3>
+<pre>
+    0F 31</pre>
+<p>
+</p>
+<h3><a name="o1620rdtsc">o16 rdtsc</a></h3>
+<pre>
+    66 0F 31</pre>
+<p>
+</p>
+<h3><a name="ret">ret</a></h3>
+<pre>
+    C3</pre>
+<p>
+</p>
+<h3><a name="o1620ret">o16 ret</a></h3>
+<pre>
+    66 C3</pre>
+<p>
+</p>
+<h3><a name="ret200x77bd">ret 0x77bd</a></h3>
+<pre>
+    C2 BD 77</pre>
+<p>
+</p>
+<h3><a name="o1620ret200xc0e3">o16 ret 0xc0e3</a></h3>
+<pre>
+    66 C2 E3 C0</pre>
+<p>
+</p>
+<h3><a name="retf">retf</a></h3>
+<pre>
+    CB</pre>
+<p>
+</p>
+<h3><a name="o1620retf">o16 retf</a></h3>
+<pre>
+    66 CB</pre>
+<p>
+</p>
+<h3><a name="retf200xe575">retf 0xe575</a></h3>
+<pre>
+    CA 75 E5</pre>
+<p>
+</p>
+<h3><a name="o1620retf200x9004">o16 retf 0x9004</a></h3>
+<pre>
+    66 CA 04 90</pre>
+<p>
+</p>
+<h3><a name="rol20cl2c1">rol cl,1</a></h3>
+<pre>
+    D0 C1</pre>
+<p>
+</p>
+<h3><a name="rol20bp2c1">rol bp,1</a></h3>
+<pre>
+    66 D1 C5</pre>
+<p>
+</p>
+<h3><a name="rol20dword205bedx2b0xd3a08a015d2c1">rol dword [edx+0xd3a08a01],1</a></h3>
+<pre>
+    D1 82 01 8A A0 D3</pre>
+<p>
+</p>
+<h3><a name="rol20word205bebx5d2c1">rol word [ebx],1</a></h3>
+<pre>
+    66 D1 03</pre>
+<p>
+</p>
+<h3><a name="rol20edi2ccl">rol edi,cl</a></h3>
+<pre>
+    D3 C7</pre>
+<p>
+</p>
+<h3><a name="rol20cx2ccl">rol cx,cl</a></h3>
+<pre>
+    66 D3 C1</pre>
+<p>
+</p>
+<h3><a name="rol20dword205bedx5d2ccl">rol dword [edx],cl</a></h3>
+<pre>
+    D3 02</pre>
+<p>
+</p>
+<h3><a name="rol20word205bebp2b0x6bf6f7605d2ccl">rol word [ebp+0x6bf6f760],cl</a></h3>
+<pre>
+    66 D3 85 60 F7 F6 6B</pre>
+<p>
+</p>
+<h3><a name="rol20ecx2c0x4">rol ecx,0x4</a></h3>
+<pre>
+    C1 C1 04</pre>
+<p>
+</p>
+<h3><a name="rol20si2c0xe3">rol si,0xe3</a></h3>
+<pre>
+    66 C1 C6 E3</pre>
+<p>
+</p>
+<h3><a name="rol20byte205becx2b0x89704d265d2c0x5e">rol byte [ecx+0x89704d26],0x5e</a></h3>
+<pre>
+    C0 84 A1 26 4D 70 89 5E</pre>
+<p>
+</p>
+<h3><a name="o1620rol20byte205bebp2b0x73b42ae45d2c0x4f">o16 rol byte [ebp+0x73b42ae4],0x4f</a></h3>
+<pre>
+    66 C0 85 E4 2A B4 73 4F</pre>
+<p>
+</p>
+<h3><a name="ror20cl2c1">ror cl,1</a></h3>
+<pre>
+    D0 C9</pre>
+<p>
+</p>
+<h3><a name="o1620ror20al2c1">o16 ror al,1</a></h3>
+<pre>
+    66 D0 C8</pre>
+<p>
+</p>
+<h3><a name="ror20byte205becx2bedi2a85d2c1">ror byte [ecx+edi*8],1</a></h3>
+<pre>
+    D0 0C F9</pre>
+<p>
+</p>
+<h3><a name="ror20word205bedx0x1d5d2c1">ror word [edx-0x1d],1</a></h3>
+<pre>
+    66 D1 4A E3</pre>
+<p>
+</p>
+<h3><a name="ror20ebp2ccl">ror ebp,cl</a></h3>
+<pre>
+    D3 CD</pre>
+<p>
+</p>
+<h3><a name="o1620ror20ah2ccl">o16 ror ah,cl</a></h3>
+<pre>
+    66 D2 CC</pre>
+<p>
+</p>
+<h3><a name="ror20byte205becx2b0x26ce7dab5d2ccl">ror byte [ecx+0x26ce7dab],cl</a></h3>
+<pre>
+    D2 89 AB 7D CE 26</pre>
+<p>
+</p>
+<h3><a name="ror20word205bebx2b0x373c8b815d2ccl">ror word [ebx+0x373c8b81],cl</a></h3>
+<pre>
+    66 D3 8B 81 8B 3C 37</pre>
+<p>
+</p>
+<h3><a name="ror20al2c0x15">ror al,0x15</a></h3>
+<pre>
+    C0 C8 15</pre>
+<p>
+</p>
+<h3><a name="o1620ror20bh2c0xf4">o16 ror bh,0xf4</a></h3>
+<pre>
+    66 C0 CF F4</pre>
+<p>
+</p>
+<h3><a name="ror20dword205besi5d2c0x94">ror dword [esi],0x94</a></h3>
+<pre>
+    C1 0C A6 94</pre>
+<p>
+</p>
+<h3><a name="o1620ror20byte205bebx5d2c0x1">o16 ror byte [ebx],0x1</a></h3>
+<pre>
+    66 C0 0B 01</pre>
+<p>
+</p>
+<h3><a name="rsm">rsm</a></h3>
+<pre>
+    0F AA</pre>
+<p>
+</p>
+<h3><a name="o1620rsm">o16 rsm</a></h3>
+<pre>
+    66 0F AA</pre>
+<p>
+</p>
+<h3><a name="sahf">sahf</a></h3>
+<pre>
+    9E</pre>
+<p>
+</p>
+<h3><a name="o1620sahf">o16 sahf</a></h3>
+<pre>
+    66 9E</pre>
+<p>
+</p>
+<h3><a name="salc">salc</a></h3>
+<pre>
+    D6</pre>
+<p>
+</p>
+<h3><a name="o1620salc">o16 salc</a></h3>
+<pre>
+    66 D6</pre>
+<p>
+</p>
+<h3><a name="sar20ecx2c1">sar ecx,1</a></h3>
+<pre>
+    D1 F9</pre>
+<p>
+</p>
+<h3><a name="sar20si2c1">sar si,1</a></h3>
+<pre>
+    66 D1 FE</pre>
+<p>
+</p>
+<h3><a name="sar20byte205bedi0xd5d2c1">sar byte [edi-0xd],1</a></h3>
+<pre>
+    D0 7F F3</pre>
+<p>
+</p>
+<h3><a name="sar20word205bebx2b0x22bc21765d2c1">sar word [ebx+0x22bc2176],1</a></h3>
+<pre>
+    66 D1 BB 76 21 BC 22</pre>
+<p>
+</p>
+<h3><a name="sar20edi2ccl">sar edi,cl</a></h3>
+<pre>
+    D3 FF</pre>
+<p>
+</p>
+<h3><a name="o1620sar20ah2ccl">o16 sar ah,cl</a></h3>
+<pre>
+    66 D2 FC</pre>
+<p>
+</p>
+<h3><a name="sar20dword205bedx5d2ccl">sar dword [edx],cl</a></h3>
+<pre>
+    D3 3A</pre>
+<p>
+</p>
+<h3><a name="sar20word205becx2b0x5b5d2ccl">sar word [ecx+0x5b],cl</a></h3>
+<pre>
+    66 D3 79 5B</pre>
+<p>
+</p>
+<h3><a name="sar20eax2c0x2d">sar eax,0x2d</a></h3>
+<pre>
+    C1 F8 2D</pre>
+<p>
+</p>
+<h3><a name="o1620sar20dl2c0x1b">o16 sar dl,0x1b</a></h3>
+<pre>
+    66 C0 FA 1B</pre>
+<p>
+</p>
+<h3><a name="sar20byte205b0xd906ee1c5d2c0x3a">sar byte [0xd906ee1c],0x3a</a></h3>
+<pre>
+    C0 3D 1C EE 06 D9 3A</pre>
+<p>
+</p>
+<h3><a name="sar20word205beax5d2c0x3c">sar word [eax],0x3c</a></h3>
+<pre>
+    66 C1 38 3C</pre>
+<p>
+</p>
+<h3><a name="sbb20dl2ccl">sbb dl,cl</a></h3>
+<pre>
+    18 CA</pre>
+<p>
+</p>
+<h3><a name="o1620sbb20bh2cbh">o16 sbb bh,bh</a></h3>
+<pre>
+    66 18 FF</pre>
+<p>
+</p>
+<h3><a name="sbb20esp2cebx">sbb esp,ebx</a></h3>
+<pre>
+    1B E3</pre>
+<p>
+</p>
+<h3><a name="o1620sbb20ch2cbl">o16 sbb ch,bl</a></h3>
+<pre>
+    66 1A EB</pre>
+<p>
+</p>
+<h3><a name="sbb20bl2c5bebx0x185d">sbb bl,[ebx-0x18]</a></h3>
+<pre>
+    1A 5B E8</pre>
+<p>
+</p>
+<h3><a name="o1620sbb20bl2c5becx0x6a5d">o16 sbb bl,[ecx-0x6a]</a></h3>
+<pre>
+    66 1A 59 96</pre>
+<p>
+</p>
+<h3><a name="sbb205beax5d2cebp">sbb [eax],ebp</a></h3>
+<pre>
+    19 28</pre>
+<p>
+</p>
+<h3><a name="sbb205besi5d2cax">sbb [esi],ax</a></h3>
+<pre>
+    66 19 06</pre>
+<p>
+</p>
+<h3><a name="sbb20ebp2cbyte202b0x0">sbb ebp,byte +0x0</a></h3>
+<pre>
+    83 DD 00</pre>
+<p>
+</p>
+<h3><a name="sbb20cx2c0xfa22">sbb cx,0xfa22</a></h3>
+<pre>
+    66 81 D9 22 FA</pre>
+<p>
+</p>
+<h3><a name="sbb20eax2c0x6558fd26">sbb eax,0x6558fd26</a></h3>
+<pre>
+    1D 26 FD 58 65</pre>
+<p>
+</p>
+<h3><a name="o1620sbb20al2c0x24">o16 sbb al,0x24</a></h3>
+<pre>
+    66 1C 24</pre>
+<p>
+</p>
+<h3><a name="sbb20byte205bebx0x725d2c0xc6">sbb byte [ebx-0x72],0xc6</a></h3>
+<pre>
+    80 5B 8E C6</pre>
+<p>
+</p>
+<h3><a name="sbb20word205bedx5d2c0xb6b9">sbb word [edx],0xb6b9</a></h3>
+<pre>
+    66 81 1A B9 B6</pre>
+<p>
+</p>
+<h3><a name="scasd">scasd</a></h3>
+<pre>
+    AF</pre>
+<p>
+</p>
+<h3><a name="scasw">scasw</a></h3>
+<pre>
+    66 AF</pre>
+<p>
+</p>
+<h3><a name="seta20al">seta al</a></h3>
+<pre>
+    0F 97 C0</pre>
+<p>
+</p>
+<h3><a name="o1620setnl20bh">o16 setnl bh</a></h3>
+<pre>
+    66 0F 9D C7</pre>
+<p>
+</p>
+<h3><a name="setns205beax5d">setns [eax]</a></h3>
+<pre>
+    0F 99 00</pre>
+<p>
+</p>
+<h3><a name="o1620setpo205becx5d">o16 setpo [ecx]</a></h3>
+<pre>
+    66 0F 9B 01</pre>
+<p>
+</p>
+<h3><a name="sgdt205beax5d">sgdt [eax]</a></h3>
+<pre>
+    0F 01 00</pre>
+<p>
+</p>
+<h3><a name="o1620sgdt205becx2a82b0x96e17585d">o16 sgdt [ecx*8+0x96e1758]</a></h3>
+<pre>
+    66 0F 01 04 CD 58 17 6E 09</pre>
+<p>
+</p>
+<h3><a name="shl20ebp2c1">shl ebp,1</a></h3>
+<pre>
+    D1 E5</pre>
+<p>
+</p>
+<h3><a name="shl20bx2c1">shl bx,1</a></h3>
+<pre>
+    66 D1 E3</pre>
+<p>
+</p>
+<h3><a name="shl20dword205bedx5d2c1">shl dword [edx],1</a></h3>
+<pre>
+    D1 22</pre>
+<p>
+</p>
+<h3><a name="o1620shl20byte205bedx2b0x8c050fcb5d2c1">o16 shl byte [edx+0x8c050fcb],1</a></h3>
+<pre>
+    66 D0 A2 CB 0F 05 8C</pre>
+<p>
+</p>
+<h3><a name="shl20dh2ccl">shl dh,cl</a></h3>
+<pre>
+    D2 E6</pre>
+<p>
+</p>
+<h3><a name="o1620shl20al2ccl">o16 shl al,cl</a></h3>
+<pre>
+    66 D2 E0</pre>
+<p>
+</p>
+<h3><a name="shl20dword205bebx5d2ccl">shl dword [ebx],cl</a></h3>
+<pre>
+    D3 23</pre>
+<p>
+</p>
+<h3><a name="o1620shl20byte205beax5d2ccl">o16 shl byte [eax],cl</a></h3>
+<pre>
+    66 D2 20</pre>
+<p>
+</p>
+<h3><a name="shl20dh2c0x56">shl dh,0x56</a></h3>
+<pre>
+    C0 E6 56</pre>
+<p>
+</p>
+<h3><a name="o1620shl20dl2c0xc0">o16 shl dl,0xc0</a></h3>
+<pre>
+    66 C0 E2 C0</pre>
+<p>
+</p>
+<h3><a name="shl20dword205bebp2b0x9847979d5d2c0x5b">shl dword [ebp+0x9847979d],0x5b</a></h3>
+<pre>
+    C1 A5 9D 97 47 98 5B</pre>
+<p>
+</p>
+<h3><a name="shl20word205bebp0x165d2c0xa8">shl word [ebp-0x16],0xa8</a></h3>
+<pre>
+    66 C1 65 EA A8</pre>
+<p>
+</p>
+<h3><a name="shld20ecx2cedx2c0x1c">shld ecx,edx,0x1c</a></h3>
+<pre>
+    0F A4 D1 1C</pre>
+<p>
+</p>
+<h3><a name="shld20si2cdi2c0x42">shld si,di,0x42</a></h3>
+<pre>
+    66 0F A4 FE 42</pre>
+<p>
+</p>
+<h3><a name="shld205bedx2b0xe30f039c5d2cebx2c0xc7">shld [edx+0xe30f039c],ebx,0xc7</a></h3>
+<pre>
+    0F A4 9A 9C 03 0F E3 C7</pre>
+<p>
+</p>
+<h3><a name="shld205b0xaa8926445d2cdi2c0xc2">shld [0xaa892644],di,0xc2</a></h3>
+<pre>
+    66 0F A4 3D 44 26 89 AA C2</pre>
+<p>
+</p>
+<h3><a name="shld20ebx2cedx2ccl">shld ebx,edx,cl</a></h3>
+<pre>
+    0F A5 D3</pre>
+<p>
+</p>
+<h3><a name="shld20dx2cdi2ccl">shld dx,di,cl</a></h3>
+<pre>
+    66 0F A5 FA</pre>
+<p>
+</p>
+<h3><a name="shld205besi5d2ceax2ccl">shld [esi],eax,cl</a></h3>
+<pre>
+    0F A5 06</pre>
+<p>
+</p>
+<h3><a name="shld205becx2bedi2a45d2cdx2ccl">shld [ecx+edi*4],dx,cl</a></h3>
+<pre>
+    66 0F A5 14 B9</pre>
+<p>
+</p>
+<h3><a name="shr20ebx2c1">shr ebx,1</a></h3>
+<pre>
+    D1 EB</pre>
+<p>
+</p>
+<h3><a name="o1620shr20dh2c1">o16 shr dh,1</a></h3>
+<pre>
+    66 D0 EE</pre>
+<p>
+</p>
+<h3><a name="shr20dword205becx2besi2a25d2c1">shr dword [ecx+esi*2],1</a></h3>
+<pre>
+    D1 2C 71</pre>
+<p>
+</p>
+<h3><a name="shr20word205besi2beax2b0xc16c8e7d5d2c1">shr word [esi+eax+0xc16c8e7d],1</a></h3>
+<pre>
+    66 D1 AC 06 7D 8E 6C C1</pre>
+<p>
+</p>
+<h3><a name="shr20ch2ccl">shr ch,cl</a></h3>
+<pre>
+    D2 ED</pre>
+<p>
+</p>
+<h3><a name="shr20si2ccl">shr si,cl</a></h3>
+<pre>
+    66 D3 EE</pre>
+<p>
+</p>
+<h3><a name="shr20dword205bedi5d2ccl">shr dword [edi],cl</a></h3>
+<pre>
+    D3 2F</pre>
+<p>
+</p>
+<h3><a name="o1620shr20byte205b0xddbcd93c5d2ccl">o16 shr byte [0xddbcd93c],cl</a></h3>
+<pre>
+    66 D2 2D 3C D9 BC DD</pre>
+<p>
+</p>
+<h3><a name="shr20eax2c0xb1">shr eax,0xb1</a></h3>
+<pre>
+    C1 E8 B1</pre>
+<p>
+</p>
+<h3><a name="shr20dx2c0xf0">shr dx,0xf0</a></h3>
+<pre>
+    66 C1 EA F0</pre>
+<p>
+</p>
+<h3><a name="shr20byte205besi2b0x665d2c0x2c">shr byte [esi+0x66],0x2c</a></h3>
+<pre>
+    C0 6E 66 2C</pre>
+<p>
+</p>
+<h3><a name="shr20word205bebx2b0xc55d4acf5d2c0xa3">shr word [ebx+0xc55d4acf],0xa3</a></h3>
+<pre>
+    66 C1 AB CF 4A 5D C5 A3</pre>
+<p>
+</p>
+<h3><a name="shrd20esi2cebx2c0x7b">shrd esi,ebx,0x7b</a></h3>
+<pre>
+    0F AC DE 7B</pre>
+<p>
+</p>
+<h3><a name="shrd20bp2csp2c0xdd">shrd bp,sp,0xdd</a></h3>
+<pre>
+    66 0F AC E5 DD</pre>
+<p>
+</p>
+<h3><a name="shrd205bedi5d2ceax2c0xe9">shrd [edi],eax,0xe9</a></h3>
+<pre>
+    0F AC 07 E9</pre>
+<p>
+</p>
+<h3><a name="shrd205besi2beax2a25d2ccx2c0x87">shrd [esi+eax*2],cx,0x87</a></h3>
+<pre>
+    66 0F AC 0C 46 87</pre>
+<p>
+</p>
+<h3><a name="shrd20edi2cesi2ccl">shrd edi,esi,cl</a></h3>
+<pre>
+    0F AD F7</pre>
+<p>
+</p>
+<h3><a name="shrd20sp2csp2ccl">shrd sp,sp,cl</a></h3>
+<pre>
+    66 0F AD E4</pre>
+<p>
+</p>
+<h3><a name="shrd205beax2bebp2b0x24db5f9a5d2cesp2ccl">shrd [eax+ebp+0x24db5f9a],esp,cl</a></h3>
+<pre>
+    0F AD A4 28 9A 5F DB 24</pre>
+<p>
+</p>
+<h3><a name="shrd205bedx5d2cdi2ccl">shrd [edx],di,cl</a></h3>
+<pre>
+    66 0F AD 3A</pre>
+<p>
+</p>
+<h3><a name="sidt205bedx0x75d">sidt [edx-0x7]</a></h3>
+<pre>
+    0F 01 4A F9</pre>
+<p>
+</p>
+<h3><a name="o1620sidt205bedi2b0xdab1b0e45d">o16 sidt [edi+0xdab1b0e4]</a></h3>
+<pre>
+    66 0F 01 8F E4 B0 B1 DA</pre>
+<p>
+</p>
+<h3><a name="sldt20bx">sldt bx</a></h3>
+<pre>
+    0F 00 C3</pre>
+<p>
+</p>
+<h3><a name="o1620sldt20di">o16 sldt di</a></h3>
+<pre>
+    66 0F 00 C7</pre>
+<p>
+</p>
+<h3><a name="sldt205becx5d">sldt [ecx]</a></h3>
+<pre>
+    0F 00 01</pre>
+<p>
+</p>
+<h3><a name="o1620sldt205besi5d">o16 sldt [esi]</a></h3>
+<pre>
+    66 0F 00 06</pre>
+<p>
+</p>
+<h3><a name="smsw20cx">smsw cx</a></h3>
+<pre>
+    0F 01 E1</pre>
+<p>
+</p>
+<h3><a name="o1620smsw20ax">o16 smsw ax</a></h3>
+<pre>
+    66 0F 01 E0</pre>
+<p>
+</p>
+<h3><a name="smsw205beax2bedi5d">smsw [eax+edi]</a></h3>
+<pre>
+    0F 01 24 38</pre>
+<p>
+</p>
+<h3><a name="o1620smsw205bedx5d">o16 smsw [edx]</a></h3>
+<pre>
+    66 0F 01 22</pre>
+<p>
+</p>
+<h3><a name="stc">stc</a></h3>
+<pre>
+    F9</pre>
+<p>
+</p>
+<h3><a name="o1620stc">o16 stc</a></h3>
+<pre>
+    66 F9</pre>
+<p>
+</p>
+<h3><a name="std">std</a></h3>
+<pre>
+    FD</pre>
+<p>
+</p>
+<h3><a name="o1620std">o16 std</a></h3>
+<pre>
+    66 FD</pre>
+<p>
+</p>
+<h3><a name="sti">sti</a></h3>
+<pre>
+    FB</pre>
+<p>
+</p>
+<h3><a name="o1620sti">o16 sti</a></h3>
+<pre>
+    66 FB</pre>
+<p>
+</p>
+<h3><a name="stosb">stosb</a></h3>
+<pre>
+    AA</pre>
+<p>
+</p>
+<h3><a name="stosw">stosw</a></h3>
+<pre>
+    66 AB</pre>
+<p>
+</p>
+<h3><a name="str20si">str si</a></h3>
+<pre>
+    0F 00 CE</pre>
+<p>
+</p>
+<h3><a name="o1620str20sp">o16 str sp</a></h3>
+<pre>
+    66 0F 00 CC</pre>
+<p>
+</p>
+<h3><a name="str205beax0x1c5d">str [eax-0x1c]</a></h3>
+<pre>
+    0F 00 48 E4</pre>
+<p>
+</p>
+<h3><a name="o1620str205besi5d">o16 str [esi]</a></h3>
+<pre>
+    66 0F 00 0E</pre>
+<p>
+</p>
+<h3><a name="sub20dl2ccl">sub dl,cl</a></h3>
+<pre>
+    28 CA</pre>
+<p>
+</p>
+<h3><a name="o1620sub20bh2cbh">o16 sub bh,bh</a></h3>
+<pre>
+    66 28 FF</pre>
+<p>
+</p>
+<h3><a name="sub20ch2ccl">sub ch,cl</a></h3>
+<pre>
+    2A E9</pre>
+<p>
+</p>
+<h3><a name="o1620sub20dh2cdh">o16 sub dh,dh</a></h3>
+<pre>
+    66 2A F6</pre>
+<p>
+</p>
+<h3><a name="sub20bl2c5besi2b0x645d">sub bl,[esi+0x64]</a></h3>
+<pre>
+    2A 5E 64</pre>
+<p>
+</p>
+<h3><a name="sub20bp2c5bedi5d">sub bp,[edi]</a></h3>
+<pre>
+    66 2B 2F</pre>
+<p>
+</p>
+<h3><a name="sub205besp2beax2a45d2cbh">sub [esp+eax*4],bh</a></h3>
+<pre>
+    28 3C 84</pre>
+<p>
+</p>
+<h3><a name="o1620sub205bedx2besi2a20x505d2cdh">o16 sub [edx+esi*2-0x50],dh</a></h3>
+<pre>
+    66 28 74 72 B0</pre>
+<p>
+</p>
+<h3><a name="sub20al2c0x4b">sub al,0x4b</a></h3>
+<pre>
+    80 E8 4B</pre>
+<p>
+</p>
+<h3><a name="o1620sub20al2c0x89">o16 sub al,0x89</a></h3>
+<pre>
+    66 80 E8 89</pre>
+<p>
+</p>
+<h3><a name="sub20eax2c0x80ab7b79">sub eax,0x80ab7b79</a></h3>
+<pre>
+    2D 79 7B AB 80</pre>
+<p>
+</p>
+<h3><a name="o1620sub20al2c0x21">o16 sub al,0x21</a></h3>
+<pre>
+    66 2C 21</pre>
+<p>
+</p>
+<h3><a name="sub20dword205becx2besi2a80x345d2cbyte202b0x62">sub dword [ecx+esi*8-0x34],byte +0x62</a></h3>
+<pre>
+    83 6C F1 CC 62</pre>
+<p>
+</p>
+<h3><a name="sub20word205b0x8db520f05d2c0x63b4">sub word [0x8db520f0],0x63b4</a></h3>
+<pre>
+    66 81 2D F0 20 B5 8D B4 63</pre>
+<p>
+</p>
+<h3><a name="test20ebp2cesp">test ebp,esp</a></h3>
+<pre>
+    85 E5</pre>
+<p>
+</p>
+<h3><a name="o1620test20dh2cah">o16 test dh,ah</a></h3>
+<pre>
+    66 84 E6</pre>
+<p>
+</p>
+<h3><a name="test205bebx2bebp0x4e5d2cebx">test [ebx+ebp-0x4e],ebx</a></h3>
+<pre>
+    85 5C 2B B2</pre>
+<p>
+</p>
+<h3><a name="test205bedx2b0x7274f2a75d2csp">test [edx+0x7274f2a7],sp</a></h3>
+<pre>
+    66 85 A2 A7 F2 74 72</pre>
+<p>
+</p>
+<h3><a name="test20cl2c0xd">test cl,0xd</a></h3>
+<pre>
+    F6 C1 0D</pre>
+<p>
+</p>
+<h3><a name="o1620test20cl2c0xff">o16 test cl,0xff</a></h3>
+<pre>
+    66 F6 C1 FF</pre>
+<p>
+</p>
+<h3><a name="test20eax2c0x481f8e8c">test eax,0x481f8e8c</a></h3>
+<pre>
+    A9 8C 8E 1F 48</pre>
+<p>
+</p>
+<h3><a name="test20ax2c0x5d4b">test ax,0x5d4b</a></h3>
+<pre>
+    66 A9 4B 5D</pre>
+<p>
+</p>
+<h3><a name="test20dword205beax5d2c0x3a88774d">test dword [eax],0x3a88774d</a></h3>
+<pre>
+    F7 00 4D 77 88 3A</pre>
+<p>
+</p>
+<h3><a name="o1620test20byte205bedi0x455d2c0x30">o16 test byte [edi-0x45],0x30</a></h3>
+<pre>
+    66 F6 47 BB 30</pre>
+<p>
+</p>
+<h3><a name="ud2">ud2</a></h3>
+<pre>
+    0F 0B</pre>
+<p>
+</p>
+<h3><a name="o1620ud2">o16 ud2</a></h3>
+<pre>
+    66 0F 0B</pre>
+<p>
+</p>
+<h3><a name="verr20si">verr si</a></h3>
+<pre>
+    0F 00 E6</pre>
+<p>
+</p>
+<h3><a name="o1620verr20ax">o16 verr ax</a></h3>
+<pre>
+    66 0F 00 E0</pre>
+<p>
+</p>
+<h3><a name="verr205bedx5d">verr [edx]</a></h3>
+<pre>
+    0F 00 22</pre>
+<p>
+</p>
+<h3><a name="o1620verr205beax2b0xebdd851c5d">o16 verr [eax+0xebdd851c]</a></h3>
+<pre>
+    66 0F 00 A0 1C 85 DD EB</pre>
+<p>
+</p>
+<h3><a name="verw20ax">verw ax</a></h3>
+<pre>
+    0F 00 E8</pre>
+<p>
+</p>
+<h3><a name="o1620verw20ax">o16 verw ax</a></h3>
+<pre>
+    66 0F 00 E8</pre>
+<p>
+</p>
+<h3><a name="verw205besi5d">verw [esi]</a></h3>
+<pre>
+    0F 00 2E</pre>
+<p>
+</p>
+<h3><a name="o1620verw205bebx2b0xcae6d5335d">o16 verw [ebx+0xcae6d533]</a></h3>
+<pre>
+    66 0F 00 AB 33 D5 E6 CA</pre>
+<p>
+</p>
+<h3><a name="wait">wait</a></h3>
+<pre>
+    9B</pre>
+<p>
+</p>
+<h3><a name="o1620wait">o16 wait</a></h3>
+<pre>
+    66 9B</pre>
+<p>
+</p>
+<h3><a name="wbinvd">wbinvd</a></h3>
+<pre>
+    0F 09</pre>
+<p>
+</p>
+<h3><a name="o1620wbinvd">o16 wbinvd</a></h3>
+<pre>
+    66 0F 09</pre>
+<p>
+</p>
+<h3><a name="wrmsr">wrmsr</a></h3>
+<pre>
+    0F 30</pre>
+<p>
+</p>
+<h3><a name="o1620wrmsr">o16 wrmsr</a></h3>
+<pre>
+    66 0F 30</pre>
+<p>
+</p>
+<h3><a name="xadd20ch2cbh">xadd ch,bh</a></h3>
+<pre>
+    0F C0 FD</pre>
+<p>
+</p>
+<h3><a name="xadd20ax2cbp">xadd ax,bp</a></h3>
+<pre>
+    66 0F C1 E8</pre>
+<p>
+</p>
+<h3><a name="xadd205bedx5d2cesi">xadd [edx],esi</a></h3>
+<pre>
+    0F C1 32</pre>
+<p>
+</p>
+<h3><a name="xadd205besp2besi2a45d2cax">xadd [esp+esi*4],ax</a></h3>
+<pre>
+    66 0F C1 04 B4</pre>
+<p>
+</p>
+<h3><a name="xchg20ebp2cedx">xchg ebp,edx</a></h3>
+<pre>
+    87 EA</pre>
+<p>
+</p>
+<h3><a name="xchg20sp2ccx">xchg sp,cx</a></h3>
+<pre>
+    66 87 E1</pre>
+<p>
+</p>
+<h3><a name="xchg20eax2cebx">xchg eax,ebx</a></h3>
+<pre>
+    93</pre>
+<p>
+</p>
+<h3><a name="xchg20ax2cbp">xchg ax,bp</a></h3>
+<pre>
+    66 95</pre>
+<p>
+</p>
+<h3><a name="xchg20cl2c5beax2b0x5eaa43875d">xchg cl,[eax+0x5eaa4387]</a></h3>
+<pre>
+    86 88 87 43 AA 5E</pre>
+<p>
+</p>
+<h3><a name="xchg20cx2c5bedx2b0x8cce6a6b5d">xchg cx,[edx+0x8cce6a6b]</a></h3>
+<pre>
+    66 87 8A 6B 6A CE 8C</pre>
+<p>
+</p>
+<h3><a name="xlatb">xlatb</a></h3>
+<pre>
+    D7</pre>
+<p>
+</p>
+<h3><a name="o1620xlatb">o16 xlatb</a></h3>
+<pre>
+    66 D7</pre>
+<p>
+</p>
+<h3><a name="xor20esp2cedi">xor esp,edi</a></h3>
+<pre>
+    31 FC</pre>
+<p>
+</p>
+<h3><a name="xor20sp2cbx">xor sp,bx</a></h3>
+<pre>
+    66 31 DC</pre>
+<p>
+</p>
+<h3><a name="xor20bl2cal">xor bl,al</a></h3>
+<pre>
+    32 D8</pre>
+<p>
+</p>
+<h3><a name="o1620xor20cl2cch">o16 xor cl,ch</a></h3>
+<pre>
+    66 32 CD</pre>
+<p>
+</p>
+<h3><a name="xor20ch2c5bebx2b0x3a323bcc5d">xor ch,[ebx+0x3a323bcc]</a></h3>
+<pre>
+    32 AB CC 3B 32 3A</pre>
+<p>
+</p>
+<h3><a name="xor20cx2c5bebp2b0xfd6386a75d">xor cx,[ebp+0xfd6386a7]</a></h3>
+<pre>
+    66 33 8D A7 86 63 FD</pre>
+<p>
+</p>
+<h3><a name="xor205bebp2b0x235d2cal">xor [ebp+0x23],al</a></h3>
+<pre>
+    30 45 23</pre>
+<p>
+</p>
+<h3><a name="o1620xor205b0x9e6906ce5d2cah">o16 xor [0x9e6906ce],ah</a></h3>
+<pre>
+    66 30 25 CE 06 69 9E</pre>
+<p>
+</p>
+<h3><a name="xor20esi2cbyte202b0x7e">xor esi,byte +0x7e</a></h3>
+<pre>
+    83 F6 7E</pre>
+<p>
+</p>
+<h3><a name="xor20bx2cbyte202b0x65">xor bx,byte +0x65</a></h3>
+<pre>
+    66 83 F3 65</pre>
+<p>
+</p>
+<h3><a name="xor20al2c0xa5">xor al,0xa5</a></h3>
+<pre>
+    34 A5</pre>
+<p>
+</p>
+<h3><a name="o1620xor20al2c0x23">o16 xor al,0x23</a></h3>
+<pre>
+    66 34 23</pre>
+<p>
+</p>
+<h3><a name="xor20dword205beax5d2cbyte202b0x2b">xor dword [eax],byte +0x2b</a></h3>
+<pre>
+    83 30 2B</pre>
+<p>
+</p>
+<h3><a name="xor20word205bedi5d2c0x5f5a">xor word [edi],0x5f5a</a></h3>
+<pre>
+    66 81 37 5A 5F</pre>
+<p>
+</p>
+<h3><a name="f2xm1">f2xm1</a></h3>
+<pre>
+    D9 F0</pre>
+<p>
+</p>
+<h3><a name="fabs">fabs</a></h3>
+<pre>
+    D9 E1</pre>
+<p>
+</p>
+<h3><a name="fadd20dword205beax2b0x50c1a8bc5d">fadd dword [eax+0x50c1a8bc]</a></h3>
+<pre>
+    D8 80 BC A8 C1 50</pre>
+<p>
+</p>
+<h3><a name="fadd20qword205bedx2b0x5d5d">fadd qword [edx+0x5d]</a></h3>
+<pre>
+    DC 42 5D</pre>
+<p>
+</p>
+<h3><a name="fadd20st5">fadd st5</a></h3>
+<pre>
+    D8 C5</pre>
+<p>
+</p>
+<h3><a name="fadd20to20st1">fadd to st1</a></h3>
+<pre>
+    DC C1</pre>
+<p>
+</p>
+<h3><a name="faddp20st2">faddp st2</a></h3>
+<pre>
+    DE C2</pre>
+<p>
+</p>
+<h3><a name="fbld20tword205bedx2b0xd0a704185d">fbld tword [edx+0xd0a70418]</a></h3>
+<pre>
+    DF A2 18 04 A7 D0</pre>
+<p>
+</p>
+<h3><a name="fbstp20tword205bebx2bebp2a42b0xd903880d5d">fbstp tword [ebx+ebp*4+0xd903880d]</a></h3>
+<pre>
+    DF B4 AB 0D 88 03 D9</pre>
+<p>
+</p>
+<h3><a name="fchs">fchs</a></h3>
+<pre>
+    D9 E0</pre>
+<p>
+</p>
+<h3><a name="fnclex">fnclex</a></h3>
+<pre>
+    DB E2</pre>
+<p>
+</p>
+<h3><a name="fcom20dword205besi2b0x8d22484a5d">fcom dword [esi+0x8d22484a]</a></h3>
+<pre>
+    D8 96 4A 48 22 8D</pre>
+<p>
+</p>
+<h3><a name="fcom20qword205bedx5d">fcom qword [edx]</a></h3>
+<pre>
+    DC 12</pre>
+<p>
+</p>
+<h3><a name="fcom20st5">fcom st5</a></h3>
+<pre>
+    D8 D5</pre>
+<p>
+</p>
+<h3><a name="fcomp20dword205bebx2b0x63b078c5d">fcomp dword [ebx+0x63b078c]</a></h3>
+<pre>
+    D8 9B 8C 07 3B 06</pre>
+<p>
+</p>
+<h3><a name="fcomp20qword205besi2b0x8450698c5d">fcomp qword [esi+0x8450698c]</a></h3>
+<pre>
+    DC 9E 8C 69 50 84</pre>
+<p>
+</p>
+<h3><a name="fcomp20st2">fcomp st2</a></h3>
+<pre>
+    D8 DA</pre>
+<p>
+</p>
+<h3><a name="fcompp">fcompp</a></h3>
+<pre>
+    DE D9</pre>
+<p>
+</p>
+<h3><a name="fcomip20st3">fcomip st3</a></h3>
+<pre>
+    DF F3</pre>
+<p>
+</p>
+<h3><a name="fcos">fcos</a></h3>
+<pre>
+    D9 FF</pre>
+<p>
+</p>
+<h3><a name="fdecstp">fdecstp</a></h3>
+<pre>
+    D9 F6</pre>
+<p>
+</p>
+<h3><a name="fdiv20dword205besi2besi2b0x5f5d">fdiv dword [esi+esi+0x5f]</a></h3>
+<pre>
+    D8 74 36 5F</pre>
+<p>
+</p>
+<h3><a name="fdiv20qword205bedi5d">fdiv qword [edi]</a></h3>
+<pre>
+    DC 37</pre>
+<p>
+</p>
+<h3><a name="fdiv20st4">fdiv st4</a></h3>
+<pre>
+    D8 F4</pre>
+<p>
+</p>
+<h3><a name="fdivr20to20st3">fdivr to st3</a></h3>
+<pre>
+    DC F3</pre>
+<p>
+</p>
+<h3><a name="fdivp20st22cst0">fdivp st2,st0</a></h3>
+<pre>
+    DE FA</pre>
+<p>
+</p>
+<h3><a name="fdivr20dword205bebx2b0x128bbccb5d">fdivr dword [ebx+0x128bbccb]</a></h3>
+<pre>
+    D8 BB CB BC 8B 12</pre>
+<p>
+</p>
+<h3><a name="fdivr20qword205besi2a82b0xe1be32175d">fdivr qword [esi*8+0xe1be3217]</a></h3>
+<pre>
+    DC 3C F5 17 32 BE E1</pre>
+<p>
+</p>
+<h3><a name="fdivr20st0">fdivr st0</a></h3>
+<pre>
+    D8 F8</pre>
+<p>
+</p>
+<h3><a name="fdiv20to20st6">fdiv to st6</a></h3>
+<pre>
+    DC FE</pre>
+<p>
+</p>
+<h3><a name="fdivrp20st6">fdivrp st6</a></h3>
+<pre>
+    DE F6</pre>
+<p>
+</p>
+<h3><a name="ffree20st3">ffree st3</a></h3>
+<pre>
+    DD C3</pre>
+<p>
+</p>
+<h3><a name="fiadd20word205bebx2b0xde6aec0b5d">fiadd word [ebx+0xde6aec0b]</a></h3>
+<pre>
+    DE 83 0B EC 6A DE</pre>
+<p>
+</p>
+<h3><a name="fiadd20dword205bedx0x515d">fiadd dword [edx-0x51]</a></h3>
+<pre>
+    DA 42 AF</pre>
+<p>
+</p>
+<h3><a name="ficom20word205bedx5d">ficom word [edx]</a></h3>
+<pre>
+    DE 12</pre>
+<p>
+</p>
+<h3><a name="ficom20dword205besi0x485d">ficom dword [esi-0x48]</a></h3>
+<pre>
+    DA 56 B8</pre>
+<p>
+</p>
+<h3><a name="ficomp20word205bedx2b0x59571805d">ficomp word [edx+0x5957180]</a></h3>
+<pre>
+    DE 9A 80 71 95 05</pre>
+<p>
+</p>
+<h3><a name="ficomp20dword205beax0x7f5d">ficomp dword [eax-0x7f]</a></h3>
+<pre>
+    DA 58 81</pre>
+<p>
+</p>
+<h3><a name="fidiv20word205besi5d">fidiv word [esi]</a></h3>
+<pre>
+    DE 36</pre>
+<p>
+</p>
+<h3><a name="fidiv20dword205bedi5d">fidiv dword [edi]</a></h3>
+<pre>
+    DA 37</pre>
+<p>
+</p>
+<h3><a name="fidivr20word205bebx2bebp2a82b0x465d">fidivr word [ebx+ebp*8+0x46]</a></h3>
+<pre>
+    DE 7C EB 46</pre>
+<p>
+</p>
+<h3><a name="fidivr20dword205becx5d">fidivr dword [ecx]</a></h3>
+<pre>
+    DA 39</pre>
+<p>
+</p>
+<h3><a name="fild20word205beax0x245d">fild word [eax-0x24]</a></h3>
+<pre>
+    DF 40 DC</pre>
+<p>
+</p>
+<h3><a name="fild20dword205bedx2b0xa49b7f825d">fild dword [edx+0xa49b7f82]</a></h3>
+<pre>
+    DB 82 82 7F 9B A4</pre>
+<p>
+</p>
+<h3><a name="fild20qword205beax2becx2a40x6e5d">fild qword [eax+ecx*4-0x6e]</a></h3>
+<pre>
+    DF 6C 88 92</pre>
+<p>
+</p>
+<h3><a name="fimul20word205becx2b0xe4ebedd15d">fimul word [ecx+0xe4ebedd1]</a></h3>
+<pre>
+    DE 89 D1 ED EB E4</pre>
+<p>
+</p>
+<h3><a name="fimul20dword205bedi2becx2a25d">fimul dword [edi+ecx*2]</a></h3>
+<pre>
+    DA 0C 4F</pre>
+<p>
+</p>
+<h3><a name="fincstp">fincstp</a></h3>
+<pre>
+    D9 F7</pre>
+<p>
+</p>
+<h3><a name="fist20word205becx2bebx2a40x2a5d">fist word [ecx+ebx*4-0x2a]</a></h3>
+<pre>
+    DF 54 99 D6</pre>
+<p>
+</p>
+<h3><a name="fist20dword205bebx2b0x6ce26fab5d">fist dword [ebx+0x6ce26fab]</a></h3>
+<pre>
+    DB 93 AB 6F E2 6C</pre>
+<p>
+</p>
+<h3><a name="fistp20word205besi2becx2a80x505d">fistp word [esi+ecx*8-0x50]</a></h3>
+<pre>
+    DF 5C CE B0</pre>
+<p>
+</p>
+<h3><a name="fistp20dword205becx2b0x205d">fistp dword [ecx+0x20]</a></h3>
+<pre>
+    DB 59 20</pre>
+<p>
+</p>
+<h3><a name="fistp20qword205bedi5d">fistp qword [edi]</a></h3>
+<pre>
+    DF 3F</pre>
+<p>
+</p>
+<h3><a name="fisttp20qword205becx2b0x71f65b4c5d">fisttp qword [ecx+0x71f65b4c]</a></h3>
+<pre>
+    DF 89 4C 5B F6 71</pre>
+<p>
+</p>
+<h3><a name="fisttp20word205bebp2b0xd4e846eb5d">fisttp word [ebp+0xd4e846eb]</a></h3>
+<pre>
+    DB 8D EB 46 E8 D4</pre>
+<p>
+</p>
+<h3><a name="fisttp20dword205bedx0x1d5d">fisttp dword [edx-0x1d]</a></h3>
+<pre>
+    DD 4A E3</pre>
+<p>
+</p>
+<h3><a name="fisub20word205bedi5d">fisub word [edi]</a></h3>
+<pre>
+    DE 27</pre>
+<p>
+</p>
+<h3><a name="fisub20dword205beax5d">fisub dword [eax]</a></h3>
+<pre>
+    DA 20</pre>
+<p>
+</p>
+<h3><a name="fisubr20word205becx5d">fisubr word [ecx]</a></h3>
+<pre>
+    DE 29</pre>
+<p>
+</p>
+<h3><a name="fisubr20dword205b0xee402b3d5d">fisubr dword [0xee402b3d]</a></h3>
+<pre>
+    DA 2D 3D 2B 40 EE</pre>
+<p>
+</p>
+<h3><a name="fld20dword205bebx5d">fld dword [ebx]</a></h3>
+<pre>
+    D9 03</pre>
+<p>
+</p>
+<h3><a name="fld20qword205becx5d">fld qword [ecx]</a></h3>
+<pre>
+    DD 01</pre>
+<p>
+</p>
+<h3><a name="fld20tword205beax2b0xb97b64ee5d">fld tword [eax+0xb97b64ee]</a></h3>
+<pre>
+    DB A8 EE 64 7B B9</pre>
+<p>
+</p>
+<h3><a name="fld20st2">fld st2</a></h3>
+<pre>
+    D9 C2</pre>
+<p>
+</p>
+<h3><a name="fld1">fld1</a></h3>
+<pre>
+    D9 E8</pre>
+<p>
+</p>
+<h3><a name="fldcw205bebx5d">fldcw [ebx]</a></h3>
+<pre>
+    D9 2B</pre>
+<p>
+</p>
+<h3><a name="fldenv205besp2beax2a45d">fldenv [esp+eax*4]</a></h3>
+<pre>
+    D9 24 84</pre>
+<p>
+</p>
+<h3><a name="fldl2e">fldl2e</a></h3>
+<pre>
+    D9 EA</pre>
+<p>
+</p>
+<h3><a name="fldl2t">fldl2t</a></h3>
+<pre>
+    D9 E9</pre>
+<p>
+</p>
+<h3><a name="fldlg2">fldlg2</a></h3>
+<pre>
+    D9 EC</pre>
+<p>
+</p>
+<h3><a name="fldln2">fldln2</a></h3>
+<pre>
+    D9 ED</pre>
+<p>
+</p>
+<h3><a name="fldpi">fldpi</a></h3>
+<pre>
+    D9 EB</pre>
+<p>
+</p>
+<h3><a name="fldz">fldz</a></h3>
+<pre>
+    D9 EE</pre>
+<p>
+</p>
+<h3><a name="fmul20dword205b0xf38028c35d">fmul dword [0xf38028c3]</a></h3>
+<pre>
+    D8 0D C3 28 80 F3</pre>
+<p>
+</p>
+<h3><a name="fmul20qword205bedx5d">fmul qword [edx]</a></h3>
+<pre>
+    DC 0A</pre>
+<p>
+</p>
+<h3><a name="fmul20st3">fmul st3</a></h3>
+<pre>
+    D8 CB</pre>
+<p>
+</p>
+<h3><a name="fmul20to20st0">fmul to st0</a></h3>
+<pre>
+    DC C8</pre>
+<p>
+</p>
+<h3><a name="fmulp20st3">fmulp st3</a></h3>
+<pre>
+    DE CB</pre>
+<p>
+</p>
+<h3><a name="fninit">fninit</a></h3>
+<pre>
+    DB E3</pre>
+<p>
+</p>
+<h3><a name="fnop">fnop</a></h3>
+<pre>
+    D9 D0</pre>
+<p>
+</p>
+<h3><a name="fpatan">fpatan</a></h3>
+<pre>
+    D9 F3</pre>
+<p>
+</p>
+<h3><a name="fprem">fprem</a></h3>
+<pre>
+    D9 F8</pre>
+<p>
+</p>
+<h3><a name="fprem1">fprem1</a></h3>
+<pre>
+    D9 F5</pre>
+<p>
+</p>
+<h3><a name="fptan">fptan</a></h3>
+<pre>
+    D9 F2</pre>
+<p>
+</p>
+<h3><a name="frndint">frndint</a></h3>
+<pre>
+    D9 FC</pre>
+<p>
+</p>
+<h3><a name="frstor205beax5d">frstor [eax]</a></h3>
+<pre>
+    DD 20</pre>
+<p>
+</p>
+<h3><a name="fnsave205bedi5d">fnsave [edi]</a></h3>
+<pre>
+    DD 37</pre>
+<p>
+</p>
+<h3><a name="fscale">fscale</a></h3>
+<pre>
+    D9 FD</pre>
+<p>
+</p>
+<h3><a name="fsin">fsin</a></h3>
+<pre>
+    D9 FE</pre>
+<p>
+</p>
+<h3><a name="fsincos">fsincos</a></h3>
+<pre>
+    D9 FB</pre>
+<p>
+</p>
+<h3><a name="fsqrt">fsqrt</a></h3>
+<pre>
+    D9 FA</pre>
+<p>
+</p>
+<h3><a name="fst20dword205beax2besi2b0xf3ace6675d">fst dword [eax+esi+0xf3ace667]</a></h3>
+<pre>
+    D9 94 30 67 E6 AC F3</pre>
+<p>
+</p>
+<h3><a name="fst20qword205becx2b0xc70c9fbb5d">fst qword [ecx+0xc70c9fbb]</a></h3>
+<pre>
+    DD 91 BB 9F 0C C7</pre>
+<p>
+</p>
+<h3><a name="fst20st2">fst st2</a></h3>
+<pre>
+    DD D2</pre>
+<p>
+</p>
+<h3><a name="fnstcw205bedi0x285d">fnstcw [edi-0x28]</a></h3>
+<pre>
+    D9 7F D8</pre>
+<p>
+</p>
+<h3><a name="fnstenv205beax2b0x2f5d">fnstenv [eax+0x2f]</a></h3>
+<pre>
+    D9 70 2F</pre>
+<p>
+</p>
+<h3><a name="fstp20dword205bedx2b0x87d5d8705d">fstp dword [edx+0x87d5d870]</a></h3>
+<pre>
+    D9 9A 70 D8 D5 87</pre>
+<p>
+</p>
+<h3><a name="fstp20qword205bedx0x385d">fstp qword [edx-0x38]</a></h3>
+<pre>
+    DD 5A C8</pre>
+<p>
+</p>
+<h3><a name="fstp20tword205bedi0x35d">fstp tword [edi-0x3]</a></h3>
+<pre>
+    DB 7F FD</pre>
+<p>
+</p>
+<h3><a name="fstp20st7">fstp st7</a></h3>
+<pre>
+    DD DF</pre>
+<p>
+</p>
+<h3><a name="fnstsw20ax">fnstsw ax</a></h3>
+<pre>
+    DF E0</pre>
+<p>
+</p>
+<h3><a name="fnstsw205besp0x5b5d">fnstsw [esp-0x5b]</a></h3>
+<pre>
+    DD 7C 64 A5</pre>
+<p>
+</p>
+<h3><a name="fsub20dword205bedi2b0x8f7923f45d">fsub dword [edi+0x8f7923f4]</a></h3>
+<pre>
+    D8 A7 F4 23 79 8F</pre>
+<p>
+</p>
+<h3><a name="fsub20qword205beax5d">fsub qword [eax]</a></h3>
+<pre>
+    DC 20</pre>
+<p>
+</p>
+<h3><a name="fsub20st7">fsub st7</a></h3>
+<pre>
+    D8 E7</pre>
+<p>
+</p>
+<h3><a name="fsubr20to20st0">fsubr to st0</a></h3>
+<pre>
+    DC E0</pre>
+<p>
+</p>
+<h3><a name="fsubp20st0">fsubp st0</a></h3>
+<pre>
+    DE E8</pre>
+<p>
+</p>
+<h3><a name="fsubr20dword205besi0x305d">fsubr dword [esi-0x30]</a></h3>
+<pre>
+    D8 6E D0</pre>
+<p>
+</p>
+<h3><a name="fsubr20qword205becx5d">fsubr qword [ecx]</a></h3>
+<pre>
+    DC 29</pre>
+<p>
+</p>
+<h3><a name="fsubr20st3">fsubr st3</a></h3>
+<pre>
+    D8 EB</pre>
+<p>
+</p>
+<h3><a name="fsub20to20st0">fsub to st0</a></h3>
+<pre>
+    DC E8</pre>
+<p>
+</p>
+<h3><a name="fsubrp20st5">fsubrp st5</a></h3>
+<pre>
+    DE E5</pre>
+<p>
+</p>
+<h3><a name="ftst">ftst</a></h3>
+<pre>
+    D9 E4</pre>
+<p>
+</p>
+<h3><a name="fucom20st5">fucom st5</a></h3>
+<pre>
+    DD E5</pre>
+<p>
+</p>
+<h3><a name="fucomp20st6">fucomp st6</a></h3>
+<pre>
+    DD EE</pre>
+<p>
+</p>
+<h3><a name="fucompp">fucompp</a></h3>
+<pre>
+    DA E9</pre>
+<p>
+</p>
+<h3><a name="fucomi20st1">fucomi st1</a></h3>
+<pre>
+    DB E9</pre>
+<p>
+</p>
+<h3><a name="fucomip20st0">fucomip st0</a></h3>
+<pre>
+    DF E8</pre>
+<p>
+</p>
+<h3><a name="fxam">fxam</a></h3>
+<pre>
+    D9 E5</pre>
+<p>
+</p>
+<h3><a name="fxch20st0">fxch st0</a></h3>
+<pre>
+    D9 C8</pre>
+<p>
+</p>
+<h3><a name="fxtract">fxtract</a></h3>
+<pre>
+    D9 F4</pre>
+<p>
+</p>
+<h3><a name="fyl2x">fyl2x</a></h3>
+<pre>
+    D9 F1</pre>
+<p>
+</p>
+<h3><a name="fyl2xp1">fyl2xp1</a></h3>
+<pre>
+    D9 F9</pre>
+<table border="0" width="100%" cellspacing="0" cellpadding="3">
+<tr><td class="block" valign="middle">
+<big><strong><span class="block">&nbsp;NAME</span></strong></big>
+</td></tr>
+</table>
+
+</body>
+
+</html>

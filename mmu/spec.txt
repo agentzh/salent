@@ -1,0 +1,35 @@
+MMU stands for Memory Manage Unit.
+
+The MMU in Salent is reponsible for slicing "words" to "bytes". It bridges the gap between the processor and RAM. The RAM operates in words, but processor usually wants to access one single byte, two successive bytes, or a whole word. 
+
+MMU will play such a role that from the viewpoint of the processor, the memory is byte-addressable, and it is only word-addressable from the viewpoint of RAM.
+The I/O ports for the MMU can be divided into two separate sub-interface, one for the processor, and one for RAM:
+
+  RAM <=> MMU <=> Processor
+
+The sub-interface of MMU for RAM is exactly the same as the interface of RAM. MMU should take the full reponsibility to interact with RAM, including setting data bus, address bus, rw and strb control signals.
+  * bus_strb     - out    - Strobe signal issued by MMU itself to start the RAM.
+  * bus_rw       - out    - Read or write signal issued by MMU 
+  * bus_data     - inout
+  * bus_addr     - out
+  * bus_mfc      - in  
+	
+The sub-interface of MMU for processor is very simple, consisting of only four signals:
+  * mar      - in, reg    - Memory Address Register storing the address of the leading byte
+  * byte     - inout, reg - Memory Data Register storing the byte accessed or written by processor     
+  * strb     - in         - Strobe signal issued by procssor to start the MMU.
+  * rw       - in         - Read/Write'
+  * mfc      - out
+
+It is critical to be aware of the fact that Salent's memory is little-endian. So the order of bytes in the memory is simalar to:
+  3 2 1 0 | 7 6 5 4 | 11 10 9 8 | ...
+   MMU 模块把Ram与cpu连接起来，实现字节的访问与改写。
+   MMU——T模块 实现下面的功能：
+	实现cpu对Ram的读写操作
+        当读的时候，需要间隔时间要分情况讨论：
+		当上次读写的地址与本次读写的地址同属于一个字时，需要时间间隔是5ns
+		否则，是20ns
+        当写的时候，需要时间间隔要分情况讨论：
+		当上次读写的地址与本次读写的地址同属于一个字时，需要时间间隔是15ns
+		others 需要时间间隔为30ns
+        当第一次读写的时候，按照不属于一个字的情况处理。

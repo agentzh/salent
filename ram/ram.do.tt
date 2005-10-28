@@ -1,0 +1,49 @@
+[% DEFAULT
+     list_file = 'ram.lst'
+     vlog_file = 'ram.v'
+     ops = [
+        { rw   = 0,       rw_time = 1,
+          addr = '16#0',       addr_time = 2,
+          data = '16#FFFF', data_time = 1,
+          strb_up = 3, strb_down = 15,
+          run_time = 20 }
+        { rw   = 0,       rw_time = 1,
+          addr = '16#4',       addr_time = 2,
+          data = '16#ABCD', data_time = 1,
+          strb_up = 3, strb_down = 15,
+          run_time = 20 }
+        { rw   = 1,       rw_time = 2,
+          addr = '16#3',       addr_time = 3,
+          strb_up = 4, strb_down = 21,
+          run_time = 25 }
+        { rw   = 1,       rw_time = 2,
+          addr = '16#5',       addr_time = 1,
+          strb_up = 3, strb_down = 23,
+          run_time = 25 }
+     ]
+-%]
+vlog -nologo -quiet -incr -vlog95compat [% vlog_file %]
+vsim -quiet work.ram
+add wave rw strb mfc -hex addr data word_addr
+add list -nodelta -hex mfc data
+
+force strb 0
+force rw 1'bz
+force addr 'bz
+force data 'bz
+
+[% FOREACH ops -%]
+# [% des %]
+force rw [% rw %] [% rw_time %]
+force addr [% addr %] [% addr_time %]
+[% IF rw == 0 -%]
+force data -cancel [% strb_down %] 
+    [%- data %] [% data_time %]
+[% END -%]
+force strb 1 [% strb_up %]
+force strb 0 [% strb_down %]
+run [% run_time %]
+
+[% END -%]
+write list -event [% list_file %]
+quit

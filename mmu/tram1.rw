@@ -1,0 +1,25 @@
+word_size: 32
+addr_size: 32
+capacity: 2
+delay: 10
+
+w 'd1 'habcd
+r 'd0 0*abcd
+r 'd1 0*abcd
+r 'd2 0*abcd
+r 'd3 0*abcd
+r 'd4 ?
+r 'd5 ?
+r 'd6 ?
+r 'd7 ?
+r 'd16 !z+
+
+w 'd5 'hfffffffe
+r 'd4 f+e
+r 'd5 f+e
+r 'd6 f+e
+r 'd7 f+e
+r 'd3 0*abcd
+
+w 'd8 !'b101
+r 'd8 !z+

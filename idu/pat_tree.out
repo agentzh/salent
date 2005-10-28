@@ -1,0 +1,647 @@
+pat_tree: I've found 4 equivalence class(es):
+$Class1 = [
+            {
+              'ins' => 'BSF',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1011 1100 : 11 reg1 reg2'
+            },
+            {
+              'ins' => 'BSF',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1011 1100 : mod reg r/m'
+            },
+            {
+              'ins' => 'BSR',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1011 1101 : 11 reg1 reg2'
+            },
+            {
+              'ins' => 'BSR',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1011 1101 : mod reg r/m'
+            },
+            {
+              'ins' => 'BSWAP',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1100 1 reg'
+            },
+            {
+              'ins' => 'BT',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1011 1010 : 11 100 reg: imm8 data'
+            },
+            {
+              'ins' => 'BT',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1011 1010 : mod 100 r/m : imm8 data'
+            },
+            {
+              'ins' => 'BT',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1010 0011 : 11 reg2 reg1'
+            },
+            {
+              'ins' => 'BT',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1010 0011 : mod reg r/m'
+            },
+            {
+              'ins' => 'BTC',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1011 1010 : 11 111 reg: imm8 data'
+            },
+            {
+              'ins' => 'BTC',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1011 1010 : mod 111 r/m : imm8 data'
+            },
+            {
+              'ins' => 'BTC',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1011 1011 : 11 reg2 reg1'
+            },
+            {
+              'ins' => 'BTC',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1011 1011 : mod reg r/m'
+            },
+            {
+              'ins' => 'BTR',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1011 1010 : 11 110 reg: imm8 data'
+            },
+            {
+              'ins' => 'BTR',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1011 1010 : mod 110 r/m : imm8 data'
+            },
+            {
+              'ins' => 'BTR',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1011 0011 : 11 reg2 reg1'
+            },
+            {
+              'ins' => 'BTR',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1011 0011 : mod reg r/m'
+            },
+            {
+              'ins' => 'BTS',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1011 1010 : 11 101 reg: imm8 data'
+            },
+            {
+              'ins' => 'BTS',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1011 1010 : mod 101 r/m : imm8 data'
+            },
+            {
+              'ins' => 'BTS',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1010 1011 : 11 reg2 reg1'
+            },
+            {
+              'ins' => 'BTS',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1010 1011 : mod reg r/m'
+            },
+            {
+              'ins' => 'CLTS',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0000 0110'
+            },
+            {
+              'ins' => 'CMPXCHG',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1011 000w : 11 reg2 reg1'
+            },
+            {
+              'ins' => 'CMPXCHG',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1011 000w : mod reg r/m'
+            },
+            {
+              'ins' => 'CPUID',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1010 0010'
+            },
+            {
+              'ins' => 'IMUL',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1010 1111 : 11 reg1 reg2'
+            },
+            {
+              'ins' => 'IMUL',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1010 1111 : mod reg r/m'
+            },
+            {
+              'ins' => 'INVD',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0000 1000'
+            },
+            {
+              'ins' => 'INVLPG',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0000 0001 : mod 111 r/m'
+            },
+            {
+              'ins' => 'Jcc',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1000 tttn : full displacement'
+            },
+            {
+              'ins' => 'LAR',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0000 0010 : 11 reg1 reg2'
+            },
+            {
+              'ins' => 'LAR',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0000 0010 : mod reg r/m'
+            },
+            {
+              'ins' => 'LFS',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1011 0100 : modA reg r/m'
+            },
+            {
+              'ins' => 'LGDT',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0000 0001 : modA 010 r/m'
+            },
+            {
+              'ins' => 'LGS',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1011 0101 : modA reg r/m'
+            },
+            {
+              'ins' => 'LIDT',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0000 0001 : modA 011 r/m'
+            },
+            {
+              'ins' => 'LLDT',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0000 0000 : 11 010 reg'
+            },
+            {
+              'ins' => 'LLDT',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0000 0000 : mod 010 r/m'
+            },
+            {
+              'ins' => 'LMSW',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0000 0001 : 11 110 reg'
+            },
+            {
+              'ins' => 'LMSW',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0000 0001 : mod 110 r/m'
+            },
+            {
+              'ins' => 'LSL',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0000 0011 : 11 reg1 reg2'
+            },
+            {
+              'ins' => 'LSL',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0000 0011 : mod reg r/m'
+            },
+            {
+              'ins' => 'LSS',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1011 0010 : modA reg r/m'
+            },
+            {
+              'ins' => 'LTR',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0000 0000 : 11 011 reg'
+            },
+            {
+              'ins' => 'LTR',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0000 0000 : mod 011 r/m'
+            },
+            {
+              'ins' => 'MOV',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0010 0010 : 11 000 reg'
+            },
+            {
+              'ins' => 'MOV',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0010 0010 : 11 010reg'
+            },
+            {
+              'ins' => 'MOV',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0010 0010 : 11 011 reg'
+            },
+            {
+              'ins' => 'MOV',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0010 0010 : 11 100 reg'
+            },
+            {
+              'ins' => 'MOV',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0010 0000 : 11 eee reg'
+            },
+            {
+              'ins' => 'MOV',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0010 0011 : 11 eee reg'
+            },
+            {
+              'ins' => 'MOV',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0010 0011 : 11 eee reg'
+            },
+            {
+              'ins' => 'MOV',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0010 0011 : 11 eee reg'
+            },
+            {
+              'ins' => 'MOV',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0010 0001 : 11 eee reg'
+            },
+            {
+              'ins' => 'MOV',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0010 0001 : 11 eee reg'
+            },
+            {
+              'ins' => 'MOV',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0010 0001 : 11 eee reg'
+            },
+            {
+              'ins' => 'MOVSX',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1011 111w : 11 reg1 reg2'
+            },
+            {
+              'ins' => 'MOVSX',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1011 111w : mod reg r/m'
+            },
+            {
+              'ins' => 'MOVZX',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1011 011w : 11 reg1 reg2'
+            },
+            {
+              'ins' => 'MOVZX',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1011 011w : mod reg r/m'
+            },
+            {
+              'ins' => 'POP',
+              'pattern' => '000..111',
+              'encoding' => '000 sreg2 111'
+            },
+            {
+              'ins' => 'POP',
+              'pattern' => '000..111',
+              'encoding' => '000 sreg2 111'
+            },
+            {
+              'ins' => 'POP',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111: 10 sreg3 001'
+            },
+            {
+              'ins' => 'PUSH',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111: 10 sreg3 000'
+            },
+            {
+              'ins' => 'RDMSR',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0011 0010'
+            },
+            {
+              'ins' => 'RDPMC',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0011 0011'
+            },
+            {
+              'ins' => 'RDTSC',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0011 0001'
+            },
+            {
+              'ins' => 'RSM',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1010 1010'
+            },
+            {
+              'ins' => 'SETcc',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1001 tttn : 11 000 reg'
+            },
+            {
+              'ins' => 'SETcc',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1001 tttn : mod 000 r/m'
+            },
+            {
+              'ins' => 'SGDT',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0000 0001 : modA 000 r/m'
+            },
+            {
+              'ins' => 'SHLD',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1010 0100 : 11 reg2 reg1 : imm8'
+            },
+            {
+              'ins' => 'SHLD',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1010 0100 : mod reg r/m : imm8'
+            },
+            {
+              'ins' => 'SHLD',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1010 0101 : 11 reg2 reg1'
+            },
+            {
+              'ins' => 'SHLD',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1010 0101 : mod reg r/m'
+            },
+            {
+              'ins' => 'SHRD',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1010 1100 : 11 reg2 reg1 : imm8'
+            },
+            {
+              'ins' => 'SHRD',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1010 1100 : mod reg r/m : imm8'
+            },
+            {
+              'ins' => 'SHRD',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1010 1101 : 11 reg2 reg1'
+            },
+            {
+              'ins' => 'SHRD',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1010 1101 : mod reg r/m'
+            },
+            {
+              'ins' => 'SIDT',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0000 0001 : modA 001 r/m'
+            },
+            {
+              'ins' => 'SLDT',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0000 0000 : 11 000 reg'
+            },
+            {
+              'ins' => 'SLDT',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0000 0000 : mod 000 r/m'
+            },
+            {
+              'ins' => 'SMSW',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0000 0001 : 11 100 reg'
+            },
+            {
+              'ins' => 'SMSW',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0000 0001 : mod 100 r/m'
+            },
+            {
+              'ins' => 'STR',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0000 0000 : 11 001 reg'
+            },
+            {
+              'ins' => 'STR',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0000 0000 : mod 001 r/m'
+            },
+            {
+              'ins' => 'UD2',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0000 1011'
+            },
+            {
+              'ins' => 'VERR',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0000 0000 : 11 100 reg'
+            },
+            {
+              'ins' => 'VERR',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0000 0000 : mod 100 r/m'
+            },
+            {
+              'ins' => 'VERW',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0000 0000 : 11 101 reg'
+            },
+            {
+              'ins' => 'VERW',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0000 0000 : mod 101 r/m'
+            },
+            {
+              'ins' => 'WBINVD',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0000 1001'
+            },
+            {
+              'ins' => 'WRMSR',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 0011 0000'
+            },
+            {
+              'ins' => 'XADD',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1100 000w : 11 reg2 reg1'
+            },
+            {
+              'ins' => 'XADD',
+              'pattern' => '00001111',
+              'encoding' => '0000 1111 : 1100 000w : mod reg r/m'
+            }
+          ];
+$Class2 = [
+            {
+              'ins' => 'CALL',
+              'pattern' => '11111111',
+              'encoding' => '1111 1111 : 11 010 reg'
+            },
+            {
+              'ins' => 'CALL',
+              'pattern' => '11111111',
+              'encoding' => '1111 1111 : mod 010 r/m'
+            },
+            {
+              'ins' => 'CALL',
+              'pattern' => '11111111',
+              'encoding' => '1111 1111 : mod 011 r/m'
+            },
+            {
+              'ins' => 'DEC',
+              'pattern' => '1111111.',
+              'encoding' => '1111 111w : 11 001 reg'
+            },
+            {
+              'ins' => 'DEC',
+              'pattern' => '1111111.',
+              'encoding' => '1111 111w : mod 001 r/m'
+            },
+            {
+              'ins' => 'INC',
+              'pattern' => '1111111.',
+              'encoding' => '1111 111w : 11 000 reg'
+            },
+            {
+              'ins' => 'INC',
+              'pattern' => '1111111.',
+              'encoding' => '1111 111w : mod 000 r/m'
+            },
+            {
+              'ins' => 'JMP',
+              'pattern' => '11111111',
+              'encoding' => '1111 1111 : 11 100 reg'
+            },
+            {
+              'ins' => 'JMP',
+              'pattern' => '11111111',
+              'encoding' => '1111 1111 : mod 100 r/m'
+            },
+            {
+              'ins' => 'JMP',
+              'pattern' => '11111111',
+              'encoding' => '1111 1111 : mod 101 r/m'
+            },
+            {
+              'ins' => 'PUSH',
+              'pattern' => '11111111',
+              'encoding' => '1111 1111 : 11 110 reg'
+            },
+            {
+              'ins' => 'PUSH',
+              'pattern' => '11111111',
+              'encoding' => '1111 1111 : mod 110 r/m'
+            }
+          ];
+$Class3 = [
+            {
+              'ins' => 'NOP',
+              'pattern' => '10010000',
+              'encoding' => '1001 0000'
+            },
+            {
+              'ins' => 'XCHG',
+              'pattern' => '10010...',
+              'encoding' => '1001 0 reg'
+            }
+          ];
+$Class4 = [
+            {
+              'ins' => 'FADD',
+              'pattern' => '11011000',
+              'encoding' => '11011 000 : mod 000 r/m'
+            },
+            {
+              'ins' => 'FADD',
+              'pattern' => '11011.00',
+              'encoding' => '11011 d00 : 11 000 ST(i)'
+            },
+            {
+              'ins' => 'FCOM',
+              'pattern' => '11011000',
+              'encoding' => '11011 000 : mod 010 r/m'
+            },
+            {
+              'ins' => 'FCOM',
+              'pattern' => '11011000',
+              'encoding' => '11011 000 : 11 010 ST(i)'
+            },
+            {
+              'ins' => 'FCOMP',
+              'pattern' => '11011000',
+              'encoding' => '11011 000 : mod 011 r/m'
+            },
+            {
+              'ins' => 'FCOMP',
+              'pattern' => '11011000',
+              'encoding' => '11011 000 : 11 011 ST(i)'
+            },
+            {
+              'ins' => 'FDIV',
+              'pattern' => '11011000',
+              'encoding' => '11011 000 : mod 110 r/m'
+            },
+            {
+              'ins' => 'FDIV',
+              'pattern' => '11011.00',
+              'encoding' => '11011 d00 : 1111 R ST(i)'
+            },
+            {
+              'ins' => 'FDIVR',
+              'pattern' => '11011000',
+              'encoding' => '11011 000 : mod 111 r/m'
+            },
+            {
+              'ins' => 'FDIVR',
+              'pattern' => '11011.00',
+              'encoding' => '11011 d00 : 1111 R ST(i)'
+            },
+            {
+              'ins' => 'FMUL',
+              'pattern' => '11011000',
+              'encoding' => '11011 000 : mod 001 r/m'
+            },
+            {
+              'ins' => 'FMUL',
+              'pattern' => '11011.00',
+              'encoding' => '11011 d00 : 1100 1 ST(i)'
+            },
+            {
+              'ins' => 'FSUB',
+              'pattern' => '11011000',
+              'encoding' => '11011 000 : mod 100 r/m'
+            },
+            {
+              'ins' => 'FSUB',
+              'pattern' => '11011.00',
+              'encoding' => '11011 d00 : 1110 R ST(i)'
+            },
+            {
+              'ins' => 'FSUBR',
+              'pattern' => '11011000',
+              'encoding' => '11011 000 : mod 101 r/m'
+            },
+            {
+              'ins' => 'FSUBR',
+              'pattern' => '11011.00',
+              'encoding' => '11011 d00 : 1110 R ST(i)'
+            }
+          ];
+Instruction CWD and CDQ conflicted at inc/pat_tree.pm line 44.
+Instruction CWDE and CBW conflicted at inc/pat_tree.pm line 44.
+Instruction MOV and MOV conflicted at inc/pat_tree.pm line 44.
+Instruction MOV and MOV conflicted at inc/pat_tree.pm line 44.
+Instruction MOV and MOV conflicted at inc/pat_tree.pm line 44.
+Instruction MOV and MOV conflicted at inc/pat_tree.pm line 44.
+Instruction MOV and MOV conflicted at inc/pat_tree.pm line 44.
+Instruction MOV and MOV conflicted at inc/pat_tree.pm line 44.
+Instruction POP and POP conflicted at inc/pat_tree.pm line 44.
+Instruction FDIVR and FDIV conflicted at inc/pat_tree.pm line 44.
+Instruction FSUBR and FSUB conflicted at inc/pat_tree.pm line 44.
+Instruction FWAIT and WAIT conflicted at inc/pat_tree.pm line 44.
+pat_tree: pat_tree.ast generated.

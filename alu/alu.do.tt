@@ -1,0 +1,142 @@
+[% DEFAULT
+     list_file = 'alu.lst'
+     vlog_file = 'alu.v'
+     alu = {
+         sels = 
+           [
+             'NOP',
+             'ADD', 'SUB', 'MUL', 'IMUL', 'DIV', 'IDIV',
+             'AND', 'OR', 'XOR', 'NOT', 'NEG',
+             'SHL', 'SHR', 'SAL', 'SAR',
+             'ROL', 'ROR', 'RCL', 'RCR',
+           ]
+     }
+     ops = [  # operands must all be in hex form
+        { op = 'mul', A = '20', B = 0,
+          op_time = 0, A_time = 0, B_time = 1,
+          run_time = 4 }
+        { op = 'imul', A = 'fffffffd', B = 2,
+          op_time = 0, A_time = 0, B_time = 1,
+          run_time = 4 }
+        { op = 'mul', A = 'fffffffd', B = 2,
+          op_time = 1, A_time = 2, B_time = 1,
+          run_time = 4 }
+        { op = 'div', A = 6, B = 'fffffffe', D = 0,
+          op_time = 1, A_time = 0, B_time = 1, D_time = 1,
+          run_time = 4 }
+        { op = 'idiv', A = 6, B = 'fffffffe',
+          op_time = 0, A_time = 0, B_time = 1,
+          run_time = 4 }
+        { op = 'nop', op_time = 1, run_time = 4 }
+        { op = 'add', A = 5, B = 6,
+          op_time = 2, A_time = 0, B_time = 1,
+          run_time = 4 }
+        { op = 'add', A = 5, B = 6, cin = 1,
+          op_time = 2, A_time = 0, B_time = 1, cin_time = 2,
+          run_time = 4 }
+        { op = 'add', A = 5, B = 6, cin = 0,
+          op_time = 2, A_time = 0, B_time = 1, cin_time = 2,
+          run_time = 4 }
+        { op = 'sub', A = 'fffffffd', B = 9,
+          op_time = 2, A_time = 0, B_time = 1,
+          run_time = 4 }
+        { op = 'sub', A = 'fffffffd', B = 9, cin = 1,
+          op_time = 2, A_time = 0, B_time = 1, cin_time = 2,
+          run_time = 4 }
+        { op = 'sub', A = 'd', B = 9, cin = 1,
+          op_time = 2, A_time = 0, B_time = 1, cin_time = 2,
+          run_time = 4 }
+        { op = 'sub', A = 'fffffffd', B = 9, cin = 0,
+          op_time = 2, A_time = 0, B_time = 1, cin_time = 2,
+          run_time = 4 }
+        { op = 'nop', op_time = 1, run_time = 4 }
+        { op = 'xor', A = 'fffffffe', B = 3,
+          op_time = 2, A_time = 0, B_time = 1,
+          run_time = 4 }
+        { op = 'and', A = 'fffffffe', B = 'fffffffd',
+          op_time = 2, A_time = 0, B_time = 1,
+          run_time = 4 }
+        { op = 'or', A = 'fffffffe', B = 3,
+          op_time = 2, A_time = 0, B_time = 1,
+          run_time = 4 }
+        { op = 'neg', A = 5,
+          op_time = 1, A_time = 0,
+          run_time = 4 }
+        { op = 'not', A = 'b',
+          op_time = 1, A_time = 0,
+          run_time = 4 }
+        { op = 'nop', op_time = 1, run_time = 4 }
+        { op = 'shl', A = 'fffffffe', B = 2,
+          op_time = 2, A_time = 0, B_time = 1,
+          run_time = 4 }
+        { op = 'shr', A = 'fffffffe', B = 2,
+          op_time = 2, A_time = 0, B_time = 1,
+          run_time = 4 }
+        { op = 'sal', A = 'fffffffe', B = 2,
+          op_time = 2, A_time = 0, B_time = 1,
+          run_time = 4 }
+        { op = 'sar', A = 'fffffffe', B = 2,
+          op_time = 2, A_time = 0, B_time = 1,
+          run_time = 4 }
+        { op = 'rol', A = 'fffffffe', B = 2, cin = 0,
+          op_time = 2, A_time = 0, B_time = 1, cin_time = 1,
+          run_time = 4 }
+        { op = 'ror', A = 'fffffffe', B = 2, cin = 1,
+          op_time = 2, A_time = 0, B_time = 1, cin_time = 2,
+          run_time = 4 }
+        { op = 'rcl', A = 'fffffffe', B = 2, cin = 1,
+          op_time = 2, A_time = 0, B_time = 1, cin_time = 2,
+          run_time = 4 }
+        { op = 'rcr', A = 'fffffffe', B = 2, cin = 0,
+          op_time = 2, A_time = 0, B_time = 1, cin_time = 2,
+          run_time = 4 }
+     ]
+-%]
+[% USE Perl -%]
+[% sel_map = {};
+   i = 0;
+   FOREACH sel IN alu.sels;
+     sel = Perl.lc(sel);
+     sel_map.$sel = i;
+     i = i + 1;
+   END -%]
+vlog -nologo -quiet -incr [% vlog_file %]
+vsim -quiet work.alu
+add wave -hex data1 data2 data3 cin sel cout res1 res2
+add list -nodelta -hex cout res1 res2
+
+force data1 'bz
+force data2 'bz
+force data3 'bz
+force cin 0
+
+[% FOREACH ops -%]
+    [%- IF A.defined -%]
+force data1 16#[% A %] [% A_time %]
+
+    [%- END -%]
+
+    [%- IF B.defined -%]
+force data2 16#[% B %] [% B_time %]
+
+    [%- END -%]
+
+    [%- IF D.defined -%]
+force data3 16#[% D %] [% D_time %]
+
+    [%- END -%]
+
+    [%- IF cin.defined -%]
+force cin 1'b[% cin %] [% cin_time %]
+
+    [%- ELSE -%]
+force cin 1'b0
+
+    [%- END -%]
+# [% op %]:
+force sel 10#[% sel_map.$op %] [% op_time %]
+run [% run_time %]
+
+[% END -%]
+write list -event [% list_file %]
+quit

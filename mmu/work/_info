@@ -1,0 +1,36 @@
+m255
+cModel Technology
+dD:\Agent2002\Salent\v0.11\ModelSim\mmu
+vmmu
+I8Z@<GZKJj9YA_DiTQG;cA2
+VE[S1RUb=7]Y6<8l0aQ>PM2
+dD:\Agent2002\Salent\v0.12\ModelSim\mmu
+w1125468733
+Fmmu.v
+L0 7
+OE;L;5.7d;17
+r1
+31
+o-nologo -quiet -vlog95compat
+vmmu_t
+I><oc[b3V7NWMaV;Ve_ma]0
+VTJB@DXD?]:H=l:?T38B9d2
+dD:\Agent2002\Salent\v0.12\ModelSim\mmu
+w1124804866
+Fmmu_t.v
+L0 1
+OE;L;5.7d;17
+r1
+31
+o-nologo -quiet -vlog95compat
+vram
+I0_Ll_AU3O7DX3K0SYj;cV2
+VgLb_IU1Y8o>1QDL9QABlW3
+dD:\Agent2002\Salent\v0.12\ModelSim\mmu
+w1125047349
+Fram.v
+L0 7
+OE;L;5.7d;17
+r1
+31
+o-nologo -quiet -vlog95compat

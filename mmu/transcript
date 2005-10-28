@@ -1,0 +1,7 @@
+# Reading E:/Agent2002/Modeltech_5.7d/tcl/vsim/pref.tcl 
+#  OpenFile "D:/Agent2002/Salent/v0.12/ModelSim/mmu/mmu_t.v" 
+do mmu_t.do
+# vsim -quiet work.mmu_t 
+#          x
+#          x
+destroy .list

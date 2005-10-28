@@ -1,0 +1,383 @@
+[% DEFAULT
+    version = '0.13'
+    fld_map = {
+        reg32 =
+          {
+             w0 = ['AL' 'CL' 'DL' 'BL' 'AH' 'CH' 'DH' 'BH'],
+             w1 = ['EAX' 'ECX' 'EDX' 'EBX' 'ESP' 'EBP' 'ESI' 'EDI'],
+             none = ['EAX' 'ECX' 'EDX' 'EBX' 'ESP' 'EBP' 'ESI' 'EDI']
+          },
+        reg16 =
+          {
+             w0 = ['AL' 'CL' 'DL' 'BL' 'AH' 'CH' 'DH' 'BH'],
+             w1 = ['AX' 'CX' 'DX' 'BX' 'SP' 'BP' 'SI' 'DI'],
+             none = ['AX' 'CX' 'DX' 'BX' 'SP' 'BP' 'SI' 'DI']
+          },
+        sreg2 = ['ES' 'CS' 'SS' 'DS'],
+        sreg3 = ['ES' 'CS' 'SS' 'DS' 'FS' 'GS' 'Reserved' 'Reserved'],
+        eee   = {
+            CR = []
+            DR = []
+        }
+        tttn  = ['O' 'NO' 'B' 'NB' 'E' 'NE' 'BE' 'NBE' 'S' 'NS' 'P' 'NP' 'L' 'NL' 'LE' 'NLE'],
+    }
+-%]
+[% USE date;
+   USE Perl -%]
+[% SET
+     last_mod = date.format(template.modtime, '20%y-%m-%d', 'en_GB')
+-%]
+#: Disasm.pm
+#: Library for Disasm
+#: Salent v[% version %]
+#: Copyright (c) 2005 Agent Zhang
+#: 2005-08-23 [% last_mod %]
+
+package Disasm;
+
+use strict;
+use warnings;
+
+use Data::Dumper;
+use Template;
+use inc::Idu::Util;
+use C::Idu;
+use Switch 'Perl6';
+
+my $hexd = qr/[0-9A-F]/i;
+
+[%- MACRO map_reg BLOCK -%]
+[% code = Perl.sprintf("' ' x 4 x %d", nind) -%]
+[% ind = Perl.eval(code) %]
+[% ind %]given ($enc) {
+         [%- i = 0 %]
+         [%- WHILE i < fld_map.$fld.$w.size %]
+[% ind %]    when [% i %] { return "[% Perl.lc(fld_map.$fld.$w.$i) %]"; }
+         [%- i = i + 1 %]
+         [%- END %]
+[% ind %]}
+[% END -%]
+
+[%- MACRO map_eee BLOCK -%]
+[% code = Perl.sprintf("' ' x 4 x %d", nind) -%]
+[% ind = Perl.eval(code) %]
+[% ind %]given ($enc) {
+         [%- i = 0 %]
+         [%- WHILE i < fld_map.eee.$type.size %]
+[% ind %]    when [% i %] { return "[% Perl.lc(fld_map.eee.$type.$i) %]"; }
+         [%- i = i + 1 %]
+         [%- END %]
+[% ind %]}
+[% END -%]
+
+[%- MACRO map_simple BLOCK -%]
+[% code = Perl.sprintf("' ' x 4 x %d", nind) -%]
+[% ind = Perl.eval(code) %]
+[% ind %]given ($enc) {
+         [%- i = 0 %]
+         [%- WHILE i < fld_map.$fld.size %]
+[% ind %]    when [% i %] { return "[% Perl.lc(fld_map.$fld.$i) %]"; }
+         [%- i = i + 1 %]
+         [%- END %]
+[% ind %]}
+[%- END -%]
+
+sub enc2name {
+    my ($fld, $enc, $cnf) = @_;
+    return '' unless defined $enc;
+    $enc = bin2dec($enc);
+    my ($w, $bits16) = ($cnf->{w}, $cnf->{bits16}) if $cnf and ref($cnf);
+    if ($fld =~ m/^reg[12]?$/i) {
+        if ($bits16) {
+            if (defined $w) {
+                if ($w == 1) {
+                    [%- map_reg(nind=5, fld='reg16', w='w1') -%]
+                } else {
+                    [%- map_reg(nind=5, fld='reg16', w='w0') -%]
+                }
+            } else {
+                [%- map_reg(nind=4, fld='reg16', w='none') -%]
+            }
+        } else {
+            if (defined $w) {
+                if ($w == 1) {
+                    [%- map_reg(nind=5, fld='reg32', w='w1') -%]
+                } else {
+                    [%- map_reg(nind=5, fld='reg32', w='w0') -%]
+                }
+            } else {
+                [%- map_reg(nind=4, fld='reg32', w='none') -%]
+            }
+        }
+    } else {
+    [%- flds = ['sreg2' 'sreg3' 'tttn'] -%]
+    [%- FOREACH fld IN flds %]
+        [% GET '} els' UNLESS fld == flds.first %]if ($fld eq '[% fld %]') {
+            [%- map_simple(nind=3, fld=fld) -%]
+    [%- END %]
+        } elsif ($fld eq 'eee') {
+            return undef unless $cnf->{eee_type};
+            if ($cnf->{eee_type} =~ m/^cr$/i) {
+                [%- map_eee(nind=4, type='CR') -%]
+            } elsif ($cnf->{eee_type} =~ m/^dr$/i) {
+                [%- map_eee(nind=4, type='DR') -%]
+            }
+        }
+    }
+}
+
+# gen_mem: generate NASM code for memory operand specified by ModR/M byte,
+#   SIB byte, and associative displacement
+sub gen_mem {
+    my $res    = shift;
+    my $mod    = $res->{mod};
+    return undef unless defined $mod;
+    my $rm     = $res->{rm};
+    my $reg    = enc2name('reg', $rm);
+    my $scale  = $res->{scale};
+    my $factor = 2**bin2dec($scale) if defined $scale;
+    my $index  = $res->{index_reg};
+    if (defined $index) {
+        $index = enc2name('reg', $index);
+        $factor = 0 if ($index eq 'esp');
+    }
+    my $base   = $res->{base_reg};
+    $base      = enc2name('reg', $base) if defined $base;
+    my @disp   = reverse @{$res->{disp}} if $res->{disp};
+    my $disp   = '0x'.join('', @disp) if @disp;
+    if ($mod eq '00') {
+        $disp =~ s/^0x0+/0x/o if defined $disp;
+        if ($rm eq '101') { # Direct: EA = Disp32
+            return "[$disp]";
+        } elsif ($rm eq '100') { # Base with index (uses SIB byte)
+            if ($base) { # EA = [Base] + [Index] x Scale
+                return "[$base]" if $factor == 0;
+                return ($factor == 1) ?
+                    "[$base+$index]" : "[$base+$index*$factor]";
+            } else { # EA = [Index] x Scale + Disp32
+                #warn "disp - $disp";
+                return "[$disp]" if $factor == 0;
+                return ($factor == 1) ? "[$index+$disp]" : "[$index*$factor+$disp]";
+            }
+        } else {
+            return "[$reg]";
+        }
+    } elsif ($mod eq '01') {
+        $disp = signed($disp);
+        #warn "disp - $disp";
+        if ($rm eq '100') { # EA = [Base] + [Index] x Scale + Disp8
+            return "[$base$disp]" if $factor == 0;
+            return ($factor == 1) ?
+                "[$base+$index$disp]" : "[$base+$index*$factor$disp]";
+        } else { # EA = [Reg] + Disp8
+            return "[$reg$disp]";
+        }
+    } elsif ($mod eq '10') {
+        $disp =~ s/^0x0+/0x/o if defined $disp;
+        #warn "disp - $disp";
+        if ($rm eq '100') { # EA = [Base] + [Index] x Scale + Disp32
+            return "[$base+$disp]" if $factor == 0;
+            return ($factor == 1) ? "[$base+$index+$disp]" : "[$base+$index*$factor+$disp]";
+        } else { # EA = [Reg] + Disp32
+            return "[$reg+$disp]";
+        }
+    }
+}
+
+sub gen_imm {
+    my $res = shift;
+    return undef unless $res and $res->{imm};
+    my @imm = @{$res->{imm}};
+    return undef unless @imm;
+    my $imm = '0x'.join('', reverse @imm);
+    if (@imm == 1) {
+        if ($res->{s}) {
+            return 'byte '.signed($imm);
+        }
+    }
+    $imm =~ s/^0x0+($hexd)/0x$1/;
+    return $imm;
+}
+
+sub gen_disp {
+    my $res = shift;
+    return undef unless $res and $res->{imm};
+    my @imm = @{$res->{imm}};
+    return undef unless @imm;
+    my $hex = join('', reverse @imm);
+    my $val;
+    my $first = substr($hex, 0, 1);
+    if (@imm == 1 and hex($first) > 7 ) {
+        $val = hex($hex);
+        $val += @{$res->{bytes}};
+        #printf "HEX: %x", hex($hex);
+        $hex = sprintf("%02x", $val);
+        my $neg = ($hex =~ s/.+(.{2})$/$1/);
+        $hex =~ s/^0+//;
+        #$hex = sprintf("%x", $val);
+        return $neg > 0 ? "0x$hex" : '0x' . ('f' x 6) . $hex;
+    } else {
+        $val = hex($hex)+@{$res->{bytes}};
+        return sprintf("0x%x", $val);
+    }
+}
+
+sub signed {
+    my $hex = shift;
+    $hex =~ s/^0x//;
+    my $first = substr($hex, 0, 1);
+    if (hex($first) > 7) {
+        my $len = length($hex);
+        #warn "len - $len";
+        my $ret = sprintf("%x", ~hex($hex)+1);
+        $ret = substr($ret, length($ret)-$len, $len);
+        $ret =~ s/^0+($hexd)/$1/;
+        #warn "ret - $ret";
+        return '-0x' . $ret;
+    } else {
+        $hex =~ s/^0+($hexd)/$1/;
+        return '+0x' . $hex;
+    }
+}
+
+our %tpls;
+
+our $template = Template->new;
+
+sub disasm {
+    shift if @_ > 1;
+    my $mac = shift;
+    my $res = Idu->decode($mac);
+    my $asm;
+    #warn "len of \%tpls: ", scalar(keys %tpls);
+    my $tpl = $tpls{$res->{encoding}};
+    unless ($tpl) {
+        warn "Template for encoding '$res->{encoding}' not found.\n";
+        return undef;
+    }
+    my $ast = {
+[%- FOREACH bit_fld IN idu.bit_fields %]
+        [% bit_fld %] => $res->{[% bit_fld %]},
+[%- END %]
+        bits16 => $res->{bits16},
+    };
+	if ($tpl =~ m/eax_var/) {
+		if (defined $res->{w} and $res->{w} == 0) {
+			$ast->{eax_var} = 'al';
+		} elsif ($res->{bits16}) {
+			$ast->{eax_var} = 'ax';
+		} else {
+			$ast->{eax_var} = 'eax';
+		}
+	}
+	foreach my $fld (qw(reg reg1 reg2 sreg2 sreg3 tttn)) {
+        $ast->{$fld} = enc2name($fld, $res->{$fld}, $res);
+    }
+    if ($res->{ST_i}) {
+        my $i = bin2dec($res->{ST_i});
+        $ast->{"ST_i"} = "st$i";
+    }
+    foreach my $fld (qw(reg reg1 reg2)) {
+        $ast->{"${fld}_16"} = enc2name($fld, $res->{$fld}, {%$res, bits16=>1});
+    }
+    foreach my $fld (qw(reg reg1 reg2)) {
+        my %info = %$res;
+        delete $info{bits16};
+        delete $info{w};
+        #warn Data::Dumper->Dump([\%info], ['info']) if $res->{ins} =~ /mov\w+/i;
+        $ast->{"${fld}_32"} = enc2name($fld, $res->{$fld}, \%info);
+    }
+    foreach my $fld (qw(reg reg1 reg2)) {
+        my %info = %$res;
+        $info{w} = 0;
+        #warn Data::Dumper->Dump([\%info], ['info']) if $res->{ins} =~ /mov\w+/i;
+        $ast->{"${fld}_8"} = enc2name($fld, $res->{$fld}, \%info);
+    }
+    if ($res->{eee}) {
+        $res->{eee_type} = 'CR';
+        $ast->{cr} = enc2name('eee', $res->{eee}, $res);
+        $res->{eee_type} = 'DR';
+        $ast->{dr} = enc2name('eee', $res->{eee}, $res);
+    }
+    my $mem = gen_mem($res);
+    my $w = $res->{w};
+    if ($mem) {
+        $ast->{mem} = $mem;
+		if ($tpl =~ m/pref_mem/) {
+			if (defined $w and $w == 0) {
+				$ast->{pref_mem} = "byte $mem";
+			} elsif ($res->{bits16}) {
+				$ast->{pref_mem} = "word $mem";
+			} else {
+				$ast->{pref_mem} = "dword $mem";
+			}
+		}
+    }
+    $ast->{ins} = lc($res->{ins});
+    if ($res->{ins} eq 'ENTER') {
+        #warn "Hey!";
+        my $level8 = pop @{$res->{imm}};
+        $level8 =~ s/^0+($hexd)/$1/;
+        $ast->{level8} = "0x$level8";
+    } elsif ($res->{encoding} =~ m/unsigned full offset, selector/) {
+        my $offset_len = $res->{bits16} ? 2 : 4;
+        my $offset = join_imm(splice @{$res->{imm}}, 0, $offset_len);
+        $offset =~ s/^0+($hexd)/$1/;
+        $ast->{offset} = "0x$offset";
+        my $sel = join_imm(@{$res->{imm}});
+        $sel =~ s/^0+($hexd)/$1/;
+        $ast->{selector} = "0x$sel"; 
+    }
+    if ($res->{imm}) {
+        my $imm = gen_imm($res);
+        $ast->{imm} = $imm;
+        $ast->{disp} = gen_disp($res);
+		if ($tpl =~ m/pref_imm/) {
+			unless ($imm =~ m/^byte /) {
+				if (defined $w and $w == 0) {
+					$ast->{pref_imm} = "byte $imm";
+				} elsif ($res->{bits16}) {
+					$ast->{pref_imm} = "word $imm";
+				} else {
+					$ast->{pref_imm} = "dword $imm";
+				}
+			} else {
+				$ast->{pref_imm} = $imm;
+			}
+		}
+    }
+	if ($tpl =~ m/[ %\ suffix\ % ]/x) {
+		if (defined $res->{w}) {
+			if ($res->{w} == 0) {
+				$ast->{suffix} = 'b';
+			} elsif ($res->{bits16}) {
+				$ast->{suffix} = 'w';
+			} else {
+				$ast->{suffix} = 'd';
+			}
+		} else {
+			$ast->{suffix} = $res->{bits16} ? 'w' : '';
+		}
+	}
+    #warn "ENCODING: ", $res->{encoding};
+    #warn "SUBDES: ", $res->{subdes};
+    #warn "TEMPLATE: $tpl";
+    #warn Template::Ast->dump([$ast],['ast']);
+    $template->process(\$tpl, $ast, \$asm)
+      || die $template->error();
+    $asm =~ s/xchg e?ax,e?ax/nop/i;
+    $asm =~ s/fxch st1/fxch/i;
+    return $asm;
+}
+
+sub join_imm {
+    return join('', reverse @_);
+}
+
+%tpls = (
+[% FOREACH insts -%]
+   '[% encoding %]' => "[% asm_tpl %]",
+[% END -%]
+);
+
+1;

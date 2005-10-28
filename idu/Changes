@@ -1,0 +1,471 @@
+v0.13 - 2005-08-26
+
+* Created the repository.
+* Merged the patch for asm2ast.pl provided by Sal to the repository. Sal++!
+* Merged the Zhang Xing's work on gen_asm_tpl.pl, asm_tpl2.tt, and t\Disasm.t to the
+  repository. Zhang Xing++!
+* Updates to encoding.txt:
+  Move
+    ST(i) <- ST(0) / ST(i) 11011 100 : 1111 0 ST(i)
+  from FDIV to FDIVR. Yeah, it should be fdivr.
+  Move
+    ST(i) <- ST(i) / ST(0) 11011 100 : 1111 1 ST(i)
+  from FDIVR to FDIV. The same reason.
+  Apply similar movement to FSUB*,
+* jnc <=> jnb ? Weird.
+* wrote debug.bat and debug2.bat to aid Disasm's test-driven development.
+* Got a bug in Ndisasm! The operand size for FISTTP is completely wrong:
+	'DF 4D 1C' => 'fisttp qword [ebp+0x1c]'
+	'DB 8E 6C 07 A2 70' => 'fisttp word [esi+0x70a2076c]'
+	'DD 0A' => 'fisttp dword [edx]'
+* "fxch st1" should be abbreviated as "fxch" according to Intel's documentation.    
+* At 20:24 on September 1st, Zhang Xing and I successfully achieved 100% of the
+  test suit for our x86 disassembler, Disasm.
+* Weird! pat_cover.pl failed to generate an instruction for pattern
+	IMUL - memory with immediate to register
+	0110 10s1 : mod reg r/m : immediate data
+  in a run couple of days before.
+  This bug haven't recurred yet. So I can't locate it.
+* [TODO] Salent Assembler (SASM)
+* [TODO] Salent Virtual Machine (SVM)
+* [TODO] Bootstrap SVM by SASM and C
+* [TODO] Verilog IDU
+* [TODO] Perl MMU and C MMU
+* [TODO] Perl IEU and C IEU
+* Wrote state_mac.xml.tt to generate XML code for IDU's state machine AST. I expect Jack
+  to render this stuff using Java's graphical capabilities.
+* Wrote new_encoding_ast.pl to generate encoding2.ast, the next generation for
+  encoding.ast. The main difference is that encoding2.ast contains NASM templates
+  while encoding.ast doesn't. The structure of the new AST is completely compatable
+  with the old one.
+* Use encoding2.ast to replace encoding.ast in most cases, thus completing the
+  "bootstrap" process for this AST.
+* Add info for NASM syntax to encoding.html. Thanks to encoding2.ast!
+* Add draw_graph.pl to produce PNG pictures (state_mac.png and t\state_mac.png) from
+  the XML specs of state machines.
+
+
+v0.12 - 2005-08-22
+
+* Added debug code to cidu\Idu.pm, finding the maximal length of returned Perl code
+  is 443 (thanks to t\chex2bin.exe.t and t\cbin2hex.exe.t!). Therefore it is
+  appropriate to set the buffer size used by the dump_res_to_perl function to 512.
+* Changed the value of BUFSIZE in dump_res_to_perl from 1024 to 512.
+* Renamed the BUFSIZE constant to BYTES_LEN, expectedly to solve the naming pollution
+  problem.
+* Renamed the "cidu" folder to "C", which is more friendly. I look forward to more
+  folders like "Java", "Verilog", "C#", "Python", or even "JavaScript".
+* Added an awful lot of assertions to dump_res_to_perl in C\idu.c.tt. Although they
+  make the C code quite ugly, I expect C IDU to be able to catch buffer overflow as
+  soon as possible. Ugly but working solution.
+* I failed to compile C\idu.c using CL.exe v13.00.9466 with /TP option. I got the
+  following error message:
+	idu.c(991) : fatal error C1061: 晤祒ん癹秶 : 輸И杶怮旮
+  Damn! The good news is my tiny C IDU can be compiled by such CL.exe very happily.
+* Sigh. CL v13.10.3077 still fails to compile C\idu.c with /TP option. I got the
+  following error message:
+	idu.c(989) : fatal error C1061: compiler limit : blocks nested too deeply
+* Both gcc and g++ shipped with MinGW can perfectly compile C\idu.c. Whee!
+* Early work on x86 Disassembler derived from our IDU has begun!
+* Added fld_map subtree to global AST ..\Config.ast.tt. fld_map is a mapping function
+  from the encoding of field to the corresponding name (or symbol). '000' => 'eax' is
+  such an example.
+* Created inc\Disasm.pm for Disassembler utilities
+* t\Disasm.t added.
+* Updates to encoding.txt again:
+  Convert
+    MOV -
+	CR0 from register 0000 1111 : 0010 0010 : 11 000 reg
+	CR2 from register 0000 1111 : 0010 0010 : 11 010 reg
+	CR3 from register 0000 1111 : 0010 0010 : 11 011 reg
+	CR4 from register 0000 1111 : 0010 0010 : 11 100 reg
+  to
+	  CR0-CR4 from register 0000 1111 : 0010 0010 : 11 eee reg
+
+  Convert
+    MOV -
+	  DR0-DR3 from register 0000 1111 : 0010 0011 : 11 eee reg
+	  DR4-DR5 from register 0000 1111 : 0010 0011 : 11 eee reg
+	  DR6-DR7 from register 0000 1111 : 0010 0011 : 11 eee reg
+  to
+	  DR0-DR7 from register 0000 1111 : 0010 0011 : 11 eee reg
+
+  Convert
+    MOV -
+	  register from DR6-DR7 0000 1111 : 0010 0001 : 11 eee reg
+      register from DR4-DR5 0000 1111 : 0010 0001 : 11 eee reg
+	  register from DR0-DR3 0000 1111 : 0010 0001 : 11 eee reg
+  to
+	  register from DR0-DR7 0000 1111 : 0010 0001 : 11 eee reg
+
+  Remove redundant instruction 
+	"MOV - register to SS 1000 1110 : 11 sreg3 reg",
+  which is a special instance of
+	"MOV - register to segment register 1000 1110 : 11 sreg3 reg".
+
+  Remove redundant instruction
+	"MOV - memory to SS 1000 1110 : mod sreg3 r/m",
+  which is a special instance of
+	"MOV - memory to segment reg 1000 1110 : mod sreg3 r/m".
+
+  These modifications lead to 0 conflicted instruction patterns.
+  Whee!
+* Sal Zhong succeeded in refactoring the ram repository using Makefile mechanism,
+  mimicing the way the alu repository follows. Sal++!
+* Sal began to port the tester for ram to mmu.
+* Wan Xunxin obtained an experimental implementation for mmu.v. Now he gets down to
+  write tests for it. Xunxin++!
+* Zhang Xing is now reparing NASM templates for our disassembler on idu. He is
+  dangerously close to completion. I wrote inc\Disasm.pm.tt and a skeleton of
+  t\Disasm.t for him. gen_asm_tpl.pl and asm_tpl2.ast.tt are produced by himself,
+  getting help from me. Xin++!
+* Cancel the unnecessary dependency in t\cidu.t on my XBase module. XBase is not
+  mature enough for production.
+* immediate date was incorrect for displacement: loopne, loope, loop, jecxz, enter, Jcc, and call.
+  Actually, Ndisasm computes the absolute address displacement for CALL, Jcc, JECXZ, and so, with
+  respect to the context. So a patch is needed for asm2ast.pl so as to fix this suttle issue.
+* 8-bit level corrupts 16-bit displacement in the ENTER instruction.
+* Our Disassembler now passed 48% of the tests in t/disasm_cover.t. Great!
+* "nmake smoke" becomes popular again when we debug our Disasm implementation.
+* Updates to txt2html.pl: line numbers added to the HTML output. Sexy indeed!
+* Updates to encoding.txt:
+  Convert
+    ENTER 每 Make Stack Frame for High Level Procedure 1100 1000 : 16-bit displacement : 8-bit level (L)
+  to
+    ENTER 每 Make Stack Frame for High Level Procedure 1100 1000 : 24-bit displacement
+  I made updates to inc\pat_tree.pm correspondingly. Thus multiple successive imm data section problem
+  is solved simply by combining them into a whole. Simple and elegant!
+
+
+v0.11 - 2005-08-18
+
+* Improved the C IDU's error-handling mechanisms.
+* Wrapped the C IDU as a Perl module named cidu::Idu with the same API as the pure
+  Perl version inc::Idu. Thanks to the Inline::C module!
+* Ported most of the tests for Perl IDU to C IDU and all tests passed! I saw
+  how these two versions of IDU
+  effectively shared the same tester front-end and most of the backend code.
+* Added the "ctest" objective to Makefile.
+* I was very excited to see the born of optest.tt.tt which is a TT2 template that
+  generates another TT2 template! Actually, optest.tt.tt can generate different
+  tester backend template for different versions of IDU. For example, to get
+  optest.tt for Perl IDU, we should set "lang" to "Perl" via the tpage tool:
+	tpage --define lang=Perl optest.tt.tt > optest.tt
+  Another example is
+	tpage --define lang=C optest.tt.tt > coptest.tt
+  This scheme leads to the maximal code reuse of the tester backend.
+* Ported pat_cover.t onto the C IDU land, reusing code by template-ize the original
+  pat_cover.t as pat_cover.t.tt.
+* Added the "cmintest" objective to Makefile.
+* Refactored the tests for sub decode in t\Idu.t and t\cidu.t a bit.
+  Now C IDU and Perl IDU share these tests via a template named opname.t.tt.
+* Canceled the -d option and implemented 'set d' and 'unset d' for Perl idui,
+  just as C idui.
+* Got a potential bug in function dump_res in cidu\idu.c.tt: When parsing the
+  instruction "f2 66 f7 46 0c 0c 01", we get the imm data "0c 00" instead of the
+  expected value "0c 01".
+* Added error.t.tt to the repository, in order to generate tests for error-handling
+  mechanisms in Perl IDU and C IDU simultaneously.
+* Updates to inc\Idu.pm.tt: used TT2 Macros to reduce redundant code.
+* Commented out some debug code in pat_cover.pl
+* Suppressed useless 66H prefix byte generation for instructions movsx, movzx, and
+  bswap, leading to a satisfactory result that all the instructions generated by
+  pat_cover.pl can be parsed correctly by Ndisasm.
+* Added operand.t.tt to the tester, which can test the decoding result quite
+  thoroughly. These tests are shared between Perl IDU and C IDU automatically.
+* Added many more tests to t\error.t.tt. Thus the error-handling features of IDU are
+  now thoroughly tested.
+
+
+v0.10 - 2005-08-13
+
+* From this version, the main focus was transisted to fix the LALR(2) and LALR(3)
+  parsing problems in Idu.pm.
+* Modified encoding.txt by hand [Convert LALR(2)/LALR(3) patterns to LALR(1)]:
+  Convert
+    POP - segment register DS, ES 000 sreg2 111
+  to
+    POP - segment register DS 000 11 111
+    POP - segment register ES 000 00 111
+
+  Convert
+    POP - segment register SS 000 sreg2 111
+  to
+    POP - segment register SS 000 10 111
+
+  Convert
+    POP - segment register FS,GS 0000 1111: 10 sreg3 001
+  to
+    POP - segment register FS 0000 1111: 10 100 001
+    POP - segment register GS 0000 1111: 10 101 001
+
+  Convert
+
+  Convert
+    PUSH - segment register FS,GS 0000 1111: 10 sreg3 000
+  to
+    PUSH - segment register FS 0000 1111: 10 100 000
+    PUSH - segment register GS 0000 1111: 10 101 000
+
+  Convert
+    INC - reg 1111 111w : 11 000 reg
+  to
+    INC - reg8 1111 1110 : 11 000 reg
+    INC - full register 1111 1111 : 11 000 reg
+
+  Convert
+    INC - memory 1111 111w : mod 000 r/m
+  to
+    INC - mem8 1111 1110 : mod 000 r/m
+    INC - full memory 1111 1111 : mod 000 r/m
+
+  Convert
+    DEC - register 1111 111w : 11 001 reg
+  to
+    DEC - reg8 1111 1110 : 11 001 reg
+    DEC - full register 1111 1111 : 11 001 reg
+
+  Convert
+    DEC - memory 1111 111w : mod 001 r/m
+  to
+    DEC - mem8 1111 1110 : mod 001 r/m
+    DEC - full memory 1111 1111 : mod 001 r/m
+
+  Convert
+    FADD - ST(d) ↘ ST(0) + ST(i) 11011 d00 : 11 000 ST(i)
+  to
+    FADD - ST(0) ↘ ST(0) + ST(i) 11011 000 : 11 000 ST(i)
+    FADD - ST(i) ↘ ST(0) + ST(i) 11011 100 : 11 000 ST(i)
+
+  Convert
+    FSUB  - ST(d) ↘ ST(0) 每 ST(i) 11011 d00 : 1110 R ST(i)
+  to
+    FSUB  - ST(0) ↘ ST(0) 每 ST(i) 11011 000 : 1110 0 ST(i)
+    FSUB  - ST(i) ↘ ST(0) 每 ST(i) 11011 100 : 1110 0 ST(i)
+
+  Convert
+    FSUBR - ST(d) ↘ ST(i) 每 ST(0) 11011 d00 : 1110 R ST(i)
+  to
+    FSUBR - ST(0) ↘ ST(i) 每 ST(0) 11011 000 : 1110 1 ST(i)
+    FSUBR - ST(i) ↘ ST(i) 每 ST(0) 11011 100 : 1110 1 ST(i)
+
+  Convert
+    FMUL - ST(d) ↘ ST(0) ℅ ST(i) 11011 d00 : 1100 1 ST(i)
+  to
+    FMUL - ST(0) ↘ ST(0) ℅ ST(i) 11011 000 : 1100 1 ST(i)
+    FMUL - ST(i) ↘ ST(0) ℅ ST(i) 11011 100 : 1100 1 ST(i)
+
+  Convert
+    FDIV  - ST(d) ↘ ST(0) ¯ ST(i) 11011 d00 : 1111 R ST(i)
+  to
+    FDIV  - ST(0) ↘ ST(0) ¯ ST(i) 11011 000 : 1111 0 ST(i)
+    FDIV  - ST(i) ↘ ST(0) ¯ ST(i) 11011 100 : 1111 0 ST(i)
+
+  Convert
+    FDIVR - ST(d) ↘ ST(i) ¯ ST(0) 11011 d00 : 1111 R ST(i)
+  to
+    FDIVR - ST(0) ↘ ST(i) ¯ ST(0) 11011 000 : 1111 1 ST(i)
+    FDIVR - ST(i) ↘ ST(i) ¯ ST(0) 11011 100 : 1111 1 ST(i)
+
+  Convert
+    AAD 每 ASCII Adjust AX before Division 1101 0101 : 0000 1010
+  to
+    AAD 每 ASCII Adjust AX before Division
+    AX 1101 0101 : 0000 1010
+    imm8 data 1101 0101 : ib
+
+  Convert
+    AAM 每 ASCII Adjust AX after Multiply 1101 0100 : 0000 1010
+  to
+    AAM 每 ASCII Adjust AX after Multiply 1101 0100 : 0000 1010
+    AX 1101 0100 : 0000 1010
+    imm8 data 1101 0100 : ib
+
+* Bug fixes: hex2bin.c & bin2hex.c: When open binary files for reading or writing,
+  it's necessary to use "b" as a suffix in fopen's mode string.
+* Ndisasmw is able to dissemble "d5 0d" to "aad 0xd". Actually, NASM support
+  "AAD imm" which is absent in Intel's table. I decided not to add "AAD imm8" to 
+  encoding.txt.
+* I decoded not to add "AAM imm8" to encoding.txt either.
+* It's weird to handle the situation when "s" is 1 and "w" is 0. NASM doesn't
+  support it at all, I think I should not either.
+* Got a bug in sub parse_enc in pat_tree.pm: "port number" is now treated as
+  "imm8 data".
+* Got anothe bug concerning the immediate data length: sub parse_enc:
+  "unsigned full offset, selector" means 4 bytes imm data for 16-bit operand size 
+  and 6 bytes long for 32-bit operand size. So I introduce a new type of imm called
+  'pointer' to the AST. I suppose it will work perfectly.
+* Glorious News!!! It's the first time that all the tests get passed! Now it's
+  22:30 August 13th, 2005. Here is the very output:
+    perl -MExtUtils::Command::MM  -e "@ARGV = map glob, @ARGV; test_harness(
+      0, '.', '.');" t\*.t
+      t\bin2asm..........ok
+      t\bin2hex.exe......ok
+      t\bin2hex..........ok
+      t\catln............ok
+      t\exe2hex..........ok
+      t\hex2bin.exe......ok
+      t\hex2bin..........ok
+      t\Idu-Util.........ok
+      t\Idu..............ok
+      t\main.cod.........ok
+      t\my_perl.exe......ok
+      t\ndisasmi.........ok
+      t\optest...........ok
+      t\pat_cover.ast....ok
+      t\pat_cover........ok
+      t\pat_tree.........ok
+      t\state_mac........ok
+      t\types.cod........ok
+      All tests successful.
+      Files=18, Tests=56245, 75 wallclock secs ( 0.00 cusr +  0.00 csys =  0.00 CPU)
+
+* Add support for "AAD ib" and "AAM ib". Excellent work! So now machine instruction
+  "d5 1d" can be handled correctly.
+* Recover general support for prefix byte 'f2' and 'f3'. So now machine instruction
+  "F3 23 AA A3 C0 12 0A" can be parsed properly.
+* Add missing x87 FPU instruction "FISTTP" to encoding.txt
+    FISTTP - Store Integer with Truncation
+    16-bit memory 11011 111 : mod 001 r/m
+    32-bit memory 11011 011 : mod 001 r/m
+    64-bit memory 11011 101 : mod 001 r/m
+  So now machine instruction "DB 4B 1C" can get parsed.
+* Got an unparsed machine instruction for ADD : 67 02 5C D9. Weird.
+* Discard instruction "add bl,[si-0x27]" since CL don't accept it either. Maybe I 
+  should ask my future MASM teacher.
+* Now the test suit can be run arbitrarily without any failures. Yeah!
+* No, when I add '66' prefix byte generation feature to pat_cover.pl, some tests
+  failed.
+* I suspect that Ndisasmw.exe incorrectly parse machine ins "66 A1 E8 1C 6B 88" to
+  "mov ax,[0x886b1ce8]". Referring to Intel's doc, the instruction encoding should
+  be "A1 MOV AX,moffs16". I think my IDU is right. 
+* Yep, I'm now quite sure it's a bug in Ndisasmw.exe. CL.exe also generate
+  "66 b8 e8 1c" for the assembly ins "mov ax,[0x886b1ce8]" where only 16-bit imm 
+  data are accepted.
+* Updates to encoding.txt:
+  NOP instruction is now abandoned.
+* CBW and CWD is now abandoned in encoding.txt. CBW and CWDE merged, and CWD and
+  CDQ merged.
+* Added support for successive prefix bytes in one instruction and introduce 
+  'bits16' to the Idu decoding result. Hence, "f2 66 f7 46 0c 0c 01" should be
+  parsed from now on.
+* Important question: what does 'full displacement' stand for? Should it be 
+  affected by the operand-size attribute set by the '66' legacy prefix byte?
+  NASM thinks it is always 32-bit long regardless whether '66' prefix is present
+  or not only for 'CALL'.
+* Updates to encoding.exe according to the behaviour of NDisasamw.exe:
+  Changed
+    MOV - memory to AL, AX, or EAX 1010 000w : full displacement
+    MOV - AL, AX, or EAX to memory 1010 001w : full displacement
+  to
+    memory to AL, AX, or EAX 1010 000w : disp32
+    AL, AX, or EAX to memory 1010 001w : disp32
+* According to NASM doc, I added Intel's one undocumented instruction "SALC" (d6)
+  to encoding.txt.
+* It is worth mentioning that the instruction "FCMOVcc" is missing in Intel's 
+  Appendix B Table B-11.
+* It is interesting to see that some instructions don't take 66 as a prefix bytes 
+  according to Ndisasmw.exe. Here're several instances:
+    movsx ecx,bp
+    movzx ebx,di
+    bswap edx
+* Began the work on cidu. I found that testing the C code using Inline::C is
+  amazingly convenient!
+
+
+v0.09 - 2005-08-11
+
+* Got another error in Intel's "IA-Manual-2B.pdf": FSTCW should be FNSTCW and 
+  FSTSW should be FNSTSW. FSTENV, FSAVE, and FCLEX are other examples.
+* The following instructions may not be parsed by Idu.pm properly:
+    POP - 000 sreg2 111
+    DEC - 1111 111w : 11 001 reg
+    DEC - 1111 111w : mod 001 r/m
+    INC - 1111 111w : 11 000 reg
+    INC - 1111 111w : mod 000 r/m
+    FADD - 11011 d00 : 11 000 ST(i)
+    FDIV - 11011 d00 : 1111 R ST(i)
+    FMUL - 11011 d00 : 1100 1 ST(i)
+    FSUB - 11011 d00 : 1110 R ST(i)
+  and many more LALR(3) patterns (such as JNS)...
+* Remove "LOCK - Assert LOCK# Signal Prefix" from encoding.txt
+
+
+v0.08 - 2005-07-31
+
+* Merge Sal's ram tester and his two idu tester front-ends cod2ast.pl and 
+  pe2ast.pl to this version.
+* Found a bug in PEDasm. It incorrectly translate "f7 9d" to "neg ebp". Both 
+  Ndisasmw and my idui.pl suppose this is an invalid machine instruction.
+  And so do I. So I force pe2ast.pl to ignore this.
+* Got another! PEDasm translates "f7 5d" to infamous the "neg ebp" instruction 
+  as well.
+* PEDasm fails to distinguish "NOP" from "XCHG eax,eax". Got it fixed in optest.tt
+* Makefile-ize the idu repository.
+* Migrate Pugs'wonderful "smoke" mechanism to Salent idu.
+* The hyper-links in smoke.html now compeletely work. The links on the test file
+  name are pointed to the test script source, and the links on the colored bricks
+  are set to the corresponding line of the AST file. Excellent!
+* The link-setting code added to util/testgraph.pl is now fully optimized.
+* The tester is also optimized by setting the evironment HARNESS_OK_SLOW to true. 
+  Good news! 
+
+
+v0.07
+
+* First run exe2t.pl using my little bin2hex.exe, 311 tests of 24192 total tests 
+  (1.29%) failed. In other words, 98.71% passed.
+* I fixed a "new-line bug" in exe2hex.pl, so all "MOV reg, imm" passed, leading to
+  the passing rate of bin2hex.exe.t of 99.03%.
+* After I modified the optest.tt a bit, the test passing rate raised to 99.36% 
+  (155 tests failed).
+* I cancelled the REP prefix (F3h) in Idu.pm.tt, thus "REP MOVS", "REP OUTS",
+  etc., will be decoded properly.
+* When I fixed the most of the synonym problems, bin2hex.exe.t passed 99.45% 
+  (133 tests failed).
+* Adapt to NASM's "es ..." and "db ..." syntax, thus giving rise to a passing rate
+  of 99.51% (119 tests failed). It is interesting to noting that PEDasm generate 
+  "byte ..." pseudo instruction for unrecognized instrucitons, but NDisasm prefers
+  "db ...".
+* "insb" is a synonym for "ins" when the w field is set to 0.
+* NOP and XCHG shouldn't break but they broke. I rewrite the sub sort_next_states
+  in state_mac.pm using the algorithm based on equivalence class grouping. The
+  original algorithm is incorrect in theory. This modification gives rise to 
+  a test passing rate of 99.64% (86 tests failed).
+* I asked Sal to provide a new tester front-end based on PEDasm.exe.
+* Ignore prefix byte f0 to make the LOCK instruction available. I have no idea
+  how I can fix it. Leaving it to a TODO test may be best choice for now. Sigh.
+
+
+v0.06
+
+* Instruction CWD and CDQ conflicted. Reserved the former only.
+* Instruction CWDE and CBW conflicted. Reserved the former only.
+* Typo in Intel doc: "UD2 - ... 0000 FFFF : 0000 1011". It should have been "1111",
+  but it is "FFFF". Sigh. Thanks to sub parse_enc!
+* Typo in Intel doc: "IMUL - ... 0000 1111 : 1010 1111 : 11 : reg1 reg2". It should
+  be "11 reg1 reg2", not "11 : reg1 reg2". Thanks to sub parse_enc!
+* I made a decision to support all the FPU instructions in the Salent Instruction 
+  Decoder.
+* Typo in Intel doc(Appendix B): the FINIT directive lacks encoding pattern. Well,
+  it's not a typo, FINIT is a combination of two separate instructions (FWAIT and
+  FNINIT)
+* Missing instruction FNINIT in Table B-33, Appendix B.
+* ASCII ' - 'appeared in FPU instruction 'FLDL2E'.
+* So many typos in Table B-33! Intel--
+* It is critical to sort the next state list for each state according to their 
+  patterns' relative generalities.
+* What is the length of the "immediate data" if the "w" field is not present in
+  the instruction encoding? The PUSH and SUB instructions give different answers.
+  So perhaps I could say "uncertain" or such.
+* What is the length of the "port number" in
+  "IN - fixed port - 1110 010w : port number"?
+  Should it be "immediate data", or "imm8"?
+* What controls the length of "immediate data"? only "w"? only "s"? or both?
+* I'm guessing that the len of "immediate data" is 8-bit if both "w" field and
+  "s" field appeared and they are both set to 1. In other cases, The len is 
+  determined absolutely by the "w" field: 8 when "w" = 0 and 16/32 when "w" = 1.
+  If the "w" field is absent, the len is determined absolutely by the "s" field:
+  8-bit when s = 1, 16/32-bit otherwise.
+* There is a serious problems concerned with CALL, INC, and DEC. The first byte's
+  patterns conflict. I can do nothing but split the encodings for DEC and INC.

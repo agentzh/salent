@@ -1,0 +1,32 @@
+v0.13 - 2005-08-26
+
+* Removed vsim_svr.wsc and t\vsim_svr.t.
+
+
+v0.12 - 2005-08-25
+
+* Add vsim_svr.wsc and t/vsim_svr.t to the alu repository.
+* Obviously Windows Script Component is DLL COM Server, not EXE COM Server like MS Word. Hence this
+  approach can be used to eliminate frequent restarting behaviou of vsim.exe. Sigh.
+* I think I have to use Active Template Library (ATL) to build an EXE COM server using C++ myself.
+
+
+v0.09 - 2005-08-11
+
+* Makefile-ize the alu repository and also use cutomized Makefile.PL to generate Makefile
+
+
+v0.08
+
+* Do not set cin in AST when op is div or mul. The tester will broke even if you set c_in all to 0.
+* Ignore the cin and cout completely when div, idiv, mul, and imul are performed.
+* cout is always 0 when logic and, or, and xor are performed. cin will be ignored by ALU for these operations.
+* When generate test cases randomly, be ware of the "divide by zero" exception and "integer over flow exception". The MASM code will crash if a software exception occurred.
+* Don't change word_size to values other than 32. The MASM code impose this limit to us.
+* clean.bat is very handy indeed.
+* It should be noted that NOT has no affect on cout. Unforturnately, there is no easy way to test this behaviour. We can't specify cin when we test NOT in .op file.
+* It is interesting to test
+	rcr 0xe49e0000, 0x11 (CF = 1)
+  and
+        rcr 0x28820000, 0x00 (CF = 1)
+* I wrote talu6.pl to generate the AST directly, without boring to use the cumbersome opc.tt mechanism. I got the test process 5 sec faster in the case of talu1.

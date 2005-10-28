@@ -1,0 +1,316 @@
+[% DEFAULT
+    version = '0.13'
+    fld_map = { 
+        reg =
+          {
+             w0 = ['AL' 'CL' 'DL' 'BL' 'AH' 'CH' 'DH' 'BH'],
+             w1 = ['AX' 'CX' 'DX' 'BX' 'SP' 'BP' 'SI' 'DI'],
+             none = ['AX' 'CX' 'DX' 'BX' 'SP' 'BP' 'SI' 'DI']
+          },
+        sreg2 = ['ES' 'CS' 'SS' 'DS'],
+        sreg3 = ['ES' 'CS' 'SS' 'DS' 'FS' 'GS' 'Reserved' 'Reserved'],
+        tttn  = ['O' 'NO' 'B' 'NB' 'E' 'NE' 'BE' 'NBE' 'S' 'NS' 'P' 'NP' 'L' 'NL' 'LE' 'NLE'],
+    }
+-%]
+[% USE date;
+   USE Perl -%]
+[% SET
+     last_mod = date.format(template.modtime, '20%y-%m-%d', 'en_GB')
+     year = date.format(template.modtime, '20%y', 'en_GB')
+     states = idu.state_machine
+-%]
+
+[%- MACRO read_byte BLOCK -%]
+[% code = Perl.sprintf("' ' x 4 x %d", nind) -%]
+[% ind = Perl.eval(code) -%]
+[% ind %]$byte = readbytes(1);
+[% ind %]unless (defined $byte) { # Check the unexpected end of input
+[% ind %]    $state = $token_error ? 'S_SYN_ERROR' : 'S_END_ERROR';
+[% ind %]    next;
+[% ind %]}
+[% END -%]
+
+[%- MACRO read_imm_data BLOCK -%]
+[% code = Perl.sprintf("' ' x 4 x %d", nind) -%]
+[% ind = Perl.eval(code) -%]
+[% ind %]my @bytes = readbytes([% nbytes %]);
+[% ind %]unless (@bytes) {
+[% ind %]    $state = $token_error ? 'S_SYN_ERROR' : 'S_END_ERROR';
+[% ind %]    next;
+[% ind %]}
+[% ind %]$res->{imm} = [bin2hex @bytes];
+[%- END -%]
+
+[%- MACRO read_disp BLOCK -%]
+[% code = Perl.sprintf("' ' x 4 x %d", nind) -%]
+[% ind = Perl.eval(code) -%]
+[% ind %]my @bytes = readbytes([% nbytes %]);
+[% ind %]return undef unless @bytes;
+[% ind %]$res->{disp} = [bin2hex @bytes];
+[% END -%]
+#: Idu.pm
+#: Perl implementation of IA-32 instruction decoding unit
+#: Salent v[% version %]
+#: Copyright (c) [% year %] Agent Zhang
+#: 2005-07-24 [% last_mod %]
+
+package Idu;
+
+use strict;
+use warnings;
+use inc::Idu::Util;
+
+our $source;   # input file handle
+our @oldbytes; # stores the bytes processed
+our $error;    # stores the error info
+our $debug = 0;
+our $token;
+our $token_error = 0;
+
+# Return the error info:
+sub error {
+    return $error;
+}
+
+# Read the specified number of bytes from input:
+sub readbytes {
+    $token_error = 0;
+    my $count = shift;
+    $count ||= 1;
+    my @bytes;
+    for (1..$count) {
+        local $/ = ' ';
+        do {
+            $token = <$source>;
+        } while ($token and $token =~ m/^\s+$/);
+        return () unless $token;
+        $token =~ s/\s+|\n//g;
+        push @oldbytes, $token;
+        if ($token =~ m/^[01]{8}$/o) {
+            push @bytes, sprintf("%08s", $token);
+        } elsif ($token =~ m/^[0-9a-f]{2}$/io) {
+            push @bytes, sprintf("%08b", hex($token));
+        } else {
+            $token_error = 1;
+            return wantarray ? () : undef;
+        }
+    }
+    return wantarray ? @bytes : $bytes[0];
+}
+
+# Process the ModR/M byte:
+sub process_ModRM {
+    my ($res, $byte) = @_;
+    my $mod = slice($byte, 7, 6);
+    my $rm  = slice($byte, 2, 0);
+    $res->{mod} = $mod;
+    $res->{rm}  = $rm;
+    if ($mod eq '00') {
+        if ($rm eq '101') { # Direct: EA = Disp32
+            # Get 32-bit displacement:
+
+            [%- read_disp(nind=3, nbytes=4) -%]
+        } elsif ($rm eq '100') { # Base with index (uses SIB byte)
+            # Get SIB byte:
+            my $byte = readbytes(1);
+            return undef unless defined $byte;
+            $res->{scale} = slice($byte, 7, 6);
+            $res->{index_reg} = slice($byte, 5, 3);
+            my $base = slice($byte, 2, 0);
+            if ($base eq '101') { # Base == EBP: EA = [Index] x Scale + Disp32
+                # Get 32-bit displacement:
+
+                [%- read_disp(nind=4, nbytes=4) -%]
+            } else { # EA = [Base] + [Index] x Scale
+                $res->{base_reg} = $base;
+            }
+        }
+    } elsif ($mod eq '01') {
+        if ($rm eq '100') { # EA = [Base] + [Index] x Scale + Disp8
+            # Get SIB byte:
+            my $byte = readbytes(1);
+            return undef unless defined $byte;
+            $res->{scale} = slice($byte, 7, 6);
+            $res->{index_reg} = slice($byte, 5, 3);
+            $res->{base_reg}  = slice($byte, 2, 0);
+            # Get 8-bit displacement:
+
+            [%- read_disp(nind=3, nbytes=1) -%]
+        } else { # EA = [Reg] + Disp8
+            # Get 8-bit displacement:
+
+            [%- read_disp(nind=3, nbytes=1) -%]
+        }
+    } elsif ($mod eq '10') {
+        if ($rm eq '100') { # EA = [Base] + [Index] x Scale + Disp32
+            # Get SIB byte:
+            my $byte = readbytes(1);
+            return undef unless defined $byte;
+            $res->{scale} = slice($byte, 7, 6);
+            $res->{index_reg} = slice($byte, 5, 3);
+            $res->{base_reg}  = slice($byte, 2, 0);
+            # Get 32-bit displacement:
+
+            [%- read_disp(nind=3, nbytes=4) -%]
+        } else { # EA = [Reg] + Disp32
+            # Get 32-bit displacement:
+
+            [%- read_disp(nind=3, nbytes=4) -%]
+        }
+    }
+    return 1;
+}
+
+# Decode one instruction:
+sub decode {
+    shift;
+    if (@_) {
+        unless (open $Idu::source, '<', \$_[0]) {
+            $error = "file error - $!";
+            return undef;
+        }
+    }
+    @oldbytes = ();
+    my $byte;
+    my $res = {};
+    my $state = 'S_START';
+    while (1) {
+        if ($debug) {
+            my $val = $byte || '';
+            warn "Switching to state $state with byte $val...\n";
+        }
+        if ($state eq 'S_START' or $state eq 'S_PREFIX') {
+            if ($state eq 'S_START') {
+                $byte = readbytes(1);
+                unless (defined $byte) { # Check the valid end of input
+                    if ($token_error) {
+                        $state = 'S_SYN_ERROR';
+                        next;
+                    } else {
+                        $error = '';
+                        return undef;
+                    }
+                }
+            }
+            # Process preffix byte (if any):
+            [%- firstTime = 1 %]
+            [%- FOREACH prefix IN idu.prefixes %]
+                [%-# NEXT IF prefix.match('(?i)f[23]') %]
+                [%- bstr = Perl.sprintf('%08b', Perl.hex(prefix)) %]
+            [% GET '} els' UNLESS firstTime
+            %]if ($byte eq '[% bstr %]') {
+                if ($state eq 'S_START') {
+                    $res->{prefix} = ['[% prefix %]'] ;
+                } else {
+                    push @{$res->{prefix}}, '[% prefix %]';
+                }
+                [% IF prefix == '66' %]
+                $res->{bits16} = 1;
+                [% END %]
+
+                [%- read_byte(nind=4) -%]
+                $state = 'S_PREFIX';
+                [%- firstTime = 0 IF firstTime %]
+            [%- END %]
+            } else {
+                $state = 'S_[% states.0.state_id %]';
+            }
+        [%- FOREACH state IN states %]
+        } elsif ($state eq 'S_[% state.state_id %]') {
+          [%- # Process the various fields (if any) -%]
+
+          [%- IF state.item('mod') OR state.modA %]
+            # Process the current ModR/M byte:
+            unless (process_ModRM($res, $byte)) {
+                $state = $token_error ? 'S_SYN_ERROR' : 'S_END_ERROR';
+                next;
+            }
+          [%- END -%]
+
+          [%- FOREACH bit IN idu.bit_fields %]
+              [%- NEXT UNLESS state.$bit.defined %]
+            # Get the [% bit %] field from the current byte:
+            $res->{'[% bit %]'} = slice($byte, [% state.$bit %]);
+          [%- END -%]
+
+          [%- FOREACH reg IN idu.reg_fields %]
+            [%- NEXT UNLESS state.$reg %]
+            # Get the [% reg %] field from the current byte:
+            $res->{'[% reg %]'} = slice($byte, [% state.$reg.0
+                %], [% state.$reg.1 %]);
+          [%- END -%]
+
+          [%- IF state.imm == 'full' %]
+            # Get full immediate data:
+            my $len = $res->{bits16} ? 2 : 4;
+
+            [%- read_imm_data(nind=3, nbytes='$len') -%]
+          [%- ELSIF state.imm == 'normal' %]
+            # Get immediate data:
+            my $len = get_imm_len($res->{s}, $res->{w}, $res->{bits16});
+
+            [%- read_imm_data(nind=3, nbytes='$len') -%]
+          [%- ELSIF state.imm == 'pointer' %]
+            # Get immediate data:
+            my $len = $res->{bits16} ? 4 : 6;
+
+            [%- read_imm_data(nind=3, nbytes='$len') -%]
+          [%- ELSIF state.imm %]
+            [%- nbytes = state.imm / 8;
+                nbytes = Perl.int(nbytes) %]
+            # Get [% state.imm %]-bit immediate data:
+            [%- IF state.pattern and nbytes == 1 %]
+            $res->{imm} = [bin2hex $byte];
+            [%- ELSE %]
+
+            [%- read_imm_data(nind=3, nbytes=nbytes) -%]
+            [%- END -%]
+          [%- END %]
+
+          [%- # Determine the next state -%]
+
+          [%- IF state.next.0.pattern  # Conditional switch %]
+            [%- UNLESS state == states.0 %]
+            [%- read_byte(nind=3) -%]
+            [%- END -%]
+
+            [%- FOREACH next_state IN state.next %]
+            [%- regex = next_state.pattern.replace('\.', '[01]') %]
+            [% GET '} els' UNLESS next_state == state.next.0
+            %]if ($byte =~ m/^[% regex %]$/o) {
+                $state = 'S_[% next_state.state %]';
+            [%- END %]
+            } else {
+                $state = 'S_SYN_ERROR';
+            }
+          [%- ELSIF state.next.0  # Unconditional switch %]
+            $state = 'S_[% state.next.0.state %]';
+          [%- ELSE  # Reach the end of the instruction %]
+            $res->{ins} = "[% state.ins.op_name %]";
+            $res->{des} = "[% state.ins.des %]";
+            [%- IF state.ins.sub_des %]
+            $res->{subdes} = "[% state.ins.sub_des %]";
+            [%- END %]
+            $res->{encoding} = "[% state.ins.encoding %]";
+            $res->{ins_set} = "[% state.ins.ins_set %]";
+            $res->{bytes} = [@oldbytes];
+            close($Idu::source) if @_;
+            return $res;
+          [%- END %]
+        [%- END %]
+        } elsif ($state eq 'S_SYN_ERROR') { # Syntax error
+            $error = "syntax error ($.) - unexpected byte \"$token\": @oldbytes";
+            last;
+        } elsif ($state eq 'S_END_ERROR') {
+            $error = "syntax error ($.) - unexpected end of input: @oldbytes";
+            last;
+        } else {
+            $error = "core error ($.) - unknown state $state reached: @oldbytes";
+            last;
+        }
+    }
+    close($Idu::source) if @_;
+    return undef;
+}
+
+1;

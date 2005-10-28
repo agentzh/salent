@@ -1,0 +1,187 @@
+$VAR1 = {
+          'idu' => {
+                     'bit_fields' => [
+                                       's',
+                                       'w',
+                                       'd',
+                                       'R'
+                                     ],
+                     'prefixes' => [
+                                     'f2',
+                                     'f3',
+                                     'f0',
+                                     '67',
+                                     '66',
+                                     '2e',
+                                     '36',
+                                     '3e',
+                                     '26',
+                                     '64',
+                                     '65'
+                                   ],
+                     'reg_fields' => [
+                                       'reg',
+                                       'reg1',
+                                       'reg2',
+                                       'sreg2',
+                                       'sreg3',
+                                       'eee',
+                                       'tttn',
+                                       'ST_i'
+                                     ]
+                   },
+          'word_size' => 32,
+          'version' => '0.13',
+          'fld_map' => {
+                         'sreg3' => [
+                                      'ES',
+                                      'CS',
+                                      'SS',
+                                      'DS',
+                                      'FS',
+                                      'GS',
+                                      'segr6',
+                                      'segr7'
+                                    ],
+                         'eee' => {
+                                    'DR' => [
+                                              'DR0',
+                                              'DR1',
+                                              'DR2',
+                                              'DR3',
+                                              'DR4',
+                                              'DR5',
+                                              'DR6',
+                                              'DR7'
+                                            ],
+                                    'CR' => [
+                                              'CR0',
+                                              'CR1',
+                                              'CR2',
+                                              'CR3',
+                                              'CR4',
+                                              'CR5',
+                                              'CR6',
+                                              'CR7'
+                                            ]
+                                  },
+                         'reg16' => {
+                                      'none' => [
+                                                  'AX',
+                                                  'CX',
+                                                  'DX',
+                                                  'BX',
+                                                  'SP',
+                                                  'BP',
+                                                  'SI',
+                                                  'DI'
+                                                ],
+                                      'w0' => [
+                                                'AL',
+                                                'CL',
+                                                'DL',
+                                                'BL',
+                                                'AH',
+                                                'CH',
+                                                'DH',
+                                                'BH'
+                                              ],
+                                      'w1' => [
+                                                'AX',
+                                                'CX',
+                                                'DX',
+                                                'BX',
+                                                'SP',
+                                                'BP',
+                                                'SI',
+                                                'DI'
+                                              ]
+                                    },
+                         'sreg2' => [
+                                      'ES',
+                                      'CS',
+                                      'SS',
+                                      'DS'
+                                    ],
+                         'reg32' => {
+                                      'none' => [
+                                                  'EAX',
+                                                  'ECX',
+                                                  'EDX',
+                                                  'EBX',
+                                                  'ESP',
+                                                  'EBP',
+                                                  'ESI',
+                                                  'EDI'
+                                                ],
+                                      'w0' => [
+                                                'AL',
+                                                'CL',
+                                                'DL',
+                                                'BL',
+                                                'AH',
+                                                'CH',
+                                                'DH',
+                                                'BH'
+                                              ],
+                                      'w1' => [
+                                                'EAX',
+                                                'ECX',
+                                                'EDX',
+                                                'EBX',
+                                                'ESP',
+                                                'EBP',
+                                                'ESI',
+                                                'EDI'
+                                              ]
+                                    },
+                         'tttn' => [
+                                     'O',
+                                     'NO',
+                                     'C',
+                                     'NC',
+                                     'Z',
+                                     'NZ',
+                                     'NA',
+                                     'A',
+                                     'S',
+                                     'NS',
+                                     'PE',
+                                     'PO',
+                                     'L',
+                                     'NL',
+                                     'NG',
+                                     'G'
+                                   ]
+                       },
+          'addr_size' => 32,
+          'ram' => {
+                     'delay' => 10,
+                     'capacity' => 256
+                   },
+          'alu' => {
+                     'sels' => [
+                                 'NOP',
+                                 'ADD',
+                                 'SUB',
+                                 'MUL',
+                                 'IMUL',
+                                 'DIV',
+                                 'IDIV',
+                                 'AND',
+                                 'OR',
+                                 'XOR',
+                                 'NOT',
+                                 'NEG',
+                                 'SHL',
+                                 'SHR',
+                                 'SAL',
+                                 'SAR',
+                                 'ROL',
+                                 'ROR',
+                                 'RCL',
+                                 'RCR'
+                               ],
+                     'delay' => 1
+                   }
+        };

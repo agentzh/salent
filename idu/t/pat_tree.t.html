@@ -1,0 +1,382 @@
+<html>
+ <head>
+  <title>D:\Agent2002\Salent\v0.13\ModelSim\idu\t\pat_tree.t</title>
+ </head>
+ <body><tt><pre>
+<font color=gray>     1</font>  <a name="line_1"></a>#: pat_tree.t
+<font color=gray>     2</font>  <a name="line_2"></a>#: Test inc::pat_tree
+<font color=gray>     3</font>  <a name="line_3"></a>#: Salent v0.13
+<font color=gray>     4</font>  <a name="line_4"></a>#: Copyright (c) 2005 Agent Zhang
+<font color=gray>     5</font>  <a name="line_5"></a>#: 2005-07-22 2005-07-24
+<font color=gray>     6</font>  <a name="line_6"></a>
+<font color=gray>     7</font>  <a name="line_7"></a>use strict;
+<font color=gray>     8</font>  <a name="line_8"></a>use warnings;
+<font color=gray>     9</font>  <a name="line_9"></a>
+<font color=gray>    10</font>  <a name="line_10"></a>#use Data::Dumper;
+<font color=gray>    11</font>  <a name="line_11"></a>use Test::More tests => 34;
+<font color=gray>    12</font>  <a name="line_12"></a>BEGIN { use_ok('inc::pat_tree'); }
+<font color=gray>    13</font>  <a name="line_13"></a>
+<font color=gray>    14</font>  <a name="line_14"></a>{
+<font color=gray>    15</font>  <a name="line_15"></a># Test sub pre_check:
+<font color=gray>    16</font>  <a name="line_16"></a>my @insts = (
+<font color=gray>    17</font>  <a name="line_17"></a>    {
+<font color=gray>    18</font>  <a name="line_18"></a>      'sub_des' => 'register indirect',
+<font color=gray>    19</font>  <a name="line_19"></a>      'op_name' => 'CALL',
+<font color=gray>    20</font>  <a name="line_20"></a>      'des' => 'Call Procedure (in same segment)',
+<font color=gray>    21</font>  <a name="line_21"></a>      'encoding' => '1111 1111 : 11 010 reg'
+<font color=gray>    22</font>  <a name="line_22"></a>    },
+<font color=gray>    23</font>  <a name="line_23"></a>    {
+<font color=gray>    24</font>  <a name="line_24"></a>      'sub_des' => 'direct',
+<font color=gray>    25</font>  <a name="line_25"></a>      'op_name' => 'JMP',
+<font color=gray>    26</font>  <a name="line_26"></a>      'des' => 'Unconditional Jump (to same segment)',
+<font color=gray>    27</font>  <a name="line_27"></a>      'encoding' => '1110 1001 : full displacement'
+<font color=gray>    28</font>  <a name="line_28"></a>    },
+<font color=gray>    29</font>  <a name="line_29"></a>    {
+<font color=gray>    30</font>  <a name="line_30"></a>      'sub_des' => 'memory indirect',
+<font color=gray>    31</font>  <a name="line_31"></a>      'op_name' => 'CALL',
+<font color=gray>    32</font>  <a name="line_32"></a>      'des' => 'Call Procedure (in same segment)',
+<font color=gray>    33</font>  <a name="line_33"></a>      'encoding' => '1111 1111 : mod 010 r/m'
+<font color=gray>    34</font>  <a name="line_34"></a>    },
+<font color=gray>    35</font>  <a name="line_35"></a>    {
+<font color=gray>    36</font>  <a name="line_36"></a>      'sub_des' => 'full displacement',
+<font color=gray>    37</font>  <a name="line_37"></a>      'op_name' => 'Jcc',
+<font color=gray>    38</font>  <a name="line_38"></a>      'des' => 'Jump if Condition is Met',
+<font color=gray>    39</font>  <a name="line_39"></a>      'encoding' => '0000 1111 : 1000 tttn : full displacement'
+<font color=gray>    40</font>  <a name="line_40"></a>    },
+<font color=gray>    41</font>  <a name="line_41"></a>    {
+<font color=gray>    42</font>  <a name="line_42"></a>      'sub_des' => 'reg',
+<font color=gray>    43</font>  <a name="line_43"></a>      'op_name' => 'INC',
+<font color=gray>    44</font>  <a name="line_44"></a>      'des' => 'Increment by 1',
+<font color=gray>    45</font>  <a name="line_45"></a>      'encoding' => '1111 111w : 11 000 reg'
+<font color=gray>    46</font>  <a name="line_46"></a>    },
+<font color=gray>    47</font>  <a name="line_47"></a>);
+<font color=gray>    48</font>  <a name="line_48"></a>
+<font color=gray>    49</font>  <a name="line_49"></a>my @classes = pre_check(@insts);
+<font color=gray>    50</font>  <a name="line_50"></a>#warn Data::Dumper->Dump([\@classes], ['classes']);
+<font color=gray>    51</font>  <a name="line_51"></a>is scalar(@classes), 1;
+<font color=gray>    52</font>  <a name="line_52"></a>ok eq_set($classes[0], [
+<font color=gray>    53</font>  <a name="line_53"></a>  {
+<font color=gray>    54</font>  <a name="line_54"></a>    'ins' => 'CALL',
+<font color=gray>    55</font>  <a name="line_55"></a>    'pattern' => '11111111',
+<font color=gray>    56</font>  <a name="line_56"></a>    'encoding' => '1111 1111 : 11 010 reg'
+<font color=gray>    57</font>  <a name="line_57"></a>  },
+<font color=gray>    58</font>  <a name="line_58"></a>  {
+<font color=gray>    59</font>  <a name="line_59"></a>    'ins' => 'CALL',
+<font color=gray>    60</font>  <a name="line_60"></a>    'pattern' => '11111111',
+<font color=gray>    61</font>  <a name="line_61"></a>    'encoding' => '1111 1111 : mod 010 r/m'
+<font color=gray>    62</font>  <a name="line_62"></a>  },
+<font color=gray>    63</font>  <a name="line_63"></a>  {
+<font color=gray>    64</font>  <a name="line_64"></a>    'ins' => 'INC',
+<font color=gray>    65</font>  <a name="line_65"></a>    'pattern' => '1111111.',
+<font color=gray>    66</font>  <a name="line_66"></a>    'encoding' => '1111 111w : 11 000 reg'
+<font color=gray>    67</font>  <a name="line_67"></a>  }
+<font color=gray>    68</font>  <a name="line_68"></a>]);
+<font color=gray>    69</font>  <a name="line_69"></a>
+<font color=gray>    70</font>  <a name="line_70"></a>}
+<font color=gray>    71</font>  <a name="line_71"></a>
+<font color=gray>    72</font>  <a name="line_72"></a>{# Test sub add_to_tree:
+<font color=gray>    73</font>  <a name="line_73"></a>
+<font color=gray>    74</font>  <a name="line_74"></a>my $ast = {};
+<font color=gray>    75</font>  <a name="line_75"></a>
+<font color=gray>    76</font>  <a name="line_76"></a>my $entry = {encoding => 'a:b', op => 'MOV' };
+<font color=gray>    77</font>  <a name="line_77"></a>add_to_tree($ast, $entry);
+<font color=gray>    78</font>  <a name="line_78"></a>ok eq_hash($ast, {
+<font color=gray>    79</font>  <a name="line_79"></a>    a => {
+<font color=gray>    80</font>  <a name="line_80"></a>        next => {
+<font color=gray>    81</font>  <a name="line_81"></a>            b => {
+<font color=gray>    82</font>  <a name="line_82"></a>                next => {ins => $entry },
+<font color=gray>    83</font>  <a name="line_83"></a>            },
+<font color=gray>    84</font>  <a name="line_84"></a>        },
+<font color=gray>    85</font>  <a name="line_85"></a>    },
+<font color=gray>    86</font>  <a name="line_86"></a>});
+<font color=gray>    87</font>  <a name="line_87"></a>
+<font color=gray>    88</font>  <a name="line_88"></a>my $entry2 = {encoding => 'a:e', op => 'ADD' };
+<font color=gray>    89</font>  <a name="line_89"></a>add_to_tree($ast, $entry2);
+<font color=gray>    90</font>  <a name="line_90"></a>ok eq_hash($ast, {
+<font color=gray>    91</font>  <a name="line_91"></a>    a => {
+<font color=gray>    92</font>  <a name="line_92"></a>        next => {
+<font color=gray>    93</font>  <a name="line_93"></a>            b => {
+<font color=gray>    94</font>  <a name="line_94"></a>                next => {ins => $entry },
+<font color=gray>    95</font>  <a name="line_95"></a>            },
+<font color=gray>    96</font>  <a name="line_96"></a>            e => {
+<font color=gray>    97</font>  <a name="line_97"></a>                next => {ins => $entry2 },
+<font color=gray>    98</font>  <a name="line_98"></a>            },
+<font color=gray>    99</font>  <a name="line_99"></a>        },
+<font color=gray>   100</font>  <a name="line_100"></a>    },
+<font color=gray>   101</font>  <a name="line_101"></a>});
+<font color=gray>   102</font>  <a name="line_102"></a>
+<font color=gray>   103</font>  <a name="line_103"></a>my $entry3 = {encoding => 'cf', op => 'SUB' };
+<font color=gray>   104</font>  <a name="line_104"></a>add_to_tree($ast, $entry3);
+<font color=gray>   105</font>  <a name="line_105"></a>ok eq_hash($ast, {
+<font color=gray>   106</font>  <a name="line_106"></a>    a => {
+<font color=gray>   107</font>  <a name="line_107"></a>        next => {
+<font color=gray>   108</font>  <a name="line_108"></a>            b => {
+<font color=gray>   109</font>  <a name="line_109"></a>                next => {ins => $entry },
+<font color=gray>   110</font>  <a name="line_110"></a>            },
+<font color=gray>   111</font>  <a name="line_111"></a>            e => {
+<font color=gray>   112</font>  <a name="line_112"></a>                next => {ins => $entry2 },
+<font color=gray>   113</font>  <a name="line_113"></a>            },
+<font color=gray>   114</font>  <a name="line_114"></a>        },
+<font color=gray>   115</font>  <a name="line_115"></a>    },
+<font color=gray>   116</font>  <a name="line_116"></a>    cf => { next => { ins => $entry3 }},
+<font color=gray>   117</font>  <a name="line_117"></a>});
+<font color=gray>   118</font>  <a name="line_118"></a>
+<font color=gray>   119</font>  <a name="line_119"></a>my $entry4 = {encoding => 'a:h:f', op => 'ADD' };
+<font color=gray>   120</font>  <a name="line_120"></a>add_to_tree($ast, $entry4);
+<font color=gray>   121</font>  <a name="line_121"></a>ok eq_hash($ast, {
+<font color=gray>   122</font>  <a name="line_122"></a>    a => {
+<font color=gray>   123</font>  <a name="line_123"></a>        next => {
+<font color=gray>   124</font>  <a name="line_124"></a>            b => {
+<font color=gray>   125</font>  <a name="line_125"></a>                next => {ins => $entry },
+<font color=gray>   126</font>  <a name="line_126"></a>            },
+<font color=gray>   127</font>  <a name="line_127"></a>            e => {
+<font color=gray>   128</font>  <a name="line_128"></a>                next => {ins => $entry2 },
+<font color=gray>   129</font>  <a name="line_129"></a>            },
+<font color=gray>   130</font>  <a name="line_130"></a>            h => {
+<font color=gray>   131</font>  <a name="line_131"></a>                next => {
+<font color=gray>   132</font>  <a name="line_132"></a>                    f => {
+<font color=gray>   133</font>  <a name="line_133"></a>                        next => {ins => $entry4 },
+<font color=gray>   134</font>  <a name="line_134"></a>                    },
+<font color=gray>   135</font>  <a name="line_135"></a>                },
+<font color=gray>   136</font>  <a name="line_136"></a>            },
+<font color=gray>   137</font>  <a name="line_137"></a>        },
+<font color=gray>   138</font>  <a name="line_138"></a>    },
+<font color=gray>   139</font>  <a name="line_139"></a>    cf => { next => { ins => $entry3 }},
+<font color=gray>   140</font>  <a name="line_140"></a>});
+<font color=gray>   141</font>  <a name="line_141"></a>
+<font color=gray>   142</font>  <a name="line_142"></a>}
+<font color=gray>   143</font>  <a name="line_143"></a>
+<font color=gray>   144</font>  <a name="line_144"></a>{# Test sub parse_enc:
+<font color=gray>   145</font>  <a name="line_145"></a>
+<font color=gray>   146</font>  <a name="line_146"></a>my $enc = '0110 1011';
+<font color=gray>   147</font>  <a name="line_147"></a>my %info = parse_enc($enc);
+<font color=gray>   148</font>  <a name="line_148"></a>ok eq_hash(\%info, {
+<font color=gray>   149</font>  <a name="line_149"></a>    pattern => '01101011',
+<font color=gray>   150</font>  <a name="line_150"></a>});
+<font color=gray>   151</font>  <a name="line_151"></a>
+<font color=gray>   152</font>  <a name="line_152"></a>$enc = '0110 10s1';
+<font color=gray>   153</font>  <a name="line_153"></a>%info = parse_enc($enc);
+<font color=gray>   154</font>  <a name="line_154"></a>ok eq_hash(\%info, {
+<font color=gray>   155</font>  <a name="line_155"></a>    pattern => '011010.1',
+<font color=gray>   156</font>  <a name="line_156"></a>    s => 1,
+<font color=gray>   157</font>  <a name="line_157"></a>});
+<font color=gray>   158</font>  <a name="line_158"></a>#warn Data::Dumper->Dump([\%info], ['info']);
+<font color=gray>   159</font>  <a name="line_159"></a>
+<font color=gray>   160</font>  <a name="line_160"></a>$enc = '10sw 0110';
+<font color=gray>   161</font>  <a name="line_161"></a>%info = parse_enc($enc);
+<font color=gray>   162</font>  <a name="line_162"></a>ok eq_hash(\%info, {
+<font color=gray>   163</font>  <a name="line_163"></a>    pattern => '10..0110',
+<font color=gray>   164</font>  <a name="line_164"></a>    s => 5,
+<font color=gray>   165</font>  <a name="line_165"></a>    w => 4,
+<font color=gray>   166</font>  <a name="line_166"></a>});
+<font color=gray>   167</font>  <a name="line_167"></a>
+<font color=gray>   168</font>  <a name="line_168"></a>$enc = '10sd 0110';
+<font color=gray>   169</font>  <a name="line_169"></a>%info = parse_enc($enc);
+<font color=gray>   170</font>  <a name="line_170"></a>ok eq_hash(\%info, {
+<font color=gray>   171</font>  <a name="line_171"></a>    pattern => '10..0110',
+<font color=gray>   172</font>  <a name="line_172"></a>    s => 5,
+<font color=gray>   173</font>  <a name="line_173"></a>    d => 4,
+<font color=gray>   174</font>  <a name="line_174"></a>});
+<font color=gray>   175</font>  <a name="line_175"></a>
+<font color=gray>   176</font>  <a name="line_176"></a>$enc = 'mod 111 r/m';
+<font color=gray>   177</font>  <a name="line_177"></a>%info = parse_enc($enc);
+<font color=gray>   178</font>  <a name="line_178"></a>ok eq_hash(\%info, {
+<font color=gray>   179</font>  <a name="line_179"></a>    pattern => '..111...',
+<font color=gray>   180</font>  <a name="line_180"></a>    mod => 1,
+<font color=gray>   181</font>  <a name="line_181"></a>});
+<font color=gray>   182</font>  <a name="line_182"></a>
+<font color=gray>   183</font>  <a name="line_183"></a>$enc = 'modA reg r/m';
+<font color=gray>   184</font>  <a name="line_184"></a>%info = parse_enc($enc);
+<font color=gray>   185</font>  <a name="line_185"></a>ok eq_hash(\%info, {
+<font color=gray>   186</font>  <a name="line_186"></a>    modA => 1,
+<font color=gray>   187</font>  <a name="line_187"></a>    reg => [5, 3],
+<font color=gray>   188</font>  <a name="line_188"></a>    pattern => '.' x 8,
+<font color=gray>   189</font>  <a name="line_189"></a>});
+<font color=gray>   190</font>  <a name="line_190"></a>#warn Data::Dumper->Dump([\%info], ['info']);
+<font color=gray>   191</font>  <a name="line_191"></a>
+<font color=gray>   192</font>  <a name="line_192"></a>$enc = '11 reg1 reg2';
+<font color=gray>   193</font>  <a name="line_193"></a>%info = parse_enc($enc);
+<font color=gray>   194</font>  <a name="line_194"></a>ok eq_hash(\%info, {
+<font color=gray>   195</font>  <a name="line_195"></a>    pattern => '11......',
+<font color=gray>   196</font>  <a name="line_196"></a>    reg2 => [2, 0],
+<font color=gray>   197</font>  <a name="line_197"></a>    reg1 => [5, 3],
+<font color=gray>   198</font>  <a name="line_198"></a>});
+<font color=gray>   199</font>  <a name="line_199"></a>#warn Data::Dumper->Dump([\%info], ['info']);
+<font color=gray>   200</font>  <a name="line_200"></a>
+<font color=gray>   201</font>  <a name="line_201"></a>$enc = '11 eee reg';
+<font color=gray>   202</font>  <a name="line_202"></a>%info = parse_enc($enc);
+<font color=gray>   203</font>  <a name="line_203"></a>ok eq_hash(\%info, {
+<font color=gray>   204</font>  <a name="line_204"></a>    pattern => '11......',
+<font color=gray>   205</font>  <a name="line_205"></a>    reg => [2, 0],
+<font color=gray>   206</font>  <a name="line_206"></a>    eee => [5, 3],
+<font color=gray>   207</font>  <a name="line_207"></a>});
+<font color=gray>   208</font>  <a name="line_208"></a>
+<font color=gray>   209</font>  <a name="line_209"></a>$enc = '11 eee sreg3';
+<font color=gray>   210</font>  <a name="line_210"></a>%info = parse_enc($enc);
+<font color=gray>   211</font>  <a name="line_211"></a>ok eq_hash(\%info, {
+<font color=gray>   212</font>  <a name="line_212"></a>    pattern => '11......',
+<font color=gray>   213</font>  <a name="line_213"></a>    sreg3 => [2, 0],
+<font color=gray>   214</font>  <a name="line_214"></a>    eee => [5, 3],
+<font color=gray>   215</font>  <a name="line_215"></a>});
+<font color=gray>   216</font>  <a name="line_216"></a>
+<font color=gray>   217</font>  <a name="line_217"></a>$enc = '11 eee sreg2 1';
+<font color=gray>   218</font>  <a name="line_218"></a>%info = parse_enc($enc);
+<font color=gray>   219</font>  <a name="line_219"></a>ok eq_hash(\%info, {
+<font color=gray>   220</font>  <a name="line_220"></a>    pattern => '11.....1',
+<font color=gray>   221</font>  <a name="line_221"></a>    sreg2 => [2, 1],
+<font color=gray>   222</font>  <a name="line_222"></a>    eee => [5, 3],
+<font color=gray>   223</font>  <a name="line_223"></a>});
+<font color=gray>   224</font>  <a name="line_224"></a>
+<font color=gray>   225</font>  <a name="line_225"></a>$enc = '1001 tttn';
+<font color=gray>   226</font>  <a name="line_226"></a>%info = parse_enc($enc);
+<font color=gray>   227</font>  <a name="line_227"></a>ok eq_hash(\%info, {
+<font color=gray>   228</font>  <a name="line_228"></a>    pattern => '1001....',
+<font color=gray>   229</font>  <a name="line_229"></a>    tttn => [3, 0],
+<font color=gray>   230</font>  <a name="line_230"></a>});
+<font color=gray>   231</font>  <a name="line_231"></a>
+<font color=gray>   232</font>  <a name="line_232"></a>$enc = '11 000 ST(i)';
+<font color=gray>   233</font>  <a name="line_233"></a>%info = parse_enc($enc);
+<font color=gray>   234</font>  <a name="line_234"></a>ok eq_hash(\%info, {
+<font color=gray>   235</font>  <a name="line_235"></a>    pattern => '11000...',
+<font color=gray>   236</font>  <a name="line_236"></a>    ST_i => [2, 0],
+<font color=gray>   237</font>  <a name="line_237"></a>});
+<font color=gray>   238</font>  <a name="line_238"></a>
+<font color=gray>   239</font>  <a name="line_239"></a>$enc = '1111 R ST(i)';
+<font color=gray>   240</font>  <a name="line_240"></a>%info = parse_enc($enc);
+<font color=gray>   241</font>  <a name="line_241"></a>ok eq_hash(\%info, {
+<font color=gray>   242</font>  <a name="line_242"></a>    pattern => '1111....',
+<font color=gray>   243</font>  <a name="line_243"></a>    R => 3,
+<font color=gray>   244</font>  <a name="line_244"></a>    ST_i => [2, 0],
+<font color=gray>   245</font>  <a name="line_245"></a>});
+<font color=gray>   246</font>  <a name="line_246"></a>
+<font color=gray>   247</font>  <a name="line_247"></a>$enc = '11011 d00';
+<font color=gray>   248</font>  <a name="line_248"></a>%info = parse_enc($enc);
+<font color=gray>   249</font>  <a name="line_249"></a>ok eq_hash(\%info, {
+<font color=gray>   250</font>  <a name="line_250"></a>    pattern => '11011.00',
+<font color=gray>   251</font>  <a name="line_251"></a>    d => 2,
+<font color=gray>   252</font>  <a name="line_252"></a>});
+<font color=gray>   253</font>  <a name="line_253"></a>
+<font color=gray>   254</font>  <a name="line_254"></a>$enc = '8-bit displacement';
+<font color=gray>   255</font>  <a name="line_255"></a>%info = parse_enc($enc);
+<font color=gray>   256</font>  <a name="line_256"></a>ok eq_hash(\%info, {
+<font color=gray>   257</font>  <a name="line_257"></a>    imm => 8,
+<font color=gray>   258</font>  <a name="line_258"></a>});
+<font color=gray>   259</font>  <a name="line_259"></a>
+<font color=gray>   260</font>  <a name="line_260"></a>$enc = 'unsigned full offset, selector';
+<font color=gray>   261</font>  <a name="line_261"></a>%info = parse_enc($enc);
+<font color=gray>   262</font>  <a name="line_262"></a>ok eq_hash(\%info, {
+<font color=gray>   263</font>  <a name="line_263"></a>    imm => 'pointer',
+<font color=gray>   264</font>  <a name="line_264"></a>});
+<font color=gray>   265</font>  <a name="line_265"></a>
+<font color=gray>   266</font>  <a name="line_266"></a>$enc = 'immediate data';
+<font color=gray>   267</font>  <a name="line_267"></a>%info = parse_enc($enc);
+<font color=gray>   268</font>  <a name="line_268"></a>ok eq_hash(\%info, {
+<font color=gray>   269</font>  <a name="line_269"></a>    imm => 'normal',
+<font color=gray>   270</font>  <a name="line_270"></a>});
+<font color=gray>   271</font>  <a name="line_271"></a>
+<font color=gray>   272</font>  <a name="line_272"></a>$enc = 'imm8 data';
+<font color=gray>   273</font>  <a name="line_273"></a>%info = parse_enc($enc);
+<font color=gray>   274</font>  <a name="line_274"></a>ok eq_hash(\%info, {
+<font color=gray>   275</font>  <a name="line_275"></a>    imm => 8,
+<font color=gray>   276</font>  <a name="line_276"></a>});
+<font color=gray>   277</font>  <a name="line_277"></a>
+<font color=gray>   278</font>  <a name="line_278"></a>$enc = 'imm8';
+<font color=gray>   279</font>  <a name="line_279"></a>%info = parse_enc($enc);
+<font color=gray>   280</font>  <a name="line_280"></a>ok eq_hash(\%info, {
+<font color=gray>   281</font>  <a name="line_281"></a>    imm => 8,
+<font color=gray>   282</font>  <a name="line_282"></a>});
+<font color=gray>   283</font>  <a name="line_283"></a>
+<font color=gray>   284</font>  <a name="line_284"></a>$enc = 'type';
+<font color=gray>   285</font>  <a name="line_285"></a>%info = parse_enc($enc);
+<font color=gray>   286</font>  <a name="line_286"></a>ok eq_hash(\%info, {
+<font color=gray>   287</font>  <a name="line_287"></a>    imm => 8,
+<font color=gray>   288</font>  <a name="line_288"></a>});
+<font color=gray>   289</font>  <a name="line_289"></a>
+<font color=gray>   290</font>  <a name="line_290"></a>$enc = 'port number';
+<font color=gray>   291</font>  <a name="line_291"></a>%info = parse_enc($enc);
+<font color=gray>   292</font>  <a name="line_292"></a>ok eq_hash(\%info, {
+<font color=gray>   293</font>  <a name="line_293"></a>    imm => 8,
+<font color=gray>   294</font>  <a name="line_294"></a>});
+<font color=gray>   295</font>  <a name="line_295"></a>#warn Data::Dumper->Dump([\%info], ['info']);
+<font color=gray>   296</font>  <a name="line_296"></a>
+<font color=gray>   297</font>  <a name="line_297"></a>$enc = '8-bit level (L)';
+<font color=gray>   298</font>  <a name="line_298"></a>%info = parse_enc($enc);
+<font color=gray>   299</font>  <a name="line_299"></a>ok eq_hash(\%info, {
+<font color=gray>   300</font>  <a name="line_300"></a>    imm => 8,
+<font color=gray>   301</font>  <a name="line_301"></a>});
+<font color=gray>   302</font>  <a name="line_302"></a>#warn Data::Dumper->Dump([\%info], ['info']);
+<font color=gray>   303</font>  <a name="line_303"></a>
+<font color=gray>   304</font>  <a name="line_304"></a>$enc = '8-bit displacement';
+<font color=gray>   305</font>  <a name="line_305"></a>%info = parse_enc($enc);
+<font color=gray>   306</font>  <a name="line_306"></a>ok eq_hash(\%info, {
+<font color=gray>   307</font>  <a name="line_307"></a>    imm => 8,
+<font color=gray>   308</font>  <a name="line_308"></a>});
+<font color=gray>   309</font>  <a name="line_309"></a>
+<font color=gray>   310</font>  <a name="line_310"></a>$enc = '16-bit displacement';
+<font color=gray>   311</font>  <a name="line_311"></a>%info = parse_enc($enc);
+<font color=gray>   312</font>  <a name="line_312"></a>ok eq_hash(\%info, {
+<font color=gray>   313</font>  <a name="line_313"></a>    imm => 16,
+<font color=gray>   314</font>  <a name="line_314"></a>});
+<font color=gray>   315</font>  <a name="line_315"></a>
+<font color=gray>   316</font>  <a name="line_316"></a>$enc = 'full displacement';
+<font color=gray>   317</font>  <a name="line_317"></a>%info = parse_enc($enc);
+<font color=gray>   318</font>  <a name="line_318"></a>ok eq_hash(\%info, {
+<font color=gray>   319</font>  <a name="line_319"></a>    imm => 'full',
+<font color=gray>   320</font>  <a name="line_320"></a>});
+<font color=gray>   321</font>  <a name="line_321"></a>
+<font color=gray>   322</font>  <a name="line_322"></a>$enc = 'ib';
+<font color=gray>   323</font>  <a name="line_323"></a>%info = parse_enc($enc);
+<font color=gray>   324</font>  <a name="line_324"></a>ok eq_hash(\%info, {
+<font color=gray>   325</font>  <a name="line_325"></a>    imm => 8,
+<font color=gray>   326</font>  <a name="line_326"></a>    pattern => '.' x 8,
+<font color=gray>   327</font>  <a name="line_327"></a>});
+<font color=gray>   328</font>  <a name="line_328"></a>
+<font color=gray>   329</font>  <a name="line_329"></a>}
+<font color=gray>   330</font>  <a name="line_330"></a>
+<font color=gray>   331</font>  <a name="line_331"></a>{ # Test sub process_tree:
+<font color=gray>   332</font>  <a name="line_332"></a>
+<font color=gray>   333</font>  <a name="line_333"></a>my $ast = {
+<font color=gray>   334</font>  <a name="line_334"></a>    '1100 000w' => {
+<font color=gray>   335</font>  <a name="line_335"></a>        next => {
+<font color=gray>   336</font>  <a name="line_336"></a>            '11 111 reg' => {
+<font color=gray>   337</font>  <a name="line_337"></a>                next => {
+<font color=gray>   338</font>  <a name="line_338"></a>                    'imm8 data' => {
+<font color=gray>   339</font>  <a name="line_339"></a>                        next => {
+<font color=gray>   340</font>  <a name="line_340"></a>                          ins => {
+<font color=gray>   341</font>  <a name="line_341"></a>                            encoding => '1100 000w : 11 111 reg : imm8 data',
+<font color=gray>   342</font>  <a name="line_342"></a>                          },
+<font color=gray>   343</font>  <a name="line_343"></a>                        },
+<font color=gray>   344</font>  <a name="line_344"></a>                    },
+<font color=gray>   345</font>  <a name="line_345"></a>                },
+<font color=gray>   346</font>  <a name="line_346"></a>            },
+<font color=gray>   347</font>  <a name="line_347"></a>        },
+<font color=gray>   348</font>  <a name="line_348"></a>    },
+<font color=gray>   349</font>  <a name="line_349"></a>};
+<font color=gray>   350</font>  <a name="line_350"></a>
+<font color=gray>   351</font>  <a name="line_351"></a>process_tree($ast);
+<font color=gray>   352</font>  <a name="line_352"></a>ok eq_hash($ast, {
+<font color=gray>   353</font>  <a name="line_353"></a>    '1100 000w' => {
+<font color=gray>   354</font>  <a name="line_354"></a>        pattern => '1100000.',
+<font color=gray>   355</font>  <a name="line_355"></a>        w => 0,
+<font color=gray>   356</font>  <a name="line_356"></a>        next => {
+<font color=gray>   357</font>  <a name="line_357"></a>            '11 111 reg' => {
+<font color=gray>   358</font>  <a name="line_358"></a>                pattern => '11111...',
+<font color=gray>   359</font>  <a name="line_359"></a>                reg => [2, 0],
+<font color=gray>   360</font>  <a name="line_360"></a>                next => {
+<font color=gray>   361</font>  <a name="line_361"></a>                    'imm8 data' => {
+<font color=gray>   362</font>  <a name="line_362"></a>                        imm => 8,
+<font color=gray>   363</font>  <a name="line_363"></a>                        next => {
+<font color=gray>   364</font>  <a name="line_364"></a>                          ins => {
+<font color=gray>   365</font>  <a name="line_365"></a>                            encoding => '1100 000w : 11 111 reg : imm8 data',
+<font color=gray>   366</font>  <a name="line_366"></a>                          },
+<font color=gray>   367</font>  <a name="line_367"></a>                        },
+<font color=gray>   368</font>  <a name="line_368"></a>                    },
+<font color=gray>   369</font>  <a name="line_369"></a>                },
+<font color=gray>   370</font>  <a name="line_370"></a>            },
+<font color=gray>   371</font>  <a name="line_371"></a>        },
+<font color=gray>   372</font>  <a name="line_372"></a>    },
+<font color=gray>   373</font>  <a name="line_373"></a>});
+<font color=gray>   374</font>  <a name="line_374"></a>
+<font color=gray>   375</font>  <a name="line_375"></a>}
+ </pre></tt></body>
+</html>

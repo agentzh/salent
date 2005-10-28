@@ -1,0 +1,106 @@
+RW_TT = genrw.tt
+RW_PL = genrw2.pl
+TR2_TT = tram2.tt
+TR3_TT = tram3.tt
+
+RM_F = perl -MExtUtils::Command -e rm_f
+RM_RF = perl -MExtUtils::Command -e rm_rf
+
+VLOG_RAM = ..\ram.v
+
+RWC = rwc.pl
+V_TT = ram.v.tt
+DO_TT = ram.do.tt
+T_TT = ram.t.tt
+GLOB_AST = ..\Config.ast
+
+all : $(VLOG_RAM)
+
+$(VLOG_RAM) : $(V_TT) $(GLOB_AST)
+    astt -o $@ -t $(V_TT) $(GLOB_AST)
+
+test : genres exet all
+
+genres : genrw genot ram_t
+
+genrw : genrwS genrwB tramX
+
+[% lists = [8, 16, 32, 64] %]
+genrwS : genrw8.rw genrw16.rw genrw32.rw genrw64.rw
+[% FOREACH item IN lists %]
+genrw[% item %].rw : genrw[% item %].ast $(RW_TT)
+        astt -t $(RW_TT) -o $@ genrw[% item %].ast
+
+genrw[% item %].ast : $(RW_PL)
+        perl $(RW_PL) [% item %] > $@
+[% END %]
+
+genrwB : genrw_8_1000.rw genrw_16_1000.rw genrw_32_1000.rw genrw_64_1000.rw
+
+[% FOREACH item IN lists %]
+genrw_[% item %]_1000.rw : genrw_[% item %]_1000.ast $(RW_TT)
+        astt -t $(RW_TT) -o $@ genrw_[% item %]_1000.ast
+
+genrw_[% item %]_1000.ast : $(RW_PL)
+        perl $(RW_PL) [% item %] 1000 > $@
+
+[% END %]
+tramx : tramX_1.rw tramX_2.rw tramX_3.rw tramX_4.rw tramX_5.rw tramX_6.rw tramX_7.rw tramX_8.rw
+[% i = 1 %]
+[% FOREACH item IN lists %]
+tramX_[% i %].rw : $(TR_TT)
+    tpage --define word_size=[% item %] $(TR2_TT) > $@
+[% i = i + 1 %]
+[%- END %]
+[% FOREACH item IN lists %]
+tramx_[% i %].rw : $(TR_TT)
+    tpage --define word_size=[% item %] $(TR3_TT) > $@
+[% i = i + 1 %]
+[% END -%]
+
+[% i = 0 %]
+[% rws = ['tram1.rw' 'genrw8.rw', 'genrw16.rw', 'genrw32.rw', 'genrw64.rw',
+   'genrw_8_1000.rw', 'genrw_16_1000.rw', 'genrw_32_1000.rw', 'genrw_64_1000.rw',
+   'tramX_1.rw', 'tramX_2.rw', 'tramX_3.rw', 'tramX_4.rw', 'tramX_5.rw', 'tramX_6.rw', 'tramX_7.rw', 'tramX_8.rw'] %]
+genot : rw0 rw1 rw2 rw3 rw4 rw5 rw6 rw7 rw8 rw9 rw10 rw11 rw12 rw13 rw14 rw15 rw16
+
+# Test the templates separately:
+ram_t : ram.v ram.t ram.do ram.lst
+ram.v : $(V_TT) 
+    tpage $(V_TT) > $@
+ram.t : $(T_TT)
+    tpage $(T_TT) > $@
+ram.do : $(DO_TT)
+    tpage $(DO_TT) > $@
+ram.lst : ram.do
+    vsim -c -quiet -do ram.do
+
+[% FOREACH rw IN rws%]
+rw[% i %] : [% rw %].t [% rw %].lst
+[% rw %].t : $(T_TT) $(GLOB_AST) [% rw %].ast
+    astt -o $@ -t $(T_TT) $(GLOB_AST) [% rw %].ast
+[% rw %].ast : [% rw %] $(RWC) ast++.pl
+    perl $(RWC) [% rw %]
+    perl ast++.pl $@
+[% rw %].lst : [% rw %].do [% rw %].v
+    vsim -c -quiet -do [% rw %].do
+[% rw %].do : $(DO_TT) $(GLOB_AST) [% rw %].ast
+    astt -o $@ -t $(DO_TT) $(GLOB_AST) [% rw %].ast
+[% rw %].v: $(V_TT) $(GLOB_AST) [% rw %].ast
+    astt -o $@ -t $(V_TT) $(GLOB_AST) [% rw %].ast
+[% i = i + 1 %]
+[% END %]
+
+exet :
+    set HARNESS_OK_SLOW = 1
+	perl -MExtUtils::Command::MM \
+	    -e "@ARGV = map glob, @ARGV; test_harness(0, '.', '.');" *.t
+    diff -i ram.lst ram.lst~
+
+clean :
+    $(RM_F) $(VLOG_RAM) \
+    vsim.wlf transcript \
+    *.rw.t *.rw.v *.rw.do *.rw.ast *.rw.lst tramX*.rw genrw*.rw genrw*.ast \
+    ram.do ram.pl ram.lst ram.v Makefile ram.t
+    $(RM_RF) work
+	vlib work

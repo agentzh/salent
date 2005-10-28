@@ -1,0 +1,475 @@
+[% DEFAULT lang='Default' -%]
+[% USE date;
+   SET
+     last_mod = date.format(template.modtime, '20%y-%m-%d', 'en_GB')
+-%]
+#: This file is generated from error.t.tt
+#: Test error handling of the IDU library
+#: Salent v0.13
+#: Copyright (c) 2005 Agent Zhang
+#: 2005-08-20 [% last_mod %]
+
+use strict;
+use warnings;
+
+use Test::More tests => 3 + 2 * 90;
+[% IF lang == 'Perl' -%]
+use inc::Idu;
+[% ELSE -%]
+use [% lang %]::Idu;
+[% END -%]
+
+my $res = Idu->decode(' 66 12 06 00');
+ok $res, 'res - ok';
+is $res->{ins}, 'ADC';
+is scalar(@{$res->{bytes}}), 3, '1 byte left';
+
+my $mac = ' 66 12 I';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "I"\s*:\s*$mac\s*$/i);
+
+$mac = 'I';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "I"\s*:\s*$mac\s*$/i);
+
+$mac = '';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+is(Idu->error(), '');
+
+$mac = 'f2 66 f7 46 0c 0c';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = 'f2 66 f7 46 0c 0c ZHI';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "ZHI"\s*:\s*$mac\s*$/i);
+
+$mac = 'f2 66 f7 46 0c';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = 'f2 66 f7 46 0c ZHI';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "ZHI"\s*:\s*$mac\s*$/i);
+
+$mac = 'f2 66 f7 46';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = 'f2 66 f7 46 X';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "X"\s*:\s*$mac\s*$/i);
+
+$mac = 'f2 66 f7';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = 'f2 66 f7 X';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "X"\s*:\s*$mac\s*$/i);
+
+$mac = 'f2 66';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = 'f2 66 X';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "X"\s*:\s*$mac\s*$/i);
+
+$mac = 'f2 66 66';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = 'f2 66 66 X';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "X"\s*:\s*$mac\s*$/i);
+
+$mac = 'f2 66 66';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = 'f2 66 66 3X';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "3X"\s*:\s*$mac\s*$/i);
+
+$mac = 'f2 66 66 3';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "3"\s*:\s*$mac\s*$/i);
+
+$mac = '66 d4';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = '66 d4 II';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "II"\s*:\s*$mac\s*$/i);
+
+$mac = 'd4';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = 'd4 II';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "II"\s*:\s*$mac\s*$/i);
+
+$mac = '13 79';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = '13 79 II';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "II"\s*:\s*$mac\s*$/i);
+
+$mac = '66 13 9a 4e 5a e7';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = '66 13 9a 4e 5a e7 II';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "II"\s*:\s*$mac\s*$/i);
+
+$mac = '66 13 9a 4e 5a';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = '66 13 9a 4e 5a II';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "II"\s*:\s*$mac\s*$/i);
+
+$mac = '66 13 9a 4e';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = '66 13 9a 4e II';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "II"\s*:\s*$mac\s*$/i);
+
+$mac = '66 13 9a';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = '66 13 9a II';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "II"\s*:\s*$mac\s*$/i);
+
+$mac = '66 13';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = '66 13 II';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "II"\s*:\s*$mac\s*$/i);
+
+$mac = '11';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = '11 II';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "II"\s*:\s*$mac\s*$/i);
+
+$mac = '80 d1';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = '80 d1 II';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "II"\s*:\s*$mac\s*$/i);
+
+$mac = '80';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = '80 II';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "II"\s*:\s*$mac\s*$/i);
+
+$mac = '66 15 4b';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = '66 15 4b II';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "II"\s*:\s*$mac\s*$/i);
+
+$mac = '66 15';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = '66 15 II';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "II"\s*:\s*$mac\s*$/i);
+
+$mac = '80 57 a4';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = '80 57 a4 II';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "II"\s*:\s*$mac\s*$/i);
+
+$mac = '80 57';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = '80 57 II';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "II"\s*:\s*$mac\s*$/i);
+
+$mac = '66 80 14 7e';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = '66 80 14 7e II';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "II"\s*:\s*$mac\s*$/i);
+
+$mac = '66 80 14';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = '66 80 14 II';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "II"\s*:\s*$mac\s*$/i);
+
+$mac = '66 80';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = '66 80 II';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "II"\s*:\s*$mac\s*$/i);
+
+$mac = '83 04 1b';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = '83 04 1b II';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "II"\s*:\s*$mac\s*$/i);
+
+$mac = '83 04';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = '83 04 II';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "II"\s*:\s*$mac\s*$/i);
+
+$mac = '83';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = '83 II';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "II"\s*:\s*$mac\s*$/i);
+
+$mac = '81 66 fb 8b 7c be';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = '81 66 fb 8b 7c be II';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "II"\s*:\s*$mac\s*$/i);
+
+$mac = '81 66 fb 8b 7c';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = '81 66 fb 8b 7c II';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "II"\s*:\s*$mac\s*$/i);
+
+$mac = '81 66 fb 8b';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = '81 66 fb 8b II';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "II"\s*:\s*$mac\s*$/i);
+
+$mac = '81 66 fb';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = '81 66 fb II';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "II"\s*:\s*$mac\s*$/i);
+
+$mac = '81 66';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = '81 66 II';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "II"\s*:\s*$mac\s*$/i);
+
+$mac = '66 0f bc 64 42';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = '66 0f bc 64 42 II';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "II"\s*:\s*$mac\s*$/i);
+
+$mac = '66 0f bc 64';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = '66 0f bc 64 II';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "II"\s*:\s*$mac\s*$/i);
+
+$mac = '66 0f bc';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = '66 0f bc II';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "II"\s*:\s*$mac\s*$/i);
+
+$mac = '66 0f';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = '66 0f II';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "II"\s*:\s*$mac\s*$/i);
+
+$mac = 'de 1c 45 57 e1 57';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = 'de 1c 45 57 e1 57 HIB';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "HIB"\s*:\s*$mac\s*$/i);
+
+$mac = 'de 1c 45 57 e1';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = 'de 1c 45 57 e1 HIB';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "HIB"\s*:\s*$mac\s*$/i);
+
+$mac = 'de 1c 45 57';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = 'de 1c 45 57 HIB';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "HIB"\s*:\s*$mac\s*$/i);
+
+$mac = 'de 1c 45';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = 'de 1c 45 HIB';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "HIB"\s*:\s*$mac\s*$/i);
+
+$mac = 'de 1c';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = 'de 1c HIB';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "HIB"\s*:\s*$mac\s*$/i);
+
+$mac = 'de';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected end of input\s*:\s*$mac\s*$/i);
+
+$mac = 'de HIB';
+$res = Idu->decode($mac);
+ok !defined($res), 'res - not ok';
+like(Idu->error(), qr/syntax error.*unexpected byte "HIB"\s*:\s*$mac\s*$/i);

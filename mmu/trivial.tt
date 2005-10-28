@@ -1,0 +1,17 @@
+[% USE Perl -%]
+[%# FOREACH num IN [1,2,3,4,5] -%]
+[%# Perl.pow(2, num) -%]
+[%# END -%]
+[%- DEFAULT word_size = 32 -%]
+[%-
+     bytes_per_word = word_size / 8
+     temp = Perl.log(bytes_per_word) / Perl.log(2)
+     byte_addr_size = Perl.sprintf("%.0f", temp)  # rounding
+     fmt = Perl.sprintf("%%0%db", byte_addr_size)
+-%]
+fmt = [% fmt %]
+[% i = 0 -%]
+[% WHILE i < bytes_per_word -%]
+                        [% byte_addr_size %]'b[% Perl.sprintf(fmt, i) %]: bytedata = data[[% i*8+7 %]:[% i*8 %]];
+    [%- i = i + 1 %]
+[% END -%]

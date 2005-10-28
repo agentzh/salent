@@ -1,0 +1,136 @@
+[% DEFAULT
+     version = '0.13'
+     word_size = 32
+     alu = {
+         sels = 
+           [
+             'NOP',
+             'ADD', 'SUB', 'MUL', 'IMUL', 'DIV', 'IDIV',
+             'AND', 'OR', 'XOR', 'NOT', 'NEG',
+             'SHL', 'SHR', 'SAL', 'SAR',
+             'ROL', 'ROR', 'RCL', 'RCR',
+           ]
+         delay = 1
+     }
+-%]
+[% USE Perl;
+   USE POSIX;
+   USE date;
+   SET
+     last_mod = date.format(template.modtime, '20%y-%m-%d', 'en_GB')
+     year = date.format(template.modtime, '20%y', 'en_GB')
+
+     temp = Perl.log(alu.sels.size) / Perl.log(2)
+     sel_size = POSIX.ceil(temp);
+-%]
+//: alu.v.tt
+//: Arithmetic Logic Unit (ALU)
+//: Salent v[% version %]
+//: Copyright (c) [% year %] Agent Zhang.
+//: 2005-07-11 [% last_mod %]
+
+/*
+    res1 is the normal output port.
+    When division is performed, res2 stores the remainder and data3
+      stores the higher word of the dividend.
+    When multiplication is performed, res2 stores the higher word of
+      the product.
+*/
+module alu (cout, res1, res2, data1, data2, data3, cin, sel);
+    parameter WORD_SIZE = [% word_size %];
+    parameter DELAY     = [% alu.delay %];
+    parameter SEL_SIZE  = [% sel_size %];
+
+    // Opcodes:
+[%- fmt = Perl.sprintf("%d'b%%0%db", sel_size, sel_size);
+    i = 0 %]
+[%- FOREACH sel IN alu.sels %]
+    parameter [% Perl.sprintf("%-4s", sel) %] = [% Perl.sprintf(fmt, i) %];
+    [%- i = i + 1 %]
+[%- END %]
+
+    output cout;  // Carry out
+    output [WORD_SIZE-1:0] res1, res2;
+    input  [WORD_SIZE-1:0] data1, data2, data3;
+    input  cin;   // Carry in
+    input  [SEL_SIZE-1:0] sel;  // Specifies the operation to be carried out
+
+    reg cout;
+    reg [WORD_SIZE-1:0] res1, res2;
+    reg [WORD_SIZE-1:0] temp1, temp2;
+
+    always @ (sel or data1 or data2 or data3 or cin) begin
+        #(DELAY);
+        case (sel)
+            NOP: ;
+
+            ADD:  { cout, res1 } = data1 + data2 + cin;
+            SUB:  { cout, res1 } = data1 - data2 - cin;
+            MUL:  { cout, res2, res1 } = data1 * data2;
+            IMUL: { cout, res2, res1 } = $signed(data1) * $signed(data2);
+
+            DIV:  // Carry out is undefined.
+              begin
+                res1 = {data3, data1} / data2;
+                res2 = {data3, data1} % data2;
+              end
+            
+            IDIV: // Carry out is undefined.
+              begin
+                res1 = $signed({data3, data1}) / $signed(data2);
+                res2 = $signed({data3, data1}) % $signed(data2);
+              end
+
+            AND: {cout, res1} = data1 & data2;
+            OR:  {cout, res1} = data1 | data2;
+            XOR: {cout, res1} = data1 ^ data2;
+            NOT: res1 = ~ data1;  // Carry out is unaffected.
+            NEG: {cout, res1} = ~ data1 + 1;
+
+            SHL: {cout, res1} = {cin, data1} << data2;
+            SAL: {cout, res1} = $signed({cin, data1}) <<< data2;
+
+            SHR: {res1, cout} = {data1, cin} >> data2;
+            SAR: {res1, cout} = $signed({data1, cin}) >>> data2;
+
+            ROL:
+              begin
+                {cout, temp1} = {cin, data1} << data2;
+                temp2 = data1 >> (WORD_SIZE - data2);
+                res1  = temp1 + temp2;
+              end
+
+            RCL:
+              begin
+                {cout, temp1} = {cin, data1} << data2;
+                temp2 = {cin, data1} >> (WORD_SIZE - data2 + 1);
+                res1 = temp1 + temp2;
+              end
+            
+            ROR:
+              begin
+                {temp1, cout} = {data1, cin} >> data2;
+                temp2 = data1 << (WORD_SIZE - data2);
+                res1  = temp1 + temp2;
+              end
+
+            RCR:
+              begin
+                {temp1, cout} = {cin, data1, cin} >> data2;
+                temp2 = data1 << (WORD_SIZE - data2 + 1);
+                res1 = temp1 + temp2;
+              end
+
+            default:
+              begin
+        [%- IF word_size > 32 # adapt to vlog-1995 %]
+                res1 = [% word_size %]'bx;
+                res2 = [% word_size %]'bx;
+        [%- ELSE %]
+                res1 = 'bx;
+                res2 = 'bx;
+        [%- END %]
+              end
+        endcase
+    end
+endmodule

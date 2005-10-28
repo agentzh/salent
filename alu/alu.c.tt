@@ -1,0 +1,126 @@
+[% USE date -%]
+[% DEFAULT
+     version = '0.13'
+     c_file = 'alu.c'
+     ops = [  # operands must all be in hex form
+        { op = 'mul', A = '20', B = 0 }
+        { op = 'imul', A = 'fffffffd', B = 2 }
+        { op = 'mul', A = 'fffffffd', B = 2 }
+        { op = 'div', A = 6, B = 'fffffffe', D = 0 }
+        { op = 'idiv', A = 6, B = 'fffffffe' }
+        { op = 'nop' }
+        { op = 'add', A = 5, B = 6 }
+        { op = 'add', A = 5, B = 6, cin = 1 }
+        { op = 'add', A = 5, B = 6, cin = 0 }
+        { op = 'sub', A = 'fffffffd', B = 9 }
+        { op = 'sub', A = 'fffffffd', B = 9, cin = 1 }
+        { op = 'sub', A = 'd', B = 9, cin = 1 }
+        { op = 'sub', A = 'fffffffd', B = 9, cin = 0 }
+        { op = 'nop' }
+        { op = 'xor', A = 'fffffffe', B = 3 }
+        { op = 'and', A = 'fffffffe', B = 'fffffffd' }
+        { op = 'or', A = 'fffffffe', B = 3 }
+        { op = 'neg', A = 5 }
+        { op = 'not', A = 'b' }
+        { op = 'nop' }
+        { op = 'shl', A = 'fffffffe', B = 2 }
+        { op = 'shr', A = 'fffffffe', B = 2 }
+        { op = 'sal', A = 'fffffffe', B = 2 }
+        { op = 'sar', A = 'fffffffe', B = 2 }
+        { op = 'rol', A = 'fffffffe', B = 2, cin = 0 }
+        { op = 'ror', A = 'fffffffe', B = 2, cin = 1 }
+        { op = 'rcl', A = 'fffffffe', B = 2, cin = 1 }
+        { op = 'rcr', A = 'fffffffe', B = 2, cin = 0 }
+     ]
+-%]
+[% SET
+     last_mod = date.format(template.modtime, '20%y-%m-%d', 'en_GB')
+     year = date.format(template.modtime, '20%y', 'en_GB')
+-%]
+//: [% c_file %]
+//: Reference implementation of ALU using MASM
+//: This file was generated from alu.c.tt
+//: Salent v[% version %]
+//: Copyright (c) [% year %] Agent Zhang.
+//: 2005-07-08 [% last_mod %]
+
+#include <stdio.h>
+
+void printbin(unsigned char c) {
+    int i = sizeof(c) * 8;
+    while (i > 0)
+        printf("%d", ((1<<--i)&c) != 0);
+}
+
+int main() {
+    int a, d;
+    unsigned char flags;
+
+    printf("SF:ZF:0:AF:0:PF:1:CF eax edx\n");
+[%- FOREACH ops %]
+    __asm {
+    [%- IF cin == 1 %]
+        stc
+    [%- ELSIF cin == 0 %]
+        clc
+    [%- END -%]
+
+    [%- IF cin.defined;
+            SET op = 'adc' IF op == 'add';
+            SET op = 'sbb' IF op == 'sub';
+        END -%]
+
+    [%- IF op == 'mul' OR op == 'imul' %]
+        mov eax, 0x[% A %]
+        mov ebx, 0x[% B %]
+        [% op %] ebx
+        mov a, eax
+        mov d, edx
+        lahf
+        mov flags, ah
+    }
+    printbin(flags);
+    printf(" %x %x\n", a, d);
+    [%- ELSIF op == 'div' OR op == 'idiv' %]
+        mov eax, 0x[% A %]
+        [%- IF D.defined %]
+        mov edx, 0x[% D %]
+        [%- ELSIF op == 'idiv' %]
+        cdq
+        [%- ELSE %]
+        mov edx, 0
+        [%- END %]
+        mov ebx, 0x[% B %]
+        [% op %] ebx
+        mov a, eax
+        mov d, edx
+        lahf
+        mov flags, ah
+    }
+    printbin(flags);
+    printf(" %x %x\n", a, d);
+    [%- ELSIF op == 'not' OR op == 'neg' %]
+        mov eax, 0x[% A %]
+        [% op %] eax
+        mov a, eax
+        lahf
+        mov flags, ah
+    }
+    printbin(flags);
+    printf(" %x\n", a);
+    [%- ELSIF op == 'nop' %]
+    }
+    printf("\n");
+    [%- ELSE # add sub and or xor shl shr rol ror sal sar %]
+        mov eax, 0x[% A %]
+        [% op %] eax, 0x[% B %]
+        mov a, eax
+        lahf
+        mov flags, ah
+    }
+    printbin(flags);
+    printf(" %x\n", a);
+    [%- END %]
+[% END %]
+    return 0;
+}

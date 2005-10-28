@@ -1,0 +1,64 @@
+[% DEFAULT lang='Default' -%]
+[% USE date;
+   SET
+     last_mod = date.format(template.modtime, '20%y-%m-%d', 'en_GB')
+-%]
+#: This file is generated from opname.t.tt
+#: Test names of instructions
+#: Salent v0.13
+#: Copyright (c) 2005 Agent Zhang
+#: 2005-08-20 [% last_mod %]
+
+use strict;
+use warnings;
+
+use Test::More tests => 28;
+[% IF lang == 'Perl' -%]
+use inc::Idu;
+[% ELSE -%]
+use [% lang %]::Idu;
+[% END -%]
+
+my $res = Idu->decode(' 66   12 06');
+ok $res, 'res - ok';
+is $res->{ins}, 'ADC';
+is scalar(@{$res->{bytes}}), 3, 'no bytes left';
+
+$res = Idu->decode("f2 66 f7  46 0c 0c \t01");
+ok $res, 'res - ok';
+is $res->{ins}, 'TEST';
+is $res->{imm}->[0], '0c';
+is $res->{imm}->[1], '01';
+is scalar(@{$res->{bytes}}), 7, 'no bytes left';
+
+$res = Idu->decode('66 A0 1D 51  66 A3');
+ok $res, 'res - ok';
+is $res->{ins}, 'MOV';
+is scalar(@{$res->{bytes}}), 6, 'no bytes left';
+
+$res = Idu->decode('d6');
+ok $res, 'res - ok';
+is $res->{ins}, 'SALC';
+is scalar(@{$res->{bytes}}), 1, 'no bytes left';
+
+$res = Idu->decode('DB 4B 1C');
+ok $res, 'res - ok';
+is $res->{ins}, 'FISTTP';
+is scalar(@{$res->{bytes}}), 3, 'no bytes left';
+
+$res = Idu->decode('F3 23 AA A3 C0 12 0A');
+ok $res, 'res - ok';
+is $res->{ins}, 'AND';
+is scalar(@{$res->{bytes}}), 7, 'no bytes left';
+
+$res = Idu->decode('d5 1d');
+ok $res, 'res - ok';
+is $res->{ins}, 'AAD';
+is $res->{imm}->[0], '1d';
+is scalar(@{$res->{bytes}}), 2, 'no bytes left';
+
+$res = Idu->decode('d4 b1');
+ok $res, 'res - ok';
+is $res->{ins}, 'AAM';
+is $res->{imm}->[0], 'b1';
+is scalar(@{$res->{bytes}}), 2, 'no bytes left';

@@ -1,0 +1,152 @@
+<html>
+ <head>
+  <title>D:\Agent2002\AISystem1.0\LogicDesign\Salent\v0.08\ModelSim\idu\t\optest.t</title>
+ </head>
+ <body><tt><pre>
+<a name="line_1"></a>#: This test script was generated from optest.tt
+<a name="line_2"></a>#: Salent v0.08
+<a name="line_3"></a>#: Copyright (c) 2005 Agent Zhang
+<a name="line_4"></a>#: 2005-07-29 2005-08-02
+<a name="line_5"></a>
+<a name="line_6"></a>use strict;
+<a name="line_7"></a>use warnings;
+<a name="line_8"></a>
+<a name="line_9"></a>use Getopt::Std;
+<a name="line_10"></a>use Test::More tests => 42;
+<a name="line_11"></a>use inc::Idu;
+<a name="line_12"></a>use Template::Ast;
+<a name="line_13"></a>
+<a name="line_14"></a>#my %opts;
+<a name="line_15"></a>#getopts('d', \%opts);
+<a name="line_16"></a>#my $debug = $opts{d};
+<a name="line_17"></a>
+<a name="line_18"></a>my $ast = Template::Ast->read('t/optest.ast');
+<a name="line_19"></a>my @ops = @{$ast->{ops}};
+<a name="line_20"></a>#warn Template::Ast->dump([\@ops], [qw(ops)]);
+<a name="line_21"></a>
+<a name="line_22"></a>my @synonyms = (
+<a name="line_23"></a>    'CMPS/CMPSB/CMPSW/CMPSD',
+<a name="line_24"></a>    'CWD/CDQ',     # Add by Agent
+<a name="line_25"></a>    'CWDE/CDW',    # Add by Agent
+<a name="line_26"></a>    'FDIVR/FDIV',  # Add by Agent
+<a name="line_27"></a>    'FSUBR/FSUB',  # Add by Agent
+<a name="line_28"></a>    'FWAIT/WAIT',  # Add by Agent
+<a name="line_29"></a>    'IRET/IRETD',
+<a name="line_30"></a>    'JCXZ/JECXZ',
+<a name="line_31"></a>    'INT/INT3',    # Add by Agent
+<a name="line_32"></a>    'INS/INSB',    # Add by Agent
+<a name="line_33"></a>    'LODS/LODSB/LODSW/LODSD',
+<a name="line_34"></a>    'LOOPZ/LOOPE',
+<a name="line_35"></a>    'LOOPNZ/LOOPNE',
+<a name="line_36"></a>    'MOVS/MOVSB/MOVSW/MOVSD',
+<a name="line_37"></a>    'POPA/POPAD',
+<a name="line_38"></a>    'POPF/POPFD',
+<a name="line_39"></a>    'PUSHA/PUSHAD',
+<a name="line_40"></a>    'PUSHF/PUSHFD',
+<a name="line_41"></a>    'PUSH/PUSHD',   # Add by Agent
+<a name="line_42"></a>    'SCAS/SCASB/SCASW/SCASD',
+<a name="line_43"></a>    'STOS/STOSB/STOSW/STOSD',
+<a name="line_44"></a>    'XLAT/XLATB',
+<a name="line_45"></a>);
+<a name="line_46"></a>
+<a name="line_47"></a>map { s/\//|/g; $_ = "(?:$_)"; } @synonyms;
+<a name="line_48"></a>#warn "@synonyms\n";
+<a name="line_49"></a>
+<a name="line_50"></a>foreach my $op (@ops) {
+<a name="line_51"></a>    my $mac = $op->{mac};
+<a name="line_52"></a>    my ($ins, $asm) = process_asm($op->{asm});
+<a name="line_53"></a>
+<a name="line_54"></a>    my $res = Idu->decode($mac);
+<a name="line_55"></a>    # Ignore some legacy preffix byte:
+<a name="line_56"></a>    $ins =~ s/^(?:lock|es|ss)\s+//io;
+<a name="line_57"></a>
+<a name="line_58"></a>=begin comment_todo
+<a name="line_59"></a>
+<a name="line_60"></a>    if ($ins =~ m/DEC|INC|JNS/i) {
+<a name="line_61"></a>        TODO: {
+<a name="line_62"></a>            local $TODO = 'State machine needs to be adapted to LALR(2)';
+<a name="line_63"></a>            ok($res, "res ok - $mac => $ins => $asm");
+<a name="line_64"></a>            is $res->{ins}, $ins, "op name ok";
+<a name="line_65"></a>            ok eq_array (
+<a name="line_66"></a>                \@Idu::oldbytes,
+<a name="line_67"></a>                [split(' ', $mac)],
+<a name="line_68"></a>            ), "no bytes left";
+<a name="line_69"></a>        }
+<a name="line_70"></a>        next;
+<a name="line_71"></a>    }
+<a name="line_72"></a>
+<a name="line_73"></a>=cut
+<a name="line_74"></a>
+<a name="line_75"></a>    # The disassembler fails to parse the bytes:
+<a name="line_76"></a>    if ($ins =~ m/^DB$/i or $ins =~ m/^byte$/i) {
+<a name="line_77"></a>        ok(!defined $res, "res ok - $mac => $ins => $asm");
+<a name="line_78"></a>        ok(1);
+<a name="line_79"></a>        ok(1);
+<a name="line_80"></a>        next;
+<a name="line_81"></a>    }
+<a name="line_82"></a>
+<a name="line_83"></a>    ok($res, "res ok - $mac => $ins => $asm");
+<a name="line_84"></a>    ok eq_array (
+<a name="line_85"></a>        \@Idu::oldbytes,
+<a name="line_86"></a>        [split(' ', $mac)],
+<a name="line_87"></a>    ), "no bytes left";
+<a name="line_88"></a>
+<a name="line_89"></a>    # Resolve "XCHG eax, eax":
+<a name="line_90"></a>    if ($asm =~ m/xchg\s+eax\s*,\s*eax/i) {
+<a name="line_91"></a>        is($res->{ins}, 'NOP', 'op name ok');
+<a name="line_92"></a>        next;
+<a name="line_93"></a>    }
+<a name="line_94"></a>
+<a name="line_95"></a>    cmp_op($res->{ins}, $ins);
+<a name="line_96"></a>}
+<a name="line_97"></a>
+<a name="line_98"></a>sub cmp_op {
+<a name="line_99"></a>    my ($dec_ins, $des_ins) = @_;
+<a name="line_100"></a>
+<a name="line_101"></a>    if ($dec_ins =~ m/\//) {  # decoder returns 'PUSHF/PUSHFD', 'PUSH/PUSHD', etc.
+<a name="line_102"></a>        my $pat = $dec_ins;
+<a name="line_103"></a>        $pat =~ s/\//|/g;
+<a name="line_104"></a>        return like($des_ins, qr/$pat/, 'op name ok');
+<a name="line_105"></a>    }
+<a name="line_106"></a>
+<a name="line_107"></a>    if ($dec_ins =~ m/^(\w+)cc$/) {  # cc problem:
+<a name="line_108"></a>        return like($des_ins, qr/^$1\w+/i, 'op name ok');
+<a name="line_109"></a>    }
+<a name="line_110"></a>
+<a name="line_111"></a>    # resolve the synonym problem:
+<a name="line_112"></a>    my $prefix;
+<a name="line_113"></a>    my $found = grep {
+<a name="line_114"></a>        if ($des_ins =~ m/^$_$/) {
+<a name="line_115"></a>            1;
+<a name="line_116"></a>        } elsif ($des_ins =~ m/^(rep\w*) $_$/i) {
+<a name="line_117"></a>            $prefix = $1;
+<a name="line_118"></a>            1;
+<a name="line_119"></a>        }
+<a name="line_120"></a>    } @synonyms;
+<a name="line_121"></a>    if ($found) {
+<a name="line_122"></a>        if (defined $prefix) {
+<a name="line_123"></a>            $prefix .= ' ';
+<a name="line_124"></a>        } else {
+<a name="line_125"></a>            $prefix = '';
+<a name="line_126"></a>        }
+<a name="line_127"></a>        $prefix =~ s/^rep\w+/rep\\w+/i;
+<a name="line_128"></a>        #warn $prefix;
+<a name="line_129"></a>        $found = grep { $dec_ins =~ m/^${prefix}$_$/i } @synonyms;
+<a name="line_130"></a>        return ok($found, "op name ok: $dec_ins <=> $des_ins");
+<a name="line_131"></a>    } 
+<a name="line_132"></a>    return is($dec_ins, $des_ins, 'op name ok');
+<a name="line_133"></a>}
+<a name="line_134"></a>
+<a name="line_135"></a>sub process_asm {
+<a name="line_136"></a>    my $asm = shift;
+<a name="line_137"></a>    $asm =~ s/;[^;]+$//;
+<a name="line_138"></a>    $asm =~ s/\s+$//;
+<a name="line_139"></a>    unless ($asm =~ m/^(?:rep\w*|lock|[scde]s)\s+\w+/io or $asm =~ m/^\w+/oi) {
+<a name="line_140"></a>        warn $_;
+<a name="line_141"></a>        next;
+<a name="line_142"></a>    }
+<a name="line_143"></a>    my $ins = $&;
+<a name="line_144"></a>    return (uc($ins), $asm);
+<a name="line_145"></a>}
+ </pre></tt></body>
+</html>

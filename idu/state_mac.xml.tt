@@ -1,0 +1,56 @@
+[% DEFAULT
+    idu = {
+        state_machine = [
+          {
+            state_id = 0,
+            next = [
+                { pattern = '100000..',
+                  state = 1 }
+                { pattern = '0001001.',
+                  state = 6 }
+            ]
+          }
+          {
+            state_id = 1,
+            imm = 3,
+            ins = {
+              sub_des = 'immediate to memory',
+              op_name = 'ADC',
+              ins_set = 'General',
+              des = 'ADD with Carry',
+              encoding = '1000 00sw : mod 010 r/m : immediate data'
+            }
+          }
+        ]
+    }
+-%]
+<?xml version="1.0"?>
+
+<graph>
+
+[% FOREACH state IN idu.state_machine -%]
+<node id="[% state.state_id %]">
+    <traits 
+  [%- FOREACH key IN state.keys %]
+    [%- NEXT IF key == 'state_id' %]
+    [%- IF key == 'next' %]
+      [%- NEXT %]
+    [%- ELSIF key == 'ins' %]
+      [%- FOREACH subkey IN state.ins.keys %]
+        [%- val = state.ins.$subkey;
+            val = val.replace("<", "&lt;");
+            val = val.replace("¦Å", "epsilon");
+            val = val.replace("¦Ð", "Pi") %]
+        [%- subkey %]="[% val %]" 
+      [%- END %]
+    [%- ELSE %]
+        [%- key %]="[% state.$key.join(':') %]" 
+    [%- END %]
+  [%- END %]/>
+  [%- FOREACH arc IN state.next %]
+    <arc id="[% arc.pattern %]" to="[% arc.state %]"/>
+  [%- END %]
+</node>
+
+[% END -%]
+</graph>

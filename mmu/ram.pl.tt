@@ -1,0 +1,109 @@
+[% USE date -%]
+[% DEFAULT
+     version = '0.13'
+     list_file = 'ram.lst'
+     perl_file = 'ram.pl'
+     ram = { delay = 10 }
+     ops = [
+        { rw   = 0,       rw_time = 1,
+          addr = '16#0',       addr_time = 2,
+          data = '16#FFFF', data_time = 1,
+          strb_up = 3, strb_down = 15,
+          run_time = 20, des = 'w 16#0 16#FFFF'
+          overflow = 0, uninit = 0 }
+        { rw   = 0,       rw_time = 1,
+          addr = '16#4',       addr_time = 2,
+          data = '16#ABCD', data_time = 1,
+          strb_up = 3, strb_down = 15,
+          run_time = 20, des = 'w 16#4 16#ABCD'
+          overflow = 0 }
+        { rw   = 1,       rw_time = 2,
+          addr = '16#3',       addr_time = 3,
+          strb_up = 4, strb_down = 21,
+          run_time = 25, data = '0*ffff',
+          des = 'r 16#3 0*ffff', overflow = 0 }
+        { rw   = 1,       rw_time = 2,
+          addr = '16#5',       addr_time = 1,
+          strb_up = 3, strb_down = 23,
+          run_time = 25, data = '0*abcd',
+          des = 'r 16#5 0*abcd', overflow = 0 }
+     ]
+-%]
+[% SET
+     last_mod = date.format(template.modtime, '20%y-%m-%d', 'en_GB')
+     year = date.format(template.modtime, '20%y', 'en_GB')
+-%]
+#: [% perl_file %]
+#: Working with ram.do.tt to check in simulation list
+#:   outputs of ram.v
+#: This file was generated from ram.pl.tt
+#: Salent v[% version %]
+#: Copyright (C) [% year %] Agent Zhang.
+#: 2005-07-03 [% last_mod %]
+
+use strict;
+use warnings;
+
+[% tests = 0 -%]
+[% FOREACH op IN ops;
+     IF op.overflow;
+        tests = tests + 1;
+        IF op.rw;
+            tests = tests + 1;
+        END;
+     ELSE;
+        tests = tests + 3;
+        IF op.rw;
+            tests = tests + 1;
+            IF op.uninit;
+                tests = tests + 1;
+            ELSE;
+                tests = tests + 2;
+            END;
+        END;
+     END;
+   END -%]
+use Test::More tests => [% tests %];
+use ModelSim::List;
+
+my $list = ModelSim::List->new;
+$list->parse('[% list_file %]');
+
+[%- start = 0 -%]
+[% FOREACH op IN ops -%]
+
+    [%- end = start + op.run_time -%]
+    [%- des = op.des _ ' (@ ' _ start _ ' ~ ' _ end _ ')';
+       mfc_up = start + op.strb_up + ram.delay;
+       mfc_down = start + op.strb_down -%]
+
+    [%- IF op.overflow %]
+ok(!defined $list->time_of('/ram/mfc', 1, [% start %], 
+    [%- end %]), '[% des %]'.' - mfc');
+        [%- IF op.rw %]
+ok(!defined $list->time_of('/ram/data', qr/[^z]/, [% start %], 
+    [%- end %]), '[% des %]'.' - data');
+        [%- END -%]
+
+    [%- ELSE -%]
+
+is($list->strobe('/ram/mfc', [% start %]), 0, '[% des %]');
+is($list->time_of('/ram/mfc', 1, [% start %], [% end %]), 
+    [%- mfc_up %], '[% des %]');
+is($list->time_of('/ram/mfc', 0, [% mfc_up %], [% end %]), 
+    [%- mfc_down %], '[% des %]');
+        [%- IF op.rw # read mode %]
+like($list->strobe('/ram/data', [% start %]), qr/^z+$/i, '[% des %]');
+            [%- IF op.uninit # read uninitialized address %]
+like($list->strobe('/ram/data', qr/^z+$/i, [% mfc_down %]), qr/^z+$/i, '[% des %]');
+            [%- ELSE %]
+is($list->time_of('/ram/data', qr/^[% op.data %]$/i, 
+    [%- start %], [% end %]), [% mfc_up %], '[% des %]');
+is($list->time_of('/ram/data', qr/^z+$/i, 
+    [%- mfc_up %], [% end %]), [% mfc_down %], '[% des %]');
+            [%- END %]
+        [%- END -%]
+    [%- END -%]
+
+    [% start = start + op.run_time -%]
+[% END -%]

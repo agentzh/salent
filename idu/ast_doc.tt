@@ -1,0 +1,25 @@
+[% DEFAULT
+    des = 'IDU Tester AST'
+    ops = [
+        {
+            mac = '00 00 ff ff',
+            asm  = 'sub est bb',
+         }
+        {
+            mac = '8b ec',
+            asm  = 'mov	 ebp, esp',
+         }
+     ]
+-%]
+=head1 NAME
+
+[% des %]
+
+=head1 AST STRUCTURE
+
+[%- FOREACH item IN ops %]
+=head3 [% item.asm %]
+
+    [% item.mac %]
+
+[%- END -%]

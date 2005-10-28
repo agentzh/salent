@@ -1,0 +1,67 @@
+$ast = {
+         'insts' => [
+                      {
+                        'sub_des' => 'register1 to register2',
+                        'op_name' => 'ADC',
+                        'ins_set' => 'General',
+                        'id' => 0,
+                        'asm_tpl' => '[% ins %] [% reg2 %],[% reg1 %]',
+                        'des' => 'ADD with Carry',
+                        'encoding' => '0001 000w : 11 reg1 reg2'
+                      },
+                      {
+                        'sub_des' => 'register2 to register1',
+                        'op_name' => 'ADC',
+                        'ins_set' => 'General',
+                        'id' => 1,
+                        'asm_tpl' => '[% ins %] [% reg1 %],[% reg2 %]',
+                        'des' => 'ADD with Carry',
+                        'encoding' => '0001 001w : 11 reg1 reg2'
+                      },
+                      {
+                        'sub_des' => 'memory to register',
+                        'op_name' => 'ADC',
+                        'ins_set' => 'General',
+                        'id' => 2,
+                        'asm_tpl' => '[% ins %] [% reg %],[% mem %]',
+                        'des' => 'ADD with Carry',
+                        'encoding' => '0001 001w : mod reg r/m'
+                      },
+                      {
+                        'sub_des' => 'register to memory',
+                        'op_name' => 'ADC',
+                        'ins_set' => 'General',
+                        'id' => 3,
+                        'asm_tpl' => '[% ins %] [% mem %],[% reg %]',
+                        'des' => 'ADD with Carry',
+                        'encoding' => '0001 000w : mod reg r/m'
+                      },
+                      {
+                        'sub_des' => 'immediate to register',
+                        'op_name' => 'ADC',
+                        'ins_set' => 'General',
+                        'id' => 4,
+                        'asm_tpl' => '[% ins %] [% reg %],[% imm %]',
+                        'des' => 'ADD with Carry',
+                        'encoding' => '1000 00sw : 11 010 reg : immediate data'
+                      },
+                      {
+                        'sub_des' => 'immediate to AL, AX, or EAX',
+                        'op_name' => 'ADC',
+                        'ins_set' => 'General',
+                        'id' => 5,
+                        'asm_tpl' => '[% ins %] [% eax_var %],[% imm %]',
+                        'des' => 'ADD with Carry',
+                        'encoding' => '0001 010w : immediate data'
+                      },
+                      {
+                        'sub_des' => 'immediate to memory',
+                        'op_name' => 'ADC',
+                        'ins_set' => 'General',
+                        'id' => 6,
+                        'asm_tpl' => '[% ins %] [% pref_mem %],[% imm %]',
+                        'des' => 'ADD with Carry',
+                        'encoding' => '1000 00sw : mod 010 r/m : immediate data'
+                      }
+                    ]
+       };

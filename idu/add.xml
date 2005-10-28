@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+
+<graph>
+
+<node id="0">
+<arc id="a" to="1" />
+</node>
+
+<node id="1">
+<arc id="d" to="2" />
+<arc id="n" to="3" />
+</node>
+
+<node id="2">
+<arc id="d" to="4" />
+</node>
+
+<node id="3">
+<arc id="d" to="5" />
+</node>
+
+<node id="4" />
+<node id="5" />
+
+</graph>

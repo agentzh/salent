@@ -1,0 +1,362 @@
+<html>
+ <head>
+  <title>D:\Agent2002\Salent\v0.13\ModelSim\idu\t\ndisasm.t</title>
+ </head>
+ <body><tt><pre>
+<font color=gray>     1</font>  <a name="line_1"></a>#: ndisasm.t
+<font color=gray>     2</font>  <a name="line_2"></a>#: Test the inc::Disasm module.
+<font color=gray>     3</font>  <a name="line_3"></a>#: Salent v0.12
+<font color=gray>     4</font>  <a name="line_4"></a>#: Copyright (c) 2005 Agent Zhang
+<font color=gray>     5</font>  <a name="line_5"></a>#: 2005-08-23 2005-08-25
+<font color=gray>     6</font>  <a name="line_6"></a>
+<font color=gray>     7</font>  <a name="line_7"></a>use strict;
+<font color=gray>     8</font>  <a name="line_8"></a>use warnings;
+<font color=gray>     9</font>  <a name="line_9"></a>
+<font color=gray>    10</font>  <a name="line_10"></a>package Disasm;
+<font color=gray>    11</font>  <a name="line_11"></a>
+<font color=gray>    12</font>  <a name="line_12"></a>use Test::More tests => 138;
+<font color=gray>    13</font>  <a name="line_13"></a>use inc::Ndisasm;
+<font color=gray>    14</font>  <a name="line_14"></a>
+<font color=gray>    15</font>  <a name="line_15"></a>my $mac = '37';
+<font color=gray>    16</font>  <a name="line_16"></a>is disasm($mac), 'aaa';
+<font color=gray>    17</font>  <a name="line_17"></a>
+<font color=gray>    18</font>  <a name="line_18"></a>$mac = '66 62 23';
+<font color=gray>    19</font>  <a name="line_19"></a>is disasm($mac), 'bound sp,[ebx]';
+<font color=gray>    20</font>  <a name="line_20"></a>
+<font color=gray>    21</font>  <a name="line_21"></a>$mac = 'D5 0A';
+<font color=gray>    22</font>  <a name="line_22"></a>is disasm($mac), 'aad';
+<font color=gray>    23</font>  <a name="line_23"></a>
+<font color=gray>    24</font>  <a name="line_24"></a>$mac = 'D4 0A';
+<font color=gray>    25</font>  <a name="line_25"></a>is disasm($mac), 'aam';
+<font color=gray>    26</font>  <a name="line_26"></a>
+<font color=gray>    27</font>  <a name="line_27"></a>$mac = '66 3F';
+<font color=gray>    28</font>  <a name="line_28"></a>is disasm($mac), 'o16 aas';
+<font color=gray>    29</font>  <a name="line_29"></a>
+<font color=gray>    30</font>  <a name="line_30"></a>$mac = '66 98';
+<font color=gray>    31</font>  <a name="line_31"></a>is disasm($mac), 'cbw';
+<font color=gray>    32</font>  <a name="line_32"></a>
+<font color=gray>    33</font>  <a name="line_33"></a>$mac = '98';
+<font color=gray>    34</font>  <a name="line_34"></a>is disasm($mac), 'cwde';
+<font color=gray>    35</font>  <a name="line_35"></a>
+<font color=gray>    36</font>  <a name="line_36"></a>$mac = '99';
+<font color=gray>    37</font>  <a name="line_37"></a>is disasm($mac), 'cdq';
+<font color=gray>    38</font>  <a name="line_38"></a>
+<font color=gray>    39</font>  <a name="line_39"></a>$mac = '66 99';
+<font color=gray>    40</font>  <a name="line_40"></a>is disasm($mac), 'cwd';
+<font color=gray>    41</font>  <a name="line_41"></a>
+<font color=gray>    42</font>  <a name="line_42"></a>$mac = '3F';
+<font color=gray>    43</font>  <a name="line_43"></a>is disasm($mac), 'aas';
+<font color=gray>    44</font>  <a name="line_44"></a>
+<font color=gray>    45</font>  <a name="line_45"></a>$mac = '0F CD';
+<font color=gray>    46</font>  <a name="line_46"></a>is disasm($mac), 'bswap ebp';
+<font color=gray>    47</font>  <a name="line_47"></a>
+<font color=gray>    48</font>  <a name="line_48"></a>$mac = 'F8';
+<font color=gray>    49</font>  <a name="line_49"></a>is disasm($mac), 'clc';
+<font color=gray>    50</font>  <a name="line_50"></a>
+<font color=gray>    51</font>  <a name="line_51"></a>$mac = 'FC';
+<font color=gray>    52</font>  <a name="line_52"></a>is disasm($mac), 'cld';
+<font color=gray>    53</font>  <a name="line_53"></a>
+<font color=gray>    54</font>  <a name="line_54"></a>$mac = 'FA';
+<font color=gray>    55</font>  <a name="line_55"></a>is disasm($mac), 'cli';
+<font color=gray>    56</font>  <a name="line_56"></a>
+<font color=gray>    57</font>  <a name="line_57"></a>$mac = '0F 06';
+<font color=gray>    58</font>  <a name="line_58"></a>is disasm($mac), 'clts';
+<font color=gray>    59</font>  <a name="line_59"></a>
+<font color=gray>    60</font>  <a name="line_60"></a>$mac = 'F5';
+<font color=gray>    61</font>  <a name="line_61"></a>is disasm($mac), 'cmc';
+<font color=gray>    62</font>  <a name="line_62"></a>
+<font color=gray>    63</font>  <a name="line_63"></a>$mac = 'A6';
+<font color=gray>    64</font>  <a name="line_64"></a>is disasm($mac),'cmpsb';
+<font color=gray>    65</font>  <a name="line_65"></a>
+<font color=gray>    66</font>  <a name="line_66"></a>$mac = '0F A2';
+<font color=gray>    67</font>  <a name="line_67"></a>is disasm($mac),'cpuid';
+<font color=gray>    68</font>  <a name="line_68"></a>
+<font color=gray>    69</font>  <a name="line_69"></a>$mac = '27';
+<font color=gray>    70</font>  <a name="line_70"></a>is disasm($mac),'daa';
+<font color=gray>    71</font>  <a name="line_71"></a>
+<font color=gray>    72</font>  <a name="line_72"></a>$mac = '2F';
+<font color=gray>    73</font>  <a name="line_73"></a>is disasm($mac),'das';
+<font color=gray>    74</font>  <a name="line_74"></a>
+<font color=gray>    75</font>  <a name="line_75"></a>$mac = 'F4';
+<font color=gray>    76</font>  <a name="line_76"></a>is disasm($mac), 'hlt';
+<font color=gray>    77</font>  <a name="line_77"></a>
+<font color=gray>    78</font>  <a name="line_78"></a>$mac = '6C';
+<font color=gray>    79</font>  <a name="line_79"></a>is disasm($mac), 'insb';
+<font color=gray>    80</font>  <a name="line_80"></a>
+<font color=gray>    81</font>  <a name="line_81"></a>$mac = '6D';
+<font color=gray>    82</font>  <a name="line_82"></a>is disasm($mac), 'insd';
+<font color=gray>    83</font>  <a name="line_83"></a>
+<font color=gray>    84</font>  <a name="line_84"></a>$mac = '66 6D';
+<font color=gray>    85</font>  <a name="line_85"></a>is disasm($mac), 'insw';
+<font color=gray>    86</font>  <a name="line_86"></a>
+<font color=gray>    87</font>  <a name="line_87"></a>$mac = '66 6C';
+<font color=gray>    88</font>  <a name="line_88"></a>is disasm($mac), 'o16 insb';
+<font color=gray>    89</font>  <a name="line_89"></a>
+<font color=gray>    90</font>  <a name="line_90"></a>$mac = 'CC';
+<font color=gray>    91</font>  <a name="line_91"></a>is disasm($mac), 'int3';
+<font color=gray>    92</font>  <a name="line_92"></a>
+<font color=gray>    93</font>  <a name="line_93"></a>$mac = 'CD 96';
+<font color=gray>    94</font>  <a name="line_94"></a>is disasm($mac), 'int 0x96';
+<font color=gray>    95</font>  <a name="line_95"></a>
+<font color=gray>    96</font>  <a name="line_96"></a>$mac = 'CE';
+<font color=gray>    97</font>  <a name="line_97"></a>is disasm($mac), 'into';
+<font color=gray>    98</font>  <a name="line_98"></a>
+<font color=gray>    99</font>  <a name="line_99"></a>$mac = '0F 08';
+<font color=gray>   100</font>  <a name="line_100"></a>is disasm($mac), 'invd';
+<font color=gray>   101</font>  <a name="line_101"></a>
+<font color=gray>   102</font>  <a name="line_102"></a>$mac = '0F 01 39';
+<font color=gray>   103</font>  <a name="line_103"></a>is disasm($mac), 'invlpg [ecx]';
+<font color=gray>   104</font>  <a name="line_104"></a>
+<font color=gray>   105</font>  <a name="line_105"></a>$mac = 'CF';
+<font color=gray>   106</font>  <a name="line_106"></a>is disasm($mac), 'iret';
+<font color=gray>   107</font>  <a name="line_107"></a>
+<font color=gray>   108</font>  <a name="line_108"></a>$mac = '66 CF';
+<font color=gray>   109</font>  <a name="line_109"></a>is disasm($mac), 'iretw';
+<font color=gray>   110</font>  <a name="line_110"></a>
+<font color=gray>   111</font>  <a name="line_111"></a>$mac = '9F';
+<font color=gray>   112</font>  <a name="line_112"></a>is disasm($mac), 'lahf';
+<font color=gray>   113</font>  <a name="line_113"></a>
+<font color=gray>   114</font>  <a name="line_114"></a>$mac = 'C5 81 53 BC C2 45';
+<font color=gray>   115</font>  <a name="line_115"></a>is disasm($mac), 'lds eax,[ecx+0x45c2bc53]';
+<font color=gray>   116</font>  <a name="line_116"></a>
+<font color=gray>   117</font>  <a name="line_117"></a>$mac = '8D 5D 8E';
+<font color=gray>   118</font>  <a name="line_118"></a>is disasm($mac), 'lea ebx,[ebp-0x72]';
+<font color=gray>   119</font>  <a name="line_119"></a>
+<font color=gray>   120</font>  <a name="line_120"></a>$mac = 'C9';
+<font color=gray>   121</font>  <a name="line_121"></a>is disasm($mac), 'leave';
+<font color=gray>   122</font>  <a name="line_122"></a>
+<font color=gray>   123</font>  <a name="line_123"></a>$mac = '66 C4 A1 41 A4 9A 05';
+<font color=gray>   124</font>  <a name="line_124"></a>is disasm($mac), 'les sp,[ecx+0x59aa441]';
+<font color=gray>   125</font>  <a name="line_125"></a>
+<font color=gray>   126</font>  <a name="line_126"></a>$mac = '0F B4 6A C6';
+<font color=gray>   127</font>  <a name="line_127"></a>is disasm($mac), 'lfs ebp,[edx-0x3a]';
+<font color=gray>   128</font>  <a name="line_128"></a>
+<font color=gray>   129</font>  <a name="line_129"></a>$mac = '0F 01 97 49 4D 7F DC';
+<font color=gray>   130</font>  <a name="line_130"></a>is disasm($mac), 'lgdt [edi+0xdc7f4d49]';
+<font color=gray>   131</font>  <a name="line_131"></a>
+<font color=gray>   132</font>  <a name="line_132"></a>$mac = '66 0F B5 15 B5 8B C0 1D';
+<font color=gray>   133</font>  <a name="line_133"></a>is disasm($mac), 'lgs dx,[0x1dc08bb5]';
+<font color=gray>   134</font>  <a name="line_134"></a>
+<font color=gray>   135</font>  <a name="line_135"></a>$mac = '0F 01 5A 39';
+<font color=gray>   136</font>  <a name="line_136"></a>is disasm($mac), 'lidt [edx+0x39]';
+<font color=gray>   137</font>  <a name="line_137"></a>
+<font color=gray>   138</font>  <a name="line_138"></a>$mac = 'AC';
+<font color=gray>   139</font>  <a name="line_139"></a>is disasm($mac), 'lodsb';
+<font color=gray>   140</font>  <a name="line_140"></a>
+<font color=gray>   141</font>  <a name="line_141"></a>$mac = 'AD';
+<font color=gray>   142</font>  <a name="line_142"></a>is disasm($mac), 'lodsd';
+<font color=gray>   143</font>  <a name="line_143"></a>
+<font color=gray>   144</font>  <a name="line_144"></a>$mac = '66 AD';
+<font color=gray>   145</font>  <a name="line_145"></a>is disasm($mac), 'lodsw';
+<font color=gray>   146</font>  <a name="line_146"></a>
+<font color=gray>   147</font>  <a name="line_147"></a>$mac = 'E8 84 64 B8 3B';
+<font color=gray>   148</font>  <a name="line_148"></a>is disasm($mac), 'call 0x3bb86489';
+<font color=gray>   149</font>  <a name="line_149"></a>
+<font color=gray>   150</font>  <a name="line_150"></a>$mac = '7F D5';
+<font color=gray>   151</font>  <a name="line_151"></a>is disasm($mac), 'jg 0xffffffd7';
+<font color=gray>   152</font>  <a name="line_152"></a>
+<font color=gray>   153</font>  <a name="line_153"></a>$mac = '0F 88 9F 86 14 87';
+<font color=gray>   154</font>  <a name="line_154"></a>is disasm($mac), 'js near 0x871486a5';
+<font color=gray>   155</font>  <a name="line_155"></a>
+<font color=gray>   156</font>  <a name="line_156"></a>$mac = 'E2 C4';
+<font color=gray>   157</font>  <a name="line_157"></a>is disasm($mac), 'loop 0xffffffc6';
+<font color=gray>   158</font>  <a name="line_158"></a>
+<font color=gray>   159</font>  <a name="line_159"></a>$mac = 'E1 B8';
+<font color=gray>   160</font>  <a name="line_160"></a>is disasm($mac), 'loope 0xffffffba';
+<font color=gray>   161</font>  <a name="line_161"></a>
+<font color=gray>   162</font>  <a name="line_162"></a>$mac = 'E0 1C';
+<font color=gray>   163</font>  <a name="line_163"></a>is disasm($mac), 'loopne 0x1e';
+<font color=gray>   164</font>  <a name="line_164"></a>
+<font color=gray>   165</font>  <a name="line_165"></a>$mac = 'E3 2E';
+<font color=gray>   166</font>  <a name="line_166"></a>is disasm($mac), 'jecxz 0x30';
+<font color=gray>   167</font>  <a name="line_167"></a>
+<font color=gray>   168</font>  <a name="line_168"></a>$mac = 'C8 67 37 0B';
+<font color=gray>   169</font>  <a name="line_169"></a>is disasm($mac), 'enter 0x3767,0xb';
+<font color=gray>   170</font>  <a name="line_170"></a>
+<font color=gray>   171</font>  <a name="line_171"></a>$mac = '66 0F B2 72 4A';
+<font color=gray>   172</font>  <a name="line_172"></a>is disasm($mac), 'lss si,[edx+0x4a]';
+<font color=gray>   173</font>  <a name="line_173"></a>
+<font color=gray>   174</font>  <a name="line_174"></a>$mac = '6E';
+<font color=gray>   175</font>  <a name="line_175"></a>is disasm($mac), 'outsb';
+<font color=gray>   176</font>  <a name="line_176"></a>
+<font color=gray>   177</font>  <a name="line_177"></a>$mac = '66 6F';
+<font color=gray>   178</font>  <a name="line_178"></a>is disasm($mac), 'outsw';
+<font color=gray>   179</font>  <a name="line_179"></a>
+<font color=gray>   180</font>  <a name="line_180"></a>$mac = '6F';
+<font color=gray>   181</font>  <a name="line_181"></a>is disasm($mac), 'outsd';
+<font color=gray>   182</font>  <a name="line_182"></a>
+<font color=gray>   183</font>  <a name="line_183"></a>$mac = '0F 22 C2';
+<font color=gray>   184</font>  <a name="line_184"></a>is disasm($mac), 'mov cr0,edx';
+<font color=gray>   185</font>  <a name="line_185"></a>
+<font color=gray>   186</font>  <a name="line_186"></a>$mac = '0F 20 CE';
+<font color=gray>   187</font>  <a name="line_187"></a>is disasm($mac), 'mov esi,cr1';
+<font color=gray>   188</font>  <a name="line_188"></a>
+<font color=gray>   189</font>  <a name="line_189"></a>$mac = '0F 23 D2';
+<font color=gray>   190</font>  <a name="line_190"></a>is disasm($mac), 'mov dr2,edx';
+<font color=gray>   191</font>  <a name="line_191"></a>
+<font color=gray>   192</font>  <a name="line_192"></a>$mac = '0F 21 D2';
+<font color=gray>   193</font>  <a name="line_193"></a>is disasm($mac), 'mov edx,dr2';
+<font color=gray>   194</font>  <a name="line_194"></a>
+<font color=gray>   195</font>  <a name="line_195"></a>$mac = 'A4';
+<font color=gray>   196</font>  <a name="line_196"></a>is disasm($mac), 'movsb';
+<font color=gray>   197</font>  <a name="line_197"></a>
+<font color=gray>   198</font>  <a name="line_198"></a>$mac = '66 A5';
+<font color=gray>   199</font>  <a name="line_199"></a>is disasm($mac), 'movsw';
+<font color=gray>   200</font>  <a name="line_200"></a>
+<font color=gray>   201</font>  <a name="line_201"></a>$mac= 'A5';
+<font color=gray>   202</font>  <a name="line_202"></a>is disasm($mac), 'movsd';
+<font color=gray>   203</font>  <a name="line_203"></a>
+<font color=gray>   204</font>  <a name="line_204"></a>$mac = '61';
+<font color=gray>   205</font>  <a name="line_205"></a>is disasm($mac), 'popa';
+<font color=gray>   206</font>  <a name="line_206"></a>
+<font color=gray>   207</font>  <a name="line_207"></a>$mac = '66 61';
+<font color=gray>   208</font>  <a name="line_208"></a>is disasm($mac), 'popaw';
+<font color=gray>   209</font>  <a name="line_209"></a>
+<font color=gray>   210</font>  <a name="line_210"></a>$mac = '9D';
+<font color=gray>   211</font>  <a name="line_211"></a>is disasm($mac), 'popf';
+<font color=gray>   212</font>  <a name="line_212"></a>
+<font color=gray>   213</font>  <a name="line_213"></a>$mac = '66 9D';
+<font color=gray>   214</font>  <a name="line_214"></a>is disasm($mac), 'popfw';
+<font color=gray>   215</font>  <a name="line_215"></a>
+<font color=gray>   216</font>  <a name="line_216"></a>$mac = '60';
+<font color=gray>   217</font>  <a name="line_217"></a>is disasm($mac), 'pusha';
+<font color=gray>   218</font>  <a name="line_218"></a>
+<font color=gray>   219</font>  <a name="line_219"></a>$mac = '66 60';
+<font color=gray>   220</font>  <a name="line_220"></a>is disasm($mac), 'pushaw';
+<font color=gray>   221</font>  <a name="line_221"></a>
+<font color=gray>   222</font>  <a name="line_222"></a>$mac = '9C';
+<font color=gray>   223</font>  <a name="line_223"></a>is disasm($mac), 'pushf';
+<font color=gray>   224</font>  <a name="line_224"></a>
+<font color=gray>   225</font>  <a name="line_225"></a>$mac = '66 9C';
+<font color=gray>   226</font>  <a name="line_226"></a>is disasm($mac), 'pushfw';
+<font color=gray>   227</font>  <a name="line_227"></a>
+<font color=gray>   228</font>  <a name="line_228"></a>$mac = '0F 32';
+<font color=gray>   229</font>  <a name="line_229"></a>is disasm($mac), 'rdmsr';
+<font color=gray>   230</font>  <a name="line_230"></a>
+<font color=gray>   231</font>  <a name="line_231"></a>$mac = '0F 33';
+<font color=gray>   232</font>  <a name="line_232"></a>is disasm($mac), 'rdpmc';
+<font color=gray>   233</font>  <a name="line_233"></a>
+<font color=gray>   234</font>  <a name="line_234"></a>$mac = '0F 31';
+<font color=gray>   235</font>  <a name="line_235"></a>is disasm($mac), 'rdtsc';
+<font color=gray>   236</font>  <a name="line_236"></a>
+<font color=gray>   237</font>  <a name="line_237"></a>$mac = '0F AA';
+<font color=gray>   238</font>  <a name="line_238"></a>is disasm($mac), 'rsm';
+<font color=gray>   239</font>  <a name="line_239"></a>
+<font color=gray>   240</font>  <a name="line_240"></a>$mac = '9E';
+<font color=gray>   241</font>  <a name="line_241"></a>is disasm($mac), 'sahf';
+<font color=gray>   242</font>  <a name="line_242"></a>
+<font color=gray>   243</font>  <a name="line_243"></a>$mac = 'D6';
+<font color=gray>   244</font>  <a name="line_244"></a>is disasm($mac), 'salc';
+<font color=gray>   245</font>  <a name="line_245"></a>
+<font color=gray>   246</font>  <a name="line_246"></a>$mac = '0F 01 87 7B 69 C1 D2';
+<font color=gray>   247</font>  <a name="line_247"></a>is disasm($mac), 'sgdt [edi+0xd2c1697b]';
+<font color=gray>   248</font>  <a name="line_248"></a>
+<font color=gray>   249</font>  <a name="line_249"></a>$mac = '0F 01 48 78';
+<font color=gray>   250</font>  <a name="line_250"></a>is disasm($mac), 'sidt [eax+0x78]';
+<font color=gray>   251</font>  <a name="line_251"></a>
+<font color=gray>   252</font>  <a name="line_252"></a>$mac = 'F9';
+<font color=gray>   253</font>  <a name="line_253"></a>is disasm($mac), 'stc';
+<font color=gray>   254</font>  <a name="line_254"></a>
+<font color=gray>   255</font>  <a name="line_255"></a>$mac = 'FD';
+<font color=gray>   256</font>  <a name="line_256"></a>is disasm($mac), 'std';
+<font color=gray>   257</font>  <a name="line_257"></a>
+<font color=gray>   258</font>  <a name="line_258"></a>$mac = 'FB';
+<font color=gray>   259</font>  <a name="line_259"></a>is disasm($mac), 'sti';
+<font color=gray>   260</font>  <a name="line_260"></a>
+<font color=gray>   261</font>  <a name="line_261"></a>$mac = '9B';
+<font color=gray>   262</font>  <a name="line_262"></a>is disasm($mac), 'wait';
+<font color=gray>   263</font>  <a name="line_263"></a>
+<font color=gray>   264</font>  <a name="line_264"></a>$mac = '0F 09';
+<font color=gray>   265</font>  <a name="line_265"></a>is disasm($mac), 'wbinvd';
+<font color=gray>   266</font>  <a name="line_266"></a>
+<font color=gray>   267</font>  <a name="line_267"></a>$mac = '0F 30';
+<font color=gray>   268</font>  <a name="line_268"></a>is disasm($mac), 'wrmsr';
+<font color=gray>   269</font>  <a name="line_269"></a>
+<font color=gray>   270</font>  <a name="line_270"></a>$mac = 'D7';
+<font color=gray>   271</font>  <a name="line_271"></a>is disasm($mac), 'xlatb';
+<font color=gray>   272</font>  <a name="line_272"></a>
+<font color=gray>   273</font>  <a name="line_273"></a>$mac = '63 C1';
+<font color=gray>   274</font>  <a name="line_274"></a>is disasm($mac), 'arpl cx,ax';
+<font color=gray>   275</font>  <a name="line_275"></a>
+<font color=gray>   276</font>  <a name="line_276"></a>$mac = '0F 03 C2';
+<font color=gray>   277</font>  <a name="line_277"></a>is disasm($mac), 'lsl eax,edx';
+<font color=gray>   278</font>  <a name="line_278"></a>
+<font color=gray>   279</font>  <a name="line_279"></a>$mac = '0F 02 FE';
+<font color=gray>   280</font>  <a name="line_280"></a>is disasm($mac), 'lar edi,esi';
+<font color=gray>   281</font>  <a name="line_281"></a>
+<font color=gray>   282</font>  <a name="line_282"></a>$mac = '0F 01 F4';
+<font color=gray>   283</font>  <a name="line_283"></a>is disasm($mac), 'lmsw sp';
+<font color=gray>   284</font>  <a name="line_284"></a>
+<font color=gray>   285</font>  <a name="line_285"></a>my %data = (
+<font color=gray>   286</font>  <a name="line_286"></a>    '8F 04 F7' => 'pop dword [edi+esi*8]',
+<font color=gray>   287</font>  <a name="line_287"></a>    '66 0f 00 0b' => 'o16 str [ebx]',
+<font color=gray>   288</font>  <a name="line_288"></a>    '0f 00 8a 58 02 3c 90' => 'str [edx+0x903c0258]',
+<font color=gray>   289</font>  <a name="line_289"></a>    '85 df' => 'test edi,ebx',
+<font color=gray>   290</font>  <a name="line_290"></a>    '66 d3 0e' => 'ror word [esi],cl',
+<font color=gray>   291</font>  <a name="line_291"></a>    'd2 0b' => 'ror byte [ebx],cl',
+<font color=gray>   292</font>  <a name="line_292"></a>    '8E 37' => 'mov segr6,[edi]',
+<font color=gray>   293</font>  <a name="line_293"></a>    '8C DF' => 'mov edi,ds',
+<font color=gray>   294</font>  <a name="line_294"></a>    '8E D9' => 'mov ds,cx',
+<font color=gray>   295</font>  <a name="line_295"></a>    '8C 0A' => 'mov [edx],cs',
+<font color=gray>   296</font>  <a name="line_296"></a>    '1F' => 'pop ds',
+<font color=gray>   297</font>  <a name="line_297"></a>    '07' => 'pop es',
+<font color=gray>   298</font>  <a name="line_298"></a>    '17' => 'pop ss',
+<font color=gray>   299</font>  <a name="line_299"></a>    '0F A1' => 'pop fs',
+<font color=gray>   300</font>  <a name="line_300"></a>    '0F A9' => 'pop gs',
+<font color=gray>   301</font>  <a name="line_301"></a>    '16' => 'push ss',
+<font color=gray>   302</font>  <a name="line_302"></a>    '0F A0' => 'push fs',
+<font color=gray>   303</font>  <a name="line_303"></a>    '0F A8' => 'push gs',
+<font color=gray>   304</font>  <a name="line_304"></a>    '0F 0B' => 'ud2',
+<font color=gray>   305</font>  <a name="line_305"></a>    'D8 42 86' => 'fadd dword [edx-0x7a]',
+<font color=gray>   306</font>  <a name="line_306"></a>    'DC 05 77 7C 2B FD' => 'fadd qword [0xfd2b7c77]',
+<font color=gray>   307</font>  <a name="line_307"></a>    'D8 10' => 'fcom dword [eax]',
+<font color=gray>   308</font>  <a name="line_308"></a>    'DC 54 26 D6' => 'fcom qword [esi-0x2a]',
+<font color=gray>   309</font>  <a name="line_309"></a>    'D8 5F 41' => 'fcomp dword [edi+0x41]',
+<font color=gray>   310</font>  <a name="line_310"></a>    'DC 1A' => 'fcomp qword [edx]',
+<font color=gray>   311</font>  <a name="line_311"></a>    'D8 31' => 'fdiv dword [ecx]',
+<font color=gray>   312</font>  <a name="line_312"></a>    'DC 36' => 'fdiv qword [esi]',
+<font color=gray>   313</font>  <a name="line_313"></a>    'D8 BF 8F DD 5F 67' => 'fdivr dword [edi+0x675fdd8f]',
+<font color=gray>   314</font>  <a name="line_314"></a>    'DC BB 67 D3 9C 18' => 'fdivr qword [ebx+0x189cd367]',
+<font color=gray>   315</font>  <a name="line_315"></a>    'DE 84 35 08 E4 BB 48' => 'fiadd word [ebp+esi+0x48bbe408]',
+<font color=gray>   316</font>  <a name="line_316"></a>    'DA 87 BF 79 B3 F9' => 'fiadd dword [edi+0xf9b379bf]',
+<font color=gray>   317</font>  <a name="line_317"></a>    'DE 54 15 8A' => 'ficom word [ebp+edx-0x76]',
+<font color=gray>   318</font>  <a name="line_318"></a>    'DA 54 40 FD' => 'ficom dword [eax+eax*2-0x3]',
+<font color=gray>   319</font>  <a name="line_319"></a>    'DE 20' => 'fisub word [eax]',
+<font color=gray>   320</font>  <a name="line_320"></a>    'DA 20' => 'fisub dword [eax]',
+<font color=gray>   321</font>  <a name="line_321"></a>    'DE AA D5 A1 D6 44' => 'fisubr word [edx+0x44d6a1d5]',
+<font color=gray>   322</font>  <a name="line_322"></a>    'DA A9 EC 01 B0 8C' => 'fisubr dword [ecx+0x8cb001ec]',
+<font color=gray>   323</font>  <a name="line_323"></a>    'DE 0D C2 62 29 84' => 'fimul word [0x842962c2]',
+<font color=gray>   324</font>  <a name="line_324"></a>    'DA 89 62 44 60 41' => 'fimul dword [ecx+0x41604462]',
+<font color=gray>   325</font>  <a name="line_325"></a>    'DE B7 E7 62 76 54' => 'fidiv word [edi+0x547662e7]',
+<font color=gray>   326</font>  <a name="line_326"></a>    'DA 36' => 'fidiv dword [esi]',
+<font color=gray>   327</font>  <a name="line_327"></a>    'DA 7A 8E' => 'fidivr dword [edx-0x72]',
+<font color=gray>   328</font>  <a name="line_328"></a>    'DF 40 79' => 'fild word [eax+0x79]',
+<font color=gray>   329</font>  <a name="line_329"></a>    'DC 0C 49' => 'fmul qword [ecx+ecx*2]',
+<font color=gray>   330</font>  <a name="line_330"></a>    'D8 20' => 'fsub dword [eax]',
+<font color=gray>   331</font>  <a name="line_331"></a>    'DC 23' => 'fsub qword [ebx]',
+<font color=gray>   332</font>  <a name="line_332"></a>    'D8 2F' => 'fsubr dword [edi]',
+<font color=gray>   333</font>  <a name="line_333"></a>    'DC AB 66 E5 06 94' => 'fsubr qword [ebx+0x9406e566]',
+<font color=gray>   334</font>  <a name="line_334"></a>
+<font color=gray>   335</font>  <a name="line_335"></a>
+<font color=gray>   336</font>  <a name="line_336"></a>
+<font color=gray>   337</font>  <a name="line_337"></a>
+<font color=gray>   338</font>  <a name="line_338"></a>
+<font color=gray>   339</font>  <a name="line_339"></a>);
+<font color=gray>   340</font>  <a name="line_340"></a>
+<font color=gray>   341</font>  <a name="line_341"></a>my $asm;
+<font color=gray>   342</font>  <a name="line_342"></a>while (($mac, $asm) = each %data) {
+<font color=gray>   343</font>  <a name="line_343"></a>  is disasm($mac), $asm;
+<font color=gray>   344</font>  <a name="line_344"></a>}  
+<font color=gray>   345</font>  <a name="line_345"></a>
+<font color=gray>   346</font>  <a name="line_346"></a>
+<font color=gray>   347</font>  <a name="line_347"></a>
+<font color=gray>   348</font>  <a name="line_348"></a>
+<font color=gray>   349</font>  <a name="line_349"></a>
+<font color=gray>   350</font>  <a name="line_350"></a>
+<font color=gray>   351</font>  <a name="line_351"></a>
+<font color=gray>   352</font>  <a name="line_352"></a>
+<font color=gray>   353</font>  <a name="line_353"></a>
+<font color=gray>   354</font>  <a name="line_354"></a>
+<font color=gray>   355</font>  <a name="line_355"></a>
+ </pre></tt></body>
+</html>

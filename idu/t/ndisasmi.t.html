@@ -1,0 +1,30 @@
+<html>
+ <head>
+  <title>D:\Agent2002\Salent\v0.13\ModelSim\idu\t\ndisasmi.t</title>
+ </head>
+ <body><tt><pre>
+<font color=gray>     1</font>  <a name="line_1"></a>#: ndisasmi.t
+<font color=gray>     2</font>  <a name="line_2"></a>#: Test ndisasmi.pl
+<font color=gray>     3</font>  <a name="line_3"></a>#: Salent v0.13
+<font color=gray>     4</font>  <a name="line_4"></a>#: Copyright (c) 2005 Agent Zhang
+<font color=gray>     5</font>  <a name="line_5"></a>#: 2005-08-03 2005-08-03
+<font color=gray>     6</font>  <a name="line_6"></a>
+<font color=gray>     7</font>  <a name="line_7"></a>use strict;
+<font color=gray>     8</font>  <a name="line_8"></a>use warnings;
+<font color=gray>     9</font>  <a name="line_9"></a>
+<font color=gray>    10</font>  <a name="line_10"></a>use File::Compare 'compare_text';
+<font color=gray>    11</font>  <a name="line_11"></a>use Test::More tests => 5;
+<font color=gray>    12</font>  <a name="line_12"></a>
+<font color=gray>    13</font>  <a name="line_13"></a>my $tmp = 't/tmp';
+<font color=gray>    14</font>  <a name="line_14"></a>my $prog = 'ndisasmi';
+<font color=gray>    15</font>  <a name="line_15"></a>my $infile = "t/$prog.in";
+<font color=gray>    16</font>  <a name="line_16"></a>my $outfile = "t/$prog.out";
+<font color=gray>    17</font>  <a name="line_17"></a>
+<font color=gray>    18</font>  <a name="line_18"></a>ok -f "$prog.pl";
+<font color=gray>    19</font>  <a name="line_19"></a>ok -f $infile;
+<font color=gray>    20</font>  <a name="line_20"></a>ok -f $outfile;
+<font color=gray>    21</font>  <a name="line_21"></a>is system("perl $prog.pl < $infile > $tmp 2>&1"), 0;
+<font color=gray>    22</font>  <a name="line_22"></a>is compare_text($tmp, $outfile), 0;
+<font color=gray>    23</font>  <a name="line_23"></a>unlink $tmp;
+ </pre></tt></body>
+</html>

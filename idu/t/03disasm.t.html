@@ -1,0 +1,103 @@
+<html>
+ <head>
+  <title>D:\Agent2002\Salent\v0.13\ModelSim\idu\t\03disasm.t</title>
+ </head>
+ <body><tt><pre>
+<font color=gray>     1</font>  <a name="line_1"></a>#: 02Disasm.t
+<font color=gray>     2</font>  <a name="line_2"></a>#: Test the inc::Disasm module.
+<font color=gray>     3</font>  <a name="line_3"></a>#: Salent v0.13
+<font color=gray>     4</font>  <a name="line_4"></a>#: Copyright (c) 2005 Agent Zhang
+<font color=gray>     5</font>  <a name="line_5"></a>#: 2005-08-23 2005-08-28
+<font color=gray>     6</font>  <a name="line_6"></a>
+<font color=gray>     7</font>  <a name="line_7"></a>package Disasm;
+<font color=gray>     8</font>  <a name="line_8"></a>
+<font color=gray>     9</font>  <a name="line_9"></a>use strict;
+<font color=gray>    10</font>  <a name="line_10"></a>use warnings;
+<font color=gray>    11</font>  <a name="line_11"></a>
+<font color=gray>    12</font>  <a name="line_12"></a>use C::Idu;
+<font color=gray>    13</font>  <a name="line_13"></a>
+<font color=gray>    14</font>  <a name="line_14"></a>my @data;
+<font color=gray>    15</font>  <a name="line_15"></a>BEGIN {
+<font color=gray>    16</font>  <a name="line_16"></a>    @data = (
+<font color=gray>    17</font>  <a name="line_17"></a>        '8F 04 F7' => 'pop dword [edi+esi*8]',
+<font color=gray>    18</font>  <a name="line_18"></a>        '66 0f 00 0b' => 'str [ebx]',
+<font color=gray>    19</font>  <a name="line_19"></a>        '0f 00 8a 58 02 3c 90' => 'str [edx+0x903c0258]',
+<font color=gray>    20</font>  <a name="line_20"></a>        '85 df' => 'test edi,ebx',
+<font color=gray>    21</font>  <a name="line_21"></a>        '66 d3 0e' => 'ror word [esi],cl',
+<font color=gray>    22</font>  <a name="line_22"></a>        'd2 0b' => 'ror byte [ebx],cl',
+<font color=gray>    23</font>  <a name="line_23"></a>        '9A 13 A6 71 21 8F 45' => 'call 0x458f:0x2171a613',
+<font color=gray>    24</font>  <a name="line_24"></a>        '66 9A 41 1B 23 BE' => 'call word 0xbe23:0x1b41',
+<font color=gray>    25</font>  <a name="line_25"></a>        '66 9A 41 B1 23 0f' => 'call word 0xf23:0xb141',
+<font color=gray>    26</font>  <a name="line_26"></a>        '66 9A 41 00 23 BE' => 'call word 0xbe23:0x41',
+<font color=gray>    27</font>  <a name="line_27"></a>        '8E 37' => 'mov segr6,[edi]',
+<font color=gray>    28</font>  <a name="line_28"></a>        '8C DF' => 'mov edi,ds',
+<font color=gray>    29</font>  <a name="line_29"></a>        '8E D9' => 'mov ds,cx',
+<font color=gray>    30</font>  <a name="line_30"></a>        '8C 0A' => 'mov [edx],cs',
+<font color=gray>    31</font>  <a name="line_31"></a>        '1F' => 'pop ds',
+<font color=gray>    32</font>  <a name="line_32"></a>        '07' => 'pop es',
+<font color=gray>    33</font>  <a name="line_33"></a>        '17' => 'pop ss',
+<font color=gray>    34</font>  <a name="line_34"></a>        '0F A1' => 'pop fs',
+<font color=gray>    35</font>  <a name="line_35"></a>        '0F A9' => 'pop gs',
+<font color=gray>    36</font>  <a name="line_36"></a>        '16' => 'push ss',
+<font color=gray>    37</font>  <a name="line_37"></a>        '0F A0' => 'push fs',
+<font color=gray>    38</font>  <a name="line_38"></a>        '0F A8' => 'push gs',
+<font color=gray>    39</font>  <a name="line_39"></a>        '0F 0B' => 'ud2',
+<font color=gray>    40</font>  <a name="line_40"></a>        '0F BF FE' => 'movsx edi,si',
+<font color=gray>    41</font>  <a name="line_41"></a>        '0F BF 07' => 'movsx eax,word [edi]',
+<font color=gray>    42</font>  <a name="line_42"></a>        '0F B7 DA' => 'movzx ebx,dx',
+<font color=gray>    43</font>  <a name="line_43"></a>        '0F B6 08' => 'movzx ecx,byte [eax]',
+<font color=gray>    44</font>  <a name="line_44"></a>        '0F B6 64 85 74' => 'movzx esp,byte [ebp+eax*4+0x74]',
+<font color=gray>    45</font>  <a name="line_45"></a>        'FF 16' => 'call near [esi]',
+<font color=gray>    46</font>  <a name="line_46"></a>        'D8 73 09' => 'fdiv dword [ebx+0x9]',
+<font color=gray>    47</font>  <a name="line_47"></a>        '83 C4 0D' => 'add esp,byte +0xd',
+<font color=gray>    48</font>  <a name="line_48"></a>        '66 6B EF A5' => 'imul bp,di,byte -0x5b',
+<font color=gray>    49</font>  <a name="line_49"></a>        '75 90' => 'jnz 0xffffff92',
+<font color=gray>    50</font>  <a name="line_50"></a>        '0F 82 EC 61 41 D0' => 'jc near 0xd04161f2',
+<font color=gray>    51</font>  <a name="line_51"></a>        'A0 A7 67 B6 C9' => 'mov al,[0xc9b667a7]',
+<font color=gray>    52</font>  <a name="line_52"></a>        '66 A2 9C 6C 55 5E' => 'mov [0x5e556c9c],al',
+<font color=gray>    53</font>  <a name="line_53"></a>        '66 76 32' => 'jna 0x35',
+<font color=gray>    54</font>  <a name="line_54"></a>        '68 80 60 C8 84' => 'push dword 0x84c86080',
+<font color=gray>    55</font>  <a name="line_55"></a>        '66 E2 FE' => 'loop 0x1',
+<font color=gray>    56</font>  <a name="line_56"></a>        '90' => 'nop',
+<font color=gray>    57</font>  <a name="line_57"></a>#        'D8 42 86' => 'fadd dword [edx-0x7a]',
+<font color=gray>    58</font>  <a name="line_58"></a>#        'DC 05 77 7C 2B FD' => 'fadd qword [0xfd2b7c77]',
+<font color=gray>    59</font>  <a name="line_59"></a>#        'D8 10' => 'fcom dword [eax]',
+<font color=gray>    60</font>  <a name="line_60"></a>#        'DC 54 26 D6' => 'fcom qword [esi-0x2a]',
+<font color=gray>    61</font>  <a name="line_61"></a>#        'D8 5F 41' => 'fcomp dword [edi+0x41]',
+<font color=gray>    62</font>  <a name="line_62"></a>#        'DC 1A' => 'fcomp qword [edx]',
+<font color=gray>    63</font>  <a name="line_63"></a>#        'D8 31' => 'fdiv dword [ecx]',
+<font color=gray>    64</font>  <a name="line_64"></a>#        'DC 36' => 'fdiv qword [esi]',
+<font color=gray>    65</font>  <a name="line_65"></a>#        'D8 BF 8F DD 5F 67' => 'fdivr dword [edi+0x675fdd8f]',
+<font color=gray>    66</font>  <a name="line_66"></a>#        'DC BB 67 D3 9C 18' => 'fdivr qword [ebx+0x189cd367]',
+<font color=gray>    67</font>  <a name="line_67"></a>#        'DE 84 35 08 E4 BB 48' => 'fiadd word [ebp+esi+0x48bbe408]',
+<font color=gray>    68</font>  <a name="line_68"></a>#        'DA 87 BF 79 B3 F9' => 'fiadd dword [edi+0xf9b379bf]',
+<font color=gray>    69</font>  <a name="line_69"></a>#        'DE 54 15 8A' => 'ficom word [ebp+edx-0x76]',
+<font color=gray>    70</font>  <a name="line_70"></a>#        'DA 54 40 FD' => 'ficom dword [eax+eax*2-0x3]',
+<font color=gray>    71</font>  <a name="line_71"></a>#        'DE 20' => 'fisub word [eax]',
+<font color=gray>    72</font>  <a name="line_72"></a>#        'DA 20' => 'fisub dword [eax]',
+<font color=gray>    73</font>  <a name="line_73"></a>#        'DE AA D5 A1 D6 44' => 'fisubr word [edx+0x44d6a1d5]',
+<font color=gray>    74</font>  <a name="line_74"></a>#        'DA A9 EC 01 B0 8C' => 'fisubr dword [ecx+0x8cb001ec]',
+<font color=gray>    75</font>  <a name="line_75"></a>#        'DE 0D C2 62 29 84' => 'fimul word [0x842962c2]',
+<font color=gray>    76</font>  <a name="line_76"></a>#        'DA 89 62 44 60 41' => 'fimul dword [ecx+0x41604462]',
+<font color=gray>    77</font>  <a name="line_77"></a>#        'DE B7 E7 62 76 54' => 'fidiv word [edi+0x547662e7]',
+<font color=gray>    78</font>  <a name="line_78"></a>#        'DA 36' => 'fidiv dword [esi]',
+<font color=gray>    79</font>  <a name="line_79"></a>#        'DA 7A 8E' => 'fidivr dword [edx-0x72]',
+<font color=gray>    80</font>  <a name="line_80"></a>#        'DF 40 79' => 'fild word [eax+0x79]',
+<font color=gray>    81</font>  <a name="line_81"></a>#        'DC 0C 49' => 'fmul qword [ecx+ecx*2]',
+<font color=gray>    82</font>  <a name="line_82"></a>#        'D8 20' => 'fsub dword [eax]',
+<font color=gray>    83</font>  <a name="line_83"></a>#        'DC 23' => 'fsub qword [ebx]',
+<font color=gray>    84</font>  <a name="line_84"></a>#        'D8 2F' => 'fsubr dword [edi]',
+<font color=gray>    85</font>  <a name="line_85"></a>#        'DC AB 66 E5 06 94' => 'fsubr qword [ebx+0x9406e566]',
+<font color=gray>    86</font>  <a name="line_86"></a>    );
+<font color=gray>    87</font>  <a name="line_87"></a>}
+<font color=gray>    88</font>  <a name="line_88"></a>
+<font color=gray>    89</font>  <a name="line_89"></a>use Test::More tests => scalar(@data)/2;
+<font color=gray>    90</font>  <a name="line_90"></a>use inc::Disasm;
+<font color=gray>    91</font>  <a name="line_91"></a>
+<font color=gray>    92</font>  <a name="line_92"></a>my ($mac, $asm);
+<font color=gray>    93</font>  <a name="line_93"></a>while (@data) {
+<font color=gray>    94</font>  <a name="line_94"></a>   ($mac, $asm) = (shift(@data), shift(@data));
+<font color=gray>    95</font>  <a name="line_95"></a>   is disasm($mac), $asm, "mac: $mac";
+<font color=gray>    96</font>  <a name="line_96"></a>}  
+ </pre></tt></body>
+</html>

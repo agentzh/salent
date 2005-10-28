@@ -1,0 +1,30 @@
+v0.07
+
+* Check in output signals only (ram/ram.do.tt ram/ram.pl.tt)
+* Force Verilog design, Tcl do script, and Perl test script that scans the simulator output to share one single AST (ram/ram.v.tt ram/ram.do.tt ram/ram.pl.tt)
+* Use the ModelSim::List module to verify the simulator output automatically (ram/ram.pl.tt)
+* Use non-recursive template to generate arbitrary recursive language structures (trivial/nonrecur.tt)
+* Be aware of the actual format of the signal value, used by the simulator. Solve the format restriction problem by regex (ram/ram.pl.tt)
+* Give ModelSim::List the ability to process regex so as to support pattern match (ram/ram.pl.tt)
+* Use the Test::More module to organize the list-checking process (ram/ram.pl.tt). Cool.
+* When read a uninitialized RAM word, mfc will reponse normally, but data_bus will become 'X'
+* When overflow occurred during RAM reading, mfc will not response, and data_bus will keep 'HiZ'
+* When overflow occurred during RAM writing, mfc will not response, but data_bus will be driven by the external devices.
+* In .rw file, use the syntax
+      r 'hffffffff !z+
+  and
+      w 'hffffffff !16#ABCD
+  to denote an overflow occurs.
+* Data path (use tram1.rw as an example):
+  tram1.rw => [rwc.pl] => tram1.rw.ast => [ast++.pl] => tram1.rw.ast;
+  tram1.rw.ast + ram.do.tt => [astt] => tram1.rw.do;
+  tram1.rw.ast + ram.pl.tt => [astt] => tram1.rw.pl;
+  tram1.rw.ast + ram.v.tt  => [astt] => tram1.rw.v
+
+--------------------------------------------------------------------------------------
+
+v0.06
+
+* When access an uninitialized address, the vsim simulator will set the data bus to z+ or x+, but by no means certain. I suspect it is a bug. genrw.pl++, sal++.
+* The time intervals of adjacent unit tests should not interleaved, even share the same endpoint. genrw.pl++, sal++.
+* Pitfall in ram.v.tt: According to Verilog-1995, 'z' will extend to 64-bit as "00000000zzzzzzzz", which is now considered as a bug in Verilog-2001. I added some conditional test code to the template, so that when word_size > 32 the signals will be assigned the correct /^z+$/ values. Thanks to Sal's 64-bit test suit! sal++!

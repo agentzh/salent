@@ -1,0 +1,819 @@
+1..744
+ok 1 - t/pat_cover.ast.ast exists
+ok 2 - Ast read ok
+ok 3 - 37 - aaa: aaa
+ok 4 - 66 37 - aaa: aaa
+ok 5 - D5 0A - aad: aad
+ok 6 - 66 D5 0A - aad: aad
+ok 7 - D5 00 - aad 0x0: aad 0x0
+ok 8 - 66 D5 00 - aad 0x0: aad 0x0
+ok 9 - D4 0A - aam: aam
+ok 10 - 66 D4 0A - aam: aam
+ok 11 - D4 00 - aam 0x0: aam 0x0
+ok 12 - 66 D4 00 - aam 0x0: aam 0x0
+ok 13 - 3F - aas: aas
+ok 14 - 66 3F - aas: aas
+ok 15 - 10 ED - adc ch,ch: adc ch,ch
+ok 16 - 66 11 F8 - adc ax,di: adc ax,di
+ok 17 - 13 EA - adc ebp,edx: adc ebp,edx
+ok 18 - 66 13 F5 - adc si,bp: adc si,bp
+ok 19 - 13 05 B1 B4 5D 3D - adc eax,[0x3d5db4b1]: adc eax,[0x3d5db4b1]
+ok 20 - 66 13 07 - adc ax,[edi]: adc ax,[edi]
+ok 21 - 11 89 EB 49 8F AB - adc [ecx+0xab8f49eb],ecx: adc [ecx+0xab8f49eb],ecx
+ok 22 - 66 11 BB 24 E0 02 30 - adc [ebx+0x3002e024],di: adc [ebx+0x3002e024],di
+ok 23 - 83 D2 EA - adc edx,byte -0x16: adc edx,byte -0x16
+ok 24 - 66 81 D1 0F 1C - adc cx,0x1c0f: adc cx,0x1c0f
+ok 25 - 14 37 - adc al,0x37: adc al,0x37
+ok 26 - 66 14 00 - adc al,0x0: adc al,0x0
+ok 27 - 80 16 DC - adc byte [esi],0xdc: adc byte [esi],0xdc
+ok 28 - 66 81 57 C1 3A 34 - adc word [edi-0x3f],0x343a: adc word [edi-0x3f],0x343a
+ok 29 - 00 D1 - add cl,dl: add cl,dl
+ok 30 - 66 00 ED - add ch,ch: add ch,ch
+ok 31 - 03 E6 - add esp,esi: add esp,esi
+ok 32 - 66 02 C5 - add al,ch: add al,ch
+ok 33 - 02 5C 87 E2 - add bl,[edi+eax*4-0x1e]: add bl,[edi+eax*4-0x1e]
+ok 34 - 66 02 36 - add dh,[esi]: add dh,[esi]
+ok 35 - 00 3D 37 E5 88 F8 - add [0xf888e537],bh: add [0xf888e537],bh
+ok 36 - 66 01 2E - add [esi],bp: add [esi],bp
+ok 37 - 80 C7 C5 - add bh,0xc5: add bh,0xc5
+ok 38 - 66 80 C3 1A - add bl,0x1a: add bl,0x1a
+ok 39 - 05 8C 60 63 4B - add eax,0x4b63608c: add eax,0x4b63608c
+ok 40 - 66 05 A9 49 - add ax,0x49a9: add ax,0x49a9
+ok 41 - 81 05 EA 59 C6 A1 4B 40 12 64 - add dword [0xa1c659ea],0x6412404b: add dword [0xa1c659ea],0x6412404b
+ok 42 - 66 81 07 1A 93 - add word [edi],0x931a: add word [edi],0x931a
+ok 43 - 20 EE - and dh,ch: and dh,ch
+ok 44 - 66 21 DE - and si,bx: and si,bx
+ok 45 - 23 F1 - and esi,ecx: and esi,ecx
+ok 46 - 66 23 DD - and bx,bp: and bx,bp
+ok 47 - 22 6E 69 - and ch,[esi+0x69]: and ch,[esi+0x69]
+ok 48 - 66 22 2A - and ch,[edx]: and ch,[edx]
+ok 49 - 20 19 - and [ecx],bl: and [ecx],bl
+ok 50 - 66 21 1E - and [esi],bx: and [esi],bx
+ok 51 - 80 E6 E7 - and dh,0xe7: and dh,0xe7
+ok 52 - 66 81 E0 94 D3 - and ax,0xd394: and ax,0xd394
+ok 53 - 24 62 - and al,0x62: and al,0x62
+ok 54 - 66 24 2F - and al,0x2f: and al,0x2f
+ok 55 - 81 24 53 49 37 4B 02 - and dword [ebx+edx*2],0x24b3749: and dword [ebx+edx*2],0x24b3749
+ok 56 - 66 83 26 59 - and word [esi],byte +0x59: and word [esi],byte +0x59
+ok 57 - 63 D1 - arpl cx,dx: arpl cx,dx
+ok 58 - 66 63 D9 - arpl cx,bx: arpl cx,bx
+ok 59 - 63 31 - arpl [ecx],si: arpl [ecx],si
+ok 60 - 66 63 84 54 48 7F 42 56 - arpl [esp+edx*2+0x56427f48],ax: arpl [esp+edx*2+0x56427f48],ax
+ok 61 - 62 B3 53 BD 10 5E - bound esi,[ebx+0x5e10bd53]: bound esi,[ebx+0x5e10bd53]
+ok 62 - 66 62 34 9C - bound si,[esp+ebx*4]: bound si,[esp+ebx*4]
+ok 63 - 0F BC EA - bsf ebp,edx: bsf ebp,edx
+ok 64 - 66 0F BC D6 - bsf dx,si: bsf dx,si
+ok 65 - 0F BC 08 - bsf ecx,[eax]: bsf ecx,[eax]
+ok 66 - 66 0F BC 28 - bsf bp,[eax]: bsf bp,[eax]
+ok 67 - 0F BD E5 - bsr esp,ebp: bsr esp,ebp
+ok 68 - 66 0F BD CB - bsr cx,bx: bsr cx,bx
+ok 69 - 0F BD A8 B3 4E 10 8C - bsr ebp,[eax+0x8c104eb3]: bsr ebp,[eax+0x8c104eb3]
+ok 70 - 66 0F BD 10 - bsr dx,[eax]: bsr dx,[eax]
+ok 71 - 0F CC - bswap esp: bswap esp
+ok 72 - 0F BA E7 8D - bt edi,0x8d: bt edi,0x8d
+ok 73 - 66 0F BA E3 1A - bt bx,0x1a: bt bx,0x1a
+ok 74 - 0F BA 62 17 83 - bt dword [edx+0x17],0x83: bt dword [edx+0x17],0x83
+ok 75 - 66 0F BA A1 57 80 2D 78 C1 - bt word [ecx+0x782d8057],0xc1: bt word [ecx+0x782d8057],0xc1
+ok 76 - 0F A3 E2 - bt edx,esp: bt edx,esp
+ok 77 - 66 0F A3 ED - bt bp,bp: bt bp,bp
+ok 78 - 0F A3 A3 88 9A DA FD - bt [ebx+0xfdda9a88],esp: bt [ebx+0xfdda9a88],esp
+ok 79 - 66 0F A3 08 - bt [eax],cx: bt [eax],cx
+ok 80 - 0F BA FB 64 - btc ebx,0x64: btc ebx,0x64
+ok 81 - 66 0F BA FC 9B - btc sp,0x9b: btc sp,0x9b
+ok 82 - 0F BA 3B B6 - btc dword [ebx],0xb6: btc dword [ebx],0xb6
+ok 83 - 66 0F BA 3B B5 - btc word [ebx],0xb5: btc word [ebx],0xb5
+ok 84 - 0F BB FE - btc esi,edi: btc esi,edi
+ok 85 - 66 0F BB C6 - btc si,ax: btc si,ax
+ok 86 - 0F BB 51 93 - btc [ecx-0x6d],edx: btc [ecx-0x6d],edx
+ok 87 - 66 0F BB 1A - btc [edx],bx: btc [edx],bx
+ok 88 - 0F BA F7 86 - btr edi,0x86: btr edi,0x86
+ok 89 - 66 0F BA F3 D2 - btr bx,0xd2: btr bx,0xd2
+ok 90 - 0F BA B4 04 47 F8 94 D9 C1 - btr dword [esp+eax+0xd994f847],0xc1: btr dword [esp+eax+0xd994f847],0xc1
+ok 91 - 66 0F BA 77 07 84 - btr word [edi+0x7],0x84: btr word [edi+0x7],0x84
+ok 92 - 0F B3 CA - btr edx,ecx: btr edx,ecx
+ok 93 - 66 0F B3 C3 - btr bx,ax: btr bx,ax
+ok 94 - 0F B3 4F 50 - btr [edi+0x50],ecx: btr [edi+0x50],ecx
+ok 95 - 66 0F B3 11 - btr [ecx],dx: btr [ecx],dx
+ok 96 - 0F BA EA 13 - bts edx,0x13: bts edx,0x13
+ok 97 - 66 0F BA EE 88 - bts si,0x88: bts si,0x88
+ok 98 - 0F BA 6F 56 27 - bts dword [edi+0x56],0x27: bts dword [edi+0x56],0x27
+ok 99 - 66 0F BA 29 EB - bts word [ecx],0xeb: bts word [ecx],0xeb
+ok 100 - 0F AB CE - bts esi,ecx: bts esi,ecx
+ok 101 - 66 0F AB C5 - bts bp,ax: bts bp,ax
+ok 102 - 0F AB 54 1B FB - bts [ebx+ebx-0x5],edx: bts [ebx+ebx-0x5],edx
+ok 103 - 66 0F AB 63 1A - bts [ebx+0x1a],sp: bts [ebx+0x1a],sp
+ok 104 - E8 88 B7 2A 0D - call 0xd2ab78d: call 0xd2ab78d
+ok 105 - 66 E8 7D 0A - call word 0xa81: call word 0xa81
+ok 106 - FF D4 - call esp: call esp
+ok 107 - 66 FF D3 - call bx: call bx
+ok 108 - FF 94 6F B7 3B 96 57 - call near [edi+ebp*2+0x57963bb7]: call near [edi+ebp*2+0x57963bb7]
+ok 109 - 66 FF 95 20 06 5C 6F - call word near [ebp+0x6f5c0620]: call word near [ebp+0x6f5c0620]
+ok 110 - 9A F2 CF BC C0 C1 CA - call 0xcac1:0xc0bccff2: call 0xcac1:0xc0bccff2
+ok 111 - 66 9A 6B 41 59 78 - call word 0x7859:0x416b: call word 0x7859:0x416b
+ok 112 - FF 1E - call far [esi]: call far [esi]
+ok 113 - 66 FF 1C 77 - call word far [edi+esi*2]: call word far [edi+esi*2]
+ok 114 - 99 - cdq: cdq
+ok 115 - 66 99 - cwd: cwd
+ok 116 - F8 - clc: clc
+ok 117 - 66 F8 - clc: clc
+ok 118 - FC - cld: cld
+ok 119 - 66 FC - cld: cld
+ok 120 - FA - cli: cli
+ok 121 - 66 FA - cli: cli
+ok 122 - 0F 06 - clts: clts
+ok 123 - 66 0F 06 - clts: clts
+ok 124 - F5 - cmc: cmc
+ok 125 - 66 F5 - cmc: cmc
+ok 126 - 38 C2 - cmp dl,al: cmp dl,al
+ok 127 - 66 38 FE - cmp dh,bh: cmp dh,bh
+ok 128 - 3B C3 - cmp eax,ebx: cmp eax,ebx
+ok 129 - 66 3B C0 - cmp ax,ax: cmp ax,ax
+ok 130 - 38 05 A6 E1 85 CE - cmp [0xce85e1a6],al: cmp [0xce85e1a6],al
+ok 131 - 66 38 29 - cmp [ecx],ch: cmp [ecx],ch
+ok 132 - 3B 34 57 - cmp esi,[edi+edx*2]: cmp esi,[edi+edx*2]
+ok 133 - 66 3A 0B - cmp cl,[ebx]: cmp cl,[ebx]
+ok 134 - 80 F9 F7 - cmp cl,0xf7: cmp cl,0xf7
+ok 135 - 66 80 FB A0 - cmp bl,0xa0: cmp bl,0xa0
+ok 136 - 3C 76 - cmp al,0x76: cmp al,0x76
+ok 137 - 66 3D 83 D6 - cmp ax,0xd683: cmp ax,0xd683
+ok 138 - 80 7B A0 E7 - cmp byte [ebx-0x60],0xe7: cmp byte [ebx-0x60],0xe7
+ok 139 - 66 83 38 2B - cmp word [eax],byte +0x2b: cmp word [eax],byte +0x2b
+ok 140 - A7 - cmpsd: cmpsd
+ok 141 - 66 A6 - cmpsb: cmpsb
+ok 142 - 0F B0 D8 - cmpxchg al,bl: cmpxchg al,bl
+ok 143 - 66 0F B0 D2 - cmpxchg dl,dl: cmpxchg dl,dl
+ok 144 - 0F B0 0C 7A - cmpxchg [edx+edi*2],cl: cmpxchg [edx+edi*2],cl
+ok 145 - 66 0F B1 05 3F 32 DD 7D - cmpxchg [0x7ddd323f],ax: cmpxchg [0x7ddd323f],ax
+ok 146 - 0F A2 - cpuid: cpuid
+ok 147 - 66 0F A2 - cpuid: cpuid
+ok 148 - 98 - cwde: cwde
+ok 149 - 66 98 - cbw: cbw
+ok 150 - 27 - daa: daa
+ok 151 - 66 27 - daa: daa
+ok 152 - 2F - das: das
+ok 153 - 66 2F - das: das
+ok 154 - FE CE - dec dh: dec dh
+ok 155 - 66 FE C9 - dec cl: dec cl
+ok 156 - FF CE - dec esi: dec esi
+ok 157 - 66 FF CF - dec di: dec di
+ok 158 - 4E - dec esi: dec esi
+ok 159 - 66 4D - dec bp: dec bp
+ok 160 - FE 4B 0D - dec byte [ebx+0xd]: dec byte [ebx+0xd]
+ok 161 - 66 FE 4F 3F - dec byte [edi+0x3f]: dec byte [edi+0x3f]
+ok 162 - FF 09 - dec dword [ecx]: dec dword [ecx]
+ok 163 - 66 FF 4E DA - dec word [esi-0x26]: dec word [esi-0x26]
+ok 164 - F7 F0 - div eax: div eax
+ok 165 - 66 F6 F6 - div dh: div dh
+ok 166 - F7 B6 88 A7 62 4F - div dword [esi+0x4f62a788]: div dword [esi+0x4f62a788]
+ok 167 - 66 F6 31 - div byte [ecx]: div byte [ecx]
+ok 168 - C8 9F 4E 24 - enter 0x4e9f,0x24: enter 0x4e9f,0x24
+ok 169 - 66 C8 6D 47 DF - enter 0x476d,0xdf: enter 0x476d,0xdf
+ok 170 - F4 - hlt: hlt
+ok 171 - 66 F4 - hlt: hlt
+ok 172 - F6 FA - idiv dl: idiv dl
+ok 173 - 66 F7 F9 - idiv cx: idiv cx
+ok 174 - F6 3B - idiv byte [ebx]: idiv byte [ebx]
+ok 175 - 66 F6 B9 A6 B9 B5 3D - idiv byte [ecx+0x3db5b9a6]: idiv byte [ecx+0x3db5b9a6]
+ok 176 - F6 EB - imul bl: imul bl
+ok 177 - 66 F6 ED - imul ch: imul ch
+ok 178 - F7 AB 31 12 F4 0F - imul dword [ebx+0xff41231]: imul dword [ebx+0xff41231]
+ok 179 - 66 F6 6B 53 - imul byte [ebx+0x53]: imul byte [ebx+0x53]
+ok 180 - 0F AF D9 - imul ebx,ecx: imul ebx,ecx
+ok 181 - 66 0F AF C8 - imul cx,ax: imul cx,ax
+ok 182 - 0F AF 1C 42 - imul ebx,[edx+eax*2]: imul ebx,[edx+eax*2]
+ok 183 - 66 0F AF 0E - imul cx,[esi]: imul cx,[esi]
+ok 184 - 69 C6 49 B2 65 1D - imul eax,esi,dword 0x1d65b249: imul eax,esi,dword 0x1d65b249
+ok 185 - 66 69 C9 B4 1F - imul cx,cx,word 0x1fb4: imul cx,cx,word 0x1fb4
+ok 186 - 69 52 3C 41 3F DB 8C - imul edx,[edx+0x3c],dword 0x8cdb3f41: imul edx,[edx+0x3c],dword 0x8cdb3f41
+ok 187 - 66 69 5D 23 79 1E - imul bx,[ebp+0x23],word 0x1e79: imul bx,[ebp+0x23],word 0x1e79
+ok 188 - E5 DA - in eax,0xda: in eax,0xda
+ok 189 - 66 E5 29 - in ax,0x29: in ax,0x29
+ok 190 - EC - in al,dx: in al,dx
+ok 191 - 66 ED - in ax,dx: in ax,dx
+ok 192 - FE C0 - inc al: inc al
+ok 193 - 66 FE C7 - inc bh: inc bh
+ok 194 - FF C2 - inc edx: inc edx
+ok 195 - 66 FF C5 - inc bp: inc bp
+ok 196 - 41 - inc ecx: inc ecx
+ok 197 - 66 47 - inc di: inc di
+ok 198 - FE 82 4E 55 41 9A - inc byte [edx+0x9a41554e]: inc byte [edx+0x9a41554e]
+ok 199 - 66 FE 43 CD - inc byte [ebx-0x33]: inc byte [ebx-0x33]
+ok 200 - FF 06 - inc dword [esi]: inc dword [esi]
+ok 201 - 66 FF 81 B3 53 D0 3B - inc word [ecx+0x3bd053b3]: inc word [ecx+0x3bd053b3]
+ok 202 - 6D - insd: insd
+ok 203 - 66 6C - insb: insb
+ok 204 - CD 39 - int 0x39: int 0x39
+ok 205 - 66 CD 11 - int 0x11: int 0x11
+ok 206 - CC - int3: int3
+ok 207 - 66 CC - int3: int3
+ok 208 - CE - into: into
+ok 209 - 66 CE - into: into
+ok 210 - 0F 08 - invd: invd
+ok 211 - 66 0F 08 - invd: invd
+ok 212 - 0F 01 BB 0B 80 46 9C - invlpg [ebx+0x9c46800b]: invlpg [ebx+0x9c46800b]
+ok 213 - 66 0F 01 BD BF 3F 3D 43 - invlpg [ebp+0x433d3fbf]: invlpg [ebp+0x433d3fbf]
+ok 214 - CF - iret: iret
+ok 215 - 66 CF - iretw: iretw
+ok 216 - 74 34 - jz 0x36: jz 0x36
+ok 217 - 66 7D 35 - jnl 0x38: jnl 0x38
+ok 218 - 0F 85 BE 36 86 C8 - jnz near 0xc88636c4: jnz near 0xc88636c4
+ok 219 - 66 0F 8D 06 37 - jnl word 0x370b: jnl word 0x370b
+ok 220 - E3 65 - jecxz 0x67: jecxz 0x67
+ok 221 - 66 E3 1D - jecxz 0x20: jecxz 0x20
+ok 222 - EB 2B - jmp short 0x2d: jmp short 0x2d
+ok 223 - 66 EB FA - jmp short 0xfffffffd: jmp short 0xfffffffd
+ok 224 - E9 54 58 58 E5 - jmp 0xe5585859: jmp 0xe5585859
+ok 225 - 66 E9 0B 5E - jmp word 0x5e0f: jmp word 0x5e0f
+ok 226 - FF E2 - jmp edx: jmp edx
+ok 227 - 66 FF E1 - jmp cx: jmp cx
+ok 228 - FF A7 D6 55 5B ED - jmp near [edi+0xed5b55d6]: jmp near [edi+0xed5b55d6]
+ok 229 - 66 FF 23 - jmp word near [ebx]: jmp word near [ebx]
+ok 230 - EA EF 10 35 67 D5 46 - jmp 0x46d5:0x673510ef: jmp 0x46d5:0x673510ef
+ok 231 - 66 EA DE 72 DC 0C - jmp word 0xcdc:0x72de: jmp word 0xcdc:0x72de
+ok 232 - FF 2E - jmp far [esi]: jmp far [esi]
+ok 233 - 66 FF 2D 4A 9B 30 4D - jmp word far [0x4d309b4a]: jmp word far [0x4d309b4a]
+ok 234 - 9F - lahf: lahf
+ok 235 - 66 9F - lahf: lahf
+ok 236 - 0F 02 FF - lar edi,edi: lar edi,edi
+ok 237 - 66 0F 02 D0 - lar dx,ax: lar dx,ax
+ok 238 - 0F 02 05 8A 0A 67 ED - lar eax,[0xed670a8a]: lar eax,[0xed670a8a]
+ok 239 - 66 0F 02 54 39 E4 - lar dx,[ecx+edi-0x1c]: lar dx,[ecx+edi-0x1c]
+ok 240 - C5 A5 46 03 F7 C4 - lds esp,[ebp+0xc4f70346]: lds esp,[ebp+0xc4f70346]
+ok 241 - 66 C5 72 AC - lds si,[edx-0x54]: lds si,[edx-0x54]
+ok 242 - 8D 0A - lea ecx,[edx]: lea ecx,[edx]
+ok 243 - 66 8D 79 97 - lea di,[ecx-0x69]: lea di,[ecx-0x69]
+ok 244 - C9 - leave: leave
+ok 245 - 66 C9 - leave: leave
+ok 246 - C4 42 CC - les eax,[edx-0x34]: les eax,[edx-0x34]
+ok 247 - 66 C4 61 7F - les sp,[ecx+0x7f]: les sp,[ecx+0x7f]
+ok 248 - 0F B4 A3 FC 88 40 06 - lfs esp,[ebx+0x64088fc]: lfs esp,[ebx+0x64088fc]
+ok 249 - 66 0F B4 7F DB - lfs di,[edi-0x25]: lfs di,[edi-0x25]
+ok 250 - 0F 01 16 - lgdt [esi]: lgdt [esi]
+ok 251 - 66 0F 01 91 74 4D 87 A7 - lgdt [ecx+0xa7874d74]: lgdt [ecx+0xa7874d74]
+ok 252 - 0F B5 01 - lgs eax,[ecx]: lgs eax,[ecx]
+ok 253 - 66 0F B5 26 - lgs sp,[esi]: lgs sp,[esi]
+ok 254 - 0F 01 18 - lidt [eax]: lidt [eax]
+ok 255 - 66 0F 01 19 - lidt [ecx]: lidt [ecx]
+ok 256 - 0F 00 D4 - lldt sp: lldt sp
+ok 257 - 66 0F 00 D1 - lldt cx: lldt cx
+ok 258 - 0F 00 14 F9 - lldt [ecx+edi*8]: lldt [ecx+edi*8]
+ok 259 - 66 0F 00 90 0F E2 A3 03 - lldt [eax+0x3a3e20f]: lldt [eax+0x3a3e20f]
+ok 260 - 0F 01 F4 - lmsw sp: lmsw sp
+ok 261 - 66 0F 01 F6 - lmsw si: lmsw si
+ok 262 - 0F 01 73 EE - lmsw [ebx-0x12]: lmsw [ebx-0x12]
+ok 263 - 66 0F 01 B3 DF CB 5E 6E - lmsw [ebx+0x6e5ecbdf]: lmsw [ebx+0x6e5ecbdf]
+ok 264 - AC - lodsb: lodsb
+ok 265 - 66 AC - lodsb: lodsb
+ok 266 - E2 B1 - loop 0xffffffb3: loop 0xffffffb3
+not ok 267 - 66 E2 FE - loop 0x1: loop 0xffffff101
+#     Failed test (t\disasm_cover.t at line 33)
+#          got: 'loop 0xffffff101'
+#     expected: 'loop 0x1'
+ok 268 - E1 4E - loope 0x50: loope 0x50
+ok 269 - 66 E1 8D - loope 0xffffff90: loope 0xffffff90
+ok 270 - E0 3C - loopne 0x3e: loopne 0x3e
+ok 271 - 66 E0 78 - loopne 0x7b: loopne 0x7b
+ok 272 - 0F 03 E1 - lsl esp,ecx: lsl esp,ecx
+ok 273 - 66 0F 03 C3 - lsl ax,bx: lsl ax,bx
+ok 274 - 0F 03 9A B6 C5 F4 12 - lsl ebx,[edx+0x12f4c5b6]: lsl ebx,[edx+0x12f4c5b6]
+ok 275 - 66 0F 03 41 9B - lsl ax,[ecx-0x65]: lsl ax,[ecx-0x65]
+ok 276 - 0F B2 34 CC - lss esi,[esp+ecx*8]: lss esi,[esp+ecx*8]
+ok 277 - 66 0F B2 05 1C 6D A8 47 - lss ax,[0x47a86d1c]: lss ax,[0x47a86d1c]
+ok 278 - 0F 00 DB - ltr bx: ltr bx
+ok 279 - 66 0F 00 DA - ltr dx: ltr dx
+ok 280 - 0F 00 5B 56 - ltr [ebx+0x56]: ltr [ebx+0x56]
+ok 281 - 66 0F 00 58 1C - ltr [eax+0x1c]: ltr [eax+0x1c]
+ok 282 - 89 FC - mov esp,edi: mov esp,edi
+ok 283 - 66 89 D1 - mov cx,dx: mov cx,dx
+ok 284 - 8A FB - mov bh,bl: mov bh,bl
+ok 285 - 66 8A F8 - mov bh,al: mov bh,al
+ok 286 - 8B 3A - mov edi,[edx]: mov edi,[edx]
+ok 287 - 66 8B 89 1B 11 11 67 - mov cx,[ecx+0x6711111b]: mov cx,[ecx+0x6711111b]
+ok 288 - 89 78 7F - mov [eax+0x7f],edi: mov [eax+0x7f],edi
+ok 289 - 66 88 19 - mov [ecx],bl: mov [ecx],bl
+ok 290 - C6 C4 C4 - mov ah,0xc4: mov ah,0xc4
+ok 291 - 66 C6 C0 52 - mov al,0x52: mov al,0x52
+ok 292 - BC 7F 4D 31 08 - mov esp,0x8314d7f: mov esp,0x8314d7f
+ok 293 - 66 B5 F3 - mov ch,0xf3: mov ch,0xf3
+ok 294 - C7 81 F8 B9 4D 50 D0 E6 CC 5F - mov dword [ecx+0x504db9f8],0x5fcce6d0: mov dword [ecx+0x504db9f8],0x5fcce6d0
+ok 295 - 66 C6 01 98 - mov byte [ecx],0x98: mov byte [ecx],0x98
+ok 296 - A0 C1 71 5C 23 - mov al,[0x235c71c1]: mov al,[0x235c71c1]
+ok 297 - 66 A0 52 A7 39 ED - mov al,[0xed39a752]: mov al,[0xed39a752]
+ok 298 - A3 18 AD 68 2E - mov [0x2e68ad18],eax: mov [0x2e68ad18],eax
+ok 299 - 66 A2 3F 53 54 DF - mov [0xdf54533f],al: mov [0xdf54533f],al
+ok 300 - 0F 22 CC - mov cr1,esp: mov cr1,esp
+ok 301 - 66 0F 22 D6 - mov cr2,esi: mov cr2,esi
+ok 302 - 0F 20 C9 - mov ecx,cr1: mov ecx,cr1
+ok 303 - 66 0F 20 C2 - mov edx,cr0: mov edx,cr0
+ok 304 - 0F 23 E0 - mov dr4,eax: mov dr4,eax
+ok 305 - 66 0F 23 C0 - mov dr0,eax: mov dr0,eax
+ok 306 - 0F 21 E8 - mov eax,dr5: mov eax,dr5
+ok 307 - 66 0F 21 F9 - mov ecx,dr7: mov ecx,dr7
+ok 308 - 8E EE - mov gs,si: mov gs,si
+ok 309 - 66 8E C5 - mov es,bp: mov es,bp
+ok 310 - 8E 60 A3 - mov fs,[eax-0x5d]: mov fs,[eax-0x5d]
+ok 311 - 66 8E 2E - mov gs,[esi]: mov gs,[esi]
+ok 312 - 8C F3 - mov ebx,segr6: mov ebx,segr6
+ok 313 - 66 8C DA - mov dx,ds: mov dx,ds
+ok 314 - 8C 28 - mov [eax],gs: mov [eax],gs
+ok 315 - 66 8C 41 2F - mov [ecx+0x2f],es: mov [ecx+0x2f],es
+ok 316 - A4 - movsb: movsb
+ok 317 - 66 A4 - movsb: movsb
+ok 318 - 0F BF F8 - movsx edi,ax: movsx edi,ax
+ok 319 - 0F BF 13 - movsx edx,word [ebx]: movsx edx,word [ebx]
+ok 320 - 0F B7 F1 - movzx esi,cx: movzx esi,cx
+ok 321 - 0F B6 3D 44 0E 72 99 - movzx edi,byte [0x99720e44]: movzx edi,byte [0x99720e44]
+ok 322 - F7 E5 - mul ebp: mul ebp
+ok 323 - 66 F6 E7 - mul bh: mul bh
+ok 324 - F7 61 9D - mul dword [ecx-0x63]: mul dword [ecx-0x63]
+ok 325 - 66 F6 25 D2 48 08 9C - mul byte [0x9c0848d2]: mul byte [0x9c0848d2]
+ok 326 - F6 DA - neg dl: neg dl
+ok 327 - 66 F6 DB - neg bl: neg bl
+ok 328 - F7 59 6A - neg dword [ecx+0x6a]: neg dword [ecx+0x6a]
+ok 329 - 66 F7 1C EF - neg word [edi+ebp*8]: neg word [edi+ebp*8]
+ok 330 - F7 D6 - not esi: not esi
+ok 331 - 66 F7 D1 - not cx: not cx
+ok 332 - F7 15 20 80 6D 05 - not dword [0x56d8020]: not dword [0x56d8020]
+ok 333 - 66 F6 56 BF - not byte [esi-0x41]: not byte [esi-0x41]
+ok 334 - 09 F0 - or eax,esi: or eax,esi
+ok 335 - 66 09 CE - or si,cx: or si,cx
+ok 336 - 0B E1 - or esp,ecx: or esp,ecx
+ok 337 - 66 0A F7 - or dh,bh: or dh,bh
+ok 338 - 0B 19 - or ebx,[ecx]: or ebx,[ecx]
+ok 339 - 66 0A 4E 18 - or cl,[esi+0x18]: or cl,[esi+0x18]
+ok 340 - 08 1B - or [ebx],bl: or [ebx],bl
+ok 341 - 66 09 52 84 - or [edx-0x7c],dx: or [edx-0x7c],dx
+ok 342 - 83 C8 94 - or eax,byte -0x6c: or eax,byte -0x6c
+ok 343 - 66 81 CE 89 34 - or si,0x3489: or si,0x3489
+ok 344 - 0D 16 1B 97 99 - or eax,0x99971b16: or eax,0x99971b16
+ok 345 - 66 0C 45 - or al,0x45: or al,0x45
+ok 346 - 83 0F 1B - or dword [edi],byte +0x1b: or dword [edi],byte +0x1b
+ok 347 - 66 81 4D 9D 3E B0 - or word [ebp-0x63],0xb03e: or word [ebp-0x63],0xb03e
+ok 348 - E6 6D - out 0x6d,al: out 0x6d,al
+ok 349 - 66 E6 A3 - out 0xa3,al: out 0xa3,al
+ok 350 - EE - out dx,al: out dx,al
+ok 351 - 66 EE - out dx,al: out dx,al
+ok 352 - 6E - outsb: outsb
+ok 353 - 66 6E - outsb: outsb
+ok 354 - 8F C6 - pop esi: pop esi
+ok 355 - 66 8F C7 - pop di: pop di
+ok 356 - 5F - pop edi: pop edi
+ok 357 - 66 5E - pop si: pop si
+ok 358 - 8F 07 - pop dword [edi]: pop dword [edi]
+ok 359 - 66 8F 47 F6 - pop word [edi-0xa]: pop word [edi-0xa]
+ok 360 - 1F - pop ds: pop ds
+ok 361 - 66 1F - pop ds: pop ds
+ok 362 - 07 - pop es: pop es
+ok 363 - 66 07 - pop es: pop es
+ok 364 - 17 - pop ss: pop ss
+ok 365 - 66 17 - pop ss: pop ss
+ok 366 - 0F A1 - pop fs: pop fs
+ok 367 - 66 0F A1 - pop fs: pop fs
+ok 368 - 0F A9 - pop gs: pop gs
+ok 369 - 66 0F A9 - pop gs: pop gs
+ok 370 - 61 - popa: popa
+ok 371 - 66 61 - popaw: popaw
+ok 372 - 9D - popf: popf
+ok 373 - 66 9D - popfw: popfw
+ok 374 - FF F3 - push ebx: push ebx
+ok 375 - 66 FF F4 - push sp: push sp
+ok 376 - 56 - push esi: push esi
+ok 377 - 66 57 - push di: push di
+ok 378 - FF 36 - push dword [esi]: push dword [esi]
+ok 379 - 66 FF 37 - push word [edi]: push word [edi]
+ok 380 - 6A DF - push byte -0x21: push byte -0x21
+ok 381 - 66 6A 98 - push byte -0x68: push byte -0x68
+ok 382 - 06 - push es: push es
+ok 383 - 66 16 - push ss: push ss
+ok 384 - 0F A0 - push fs: push fs
+ok 385 - 66 0F A0 - push fs: push fs
+ok 386 - 0F A8 - push gs: push gs
+ok 387 - 66 0F A8 - push gs: push gs
+ok 388 - 60 - pusha: pusha
+ok 389 - 66 60 - pushaw: pushaw
+ok 390 - 9C - pushf: pushf
+ok 391 - 66 9C - pushfw: pushfw
+ok 392 - D1 D1 - rcl ecx,1: rcl ecx,1
+ok 393 - 66 D0 D3 - rcl bl,1: rcl bl,1
+ok 394 - D1 15 FE 31 E1 C6 - rcl dword [0xc6e131fe],1: rcl dword [0xc6e131fe],1
+ok 395 - 66 D0 91 BA 75 BD FD - rcl byte [ecx+0xfdbd75ba],1: rcl byte [ecx+0xfdbd75ba],1
+ok 396 - D3 D7 - rcl edi,cl: rcl edi,cl
+ok 397 - 66 D2 D2 - rcl dl,cl: rcl dl,cl
+ok 398 - D3 92 E1 F7 96 A6 - rcl dword [edx+0xa696f7e1],cl: rcl dword [edx+0xa696f7e1],cl
+ok 399 - 66 D3 16 - rcl word [esi],cl: rcl word [esi],cl
+ok 400 - C0 D4 D7 - rcl ah,0xd7: rcl ah,0xd7
+ok 401 - 66 C0 D7 70 - rcl bh,0x70: rcl bh,0x70
+ok 402 - C1 93 2F 36 2C 77 AB - rcl dword [ebx+0x772c362f],0xab: rcl dword [ebx+0x772c362f],0xab
+ok 403 - 66 C0 54 9A FB E2 - rcl byte [edx+ebx*4-0x5],0xe2: rcl byte [edx+ebx*4-0x5],0xe2
+ok 404 - D1 DC - rcr esp,1: rcr esp,1
+ok 405 - 66 D0 D9 - rcr cl,1: rcr cl,1
+ok 406 - D0 5A 65 - rcr byte [edx+0x65],1: rcr byte [edx+0x65],1
+ok 407 - 66 D1 1D 7C C6 65 B6 - rcr word [0xb665c67c],1: rcr word [0xb665c67c],1
+ok 408 - D3 DC - rcr esp,cl: rcr esp,cl
+ok 409 - 66 D3 DC - rcr sp,cl: rcr sp,cl
+ok 410 - D3 1A - rcr dword [edx],cl: rcr dword [edx],cl
+ok 411 - 66 D3 19 - rcr word [ecx],cl: rcr word [ecx],cl
+ok 412 - C1 DF DD - rcr edi,0xdd: rcr edi,0xdd
+ok 413 - 66 C0 DC 2E - rcr ah,0x2e: rcr ah,0x2e
+ok 414 - C0 1E DC - rcr byte [esi],0xdc: rcr byte [esi],0xdc
+ok 415 - 66 C0 1F 30 - rcr byte [edi],0x30: rcr byte [edi],0x30
+ok 416 - 0F 32 - rdmsr: rdmsr
+ok 417 - 66 0F 32 - rdmsr: rdmsr
+ok 418 - 0F 33 - rdpmc: rdpmc
+ok 419 - 66 0F 33 - rdpmc: rdpmc
+ok 420 - 0F 31 - rdtsc: rdtsc
+ok 421 - 66 0F 31 - rdtsc: rdtsc
+ok 422 - C3 - ret: ret
+ok 423 - 66 C3 - ret: ret
+ok 424 - C2 B5 3A - ret 0x3ab5: ret 0x3ab5
+ok 425 - 66 C2 72 E0 - ret 0xe072: ret 0xe072
+ok 426 - CB - retf: retf
+ok 427 - 66 CB - retf: retf
+ok 428 - CA 97 2A - retf 0x2a97: retf 0x2a97
+ok 429 - 66 CA 9C 4B - retf 0x4b9c: retf 0x4b9c
+ok 430 - D0 C0 - rol al,1: rol al,1
+ok 431 - 66 D1 C0 - rol ax,1: rol ax,1
+ok 432 - D1 80 52 A5 38 30 - rol dword [eax+0x3038a552],1: rol dword [eax+0x3038a552],1
+ok 433 - 66 D1 42 1F - rol word [edx+0x1f],1: rol word [edx+0x1f],1
+ok 434 - D3 C6 - rol esi,cl: rol esi,cl
+ok 435 - 66 D2 C2 - rol dl,cl: rol dl,cl
+ok 436 - D3 44 84 3D - rol dword [esp+eax*4+0x3d],cl: rol dword [esp+eax*4+0x3d],cl
+ok 437 - 66 D3 02 - rol word [edx],cl: rol word [edx],cl
+ok 438 - C1 C2 8D - rol edx,0x8d: rol edx,0x8d
+ok 439 - 66 C1 C2 46 - rol dx,0x46: rol dx,0x46
+ok 440 - C1 00 DB - rol dword [eax],0xdb: rol dword [eax],0xdb
+ok 441 - 66 C0 05 1D 76 01 AA 2D - rol byte [0xaa01761d],0x2d: rol byte [0xaa01761d],0x2d
+ok 442 - D1 C9 - ror ecx,1: ror ecx,1
+ok 443 - 66 D0 C8 - ror al,1: ror al,1
+ok 444 - D0 8C 43 20 2D AC FE - ror byte [ebx+eax*2+0xfeac2d20],1: ror byte [ebx+eax*2+0xfeac2d20],1
+ok 445 - 66 D1 0F - ror word [edi],1: ror word [edi],1
+ok 446 - D3 CC - ror esp,cl: ror esp,cl
+ok 447 - 66 D2 C8 - ror al,cl: ror al,cl
+ok 448 - D3 0D 33 ED 4F 07 - ror dword [0x74fed33],cl: ror dword [0x74fed33],cl
+ok 449 - 66 D2 49 EE - ror byte [ecx-0x12],cl: ror byte [ecx-0x12],cl
+ok 450 - C1 CC 2A - ror esp,0x2a: ror esp,0x2a
+ok 451 - 66 C0 CB 94 - ror bl,0x94: ror bl,0x94
+ok 452 - C0 0E 59 - ror byte [esi],0x59: ror byte [esi],0x59
+ok 453 - 66 C0 88 15 AD B7 46 A9 - ror byte [eax+0x46b7ad15],0xa9: ror byte [eax+0x46b7ad15],0xa9
+ok 454 - 0F AA - rsm: rsm
+ok 455 - 66 0F AA - rsm: rsm
+ok 456 - 9E - sahf: sahf
+ok 457 - 66 9E - sahf: sahf
+ok 458 - D6 - salc: salc
+ok 459 - 66 D6 - salc: salc
+ok 460 - D1 F8 - sar eax,1: sar eax,1
+ok 461 - 66 D1 FD - sar bp,1: sar bp,1
+ok 462 - D1 7A 11 - sar dword [edx+0x11],1: sar dword [edx+0x11],1
+ok 463 - 66 D0 B8 2C 3B EB 0B - sar byte [eax+0xbeb3b2c],1: sar byte [eax+0xbeb3b2c],1
+ok 464 - D2 FC - sar ah,cl: sar ah,cl
+ok 465 - 66 D3 F9 - sar cx,cl: sar cx,cl
+ok 466 - D2 BE D0 3D 66 34 - sar byte [esi+0x34663dd0],cl: sar byte [esi+0x34663dd0],cl
+ok 467 - 66 D3 BE 8B 28 6B 89 - sar word [esi+0x896b288b],cl: sar word [esi+0x896b288b],cl
+ok 468 - C0 FD 0A - sar ch,0xa: sar ch,0xa
+ok 469 - 66 C0 FD 6F - sar ch,0x6f: sar ch,0x6f
+ok 470 - C0 7F 6F 63 - sar byte [edi+0x6f],0x63: sar byte [edi+0x6f],0x63
+ok 471 - 66 C0 39 A5 - sar byte [ecx],0xa5: sar byte [ecx],0xa5
+ok 472 - 18 CD - sbb ch,cl: sbb ch,cl
+ok 473 - 66 19 C7 - sbb di,ax: sbb di,ax
+ok 474 - 1B EE - sbb ebp,esi: sbb ebp,esi
+ok 475 - 66 1A C0 - sbb al,al: sbb al,al
+ok 476 - 1B 06 - sbb eax,[esi]: sbb eax,[esi]
+ok 477 - 66 1B 13 - sbb dx,[ebx]: sbb dx,[ebx]
+ok 478 - 19 33 - sbb [ebx],esi: sbb [ebx],esi
+ok 479 - 66 19 76 36 - sbb [esi+0x36],si: sbb [esi+0x36],si
+ok 480 - 80 DD 1B - sbb ch,0x1b: sbb ch,0x1b
+ok 481 - 66 80 DB 3A - sbb bl,0x3a: sbb bl,0x3a
+ok 482 - 1D AE CF E0 98 - sbb eax,0x98e0cfae: sbb eax,0x98e0cfae
+ok 483 - 66 1C AF - sbb al,0xaf: sbb al,0xaf
+ok 484 - 80 9F 0A 78 A4 C1 F7 - sbb byte [edi+0xc1a4780a],0xf7: sbb byte [edi+0xc1a4780a],0xf7
+ok 485 - 66 83 1A CA - sbb word [edx],byte -0x36: sbb word [edx],byte -0x36
+ok 486 - AF - scasd: scasd
+ok 487 - 66 AF - scasw: scasw
+ok 488 - 0F 99 C2 - setns dl: setns dl
+ok 489 - 66 0F 9F C4 - setg ah: setg ah
+ok 490 - 0F 9B 45 57 - setpo [ebp+0x57]: setpo [ebp+0x57]
+ok 491 - 66 0F 90 06 - seto [esi]: seto [esi]
+ok 492 - 0F 01 02 - sgdt [edx]: sgdt [edx]
+ok 493 - 66 0F 01 00 - sgdt [eax]: sgdt [eax]
+ok 494 - D0 E2 - shl dl,1: shl dl,1
+ok 495 - 66 D1 E4 - shl sp,1: shl sp,1
+ok 496 - D1 A0 31 6A 08 A0 - shl dword [eax+0xa0086a31],1: shl dword [eax+0xa0086a31],1
+ok 497 - 66 D0 24 12 - shl byte [edx+edx],1: shl byte [edx+edx],1
+ok 498 - D2 E3 - shl bl,cl: shl bl,cl
+ok 499 - 66 D2 E5 - shl ch,cl: shl ch,cl
+ok 500 - D2 23 - shl byte [ebx],cl: shl byte [ebx],cl
+ok 501 - 66 D2 21 - shl byte [ecx],cl: shl byte [ecx],cl
+ok 502 - C0 E2 BA - shl dl,0xba: shl dl,0xba
+ok 503 - 66 C0 E6 4E - shl dh,0x4e: shl dh,0x4e
+ok 504 - C0 67 7B 60 - shl byte [edi+0x7b],0x60: shl byte [edi+0x7b],0x60
+ok 505 - 66 C1 61 AC D8 - shl word [ecx-0x54],0xd8: shl word [ecx-0x54],0xd8
+ok 506 - 0F A4 F0 8B - shld eax,esi,0x8b: shld eax,esi,0x8b
+ok 507 - 66 0F A4 EA A2 - shld dx,bp,0xa2: shld dx,bp,0xa2
+ok 508 - 0F A4 9B A4 BE C2 8E AC - shld [ebx+0x8ec2bea4],ebx,0xac: shld [ebx+0x8ec2bea4],ebx,0xac
+ok 509 - 66 0F A4 15 B3 95 05 6E 93 - shld [0x6e0595b3],dx,0x93: shld [0x6e0595b3],dx,0x93
+ok 510 - 0F A5 E9 - shld ecx,ebp,cl: shld ecx,ebp,cl
+ok 511 - 66 0F A5 E7 - shld di,sp,cl: shld di,sp,cl
+ok 512 - 0F A5 13 - shld [ebx],edx,cl: shld [ebx],edx,cl
+ok 513 - 66 0F A5 44 E8 2F - shld [eax+ebp*8+0x2f],ax,cl: shld [eax+ebp*8+0x2f],ax,cl
+ok 514 - D0 EE - shr dh,1: shr dh,1
+ok 515 - 66 D0 EA - shr dl,1: shr dl,1
+ok 516 - D1 AA AB 98 99 37 - shr dword [edx+0x379998ab],1: shr dword [edx+0x379998ab],1
+ok 517 - 66 D0 AB 53 A9 23 D5 - shr byte [ebx+0xd523a953],1: shr byte [ebx+0xd523a953],1
+ok 518 - D2 EF - shr bh,cl: shr bh,cl
+ok 519 - 66 D2 EE - shr dh,cl: shr dh,cl
+ok 520 - D3 2E - shr dword [esi],cl: shr dword [esi],cl
+ok 521 - 66 D3 68 C9 - shr word [eax-0x37],cl: shr word [eax-0x37],cl
+ok 522 - C1 EF 7E - shr edi,0x7e: shr edi,0x7e
+ok 523 - 66 C1 ED 39 - shr bp,0x39: shr bp,0x39
+ok 524 - C0 6F B4 02 - shr byte [edi-0x4c],0x2: shr byte [edi-0x4c],0x2
+ok 525 - 66 C1 AF 73 E1 BD 94 BC - shr word [edi+0x94bde173],0xbc: shr word [edi+0x94bde173],0xbc
+ok 526 - 0F AC C9 73 - shrd ecx,ecx,0x73: shrd ecx,ecx,0x73
+ok 527 - 66 0F AC E7 99 - shrd di,sp,0x99: shrd di,sp,0x99
+ok 528 - 0F AC 77 5D 9B - shrd [edi+0x5d],esi,0x9b: shrd [edi+0x5d],esi,0x9b
+ok 529 - 66 0F AC 35 9B 87 DC 53 B9 - shrd [0x53dc879b],si,0xb9: shrd [0x53dc879b],si,0xb9
+ok 530 - 0F AD C7 - shrd edi,eax,cl: shrd edi,eax,cl
+ok 531 - 66 0F AD C8 - shrd ax,cx,cl: shrd ax,cx,cl
+ok 532 - 0F AD 6C 70 3D - shrd [eax+esi*2+0x3d],ebp,cl: shrd [eax+esi*2+0x3d],ebp,cl
+ok 533 - 66 0F AD 55 96 - shrd [ebp-0x6a],dx,cl: shrd [ebp-0x6a],dx,cl
+ok 534 - 0F 01 0C 3A - sidt [edx+edi]: sidt [edx+edi]
+ok 535 - 66 0F 01 8E 0E 1C 1A C2 - sidt [esi+0xc21a1c0e]: sidt [esi+0xc21a1c0e]
+ok 536 - 0F 00 C0 - sldt ax: sldt ax
+ok 537 - 66 0F 00 C4 - sldt sp: sldt sp
+ok 538 - 0F 00 87 99 95 B2 A8 - sldt [edi+0xa8b29599]: sldt [edi+0xa8b29599]
+ok 539 - 66 0F 00 03 - sldt [ebx]: sldt [ebx]
+ok 540 - 0F 01 E4 - smsw sp: smsw sp
+ok 541 - 66 0F 01 E7 - smsw di: smsw di
+ok 542 - 0F 01 A7 49 F4 1A 4E - smsw [edi+0x4e1af449]: smsw [edi+0x4e1af449]
+ok 543 - 66 0F 01 A1 A9 F7 A6 6E - smsw [ecx+0x6ea6f7a9]: smsw [ecx+0x6ea6f7a9]
+ok 544 - F9 - stc: stc
+ok 545 - 66 F9 - stc: stc
+ok 546 - FD - std: std
+ok 547 - 66 FD - std: std
+ok 548 - FB - sti: sti
+ok 549 - 66 FB - sti: sti
+ok 550 - AA - stosb: stosb
+ok 551 - 66 AB - stosw: stosw
+ok 552 - 0F 00 C9 - str cx: str cx
+ok 553 - 66 0F 00 C8 - str ax: str ax
+ok 554 - 0F 00 4E 09 - str [esi+0x9]: str [esi+0x9]
+ok 555 - 66 0F 00 0D 30 B6 56 66 - str [0x6656b630]: str [0x6656b630]
+ok 556 - 28 C6 - sub dh,al: sub dh,al
+ok 557 - 66 29 F8 - sub ax,di: sub ax,di
+ok 558 - 2B D5 - sub edx,ebp: sub edx,ebp
+ok 559 - 66 2A F5 - sub dh,ch: sub dh,ch
+ok 560 - 2A BB 31 6E BB C3 - sub bh,[ebx+0xc3bb6e31]: sub bh,[ebx+0xc3bb6e31]
+ok 561 - 66 2A 64 EC 9D - sub ah,[esp+ebp*8-0x63]: sub ah,[esp+ebp*8-0x63]
+ok 562 - 29 1C B5 48 68 C0 50 - sub [esi*4+0x50c06848],ebx: sub [esi*4+0x50c06848],ebx
+ok 563 - 66 28 0D 47 0B B9 07 - sub [0x7b90b47],cl: sub [0x7b90b47],cl
+ok 564 - 83 EB F2 - sub ebx,byte -0xe: sub ebx,byte -0xe
+ok 565 - 66 80 EE BE - sub dh,0xbe: sub dh,0xbe
+ok 566 - 2C 0D - sub al,0xd: sub al,0xd
+ok 567 - 66 2C 2C - sub al,0x2c: sub al,0x2c
+ok 568 - 80 6D B4 00 - sub byte [ebp-0x4c],0x0: sub byte [ebp-0x4c],0x0
+ok 569 - 66 80 28 6D - sub byte [eax],0x6d: sub byte [eax],0x6d
+ok 570 - 84 C7 - test bh,al: test bh,al
+ok 571 - 66 84 EF - test bh,ch: test bh,ch
+ok 572 - 85 29 - test [ecx],ebp: test [ecx],ebp
+ok 573 - 66 85 15 E8 91 CD B5 - test [0xb5cd91e8],dx: test [0xb5cd91e8],dx
+ok 574 - F7 C5 86 43 A9 7C - test ebp,0x7ca94386: test ebp,0x7ca94386
+ok 575 - 66 F7 C7 3B 3B - test di,0x3b3b: test di,0x3b3b
+ok 576 - A9 E7 16 D3 0D - test eax,0xdd316e7: test eax,0xdd316e7
+ok 577 - 66 A9 C3 F8 - test ax,0xf8c3: test ax,0xf8c3
+ok 578 - F6 82 83 9D 38 5A 8A - test byte [edx+0x5a389d83],0x8a: test byte [edx+0x5a389d83],0x8a
+ok 579 - 66 F6 07 4E - test byte [edi],0x4e: test byte [edi],0x4e
+ok 580 - 0F 0B - ud2: ud2
+ok 581 - 66 0F 0B - ud2: ud2
+ok 582 - 0F 00 E1 - verr cx: verr cx
+ok 583 - 66 0F 00 E1 - verr cx: verr cx
+ok 584 - 0F 00 26 - verr [esi]: verr [esi]
+ok 585 - 66 0F 00 26 - verr [esi]: verr [esi]
+ok 586 - 0F 00 E8 - verw ax: verw ax
+ok 587 - 66 0F 00 ED - verw bp: verw bp
+ok 588 - 0F 00 2E - verw [esi]: verw [esi]
+ok 589 - 66 0F 00 A8 6F 76 DB D9 - verw [eax+0xd9db766f]: verw [eax+0xd9db766f]
+ok 590 - 9B - wait: wait
+ok 591 - 66 9B - wait: wait
+ok 592 - 0F 09 - wbinvd: wbinvd
+ok 593 - 66 0F 09 - wbinvd: wbinvd
+ok 594 - 0F 30 - wrmsr: wrmsr
+ok 595 - 66 0F 30 - wrmsr: wrmsr
+ok 596 - 0F C0 CE - xadd dh,cl: xadd dh,cl
+ok 597 - 66 0F C0 E1 - xadd cl,ah: xadd cl,ah
+ok 598 - 0F C0 BC 51 1B 47 43 F8 - xadd [ecx+edx*2+0xf843471b],bh: xadd [ecx+edx*2+0xf843471b],bh
+ok 599 - 66 0F C1 BC 55 42 4F 7C 10 - xadd [ebp+edx*2+0x107c4f42],di: xadd [ebp+edx*2+0x107c4f42],di
+ok 600 - 86 D4 - xchg dl,ah: xchg dl,ah
+ok 601 - 66 87 F4 - xchg si,sp: xchg si,sp
+ok 602 - 96 - xchg eax,esi: xchg eax,esi
+ok 603 - 66 91 - xchg ax,cx: xchg ax,cx
+ok 604 - 86 8D 60 1E 21 C5 - xchg cl,[ebp+0xc5211e60]: xchg cl,[ebp+0xc5211e60]
+ok 605 - 66 86 BD BA 48 07 22 - xchg bh,[ebp+0x220748ba]: xchg bh,[ebp+0x220748ba]
+ok 606 - D7 - xlatb: xlatb
+ok 607 - 66 D7 - xlatb: xlatb
+ok 608 - 31 ED - xor ebp,ebp: xor ebp,ebp
+ok 609 - 66 31 D5 - xor bp,dx: xor bp,dx
+ok 610 - 32 FA - xor bh,dl: xor bh,dl
+ok 611 - 66 33 DD - xor bx,bp: xor bx,bp
+ok 612 - 32 0B - xor cl,[ebx]: xor cl,[ebx]
+ok 613 - 66 33 99 B5 59 C2 70 - xor bx,[ecx+0x70c259b5]: xor bx,[ecx+0x70c259b5]
+ok 614 - 30 3B - xor [ebx],bh: xor [ebx],bh
+ok 615 - 66 31 5B 96 - xor [ebx-0x6a],bx: xor [ebx-0x6a],bx
+ok 616 - 83 F6 1B - xor esi,byte +0x1b: xor esi,byte +0x1b
+ok 617 - 66 80 F3 9E - xor bl,0x9e: xor bl,0x9e
+ok 618 - 35 34 4E 12 55 - xor eax,0x55124e34: xor eax,0x55124e34
+ok 619 - 66 34 6A - xor al,0x6a: xor al,0x6a
+ok 620 - 80 B4 7C FA D6 4C 26 4B - xor byte [esp+edi*2+0x264cd6fa],0x4b: xor byte [esp+edi*2+0x264cd6fa],0x4b
+ok 621 - 66 80 34 A0 B5 - xor byte [eax],0xb5: xor byte [eax],0xb5
+ok 622 - D9 F0 - f2xm1: f2xm1
+ok 623 - D9 E1 - fabs: fabs
+ok 624 - D8 01 - fadd dword [ecx]: fadd dword [ecx]
+ok 625 - DC 87 ED 3A ED 35 - fadd qword [edi+0x35ed3aed]: fadd qword [edi+0x35ed3aed]
+ok 626 - D8 C3 - fadd st3: fadd st3
+ok 627 - DC C0 - fadd to st0: fadd to st0
+ok 628 - DE C6 - faddp st6: faddp st6
+ok 629 - DF 23 - fbld tword [ebx]: fbld tword [ebx]
+ok 630 - DF B4 83 19 4A 33 89 - fbstp tword [ebx+eax*4+0x89334a19]: fbstp tword [ebx+eax*4+0x89334a19]
+ok 631 - D9 E0 - fchs: fchs
+ok 632 - DB E2 - fnclex: fnclex
+ok 633 - D8 53 C0 - fcom dword [ebx-0x40]: fcom dword [ebx-0x40]
+ok 634 - DC 17 - fcom qword [edi]: fcom qword [edi]
+ok 635 - D8 D4 - fcom st4: fcom st4
+ok 636 - D8 19 - fcomp dword [ecx]: fcomp dword [ecx]
+ok 637 - DC 19 - fcomp qword [ecx]: fcomp qword [ecx]
+ok 638 - D8 DE - fcomp st6: fcomp st6
+ok 639 - DE D9 - fcompp: fcompp
+ok 640 - DF F4 - fcomip st4: fcomip st4
+ok 641 - D9 FF - fcos: fcos
+ok 642 - D9 F6 - fdecstp: fdecstp
+ok 643 - D8 75 65 - fdiv dword [ebp+0x65]: fdiv dword [ebp+0x65]
+ok 644 - DC B4 32 63 B7 FC 0D - fdiv qword [edx+esi+0xdfcb763]: fdiv qword [edx+esi+0xdfcb763]
+ok 645 - D8 F5 - fdiv st5: fdiv st5
+ok 646 - DC F9 - fdiv to st1: fdiv to st1
+ok 647 - DE F9 - fdivp st1,st0: fdivp st1,st0
+ok 648 - DC F3 - fdivr to st3: fdivr to st3
+ok 649 - D8 3D 4E A8 9F 96 - fdivr dword [0x969fa84e]: fdivr dword [0x969fa84e]
+ok 650 - DC 3D B7 52 AC BA - fdivr qword [0xbaac52b7]: fdivr qword [0xbaac52b7]
+ok 651 - D8 FC - fdivr st4: fdivr st4
+ok 652 - DE F6 - fdivrp st6: fdivrp st6
+ok 653 - DD C0 - ffree st0: ffree st0
+ok 654 - DE 01 - fiadd word [ecx]: fiadd word [ecx]
+ok 655 - DA 05 E2 F5 51 98 - fiadd dword [0x9851f5e2]: fiadd dword [0x9851f5e2]
+ok 656 - DE 95 E2 2C 6D 5D - ficom word [ebp+0x5d6d2ce2]: ficom word [ebp+0x5d6d2ce2]
+ok 657 - DA 97 AB AB B3 C5 - ficom dword [edi+0xc5b3abab]: ficom dword [edi+0xc5b3abab]
+ok 658 - DE 9E 12 95 AC 00 - ficomp word [esi+0xac9512]: ficomp word [esi+0xac9512]
+ok 659 - DA 5E F9 - ficomp dword [esi-0x7]: ficomp dword [esi-0x7]
+ok 660 - DE 33 - fidiv word [ebx]: fidiv word [ebx]
+ok 661 - DA 35 F4 BD 70 0B - fidiv dword [0xb70bdf4]: fidiv dword [0xb70bdf4]
+ok 662 - DE 7F 38 - fidivr word [edi+0x38]: fidivr word [edi+0x38]
+ok 663 - DA 39 - fidivr dword [ecx]: fidivr dword [ecx]
+ok 664 - DF 05 05 1A 74 43 - fild word [0x43741a05]: fild word [0x43741a05]
+ok 665 - DB 84 06 44 65 CE 99 - fild dword [esi+eax+0x99ce6544]: fild dword [esi+eax+0x99ce6544]
+ok 666 - DF 2A - fild qword [edx]: fild qword [edx]
+ok 667 - DE 0B - fimul word [ebx]: fimul word [ebx]
+ok 668 - DA 0F - fimul dword [edi]: fimul dword [edi]
+ok 669 - D9 F7 - fincstp: fincstp
+ok 670 - DF 11 - fist word [ecx]: fist word [ecx]
+ok 671 - DB 55 84 - fist dword [ebp-0x7c]: fist dword [ebp-0x7c]
+ok 672 - DF 1E - fistp word [esi]: fistp word [esi]
+ok 673 - DB 9C 67 3B 67 E5 FB - fistp dword [edi+0xfbe5673b]: fistp dword [edi+0xfbe5673b]
+ok 674 - DF 3A - fistp qword [edx]: fistp qword [edx]
+ok 675 # skip Ndisasm can't disassemble 'fisttp' correctly
+ok 676 # skip Ndisasm can't disassemble 'fisttp' correctly
+ok 677 # skip Ndisasm can't disassemble 'fisttp' correctly
+ok 678 - DE 23 - fisub word [ebx]: fisub word [ebx]
+ok 679 - DA A5 3B DE A7 A8 - fisub dword [ebp+0xa8a7de3b]: fisub dword [ebp+0xa8a7de3b]
+ok 680 - DE AF F1 51 C9 B8 - fisubr word [edi+0xb8c951f1]: fisubr word [edi+0xb8c951f1]
+ok 681 - DA AC 96 72 34 8B 43 - fisubr dword [esi+edx*4+0x438b3472]: fisubr dword [esi+edx*4+0x438b3472]
+ok 682 - D9 07 - fld dword [edi]: fld dword [edi]
+ok 683 - DD 05 A6 64 F4 01 - fld qword [0x1f464a6]: fld qword [0x1f464a6]
+ok 684 - DB AE AB 5D 49 C8 - fld tword [esi+0xc8495dab]: fld tword [esi+0xc8495dab]
+ok 685 - D9 C3 - fld st3: fld st3
+Template for encoding '11011 001 : 1110 1000' not found.
+not ok 686 - D9 E8 - fld1: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+Template for encoding '11011 001 : mod 101 r/m' not found.
+not ok 687 - D9 2B - fldcw [ebx]: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+Template for encoding '11011 001 : mod 100 r/m' not found.
+not ok 688 - D9 27 - fldenv [edi]: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+Template for encoding '11011 001 : 1110 1010' not found.
+not ok 689 - D9 EA - fldl2e: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+Template for encoding '11011 001 : 1110 1001' not found.
+not ok 690 - D9 E9 - fldl2t: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+Template for encoding '11011 001 : 1110 1100' not found.
+not ok 691 - D9 EC - fldlg2: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+Template for encoding '11011 001 : 1110 1101' not found.
+not ok 692 - D9 ED - fldln2: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+Template for encoding '11011 001 : 1110 1011' not found.
+not ok 693 - D9 EB - fldpi: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+Template for encoding '11011 001 : 1110 1110' not found.
+not ok 694 - D9 EE - fldz: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+ok 695 - D8 0F - fmul dword [edi]: fmul dword [edi]
+ok 696 - DC 0E - fmul qword [esi]: fmul qword [esi]
+ok 697 - D8 C8 - fmul st0: fmul st0
+ok 698 - DC C9 - fmul to st1: fmul to st1
+ok 699 - DE CB - fmulp st3: fmulp st3
+Template for encoding '11011 011 : 1110 0011' not found.
+not ok 700 - DB E3 - fninit: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+ok 701 - D9 D0 - fnop: fnop
+Template for encoding '11011 001 : 1111 0011' not found.
+not ok 702 - D9 F3 - fpatan: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+Template for encoding '11011 001 : 1111 1000' not found.
+not ok 703 - D9 F8 - fprem: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+Template for encoding '11011 001 : 1111 0101' not found.
+not ok 704 - D9 F5 - fprem1: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+Template for encoding '11011 001 : 1111 0010' not found.
+not ok 705 - D9 F2 - fptan: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+Template for encoding '11011 001 : 1111 1100' not found.
+not ok 706 - D9 FC - frndint: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+Template for encoding '11011 101 : mod 100 r/m' not found.
+not ok 707 - DD A4 3D 78 96 49 1F - frstor [ebp+edi+0x1f499678]: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+Template for encoding '11011 101 : mod 110 r/m' not found.
+not ok 708 - DD 34 EE - fnsave [esi+ebp*8]: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+Template for encoding '11011 001 : 1111 1101' not found.
+not ok 709 - D9 FD - fscale: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+Template for encoding '11011 001 : 1111 1110' not found.
+not ok 710 - D9 FE - fsin: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+ok 711 - D9 FB - fsincos: fsincos
+Template for encoding '11011 001 : 1111 1010' not found.
+not ok 712 - D9 FA - fsqrt: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+ok 713 - D9 95 F7 F0 EB FC - fst dword [ebp+0xfcebf0f7]: fst dword [ebp+0xfcebf0f7]
+ok 714 - DD 56 48 - fst qword [esi+0x48]: fst qword [esi+0x48]
+ok 715 - DD D2 - fst st2: fst st2
+Template for encoding '11011 001 : mod 111 r/m' not found.
+not ok 716 - D9 3B - fnstcw [ebx]: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+Template for encoding '11011 001 : mod 110 r/m' not found.
+not ok 717 - D9 B6 08 65 15 F1 - fnstenv [esi+0xf1156508]: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+ok 718 - D9 19 - fstp dword [ecx]: fstp dword [ecx]
+ok 719 - DD 5F 9F - fstp qword [edi-0x61]: fstp qword [edi-0x61]
+ok 720 - DB 3F - fstp tword [edi]: fstp tword [edi]
+ok 721 - DD DF - fstp st7: fstp st7
+Template for encoding '11011 111 : 1110 0000' not found.
+not ok 722 - DF E0 - fnstsw ax: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+Template for encoding '11011 101 : mod 111 r/m' not found.
+not ok 723 - DD 7F CF - fnstsw [edi-0x31]: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+ok 724 - D8 27 - fsub dword [edi]: fsub dword [edi]
+ok 725 - DC 67 74 - fsub qword [edi+0x74]: fsub qword [edi+0x74]
+ok 726 - D8 E4 - fsub st4: fsub st4
+ok 727 - DC EB - fsub to st3: fsub to st3
+ok 728 - DE EC - fsubp st4: fsubp st4
+ok 729 - D8 2B - fsubr dword [ebx]: fsubr dword [ebx]
+ok 730 - DC 29 - fsubr qword [ecx]: fsubr qword [ecx]
+ok 731 - D8 EA - fsubr st2: fsubr st2
+ok 732 - DC E4 - fsubr to st4: fsubr to st4
+ok 733 - DE E7 - fsubrp st7: fsubrp st7
+Template for encoding '11011 001 : 1110 0100' not found.
+not ok 734 - D9 E4 - ftst: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+Template for encoding '11011 101 : 1110 0 ST(i)' not found.
+not ok 735 - DD E6 - fucom st6: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+Template for encoding '11011 101 : 1110 1 ST(i)' not found.
+not ok 736 - DD ED - fucomp st5: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+Template for encoding '11011 010 : 1110 1001' not found.
+not ok 737 - DA E9 - fucompp: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+Template for encoding '11011 011 : 11 101 ST(i)' not found.
+not ok 738 - DB EB - fucomi st3: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+Template for encoding '11011 111 : 11 101 ST(i)' not found.
+not ok 739 - DF EE - fucomip st6: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+Template for encoding '11011 001 : 1110 0101' not found.
+not ok 740 - D9 E5 - fxam: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+Template for encoding '11011 001 : 1100 1 ST(i)' not found.
+not ok 741 - D9 CD - fxch st5: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+Template for encoding '11011 001 : 1111 0100' not found.
+not ok 742 - D9 F4 - fxtract: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+Template for encoding '11011 001 : 1111 0001' not found.
+not ok 743 - D9 F1 - fyl2x: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+Template for encoding '11011 001 : 1111 1001' not found.
+not ok 744 - D9 F9 - fyl2xp1: (null)
+#     Failed test (t\disasm_cover.t at line 25)
+# Looks like you failed 36 tests of 744.

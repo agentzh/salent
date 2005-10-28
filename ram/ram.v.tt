@@ -1,0 +1,75 @@
+[% DEFAULT
+     version = '0.13'
+     word_size = 32
+     addr_size = 32
+     ram = {
+         capacity = 64 * 1024  # in words, not in bytes
+         delay = 10
+     }
+-%]
+[% USE Perl;
+   USE date;
+   SET
+     last_mod = date.format(template.modtime, '20%y-%m-%d', 'en_GB')
+     year = date.format(template.modtime, '20%y', 'en_GB')
+
+     bytes_per_word = word_size / 8
+     temp = Perl.log(bytes_per_word) / Perl.log(2)
+     byte_addr_size = Perl.sprintf("%.0f", temp)  # rounding
+-%]
+//: ram.v
+//: Random Access Memory (RAM)
+//: Salent v[% version %]
+//: Copyright (c) [% year %] Agent Zhang. All rights reserved.
+//: 2005-06-22 [% last_mod %]
+
+module ram (mfc, strb, rw, addr, data);
+    parameter ADDR_SIZE = [% addr_size %],
+              WORD_SIZE = [% word_size %],
+              MEM_SIZE  = [% ram.capacity %],
+              DELAY     = [% ram.delay %];
+
+    output mfc;                  // Memory Function Completed (MFC)
+    input strb, rw;              // strobe and r/w' control bus
+    input [ADDR_SIZE-1:0] addr;  // address bus
+    inout [WORD_SIZE-1:0] data;  // data bus
+
+    reg mfc;
+    reg [WORD_SIZE-1:0] l_data;  // Latched output data
+    reg l_rw;   // Latched bus rw value
+    reg [ADDR_SIZE-[% byte_addr_size + 1 %]:0] word_addr;  // Latched bus word address value
+    reg [WORD_SIZE-1:0] mem[0:MEM_SIZE-1];  // The contents of the RAM
+
+    assign data = l_data;
+
+    always @ (posedge strb) begin : ram
+        // Latch address and rw at address strobe
+        word_addr = addr[ADDR_SIZE-1:[% byte_addr_size %]];
+        l_rw = rw;
+
+        if (word_addr < MEM_SIZE) begin
+            if (l_rw)  // read
+                #(DELAY) l_data = mem[word_addr];
+            else  // write
+                #(DELAY) mem[word_addr] = data;
+
+            mfc = 1'b1;
+            @ (negedge strb);
+            mfc = 1'b0;
+        [%- IF word_size > 32 # adapt to vlog-1995 %]
+            if (l_rw) l_data = [% word_size %]'bz;
+        [%- ELSE %]
+            if (l_rw) l_data = 'bz;
+        [%- END %]
+        end
+    end
+
+    initial begin
+        mfc  = 1'b0;
+        [%- IF word_size > 32 # adapt to vlog-1995 %]
+        l_data = [% word_size %]'bz;
+        [%- ELSE %]
+        l_data = 'bz;
+        [%- END %]
+    end
+endmodule

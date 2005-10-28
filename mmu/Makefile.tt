@@ -1,0 +1,110 @@
+RW_TT = genrw.tt
+RW_PL = genrw2.pl
+TR2_TT = tmmu2.tt
+TR3_TT = tmmu3.tt
+RM_F = perl -MExtUtils::Command -e rm_f
+RM_RF = perl -MExtUtils::Command -e rm_rf
+VLOG_MMU = ..\mmu.v
+RWC = rwc.pl
+AST = ast++.pl
+RVT = mmu.v.tt
+RDT = mmu.do.tt
+RPT = mmu.pl.tt
+CST = ..\Config.ast
+
+all : $(VLOG_MMU)
+
+$(VLOG_MMU) : $(RVT) $(CST)
+    astt -o $@ -t $(RVT) $(CST)
+
+test : genres exet all
+
+genres : genrw genot mmu_t
+
+genrw : genrwS genrwB tmmuX
+
+[% lists = [8, 16, 32, 64] %]
+genrwS : genrw8.rw genrw16.rw genrw32.rw genrw64.rw
+[% FOREACH item IN lists %]
+genrw[% item %].rw : genrw[% item %].ast $(RW_TT)
+        astt -t $(RW_TT) -o $@ genrw[% item %].ast
+
+genrw[% item %].ast : $(RW_PL)
+        perl $(RW_PL) [% item %] > $@
+[% END %]
+
+genrwB : genrw_8_1000.rw genrw_16_1000.rw genrw_32_1000.rw genrw_64_1000.rw
+
+[% FOREACH item IN lists %]
+genrw_[% item %]_1000.rw : genrw_[% item %]_1000.ast $(RW_TT)
+        astt -t $(RW_TT) -o $@ genrw_[% item %]_1000.ast
+
+genrw_[% item %]_1000.ast : $(RW_PL)
+        perl $(RW_PL) [% item %] 1000 > $@
+
+[% END %]
+tmmux : tmmuX_1.rw tmmuX_2.rw tmmuX_3.rw tmmuX_4.rw tmmuX_5.rw tmmuX_6.rw tmmuX_7.rw tmmuX_8.rw
+[% i = 1 %]
+[% FOREACH item IN lists %]
+tmmuX_[% i %].rw : $(TR_TT)
+    tpage --define word_size=[% item %] $(TR2_TT) > $@
+[% i = i + 1 %]
+[%- END %]
+[% FOREACH item IN lists %]
+tmmux_[% i %].rw : $(TR_TT)
+    tpage --define word_size=[% item %] $(TR3_TT) > $@
+[% i = i + 1 %]
+[% END -%]
+
+RWC = rwc.pl
+AST = ast++.pl
+RVT = mmu.v.tt
+RDT = mmu.do.tt
+RPT = mmu.pl.tt
+CST = ../Config.ast
+[% i = 0 %]
+[% rws = ['genrw8.rw', 'genrw16.rw', 'genrw32.rw', 'genrw64.rw',
+   'genrw_8_1000.rw', 'genrw_16_1000.rw', 'genrw_32_1000.rw', 'genrw_64_1000.rw',
+   'tmmuX_1.rw', 'tmmuX_2.rw', 'tmmuX_3.rw', 'tmmuX_4.rw', 'tmmuX_5.rw', 'tmmuX_6.rw', 'tmmuX_7.rw', 'tmmuX_8.rw'] %]
+genot : rw0 rw1 rw2 rw3 rw4 rw5 rw6 rw7 rw8 rw9 rw10 rw11 rw12 rw13 rw14 rw15
+
+# Test the templates separately:
+mmu_t : mmu.v mmu.t mmu.do mmu.lst
+mmu.v : $(RVT) 
+    tpage $(RVT) > $@
+mmu.t : $(RPT)
+    tpage $(RPT) > $@
+mmu.do : $(RDT)
+    tpage $(RDT) > $@
+mmu.lst : mmu.do
+    vsim -c -quiet -do mmu.do
+
+
+[% FOREACH rw IN rws%]
+rw[% i %] : [% rw %].v [% rw %].t [% rw %].lst   
+[% rw %].v: $(RVT) $(CST) [% rw %].ast
+    astt -o $@ -t $(RVT) $(CST) [% rw %].ast
+[% rw %].t : $(RPT) $(CST) [% rw %].ast
+    astt -o $@ -t $(RPT) $(CST) [% rw %].ast
+[% rw %].ast : [% rw %] $(RWC) $(AST)
+    perl $(RWC) [% rw %]
+    perl $(AST) $@
+[% rw %].lst : [% rw %].do
+    vsim -c -quiet -do [% rw %].do
+[% rw %].do : $(RDT) $(CST) [% rw %].ast
+    astt -o $@ -t $(RDT) $(CST) [% rw %].ast
+[% i = i + 1 %]
+[% END %]
+exet : 
+    set HARNESS_OK_SLOW = 1
+	perl -MExtUtils::Command::MM \
+	    -e "@ARGV = map glob, @ARGV; test_harness(0, '.', '.');" *.t
+    diff -i mmu.lst mmu.lst~
+
+clean :
+    $(RM_F) $(VLOG_MMU) \
+    vsim.wlf transcript \
+    *.rw.t *.rw.v *.rw.do *.rw.ast *.rw.lst tmmuX*.rw genrw*.rw genrw*.ast \
+    mmu.do mmu.pl mmu.lst mmu.v Makefile
+    $(RM_RF) work
+	vlib work

@@ -157,5 +157,3 @@ clean :
 		*.op.v *.op.pl *.op.do *.op.c *.op.obj *.op.exe* *.op.lst *.op.ast \
 		talu1.op talu2.op talu3.op talu4.op talu5.op \
 		t/talu*.t t/alu.t Makefile *tmp* t/result.lst
-	$(RM_RF) work
-	vlib work

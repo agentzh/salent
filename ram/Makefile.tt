@@ -102,5 +102,3 @@ clean :
     vsim.wlf transcript \
     *.rw.t *.rw.v *.rw.do *.rw.ast *.rw.lst tramX*.rw genrw*.rw genrw*.ast \
     ram.do ram.pl ram.lst ram.v Makefile ram.t
-    $(RM_RF) work
-	vlib work

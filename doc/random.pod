@@ -1,0 +1,196 @@
+ Wed Jul 6 15:33:59 2005 章亦春 vs. 成事有余
+ 
+  我正在考虑让我的程序直接去“阅读”Intel 的机器码的码表文档，然后自动生成对应的模式 AST，并将之转换为状态机，最后生成 Verilog HDL 描述。 
+  
+  最近我在做一台机算机，和 Intel 的 IA-32 体系兼容的 CPU 还有一些外部设备。  	  比如 RAM、I/O device 等等。  	  x86 指令集的机器码格式快把我给搞死了，居然长度是变长的，而且没有明显的规律可循。  	  一条机器指令从1个字节到15个字节不等，  	  而且根本不与 word 对齐。  	  现在32位的 RAM 已经设计完成，使用 Verilog HDL，而且用基于 Perl Template Toolkit 的自动化测试框架对其进行了比较彻底的测试。  	  眼下我正集中力量于最困难的部件之一，即机器指令的译器。  	  译码器。  	  我正在考虑让我的程序直接去“阅读”Intel 的机器码的码表文档，然后自动生成对应的模式 AST，并将之转换为状态机，最后生成 Verilog HDL 描述。  
+
+ Wed Jul 6 15:36:55 2005 章亦春 vs. 张星
+ 
+  我正在考虑让我的程序直接去“阅读”Intel 的机器码的码表文档，然后自动生成对应的模式 AST，并将之转换为状态机，最后生成 Verilog HDL 描述。 
+  
+  我正在从事 Salent 模型机的开发与测试工作。  	  我希望能与 x86 指令集实现二进制兼容。  	  有什么困难？  	  所以这些日子一直在研读 Intel 的 IA-32 Reference Manual  	  最大的困难之一就是 IA-32 指令是变长的，而且例外非常多，这给机器指令译码器的设计与测试带来了极大的困难。  	  指令有规律吗？  	  IA-32 指令的机器码从 1 个字节到 十几 个字节不等，根本没跟字对齐，且无规律可循。  	  连 op code 都是从一个字节到三个字节不等的。  	  更别说寻址模式和操作数长度了。  	  另外 IA-32 指令集还有一种 64 位的扩展模式，名为 IA-32e  	  现在32位的 RAM 已经设计完成，使用 Verilog HDL，而且用基于 Perl Template Toolkit 的自动化测试框架对其进行了比较彻底的测试。  	  为何使用 Verilog HDL?  	  原本 RAM 的自动化测试想让祥子帮我的，可到最后还是我包办了。  	  困为它比 VHDL 要简洁得多、强大得多。  
+
+    我需要有什么基础?  	  首先是 Intel IA-32 Reference Manual，
+从 www.intel.com 下。 	一定要下最新的版本，该文档的版本太多。 	看这个东东之前，我首先精读了英文版的<Computer Organization>（你应该借过的），然后阅读了 NASM 的帮助，还有 MASM 的基础…… 	即便如此，我还是经过很多天的冥思苦想才最终搞清楚了 Intel 文档中的几章。 	祥子从放假以来一直在苦读这些材料……
+但这仅仅是他最近苦学材料中的一部分。 	只要下载下面这个:
+IA-32 Intel  ArchitectureSoftware Developer’sManual 	第二卷中的 Chapter 2 和第二卷中的 Appendix B 	我们的目标是让 C/C++ 程序在咱们的模型上跑起来。 	为此我们必须支持 IA-32 指令集相当大的一个常用子集。 	如果能让 Perl 和 Java 也跑起来，那就更好了。 
+
+  我正在考虑让我的程序直接去“阅读”Intel 的机器码的码表文档，然后自动生成对应的模式 AST，并将之转换为状态机，最后生成 Verilog HDL 描述。  	  全过程无需人的干预。  	  生成的状态机不仅可用于生成 Verilog 描述，也能生成 C/C++/Perl 程序。  	  我要求万珣新做一个汇编语言解释器。  	  我不知道你是否能根据机器码表，编写一个随机生成合法的 IA-32 机器码的 Perl 程序？  	  码表就在 2B 卷的 Appendix B 里。  	  我需要这个程序用于测试译码器。  	  当然，第二章必须首先阅读，否则看 Appendix B 的码表的时候你会不知所云的。  	  我对你的 perl 编程水平有些担心。  	  我没把握你是否能构造出一个足够好的机器指令随机生成器。  	  嗯，你应该考虑用一些第三方的反汇编器对你的 Perl 脚本生成的机器码进行测试。  	  当然了，你必须首先对汇编语熟悉起来。  	  否则你的 Perl 脚本我是不敢应用于精巧的 Salent 项目的。  	  反正这是下学期计组课程设计的题目，更何况汇编下学期也正要学的。  
+
+    为的是去看祥子的工作进展情况。  	  他在跟我学技术，同时帮我做 Salent 项目。  	  学的我刚才给你提到的所有技术，从 IA-32 到计算机组成原理，到 Perl Tempalte Toolkit，再到 Tcl仿真脚本，再到 ModelSim 的高级用法，再到  Verilog HDL 设计……  	  他学的东西不要太多哦。  	  好多，他学得过来吗？  	  没看到他没日没夜地苦读么？  	  我没想到 Salent 模型机项目的门槛会如此之高。  
+
+	Thu Jul 14 14:56:25 2005 章亦春 vs. 成事有余
+ 
+   我正在考虑向 CPAN 贡献自己的 perl 模块。  	  Take a look at here:
+http://www.cpan.org/ 	不是请你帮忙，只是向你介绍一下这个神奇的东西。
+You can find everything on CPAN! 	是一个搜索引擎？ 	准确的说是一个配有搜索引擎的极为庞大的 Perl 程序库和 Perl 知识库。 	那是全世界 Perl 程序员贡献自己作品的地方。 	也是全世界 perl 程序员享受别人劳动成果的地方。
+双向的，呵呵。 	当然，在这里，最主要的语言还是 perl 噢。 	Perl 不仅是我们与机器之间最好的交流工具，亦是我们程序员之间最好的交流工具，呵呵。 
+
+  我上回跟你说了一些，我正在从事一台与 IA-32 体系相兼容的计算机系统的设计开发工作。  	  IA-32 就是 Intel 从 80386 至 Pentium 4 所采用的体系结构。  	  进展如何？  	  现已完成 RAM 和 ALU 的设计与测试，正在考虑指令译码器的自动化构造问题。  	  最困难的部分恐怕也就是“指令译码器”（idu）和“指令执行单元”（ieu）了。  	  最后外加一个“存储管理单元”（MMU）就大功告成了。  	  最近一直在阅读 Intel 的文档，头都痛了。  	  我在两个月前也是一窍不通了，苦读了那么多的全英的文档和图书，这才开始开点儿窍了。  
+   
+	Thu Jul 14 19:55:33 2005 章亦春 vs. 代晓珂
+
+  晓珂，我刚刚完成 ALU 的设计与测试工作。  	  我们支持以下操作:
+ADD ADC SUB SBB MUL IMUL DIV IDIV
+AND OR XOR
+SHL SHR SAL SAR
+ROL ROR RCL RCR
+NOP 	我们的目标就是提供 Pentium4 所提供的非64位通用目的的 ALU 操作 	包括有/无符号的加减乘除、算术/逻辑移位、带/不带 CF 的位旋转(Rotate) 、按位与/或/非/异或。 	刚才的列表还漏了两个:
+NOP NEG 	都是单操作数。 	你说还有哪些运算？ 	我可是对照着 Intel 文档来做的噢。 	我又不是做指令译码器，单纯的 ALU 操作有你想象的那么多么？ 	指令译码器会支持300~400条 x86 非64位通用指令的。 	指令执行单元 就不可能支持那么多机器指令了。除非你肯帮我搞定。 	带/不带 CF 的位旋转(Rotate)
+是种什么运算？ 	位转置，我说不好，英文术语是 Rotate 	类似移位操作，只不过移出界的比特又从另一端移入。 	我们需要做的并不仅仅是一台模型机。 	那是什么？ 	我们要做的是一台与 IA-32 指令集实现二进制兼容的可以直接跑 C/C++ 程序的“计算机系统” 	够疯狂的吧？ 	二进制兼容耶，而不仅仅是汇编语言级别上的功能兼容。 	即让我的 perl 程序自己读 Intel 的文档，然后输出译码器的实现，可以是 perl 版本的，也可以是硬件描述语言的版本（比如 Verilog HDL）。 	基本过程是解析指令模式，生成模式匹配的抽象语法树（AST），再通过对 AST 的遍历（层次遍历哦）生成状态机模型（有穷自动机），最后通过输出代码的模板文件产生最终的译码器实现。这是典型的“写程序的程序”。 	由于状态机模型是与输出的实现语言无关的，因此提供 Perl 代码的模板就产生 Perl 版本的译码器程序，提供 Verilog 代码的模型就产生 Verilog 版本的译码器描述，C/C++ 还有 Java 还有 VHDL 都依此类推。 	这意味着一旦我们得到了一种语言下的译码器实现，就可以轻而易举地获得其他语言的实现。要做的只是提供这种语言下的模板文件就可以了。而模板文件都是大同小异，代码很少的。 	呵，技术上的路径表明，我们最后得到的可能远远多于我们最初所期望的。 	多个版本的译码器耶，各种各样的语言哦！
+从 Perl 到 Verilog，从 C/C++ 到 VHDL
+神不神奇啊？ 	它们都是多么不同的语言啊。 	它们之所以可以共享一棵 AST 就在于“状态机”这种东西的通用性。 	记得“数字逻辑电路”课程中接触到的“状态机”么？就是那种东西。 	我们在当时用状态机构造“二进制序列检测器”的？ 	状态图？ 	你可能还不知道它有多么强大、多么通用呢！ 	在编译理论中我们还会以更近的距离接近它。它对译码器、编译器或者类似的识别模式的程序和硬件设计而言简直是无价之宝！ 	非常优美，非常抽象，非常简洁。 	更重要的是:非常实用。 	熟练掌握状态机模型却仍需要大量的实践和思考。 	我们在写处理输入的 Perl 程序时很难不去用它。 	只不过大多数时候我们用到了，却并不知觉。 	我正在训练仲伟祥以状态机的方式来思考问题，而不是以他自己的那种笨重的方式。 
+
+
+    Fri Jul 15 13:46:52 2005 章亦春 vs. 蔡玉飞
+
+  现在我正在考虑“指令译码器”（IDU）的自动化构造问题。  	  但我们的 Salent 走得一定比任何人期望得要远。  	  有没有兴趣学习一下 Verilog HDL 语言。VHDL 该扔掉了。  	  我们的 Salent 项目完全使用 Verilog，的确收效非常之好。代码简洁而健壮。  	  经测试，Quartus II 和 ModelSim 这些主流的 EDA 软件都同时支持 Verilog 和 VHDL 两种硬件描述(HDL) 语言。  	
+
+	Tue Jul 26 18:30:19 2005 章亦春 vs. 乔海燕
+
+      我们刚刚得到一个 perl 版本的 机器指令译码器，  	  可是当我们用一个 EXE 文件中的机器指令对这个译码器进行测试的时候，捕捉到一个很头痛的错误。  	  这个错误是祥子最早定位的，sal++  	  离“好”还有很长的路要走啊。  	  我正怀着极大的兴趣阅读一个同类型的反汇编器程序的文档。我做得正是这种东西。  	  这个东东叫做 PEDasm  	  我很好奇，PEDasm 的作者究竟是如何对 Intel 如此复杂的机器指令进行解译的。  
+
+	Mon Aug 1 18:06:22 2005 章亦春 vs. 蔡玉飞
+  不好意思，我是在挂机，不是不理你，你的那个错误报表呢》怎么不发给我啊？  	  我正在向一个同学介绍这个完美的 HTML 测试报表。  	  这其实是我们 Salent 计算机的 x86 指令译码器的测试报表。  	  该项技术称之为 Test Smoke!  	  Smoke, smoke, I'd love to smoke ... Oh, no smoking please!  	  以图形化的方式显示测试集的结果，这种技术有专门一个术语，那就是 SMOKE  	  正好是抽烟的意思  	  smoke.html 中的浅绿色方块表示顺利通过的测试，红色方块表示失败的测试。  	  而深绿色方块表示未通过的 TODO 测试，浅黄色表示意外通过的 TODO 测试。  	  另外说明一下，如果你把鼠标悬停在任何一个彩色方块的上方，持续几秒钟，会出现一个黄色的小帮助，告诉你相关的调试信息。  	  爽得要死。  	  生成这张报表只用了一个命令:
+nmake smoke 	该命令在屏幕上的输出为:
+Microsoft (R) 程序维护实用工具 7.10.3077 版
+版权所有 (C) Microsoft Corporation。保留所有权利。
+        cd t
+        nmake /nologo
+        cd..
+        perl util\run-smoke.pl . smoke.html
+Sorry, concurrency not supported on your platform
+t\Idu.t
+t\bin2asm.t
+t\bin2hex.exe.t
+#     Failed test (t\bin2hex.exe.t at line 83)
+#     Failed test (t\bin2hex.exe.t at line 84)
+Use of uninitialized value in pattern match (m//) at t\bin2hex.exe.t line 101.
+Use of uninitialized value in pattern match (m//) at t\bin2hex.exe.t line 107.
+#     Failed test (t\bin2hex.exe.t at line 132)
+#          got: undef
+#     expected: 'DEC'
+...
+#     Failed test (t\bin2hex.exe.t at line 132)
+#          got: undef
+#     expected: 'INC'
+# Looks like you failed 93 tests of 24753.
+t\bin2hex.t
+t\catln.t
+t\exe2hex.t
+t\hex2bin.t
+t\main.cod.t
+t\my_perl.exe.t
+t\optest.t
+t\pat_tree.t
+t\state_mac.t
+*** All done! Smoke matrix saved as 'smoke.html'. 	那些方块矩阵图就称之为 Smoke Matrix 	酷毙了！ 
+
+
+	Sat Aug 13 19:52:31 2005 章亦春 vs. 何杉
+
+
+  Salent 是与 x86 芯片实现二进制兼容的模型机设计项目。
+我希望你做的是支持 x86 通用指令集和 x87 FPU 指令集的机器指令译码器的 Java 实现。 	我现在已经得了一个足够好的 Perl 版本的机器指令译码器 (IDU) 的实现，测试结果非常令人满意。下面要做的一个平行版本是 Verilog HDL 硬件描述语言的 IDU 实现。我希望作为 Java 社区一员的你，能够在百忙之中提供 Java 实现的模板。 	这样我们就可以拥有 Java 版本的 IDU 了耶！ 	你无需从零从起，你只需要把我们的 Perl 版本的 IDU 或者 C 版本的 IDU 直译到 Java 代码就可以了。当然，做得尽可能地 Java-ish 还是很重要的了。 	或者再简单一些，为了——好玩。或许比较不同语言版本的实现之间的性能和代码数量上的差异也是一个很不错的理由哦。 	这个项目已经取得重要进展，我们已经有了经过彻底测试的 RAM 和 ALU，还有了一个经过很好测试的 Perl 版本的 IDU 机器指令译码器。下一步，就是把这个 Perl 版本的 IDU 移植到 Verilog HDL 语言。 	万珣新正在着手开发 MMU，张星正在考虑指令执行单元 IEU 的 Perl 仿真。 	能讲讲怎么移植吗？ 	Well, it's quite straightforward. 	The versions of IDU implementations will share the same AST, I mean Abstract Semantic Tree. 	The two versions of 	The best way to comprehend AST is simply reguard it as a complex data structure, maybe something like a tree, an array, a hash, or so. 	To generate the final implementation, an AST is not enough. 	The info stored in the AST is only concerned with the state machine (or the state graph), there is nothing specific to the programming language we finally choose. 	state machine? 	Yeah. A state machine.
+In order to generate the program automatically, we provide an full-fledged AST, a well defined program template to the computer. The computer will combine the two to generate the final implementation, say, the final program. 	The key is combining an AST with a program template. 	So it's another example of a program that writes another program. 	The AST describing the state machine is now ready. What I asked you to do is simply provide a template that depicts the basic layout of the final Java program's source code. 	The Java template, the Perl template we now obtained, and the future more templates will have a similar appearance. 	They're pretty alike. 
+
+	Sat Aug 13 22:14:17 2005 吴元斌 vs. 章亦春
+  我现在被 x86 指令集中的 CALL 和 JMP 指令的" unsigned full offset, selector" 搞得很费解。  	  unsigned full offset 好像是占四个字节，即 32 位，而后一半 selector 应该是占两个字节，即 16 位。但它们究竟是干什么用的，我实在搞不明白。  	  郁闷……  	 I succeeded in getting all the tests passed! It's the first time in the past month that I finally get all the tests passed! Yahoo!  	  Thank you for helping me fix the last bug in my machine instruction decoder! Thx!  	  gratulation  	  Here is the tester output generated couples of minutes ago:
+        perl -MExtUtils::Command::MM  -e "@ARGV = map glob, @ARGV; test_harness(
+0, '.', '.');" t\*.t
+t\bin2asm..........ok
+t\bin2hex.exe......ok
+t\bin2hex..........ok
+t\catln............ok
+t\exe2hex..........ok
+t\hex2bin.exe......ok
+t\hex2bin..........ok
+t\Idu-Util.........ok
+t\Idu..............ok
+t\main.cod.........ok
+t\my_perl.exe......ok
+t\ndisasmi.........ok
+t\optest...........ok
+t\pat_cover.ast....ok
+t\pat_cover........ok
+t\pat_tree.........ok
+t\state_mac........ok
+t\types.cod........ok
+All tests successful.
+Files=18, Tests=56245, 75 wallclock secs ( 0.00 cusr +  0.00 csys =  0.00 CPU) 	They all passed! It's even sort of unbelievable! 	IDU stands for Instruction Decoding Unit in our contexts. 
+
+
+	Sun Aug 14 16:00:29 2005 章亦春 vs. 吴元斌
+
+  元斌，这一回我的 IDU 可真的是 100% 通过测试了。  	  昨天晚上一直工作到今天凌晨 2:14 才下机。  	  为了兴趣！！！  	  是啊，兴趣万岁！  	  今天又经过大半天的“捉虫”工作，刚刚才把虫子彻底捉干净。  	  我打算把这个 Perl 版本的 IDU 机器指令译器 port 到 C/C#/Java/JavaScript/Python/Tcl/Verilog HDL/VHDL/VB/Pascal 这些语言。  	  一定爽得要死。  	  它们将共享一棵 AST，共享一个测试台，哈哈！  	
+
+	Sun Aug 14 16:53:50 2005 章亦春 vs. 仲伟祥
+
+    目前我们的 Salent 项目的版本号已经达到 0.10
+好像我写了这么多项目，也不曾有一个达到第十个版本的。0.10 是一个很重要的里程碑；我们的 IDU 指令译码器 100% 地通过了所有 59371 个自包容和应力测试。万岁！
+	
+
+	Mon Aug 15 15:55:01 2005 吴元斌 vs. 章亦春
+  	(2005-08-14 16:04:13)   章亦春
+我打算把这个 Perl 版本的 IDU 机器指令译器 port 到 C/C#/Java/JavaScript/Python/Tcl[v]erilog HDL[v]HDL[v]B/Pascal 这些语言。
+	
+
+	Thu Aug 18 18:12:51 2005 章亦春 vs. 吴元斌
+
+      你的玩具玩的怎么样了！  	  哪个玩具？我有很多玩具。  	  你的计算机项目！  	  我已经得到了 C 语言的指令译码器实现。  	  但它还需要更多的测试。  	  其实无所谓！
+只要是现在你最喜欢玩的！ 	好玩吗？ 	不太好玩。 	比较麻烦，比较繁琐。 	......
+简单的对你没挑战！
+繁琐对你才有成就感！ 	我现在正在想如何让我的 C 版本的 IDU 面对非法输入时能够不崩溃。 	我毕竟在使用 C 语言。 	检查输入记号的合法性是必须的。 	关键是怎么个崩溃法！！ 	内存非法访问。 	该内存不能为"read" 	要知道我写代码的目标是“零缺陷”。 	所以哪怕是再简单的程序，我都会尽量进行彻底的测试。 	
+没有0缺陷的代码1 	这是我的追求。 	就像艺术家对完美的追求那样。 	C 的出错处理太难错了，我真怀念 Perl 中强大的文本处理能力。 
+
+	Fri Aug 19 13:40:03 2005 章亦春 vs. 吴元斌
+
+      我的 C 版本的 IDU 完成测试了！  	  C IDU 和我原来的 Perl IDU 共享了绝大部分的测试集。  	  绝大部分----》完全？几乎？  	  有一部分测试是无法共享的。  	  嗯，从技术上讲不存在共享方面的困难。  	  可共享 100% 的测试集。你是对的。  
+
+	Fri Aug 19 16:29:44 2005 仲伟祥 vs. 章亦春
+
+  我们的 Salent 项目如今已到关键时期了。  	  当前版本号是 0.11  	  前不久，我们已经得到了一个 100% 通过应力测试的 Perl 版本的 IDU 实现。  	  这两天，我又把 Perl IDU 的模板用 C 语言进行了改写，并测试集也移植到了 C 版本中。  	  今天上午 C IDU 也 100% 地通过了所有的测试。耶！  	  Verilog 版本的工作尚未着手做，但我已经开始考虑了。  	  我昨晚请王龙志帮我把 C 版本的 IDU 翻译为 C# 代码。  	  今天早上我又请李志高帮我把 C 版本的 IDU 翻译为 Java 代码。  	  要几个版本？当然是越多越好了！  	  万珣新已经完成了 MMU 的 Verilog 编码工作。他如今正在考虑如何用 ModelSim 来测试他的设计。  	  张星在 IEU 方面的工作尚无起色。  	  毕竟 IEU 的复杂度是如此之大。  	  IDU 的 Verilog 版本尚未得到，测试更是无从谈起
+MMU 的测试工作也才刚刚起步
+IEU 还停留在脑海中。 	IDU 本身就是一个艰巨的工程。 	
+
+	Mon Aug 22 13:41:41 2005 章亦春 vs. 吴元斌
+
+  确实，你是对的。现在我已经让两种语言版本的 IDU 共享全部的测试集了。无论从理论还是从技术上都不成问题！  	  更重要的是，在这种框架下，以后新增加的所有测试都会自动地为两个版本的实现所共享！  	  我以为不仅 Perl 与 C 实现可以完全共享测试集，我这两天经过思考后认为，像 C#, VB, Java 甚至于像 Verilog HDL 这样的硬件描述语言的实现都可以共享同一个测试台！
+方法是通过 COM 接口、Inline::* 模块或者 C 进行语言之间的“过渡”。 	Whee! 
+
+	Fri Aug 26 15:25:52 2005 章亦春 vs. 成事有余
+ 
+  眼下我们正在做一个 x86 反汇编器。  	  已经通过 48% 以上的测试集了。  	  测试集是我们自己根据 Intel 文档中的指令编码表让程序生成的，严格覆盖了整个"非64位通用目的指令集”和整个“x87 FPU 浮点指令集”。  	  你说的成功是指 100% 通过吗？
+100% 通过测试集只是一个时间问题，技术上应该没有什么障碍。 
+	
+
+	Fri Sep 2 18:21:16 2005 仲伟祥 vs. 章亦春
+
+  我正在着手 SVM 虚拟机的构建问题。  	  SVM 与 Salent 既是相互独立的两个项目，又是相互关联的两个项目。  	  关键是我们能从 SVM 中得到什么特别的好处。  	  一个完成了“自举”过程的 VM 会拥有怎样的优势，会具有怎么的奇异特性呢？  	  妙  	  不  	  可  	  言  	  一个能自己运行自己的 VM……
+awful... 	是呀
+就在中午,真的很棒,连我都蠢蠢欲动了 	我确实已经在脑海中构画出了一个看起来可行的 RoadMap 	从哪里开始？从 MASM 汇编开始。 	我设想的指令处理流程是：
+C/C++ code => [CL.EXE] => MASM code => [masm2nasm.pl] => NASM code => [sasm.pl] => x86 machine code => [SVM] 	中括号内的是编译器或者解释器，其他是我们希望在 SVM 上运行的指令文件。 	svm相当于cpu了 	当起点处的 C/C++ code 就是 SVM 的实现代码的时候，整个处理流程就形成了一个封闭的回路：
+SVM in C/C++ => ... => [SVM] 	这正是虚拟机的含义呀！“虚拟 CPU”，呵呵。 	一旦形成封闭回路以后，SVM 的自举过程就宣告完成！ 	比如将 MASM 转换为 NASM 的 masm2nasm.pl 的实现。 	我们刚做好的其实是一个将 x86 机器指令转换为 NASM 的反汇编器。
+只外，sasm.pl 其实就是一个针对 SVM 的汇编器。 	“最后的结果能出现在屏幕上吗”
+唔，我想这个问题的回答应该是肯定的，只要我们的 SVM 提供了 I/O 例程可供调用。就像真实的机器提供 BIOS 调用那样。 	sasm 就是 SVM Assembler
+masm2nasm 就是 MASM-to-NASM 	svm与 x86 机器指令转换为 NASM 的反汇编器。
+有哪些不同的地方 	我们远不止要让最后的结果出现在屏幕上，一旦 SVM 完成了自举，我们下一步要考虑的就是为 SVM 这台虚拟机开发属于它自己的“虚拟操作系统”了！ 	如果能让 Linux 和 Windows 也能在 SVM 上“跑”起来，那可就是更好了！ 	反汇编器不是 SVM 的一部分。SVM 是一个运行时环境，提供了 x86 机器指令在运行时所需要的硬件环境（当然是虚拟的了）。反汇编器与它没多大关系。 	思考 SVM 的一种好的方法就是把它视作硬作 CPU 的一个纯软件替代物。 	你看，x86 机器指令一般是直接运行在 x86 芯片上的，不是么？ 	我们的 SVM 就是要提供一块真实的 x86 芯片所提供的所有必要的服务与功能。 	使用运行于其上的 x86 指令“感觉”自己好像就是运行在真实的 CPU 上的，但事实上却不是，它运行在一个软件上，呵呵。 	这个软件就是我们的 SVM。 	x86 指令需要的不就是一个 RAM，一个指令译码器 idu，一个指令执行单元(ieu)以及其中的众多寄存器和 PSW等等东东？ 	而这一切正是我们在 Salent 项目中一直努力想实现的，只不过那里我们更愿意使用 HDL 硬件描述语言来实现。但在 SVM 中，我们将用纯的高级编程语言。 	事实上，我们已经有了 ram 和 idu 的纯软件实现了，呵呵。 	这是 Salent 项目的“副产品”，但却是 SVM 的核心部件。 	现在你应该可以理解为什么我在 QQ 聊天中请求万给出他的 MMU 的纯软件实现了吧？ 	下面很自然的，我们只需要一个 ieu 的纯软件实现，SVM 就基本完成了。 	当然，为了能使它可以跑 C/C++ 程序，我们还得做一些上层建筑，比如 MASM 汇编器。 	我在想，能否利用已有的 MASM 汇编器？ 	这样我们就不必自己动手做一个了。 	汇编器的复杂度相当了得。 	但有困难，你知道吗？ 	最大的困难就是地址分配问题。 	还有就是系统调用问题。 	地址分配，或者说指令的重定位，是一个非常头疼的问题。 	
+
+	Sat Sep 3 14:11:15 2005 章亦春 vs. 仲伟祥
+
+  Hey, take a look at this!  	  Double click this XML file will probably open it with IE.  	  It is a great experience to browse XML structure in IE.  	  It's just an XML file, you know.  	  Open it with IE.  	  This is the state machine we used to generate Perl IDU and C IDU.  	  The state machine is the core of our IDU implementations and it's language-independent as well.  	 I've asked Jack Shen to render the XML code using Java graphical technologies. I'm looking forward to pretty pictures with lovely cicles and elegant arcs on them!  	  s/cicles/circles/  	  I'm guessing we can get this job done using MS Visio too.  	  Getting computers to draw photos themselves is really a lovely idea, I must say!  	  Especially what we want to draw is those with huge size.  	  s/is/are/  	
+
+	Sat Sep 24 19:30:04 2005 程辰 vs. 章亦春
+
+  程辰，让你看看两张图。  	  这一回不是我手工画的，是计算机程序自己绘制的。  	  这张图描述的是一个程序的内部结构。  	  可以说是一个状态机。State Machine  	  图中的每一个节点（圆圈）都代表一个独立的“状态”，节点之间的箭头表示状态之间的转换条件。  	  状态机是这样一种抽象的机器，这个机器能够维护并且切换当前的状态。它根据外部的输入和内部产生的输出来得到状态切换的条件。  	  呵呵，不是哦。
+状态机是设计软件和设计硬件的基本工具。 	与其说它是一台“机器”，不如说它是一种数学模型。 	是抽象的？还是实物？ 	其实状态机的核心思想非常简单，我想打一个比方来加以说明。 	比如我想“识别”出两个单词 add 和 and，现在我们可以用状态机来完成“识别”的任务。 	首先，我们读取未知单词的第一个字母，比如说是 a，我们便切换到状态1，否则跳转到出错状态，因为两个词都是由 a 起始的。 	接着，我们读取第二个字母，这时就要分三种情况进行讨论，如果得到的是 d，就跳转到状态 2；如果是 n ，则跳转到状态 3；否则就跳到出错状态。 	然后，我们读取第三个字母，如果当前状态是 2，而且当前的字符是 d，则完成对 add 的识别。 	如果当前状态是 3，而当前的字符是 d ，则完成对 and 的识别。 	其余情况，跳转到出错状态，即匹配失败。 	上面这个例子可以用来识别英语单词 	这就是文曲星的工作原理？ 	呵呵，有点儿类似哦。 	真的很相似。 	事实上，状态机是无处不在的。 	状态机在编写识别性质的程序和电路的时候，简直是无价之宝。 	比如识别机器语言的集成电路，识别各种高级编程语言的编译器和解释器，还有很多一般性的程序，状态机无处不在！有时候我们即时自己使用了，可能还未发觉。 	这是你才学到的知识？ 	事实上，我已经使用了多年了。 	从高三开始我就有意识地在自己编写的代码中大量地使用。 	状态机是编程领域比较有趣的东东。我从高一开始自学编程，在高二时学习了计算机专业的《编译原理》课程，在那儿我首次接触了状态机理论。 	不久我就发现它是如此地强大。 	
+
+	Sat Oct 1 12:50:48 2005 章亦春 vs. 宋懿
+
+  我刚刚用我的一个程序画了一张图画，很想让你看看。  	  这是我的程序根据一个配置文件中的信息，自动生成的。  	  箭头指示文件之间的依赖关系。  	  这儿节点的布局全是程序自己确定的，无需人的干预。  	  我仅给出了文件之间的依赖关系。  	  这里还有一个拥有 590 个节点的图，你不妨也看看吧？  	  这个是一个状态机（有穷自动机）的图形化描述  	
+
+	Tue Oct 4 17:39:28 2005 章亦春 vs. 仲伟祥
+ 
+  给你看看我的程序渲染的 Makefile 文件  	  不要用 IE 观看，那样效果不好。  	  由于图片较大，可以适当放大。  	  这张图描述了我们的 Salent IDU 的 make doc 的生成树  	  由于这仍是一个粗糙的原型生成的东东，我还可以把它做得更漂亮一些。  	  比如对“虚目标”和“文件”进行区分，以及只渲更小的 Makefile 子树等等。  	  值得一提的是，用户可以对输出图片的风格进行自定义，比如节点和边的形状、颜色等等，都是可变的参数。  	  还应该允许用户对绘制的目标进行过滤和筛选，从而使输出的图片更干净、更清爽。  	  这儿的“目标”就是 Makefile 目标，在图上则是黄色的方框节点。  
+	
+	

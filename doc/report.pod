@@ -1,0 +1,393 @@
+=head1 NAME
+
+report - Computer Organization Design Report for Salent
+
+=head1 AUTHOR
+
+Agent Zhang (章亦春) E<lt>agent2002@126.comE<gt>
+
+3030602110 计算机0304班
+
+计算机科学与通信工程学院  江苏大学
+
+=head1 VERSION
+
+本文档描述了于 2005 年 9 月发布的 Salent 0.08
+
+=head1 DESCRIPTION
+
+本次计算机组成课程设计的基本方向是计算机系统的硬件设计。在征得指导老
+师的同意之后，我将自己的 Salent 项目作为本设计的题目。本报告概括地
+介绍了Salent 项目的主要方面，描述了项目基本的开发过程。
+
+=head1 FAQ
+
+以下列举了有关 Salent 项目的常见问题及其解答。如果你的问题未出
+现在该列表中，或者对某个问题有更好的答案，请告诉我。
+
+=head2 何为 Salent 项目？
+
+Salent 项目是章亦春为适应学校计算机组成课程设计的要求开发的支持
+x86 常用指令集的计算机硬件系统，简单地说，就是自己设计一台电子计算机。
+该项目自 2005 年 6 月底启动以来，开发工作一直延续至今。
+
+=head2 为何名为 Salent ？
+
+Salent 是本项目最初的两个开发人员仲伟祥(sal)和章亦春(agent)的
+英文名的字母组合： SAL-ENT。
+
+=head2 Salent 项目的开发动机是什么？
+
+开发该项目的初衷是为了通过动手实作一台 32 位的计算机系统，加深对
+教科书上学到的计算机组成方面的知识、原理和技术的理解，同时也为了
+探索用软件方式自动化硬件设计与测试过程的具体途径，熟悉硬件设计的
+细节。
+
+=head2 Salent 项目能带给我们什么？
+
+Salent 项目的开发过程充满了创新与活力。我有意识地效仿唐宗汉 (Autrijus
+Tang) 的 Pugs 项目"optimize for fun"的做法，以不断向四围发散的方
+式领导整个项目的开发。因此该项目的创新至上，乐趣至上的文化是最值得我
+们每一个人借鉴的。这种文化为 Salent 带来了极高的开发效率。
+
+Salent 项目使用了许多有趣的新技术来辅助硬件系统的开发，这是同时值得硬
+件和软件开发人员借鉴的。
+
+比如我使用 Perl Template Toolkit 这种模板系统来自动生成所有的
+东西，这其中包括 Verilog HDL 代码，自动化测试代码，ModelSim 仿真
+脚本，项目文档，甚至 Makefile 文件。模板驱动的代码生成技术实现
+了“写程序的程序”，虽然它远未实现让计算机为我们写所有的“程序”，但是
+我们需要编写的代码确实大大减少了。
+
+另一项有趣的技术是用软件测试的方法来对硬件设计进行自动化测试，比如
+回归测试、覆盖测试甚至应力测试。让自己的测试台操纵 ModelSim 仿真器
+是硬件测试自动化的核心，我们总结出了一种比较高效和简单的解决方案。
+
+Salent 带动了众多其他的项目，比如我的第一批贡献到 CPAN 的模块，
+L<ModelSim::List>, L<Template::Plugin::POSIX>,
+L<Template::Plugin::Perl>, L<Template::Ast>,
+和 L<Win32::Wildcard>。另外，我的流程图生成器 Flowviz，Makefile
+构造流程生成器 L<Makefile::GraphViz> 及相关联的 L<Makefile::Parser>
+也是为了适应 Salent 项目的文档工作而开发的。
+
+我们为 Salent IDU 的测试台开发的 x86 指令随机生成器是如此完美，如此
+通用，以至于它可以用于任何 x86 反汇编器项目的测试。事实上，我的测试台
+已经捕捉到了著名的 PEDasm 的众多 bug，即便像 NASM 这样主流的软件，
+我们也捕捉到了其自带的反汇编器 Ndisasm 的一个很微妙的 bug. 我记得这
+个 bug 与 FPU 指令集中的一条指令的操作数顺序有关。目前我尚未就此问题
+通知 NASM 团队。
+
+还有一个很有趣的“副产品”十分有趣，那就是我们轻松得到的纯 Perl 版本的
+x86 反汇编器实现。这个东东完全可以独立成一个 Perl 模块，贡献到 CPAN
+网络。我们可以利用这个 Perl 实现做许多有趣的事情。:=)
+
+=head2 Salent 使用了何种语言？
+
+Salent 项目的最终产品是硬件设计，当然会使用到硬件描述语言。我经
+过权衡，最终选择了 Verilog HDL。不过，值得一提的是，在设计与测试
+环节中，我还广泛使用了众多软件编程语言以辅助硬件开发。这其中包括
+Perl5，C/C++，Tcl，以及 MASM。
+
+=head2 为什么不采用江苏大学教授的 VHDL 语言？
+
+说实话，从学校教授 VHDL 的第一天起，我就对它没有什么好感。即便是很简
+单的设计，用 VHDL 描述起来也显得相当笨拙。在学习 Verilog HDL 之前
+我在 Google 中稍稍搜索了一下“Verilog vs. VHDL”，结果看到 Verilog
+占了压倒性优势（至少是在美国）。Salent 项目走到今天，事实也已经证明我
+当初的选择是明智的。
+
+=head2 Salent 项目设计的处理器具体支持哪些 x86 指令集？
+
+按照计划，Salent 芯片将支持整个“非 64 位通用目的指令集”和“FPU 浮点
+运算指令集”。至本文档编写之时，Salent 的指令译码器（IDU）已能正确
+解译上述两个指令集的所有指令了。
+
+=head2 Salent 项目由哪几部分组成？
+
+Salent 由以下模块组成：
+
+=over
+
+=item *
+
+随机访问存储器 (RAM)
+
+=item *
+
+逻辑算术单元 (ALU)
+
+=item *
+
+存储管理器 (MMU)
+
+=item *
+
+指令译码单元 (IDU)
+
+=item *
+
+指令执行单元 (IEU)
+
+=item *
+
+Salent 顶层 (Salent)
+
+=back
+
+=head2 你在开发过程中得到了哪些人的帮助？
+
+Woot! 我在开发过程中得到了许多人的帮助。下面只能择要录之：
+
+=over
+
+=item *
+
+我们班的仲伟祥同学为 Salent 项目编写了许多代码，其中包括 RAM 
+应力测试框架的上
+层建筑， RAM 的 Makefile 系统以及 IDU 测试台的两个后端 (backend)。
+
+=item *
+
+万珣新同学用 Verilog 编写了 MMU，并使用 ModelSim SE 
+对其进行了简单的仿真测试。
+
+=item *
+
+张星同学协助我完成了 IDU 测试台的一个关键构件，x86 
+反汇编器的开发与测试工作。
+
+=item *
+
+我的室友吴海周同学不厌其烦地在 QQ 上和我讨论有关 ALU 和 PSW 
+的设计上的问题。
+
+=item *
+
+我的指导老师在 IDU 的 Verilog 
+模板的开发过程中针对我遇到的一些困难提出了不少有
+益的建议。
+
+=back
+
+另外檀宝权和代晓珂同学虽然没有直接参与到项目开发中来，但他们都曾与我就 
+Salent 中
+的一些设计上的问题交换过看法。当然了，还有 QQ 
+上的许多好朋友，我很感激他们在我
+沉醉于 Salent 
+开发的两个月间耐心地倾听我的“技术讲解”。这些讲解不仅在当时就帮助我
+自己澄清了许多问题，理清了思路，而且现在还成为了项目文档（包括这篇文档
+）重要的素材
+来源。
+
+=head2 Salent 目前的进展如何？
+
+目前，逻辑算术单元 ALU 和随机访问存储器 RAM 已经完成设计与测试。指令
+译码器 IDU 已完成状态机和基本算法的测试（通过 IDU 的 Perl 和 C 版本
+的纯软件实现），并且已经得到了 Verilog HDL 的实现代码。但是 Verilog
+HDL 版本的实现尚有待于进行测试。内存管理单元 MMU 的 Verilog HDL 实现
+由万珣新编写，他已用 ModelSim SE 对他的设计进行了手工测试。
+
+作为整台模型机之核心的指令执行单元（IEU）目前只完成了一些初步的准备，
+开发
+工作尚未正式启动。
+
+=head2 这篇文档是如何产生的？
+
+这篇文档的主体使用 Perl 的 POD (Plain Old Document) 
+格式制作的。你现在看到
+的是 Pod::Html 模板自动生成的 HTML 版本（使用 ActivePerl 5.8.7 的
+级联样式表文件 Active.css 进行渲染）。
+
+文档的许多素材来自我最近几个月的 QQ 聊天记录（通过使用我编写的 Qooqle 
+搜索引擎和
+Mozilla 浏览器进行汇总）。还有不少内容来自 Salent 
+项目在开发过程中留下来的日志文
+件（分散在各个子目录中的 Changes 文件）。
+
+=head1 项目设计目标
+
+我们需要做的并不仅仅是一台模型机。那是什么？ 我们要做的是一台与 IA-32
+指令集实现二进制兼容的可以直接跑 C/C++ 程序的“计算机系统” 	
+怎么样，够疯狂的吧？二进制兼容耶，而不仅仅是汇编语言级别上的功能兼容。	
+
+我们的目标是让高级语言的编译器生成的 .exe 文件能在咱们的模型上跑起来。
+为此我们必须支持 IA-32 指令集相当大的一个常用子集。当然了，如果能让 Perl
+和 Java 也跑起来，那就更好了。不过这还有很长的路要走。
+
+这台机算机除了 CPU 之外，还有一些外部设备，比如 RAM、I/O 等等。
+
+=head1 RAM 的开发
+
+32位的 RAM 已经设计完成，使用 Verilog HDL，而且用基于 Perl Template
+Toolkit 的自动化测试框架对其进行了比较彻底的测试。
+
+=head1 ALU 的开发
+
+我们的 ALU 支持以下操作:
+
+    ADD ADC SUB SBB MUL IMUL DIV IDIV
+    AND OR XOR
+    SHL SHR SAL SAR
+    ROL ROR RCL RCR
+    NOT NEG NOP
+
+我们的目标就是提供 Pentium4 所提供的非64位通用目的的 ALU 操作 	
+包括有/无符号的加减乘除、算术/逻辑移位、带/不带 CF 的位旋转 (Rotate) 
+、按位与/或/非/异或。应该没有什么重要的遗漏，因为我可是对照着 Intel
+文档来做的噢。
+
+ALU 不是做指令译码器，单纯的 ALU 操作没有我们想象的那么多么。
+我们的指令译码器支持 419 条 x86 常用指令。指令执行单元就不可能支持
+那么多机器指令了，除非我能得到更多人的帮助。
+
+=head1 MMU 的开发
+
+=head1 IDU 的开发
+
+IA-32 指令集还有一种 64 位的扩展模式，名为 IA-32e，对 64 位指令的支持并
+不在我的 TODO 列表中。
+
+=head2 遇到的困难
+
+x86 指令集的机器码格式在开发初期曾让我感到非常头痛，因为指令长度居然是变长的，
+而且例外非常多，没有明显的规律可循。一条机器指令从单个字节到十几个字节不
+等，而且根本不与字 (word) 对齐。连 op code 都是从一个字节到三个字节不
+等的，更不用说寻址模式和操作数长度了。这给机器指令译码器的设计与测试带来
+了很大的困难。
+
+由于 IDU 支持的指令数目众多，必须要找到一种自动化的方法能构造出 IDU 的实现，
+同时也必须找到一种自动化的方法对 IDU 进行彻底的测试。
+
+=head2 准备工作
+
+于是我从一开始就考虑让我的程序直接去“阅读” Intel 的机器码的码表文档，然后
+生成对应的模式 AST，并将之转换为状态机，最后生成 Verilog HDL 描述。整个过
+程完全自动化，无需人的干预。用这种方法得到的状态机是与具体的实现语言无关的，
+所以不仅可用于生成 Verilog 描述，也能生成 C/C++/Perl 程序。
+
+为了理解 IA-32 的指令码表，开始的几周我一直在研读 Intel 的
+"IA-32 Intel  ArchitectureSoftware Developer’s Manual".
+此外，我还精读了英文版的"Computer Organization"，NASM 的帮助，还有 MASM
+方面的的基础知识…… 即便如此，我还是经过很多天的冥思苦想才最终搞清楚
+了 Intel 文档中的几章的内容。本项目的一个重要合作者仲伟祥也花费了大量的时间
+“苦读”这些材料。
+
+我们使用的 IA-32 指令格式的码表来自
+"IA-32 Intel  ArchitectureSoftware Developer’s Manual" 第二卷中的 
+Appendix B.
+
+在软件技术上，我还学习 Verilog HDL 语言，神奇的 Perl Template Toolkit，
+以及 ModelSim SE 仿真系统的高级特性。
+
+=head2 自动生成 IDU
+
+具体说来，即让我的 perl 程序自己读 Intel 的文档，然后输出译码器的实现，
+可以是 perl 版本的，也可以是硬件描述语言的版本（比如 Verilog HDL）。 	
+基本过程是解析指令模式，生成模式匹配的抽象语法树（AST），再通过对 AST 
+的遍历（层次遍历哦）生成状态机模型（有穷自动机），最后通过输出代码的模
+板文件产生最终的译码器实现。
+
+这是典型的“写程序的程序”。由于状态机模型是与输出的实现语言无关的，因此
+提供 Perl 代码的模板就产生 Perl 版本的译码器程序，提供 Verilog 代码
+的模型就产生 Verilog 版本的译码器描述，C/C++ 还有 Java 还有 VHDL 都
+依此类推。
+
+这意味着一旦我们得到了一种语言下的译码器实现，就可以轻而易举地获得其他
+语言的实现。要做的只是提供这种语言下的模板文件就可以了。而模板文件都是
+大同小异，代码很少的。
+
+呵，技术上的路径表明，我们最后得到的可能远远多于我们最初所期望的。多个版
+本的译码器耶，各种各样的语言哦！从 Perl 到 Verilog，从 C/C++ 到 VHDL……
+神不神奇啊？ 它们都是多么不同的语言啊。它们之所以可以共享一棵 AST 就在于
+“状态机”这种东西的通用性。
+
+=head3 关于状态机
+
+记得“数字逻辑电路”课程中接触到的“状态机”么？就是那种东西。我们在当时用
+状态机构造“二进制序列检测器”的？ 状态图？ 你可能还不知道它有多么强大、多
+么通用呢！在编译理论中我们还会以更近的距离接近它。它对译码器、编译器或者
+类似的识别模式的程序和硬件设计而言简直是无价之宝！非常优美，非常抽象，非
+常简洁。更重要的是:非常实用。
+
+熟练掌握状态机模型却仍需要大量的实践和思考。我们在写处理输入的 Perl 程序
+时很难不去用它。只不过大多数时候我们用到了，却并不知觉。
+
+=head3 生成 Perl IDU
+
+=head3 生成 C IDU
+
+=head3 生成 Verilog IDU
+
+=head2 自动测试 IDU
+
+为了对我们的指令译码器进行应用测试，我自然需要根据机器指令的码表，编写一个能
+随机生成合法的 IA-32 机器码的Perl 程序。码表仍然来自 Intel 手册 2B 卷的
+Appendix B。我已用一些第三方的反汇编器对我的 Perl 脚本生成的 x86 机器指令
+进行了测试。
+
+=head3 SMOKE 技术
+
+我们的 IDU 项目测试台能够生成完美的 HTML 测试报表。该项技术称之为 SMOKE.
+我曾经兴奋地在 QQ 中写道：
+
+    smoke, smoke, i'd love to smoke ... ah, no smoking please! :=)
+
+以图形化的方式显示测试集的结果的技术有专门一个术语，那就是 SMOKE，正好是抽烟的意思。
+在输出的 smoke.html 中看到的是一个巨大的方块矩阵。其中浅绿色的方块表示顺利通过的测试，
+红色方块表示失败的测试。而深绿色方块表示未通过的 TODO 测试，浅黄色表示意外通过的
+TODO 测试。另外值得一提的是，如果你把鼠标悬停在任何一个彩色方块的上方，持续几秒钟，会
+出现一个黄色的小帮助，告诉你相关的调试信息。爽得要死。
+
+生成报表只用了一个命令:
+
+    > nmake smoke
+
+该命令在屏幕上的输出为:
+
+    Microsoft (R) 程序维护实用工具 7.10.3077 版
+    版权所有 (C) Microsoft Corporation。保留所有权利。
+            cd t
+            nmake /nologo
+            cd..
+            perl util\run-smoke.pl . smoke.html
+    Sorry, concurrency not supported on your platform
+    t\Idu.t
+    t\bin2asm.t
+    t\bin2hex.exe.t
+    #     Failed test (t\bin2hex.exe.t at line 83)
+    #     Failed test (t\bin2hex.exe.t at line 84)
+    Use of uninitialized value in pattern match (m//) at t\bin2hex.exe.t line 101.
+    Use of uninitialized value in pattern match (m//) at t\bin2hex.exe.t line 107.
+    #     Failed test (t\bin2hex.exe.t at line 132)
+    #          got: undef
+    #     expected: 'DEC'
+    ...
+    #     Failed test (t\bin2hex.exe.t at line 132)
+    #          got: undef
+    #     expected: 'INC'
+    # Looks like you failed 93 tests of 24753.
+    t\bin2hex.t
+    t\catln.t
+    t\exe2hex.t
+    t\hex2bin.t
+    t\main.cod.t
+    t\my_perl.exe.t
+    t\optest.t
+    t\pat_tree.t
+    t\state_mac.t
+    *** All done! Smoke matrix saved as 'smoke.html'.
+
+那些方块矩阵图就称之为 Smoke Matrix —— 	酷毙了！ 
+
+=head2 意外的收获
+
+
+
+=head1 IEU 的开发
+
+=head1 COPYRIGHT
+
+Copyright (c) 2005 Agent Zhang
+
+This document is free. You can modify and/or redistribute it under the 
+same terms as Perl.

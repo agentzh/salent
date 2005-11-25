@@ -52,7 +52,7 @@
 #: Perl implementation of IA-32 instruction decoding unit
 #: Salent v[% version %]
 #: Copyright (c) [% year %] Agent Zhang
-#: 2005-07-24 [% last_mod %]
+#: 2005-07-24
 
 package Idu;
 

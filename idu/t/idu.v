@@ -2,7 +2,7 @@
 //: Verilog implemetation of Instruction Decoding Unit (IDU)
 //: Salent v0.13
 //: Copyright (c) 2005 Agent Zhang
-//: 2005-09-11 2005-11-24
+//: 2005-09-11
 
 module idu (strb, rw, addr, mfc, data,
             ins, mod, rm, scale, index_reg, base_reg,

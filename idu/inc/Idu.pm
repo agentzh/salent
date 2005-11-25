@@ -2,7 +2,7 @@
 #: Perl implementation of IA-32 instruction decoding unit
 #: Salent v0.13
 #: Copyright (c) 2005 Agent Zhang
-#: 2005-07-24 2005-11-24
+#: 2005-07-24
 
 package Idu;
 

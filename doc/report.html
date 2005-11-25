@@ -1,0 +1,616 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<meta HTTP-EQUIV="content-type" CONTENT="text/html; charset=gb2312">
+<head>
+<title>report - Computer Organization Design Report for Salent</title>
+<link rel="stylesheet" href="image/Active.css" type="text/css" />
+<link rev="made" href="mailto:" />
+</head>
+
+<body>
+<table border="0" width="100%" cellspacing="0" cellpadding="3">
+<tr><td class="block" valign="middle">
+<big><strong><span class="block">&nbsp;report - Computer Organization Design Report for Salent</span></strong></big>
+</td></tr>
+</table>
+
+<p><a name="__index__"></a></p>
+<!-- INDEX BEGIN -->
+
+<ul>
+
+	<li><a href="#NAME">NAME</a></li>
+	<li><a href="#AUTHOR">AUTHOR</a></li>
+	<li><a href="#VERSION">VERSION</a></li>
+	<li><a href="#DESCRIPTION">DESCRIPTION</a></li>
+	<li><a href="#FAQ">FAQ</a></li>
+	<ul>
+
+		<li><a href="#baceceaa20Salent20cfeec4bfa3bf">何为 Salent 项目？</a></li>
+		<li><a href="#ceaabacec3fbceaa20Salent20a3bf">为何名为 Salent ？</a></li>
+		<li><a href="#Salent20cfeec4bfb5c4bfaab7a2b6afbbfacac7cab2c3b4a3bf">Salent 项目的开发动机是什么？</a></li>
+		<li><a href="#Salent20cfeec4bfc4dcb4f8b8f8ced2c3c7cab2c3b4a3bf">Salent 项目能带给我们什么？</a></li>
+		<li><a href="#c8e7bacebbf1b5c320Salenta3bf">如何获得 Salent？</a></li>
+		<li><a href="#Salent20cab9d3c3c1cbbaced6d6d3efd1d4a3bf">Salent 使用了何种语言？</a></li>
+		<li><a href="#ceaacab2c3b4b2bbb2c9d3c3bdadcbd5b4f3d1a7bdcccadab5c420VHDL20d3efd1d4a3bf">为什么不采用江苏大学教授的 VHDL 语言？</a></li>
+		<li><a href="#Salent20cfeec4bfc9e8bcc6b5c4b4a6c0edc6f7bedfcce5d6a7b3d6c4c4d0a920x383620d6b8c1eebcafa3bf">Salent 项目设计的处理器具体支持哪些 x86 指令集？</a></li>
+		<li><a href="#Salent20cfeec4bfd3c9c4c4bcb8b2bfb7d6d7e9b3c9a3bf">Salent 项目由哪几部分组成？</a></li>
+		<li><a href="#c4e3d4dabfaab7a2b9fdb3ccd6d0b5c3b5bdc1cbc4c4d0a9c8cbb5c4b0efd6faa3bf">你在开发过程中得到了哪些人的帮助？</a></li>
+		<li><a href="#Salent20c4bfc7b0b5c4bdf8d5b9c8e7bacea3bf">Salent 目前的进展如何？</a></li>
+		<li><a href="#d5e2c6aacec4b5b5cac7c8e7baceb2fac9fab5c4a3bf">这篇文档是如何产生的？</a></li>
+	</ul>
+
+	<li><a href="#cfeec4bfc9e8bcc6c4bfb1ea">项目设计目标</a></li>
+	<li><a href="#RAM20b5c4bfaab7a2">RAM 的开发</a></li>
+	<li><a href="#ALU20b5c4bfaab7a2">ALU 的开发</a></li>
+	<li><a href="#MMU20b5c4bfaab7a2">MMU 的开发</a></li>
+	<li><a href="#IDU20b5c4bfaab7a2">IDU 的开发</a></li>
+	<ul>
+
+		<li><a href="#d3f6b5bdb5c4c0a7c4d1">遇到的困难</a></li>
+		<li><a href="#d7bcb1b8b9a4d7f7">准备工作</a></li>
+		<li><a href="#d7d4b6afc9fab3c920IDU">自动生成 IDU</a></li>
+		<ul>
+
+			<li><a href="#c9fab3c920Perl20IDU">生成 Perl IDU</a></li>
+			<li><a href="#c9fab3c920C20IDU">生成 C IDU</a></li>
+			<li><a href="#c9fab3c920Verilog20IDU">生成 Verilog IDU</a></li>
+		</ul>
+
+		<li><a href="#d7d4b6afb2e2cad420IDU">自动测试 IDU</a></li>
+		<ul>
+
+			<li><a href="#SMOKE20bcbccaf5">SMOKE 技术</a></li>
+		</ul>
+
+	</ul>
+
+	<li><a href="#IEU20b5c4bfaab7a2">IEU 的开发</a></li>
+	<li><a href="#Extension20of20Salent">Extension of Salent</a></li>
+	<ul>
+
+		<li><a href="#Salent20Virtual20Machine2028SVM29">Salent Virtual Machine (SVM)</a></li>
+	</ul>
+
+	<li><a href="#BIBLIOGRAPHY">BIBLIOGRAPHY</a></li>
+	<li><a href="#COPYRIGHT">COPYRIGHT</a></li>
+</ul>
+<!-- INDEX END -->
+
+<hr />
+<p>
+</p>
+<h1><a name="NAME">NAME</a></h1>
+<p>report - Computer Organization Design Report for Salent</p>
+<p>
+</p>
+<hr />
+<h1><a name="AUTHOR">AUTHOR</a></h1>
+<p>Agent Zhang (章亦春) &lt;<a href="mailto:agent2002@126.com">agent2002@126.com</a>&gt;</p>
+<p>3030602110 计算机0304班</p>
+<p>计算机科学与通信工程学院  江苏大学</p>
+<p>
+</p>
+<hr />
+<h1><a name="VERSION">VERSION</a></h1>
+<p>本文档描述了于 2005 年 10 月底发布的 Salent 0.08</p>
+<p>
+</p>
+<hr />
+<h1><a name="DESCRIPTION">DESCRIPTION</a></h1>
+<p>本次计算机组成课程设计的基本方向是计算机系统的硬件设计。在征得指导老
+师的同意之后，我将自己的 Salent 项目作为本设计的题目。本报告概括地
+介绍了Salent 项目的主要方面，描述了项目基本的开发过程。</p>
+<p>
+</p>
+<hr />
+<h1><a name="FAQ">FAQ</a></h1>
+<p>以下列举了有关 Salent 项目的常见问题及其解答。如果你的问题未出
+现在该列表中，或者对某个问题有更好的答案，请告诉我。</p>
+<p>
+</p>
+<h2><a name="baceceaa20Salent20cfeec4bfa3bf">何为 Salent 项目？</a></h2>
+<p>Salent 项目是章亦春为
+适应学校计算机组成课程设计的要求开发的支持
+x86 常用指令集的计算机硬件系统，简单地说，就是自己设计一台电子计算机。
+该项目自 2005 年 6 月底启动以来，开发工作一直延续至今。</p>
+<p>
+</p>
+<h2><a name="ceaabacec3fbceaa20Salent20a3bf">为何名为 Salent ？</a></h2>
+<p>Salent 是本项目最初的两个开发人员仲伟祥 (sal) 和章亦春 (agent) 的
+英文名的字母组合： SAL-ENT。</p>
+<p>
+</p>
+<h2><a name="Salent20cfeec4bfb5c4bfaab7a2b6afbbfacac7cab2c3b4a3bf">Salent 项目的开发动机是什么？</a></h2>
+<p>开发该项目的初衷是为了通过动手实作一台 32 位的计算机系统，加深对
+教科书上学到的计算机组成方面的知识、原理和技术的理解，同时也为了
+探索用软件方式自动化硬件设计与测试过程的具体途径，熟悉硬件设计的
+细节。</p>
+<p>
+</p>
+<h2><a name="Salent20cfeec4bfc4dcb4f8b8f8ced2c3c7cab2c3b4a3bf">Salent 项目能带给我们什么？</a></h2>
+<p>Salent 项目的开发过程充满了创新与活力。我有意识地效仿唐宗汉 (Autrijus
+Tang) 的 Pugs 项目``optimize for fun''的做法，以不断向四围发散的方
+式领导整个项目的开发。因此该项目的创新至上，乐趣至上的文化是最值得我
+们每一个人借鉴的。这种文化为 Salent 带来了极高的开发效率。</p>
+<p>Salent 项目使用了许多有趣的新技术来辅助硬件系统的开发，这是同时值得硬
+件和软件开发人员借鉴的。</p>
+<p>比如我使用 Perl Template Toolkit 这种模板系统来自动生成所有的
+东西，这其中包括 Verilog HDL 代码，自动化测试代码，ModelSim 仿真
+脚本，项目文档，甚至 Makefile 文件。模板驱动的代码生成技术实现
+了“写程序的程序”，虽然它远未实现让计算机为我们写所有的“程序”，但是
+我们需要编写的代码确实大大减少了。</p>
+<p>另一项有趣的技术是用软件测试的方法来对硬件设计进行自动化测试，比如
+回归测试、覆盖测试甚至应力测试。让自己的测试台操纵 ModelSim 仿真器
+是硬件测试自动化的核心，我们总结出了一种比较高效和简单的解决方案。</p>
+<p>Salent 带动了众多其他的项目，比如我的第一批贡献到 CPAN 的模块，
+ModelSim::List, Template::Plugin::POSIX,
+Template::Plugin::Perl, Template::Ast,
+和 Win32::Wildcard。另外，我的流程图生成器 Flowviz，Makefile
+构造流程生成器 Makefile::GraphViz 及相关联的 Makefile::Parser
+也是为了适应 Salent 项目的文档工作而开发的。</p>
+<p>我们为 Salent IDU 的测试台开发的 x86 指令随机生成器是如此完美，如此
+通用，以至于它可以用于任何 x86 反汇编器项目的测试。事实上，我的测试台
+已经捕捉到了著名的 PEDasm 的众多 bug，即便像 NASM 这样主流的软件，
+我们也捕捉到了其自带的反汇编器 Ndisasm 的一个很微妙的 bug. 我记得这
+个 bug 与 FPU 指令集中的一条指令的操作数顺序有关。目前我尚未就此问题
+通知 NASM 团队。</p>
+<p>还有一个很有趣的“副产品”十分有趣，那就是我们轻松得到的纯 Perl 版本的
+x86 反汇编器实现。这个东东完全可以独立成一个 Perl 模块，贡献到 CPAN
+网络。我们可以利用这个 Perl 实现做许多有趣的事情。:=)</p>
+<p>
+</p>
+<h2><a name="c8e7bacebbf1b5c320Salenta3bf">如何获得 Salent？</a></h2>
+<p>Salent 项目已处于现代的版本控制系统 Subversion (SVN) 的管理之下，因此
+你总是可以从 Salent 位于德国的 SVN 中央服务器</p>
+<p><a href="https://svn.berlios.de/svnroot/repos/salent">https://svn.berlios.de/svnroot/repos/salent</a></p>
+<p>获得。该项目允许匿名下载。嗯，或许你需要一个 SVN 客户程序来下载整个项目，
+而不是从 Web 浏览器中一个文件一个文件地复制。</p>
+<p>对于 Windows 用户而言，TortoiseSVN 是很值得一试的。如果你希望实现离线
+操作，SVK 则是非常不错的选择。</p>
+<p>
+</p>
+<h2><a name="Salent20cab9d3c3c1cbbaced6d6d3efd1d4a3bf">Salent 使用了何种语言？</a></h2>
+<p>Salent 项目的最终产品是硬件设计，当然会使用到硬件描述语言。我经
+过权衡，最终选择了 Verilog HDL。不过，值得一提的是，在设计与测试
+环节中，我还广泛使用了众多软件编程语言以辅助硬件开发。这其中包括
+Perl5，C/C++，Tcl，以及 MASM。</p>
+<p>
+</p>
+<h2><a name="ceaacab2c3b4b2bbb2c9d3c3bdadcbd5b4f3d1a7bdcccadab5c420VHDL20d3efd1d4a3bf">为什么不采用江苏大学教授的 VHDL 语言？</a></h2>
+<p>说实话，从学校教授 VHDL 的第一天起，我就对它没有什么好感。即便是很简
+单的设计，用 VHDL 描述起来也显得相当笨拙。在学习 Verilog HDL 之前
+我在 Google 中稍稍搜索了一下“Verilog vs. VHDL”，结果看到 Verilog
+占了压倒性优势（至少是在美国）。Salent 项目走到今天，事实也已经证明我
+当初的选择是明智的。</p>
+<p>
+</p>
+<h2><a name="Salent20cfeec4bfc9e8bcc6b5c4b4a6c0edc6f7bedfcce5d6a7b3d6c4c4d0a920x383620d6b8c1eebcafa3bf">Salent 项目设计的处理器具体支持哪些 x86 指令集？</a></h2>
+<p>按照计划，Salent 芯片将支持整个“非 64 位通用目的指令集”和“FPU 浮点
+运算指令集”。至本文档编写之时，Salent 的指令译码器（IDU）已能正确
+解译上述两个指令集的所有指令了。</p>
+<p>
+</p>
+<h2><a name="Salent20cfeec4bfd3c9c4c4bcb8b2bfb7d6d7e9b3c9a3bf">Salent 项目由哪几部分组成？</a></h2>
+<p>Salent 由以下模块组成：</p>
+<ul>
+<li></li>
+随机访问存储器 (RAM)
+<p></p>
+<li></li>
+逻辑算术单元 (ALU)
+<p></p>
+<li></li>
+存储管理器 (MMU)
+<p></p>
+<li></li>
+指令译码单元 (IDU)
+<p></p>
+<li></li>
+指令执行单元 (IEU)
+<p></p>
+<li></li>
+Salent 顶层 (Salent)
+<p></p></ul>
+<p>
+</p>
+<h2><a name="c4e3d4dabfaab7a2b9fdb3ccd6d0b5c3b5bdc1cbc4c4d0a9c8cbb5c4b0efd6faa3bf">你在开发过程中得到了哪些人的帮助？</a></h2>
+<p>Woot! 我在开发过程中得到了许多人的帮助。下面只能择要录之：</p>
+<ul>
+<li></li>
+我们班的仲伟祥同学为 Salent 项目编写了许多代码，其中包括 RAM 
+应力测试框架的上
+层建筑， RAM 的 Makefile 系统以及 IDU 测试台的两个后端 (backend)。
+<p></p>
+<li></li>
+万珣新同学用 Verilog 编写了 MMU，并使用 ModelSim SE 
+对其进行了简单的仿真测试。
+<p></p>
+<li></li>
+张星同学协助我完成了 IDU 测试台的一个关键构件，x86 
+反汇编器的开发与测试工作。
+<p></p>
+<li></li>
+我的室友吴海周同学不厌其烦地在 QQ 上和我讨论有关 ALU 和 PSW 
+的设计上的问题。
+<p></p>
+<li></li>
+我的指导老师在 IDU 的 Verilog 
+模板的开发过程中针对我遇到的一些困难提出了不少有
+益的建议。
+<p></p></ul>
+<p>另外檀宝权和代晓珂同学虽然没有直接参与到项目开发中来，但他们都曾与我就 
+Salent 中
+的一些设计上的问题交换过看法。当然了，还有 QQ 
+上的许多好朋友，我很感激他们在我
+沉醉于 Salent 
+开发的两个月间耐心地倾听我的“技术讲解”。这些讲解不仅在当时就帮助我
+自己澄清了许多问题，理清了思路，而且现在还成为了项目文档（包括这篇文档
+）重要的素材
+来源。</p>
+<p>
+</p>
+<h2><a name="Salent20c4bfc7b0b5c4bdf8d5b9c8e7bacea3bf">Salent 目前的进展如何？</a></h2>
+<p>目前，逻辑算术单元 ALU 和随机访问存储器 RAM 已经完成设计与测试。指令
+译码器 IDU 已完成状态机和基本算法的测试（通过 IDU 的 Perl 和 C 版本
+的纯软件实现），并且已经得到了 Verilog HDL 的实现代码。但是 Verilog
+HDL 版本的实现尚有待于进行测试。内存管理单元 MMU 的 Verilog HDL 实现
+由万珣新编写，他已用 ModelSim SE 对他的设计进行了手工测试。</p>
+<p>作为整台模型机之核心的指令执行单元（IEU）目前只完成了一些初步的准备，
+开发
+工作尚未正式启动。</p>
+<p>
+</p>
+<h2><a name="d5e2c6aacec4b5b5cac7c8e7baceb2fac9fab5c4a3bf">这篇文档是如何产生的？</a></h2>
+<p>这篇文档的主体使用 Perl 的 POD (Plain Old Document) 
+格式制作的。你现在看到
+的是 Pod::Html 模板自动生成的 HTML 版本（使用 ActivePerl 5.8.7 的
+级联样式表文件 Active.css 进行渲染）。</p>
+<p>文档的许多素材来自我最近几个月的 QQ 聊天记录（通过使用我编写的 Qooqle 
+搜索引擎和
+Mozilla 浏览器进行汇总）。还有不少内容来自 Salent 
+项目在开发过程中留下来的日志文
+件（分散在各个子目录中的 Changes 文件）。</p>
+<p>
+</p>
+<hr />
+<h1><a name="cfeec4bfc9e8bcc6c4bfb1ea">项目设计目标</a></h1>
+<p>我们需要做的并不仅仅是一台模型机。那是什么？ 我们要做的是一台与 IA-32
+指令集实现二进制兼容的可以直接跑 C/C++ 程序的“计算机系统” 	
+怎么样，够疯狂的吧？二进制兼容耶，而不仅仅是汇编语言级别上的功能兼容。</p>
+<p>我们的目标是让高级语言的编译器生成的 .exe 文件能在咱们的模型上跑起来。
+为此我们必须支持 IA-32 指令集相当大的一个常用子集。当然了，如果能让 Perl
+和 Java 也跑起来，那就更好了。不过这还有很长的路要走。</p>
+<p>这台机算机除了 CPU 之外，还有一些外部设备，比如 RAM、I/O 等等。</p>
+<p>
+</p>
+<hr />
+<h1><a name="RAM20b5c4bfaab7a2">RAM 的开发</a></h1>
+<p>32位的 RAM 已经设计完成，使用 Verilog HDL，而且用基于 Perl Template
+Toolkit 的自动化测试框架对其进行了比较彻底的测试。</p>
+<p>
+</p>
+<hr />
+<h1><a name="ALU20b5c4bfaab7a2">ALU 的开发</a></h1>
+<p>我们的 ALU 支持以下操作:</p>
+<pre>
+    ADD ADC SUB SBB MUL IMUL DIV IDIV
+    AND OR XOR
+    SHL SHR SAL SAR
+    ROL ROR RCL RCR
+    NOT NEG NOP</pre>
+<p>我们的目标就是提供 Pentium4 所提供的非64位通用目的的 ALU 操作 	
+包括有/无符号的加减乘除、算术/逻辑移位、带/不带 CF 的位旋转 (Rotate) 
+、按位与/或/非/异或。应该没有什么重要的遗漏，因为我可是对照着 Intel
+文档来做的噢。</p>
+<p>ALU 不是做指令译码器，单纯的 ALU 
+操作没有我们想象的那么多么。
+我们的指令译码器支持 419 条 x86 常用指令。指令执行单元就不可能支持
+那么多机器指令了，除非我能得到更多人的帮助。</p>
+<p>
+</p>
+<hr />
+<h1><a name="MMU20b5c4bfaab7a2">MMU 的开发</a></h1>
+<p>
+</p>
+<hr />
+<h1><a name="IDU20b5c4bfaab7a2">IDU 的开发</a></h1>
+<p>IA-32 指令集还有一种 64 位的扩展模式，名为 IA-32e，对 64 位指令的支持并
+不在我的 TODO 列表中。</p>
+<p>
+</p>
+<h2><a name="d3f6b5bdb5c4c0a7c4d1">遇到的困难</a></h2>
+<p>x86 指令集的机器码格式在开发初期曾让我感到非常头痛，因为指令长度居然是变长的，
+而且例外非常多，没有明显的规律可循。一条机器指令从单个字节到十几个字节不
+等，而且根本不与字 (word) 对齐。连 op code 都是从一个字节到三个字节不
+等的，更不用说寻址模式和操作数长度了。这给机器指令译码器的设计与测试带来
+了很大的困难。</p>
+<p>由于 IDU 支持的指令数目众多，必须要找到一种自动化的方法能构造出 IDU 的实现，
+同时也必须找到一种自动化的方法对 IDU 进行彻底的测试。</p>
+<p>另一问题来自 Intel 的指令码表本身。虽然``IA-32 Intel Architecture Software
+Developer's Manual''中的指令码表的格式已经相当规整，但是却并不是专门为构造指
+令译码器和汇编器而提供的，因此码表中有一些含混的地方，有一些排字错误 (typos)。
+有的问题在解析码表的时候就能捕捉到，比如一些影响到解析的 typo，但有的问题就只能
+在后期模板测试的时候才会浮出水面。</p>
+<p>
+</p>
+<h2><a name="d7bcb1b8b9a4d7f7">准备工作</a></h2>
+<p>于是我从一开始就考虑让我的程序直接去“阅读” Intel 的机器码的码表文档，然后
+生成对应的模式 AST，并将之转换为状态机，最后生成 Verilog HDL 描述。整个过
+程完全自动化，无需人的干预。用这种方法得到的状态机是与具体的实现语言无关的，
+所以不仅可用于生成 Verilog 描述，也能生成 C/C++/Perl 程序。</p>
+<p>为了理解 IA-32 的指令码表，开始的几周我一直在研读 Intel 的
+``IA-32 Intel ArchitectureSoftware Developer's Manual''.
+此外，我还精读了英文版的``Computer Organization''，NASM 的帮助，还有 MASM
+方面的的基础知识…… 即便如此，我还是经过很多天的冥思苦想才最终搞清楚
+了 Intel 文档中的几章的内容。本项目的一个重要合作者仲伟祥也花费了大量的时间
+“苦读”这些材料。</p>
+<p>我们使用的 IA-32 指令格式的码表来自
+``IA-32 Intel Architecture Software Developer's Manual'' 第二卷中的 
+Appendix B.</p>
+<p>在软件技术上，我还学习 Verilog HDL 语言，神奇的 Perl Template Toolkit，
+以及 ModelSim SE 仿真系统的高级特性。</p>
+<p>
+</p>
+<h2><a name="d7d4b6afc9fab3c920IDU">自动生成 IDU</a></h2>
+<p>具体说来，即让我的 perl 程序自己读 Intel 的文档，然后输出译码器的实现，
+可以是 perl 版本的，也可以是硬件描述语言的版本（比如 Verilog HDL）。 	
+基本过程是解析指令模式，生成模式匹配的抽象语法树（AST），再通过对 AST 
+的遍历（层次遍历哦）生成状态机模型（有穷自动机），最后通过输出代码的模
+板文件产生最终的译码器实现。</p>
+<p>这是典型的“写程序的程序”。由于状态机模型是与输出的实现语言无关的，因此
+提供 Perl 代码的模板就产生 Perl 版本的译码器程序，提供 Verilog 代码
+的模型就产生 Verilog 版本的译码器描述，C/C++ 还有 Java 还有 VHDL 都
+依此类推。</p>
+<p>这意味着一旦我们得到了一种语言下的译码器实现，就可以轻而易举地获得其他
+语言的实现。要做的只是提供这种语言下的模板文件就可以了。而模板文件都是
+大同小异，代码很少的。</p>
+<p>呵，技术上的路径表明，我们最后得到的可能远远多于我们最初所期望的。多个版
+本的译码器耶，各种各样的语言哦！从 Perl 到 Verilog，从 C/C++ 到 VHDL……
+神不神奇啊？ 它们都是多么不同的语言啊。它们之所以可以共享一棵 AST 就在于
+“状态机”这种东西的通用性。</p>
+<p>我在邀请我们专业的何杉同学为我们的 Salent IDU 提供 Java 实现的模板的
+时候曾经在 QQ 中这样向他解释如何将我们已有的 Perl 实现的模板改写为
+Java 实现的模板：</p>
+<p>``Well, it's quite straightforward. 	The two versions of IDU implementations
+(the Perl one and Java one) will share the same AST, I mean Abstract Semantic
+Tree. The best way to comprehend ASTs is simply reguard it as a complex data 
+structure. Hmm...maybe something like a tree, an array, a hash, or so so...
+To generate the final implementation, an AST is not enough.	The info stored in
+the AST is only concerned with the state machine (or the state graph), hence
+There is nothing specific to the programming language we finally choose.</p>
+<p>``In order to generate the IDU programs automatically, we provide a full-fledged 
+AST and a well defined program template to the computer. The computer will 
+combine the two to generate the final implementation, say, the final program. 
+The key is combining an AST with a program template. So it's another example of
+a program that writes another program.</p>
+<p>``The AST describing the state machine is now ready. What I asked you to do is
+basically to provide a template that depicts the layout of the final Java
+program's source code. The Perl template we've already obtained, the Java
+template you'll write, and even more templates in the future will have a similar
+appearance.	They'll be pretty alike. ''</p>
+<p><strong>关于状态机</strong></p>
+<p>记得“数字逻辑电路”课程中接触到的“状态机”么？就是那种东西。我们在当时用
+状态机构造“二进制序列检测器”的？ 状态图？ 你可能还不知道它有多么强大、多
+么通用呢！在编译理论中我们还会以更近的距离接近它。它对译码器、编译器或者
+类似的识别模式的程序和硬件设计而言简直是无价之宝！非常优美，非常抽象，非
+常简洁。更重要的是:非常实用。</p>
+<p>熟练掌握状态机模型却仍需要大量的实践和思考。我们在写处理输入的 Perl 程序
+时很难不去用它。只不过大多数时候我们用到了，却并不知觉。</p>
+<p>IDU 的状态机规模非常庞大，共有 590 个状态。我不认为用手工的方式能够在可
+以接受的时间之内圆满地完成它。下面是用 Graphviz 自动根据 IDU 状态机的
+XML 描述生成的示意图：</p>
+<pre>
+    <img src="/image/state_mac.png" alt="State Machine">
+</pre><p>为了研究和测试之方便，我还生成了一个只包含了七条指令模式的“袖珍版”状态机：</p>
+<pre>
+    <img src="/image/mini_state_mac.png" alt="Mini State Machine">
+</pre><p>
+</p>
+<h3><a name="c9fab3c920Perl20IDU">生成 Perl IDU</a></h3>
+<p>Perl IDU 是我得到的第一版本的 IDU 实现。它的开发过程完全是测试驱动的
+(test-driven)。在不断地提高 Perl IDU 的测试通过率的过程之中，我也不断
+地修正状态机乃至于指令码表中的错误。而这正是开发 Perl 版本的 IDU 的主要
+目的之一。如果我首先编写 Verilog HDL 的模板，则测试与排错的难度都会大大
+提高。</p>
+<p>
+</p>
+<h3><a name="c9fab3c920C20IDU">生成 C IDU</a></h3>
+<p>在 Perl IDU 通过全部的测试集之后，我们又得到了 C 语言的指令译码器实现。
+C 版本的测试过程相对于 Perl 版本而言就比较麻烦，比较繁琐了。
+我花了不少时间来琢磨如何让我的 C 版本的 IDU 面对非法输入时能够不崩溃。
+我毕竟在使用 C 语言。检查输入记号的合法性是必须的。我的高中同学吴元斌曾在 QQ 
+上问我 C IDU 究竟是怎么个崩溃法，我告诉他是内存非法访问，即什么``该内存不能为 
+read''. 他说这个错误很常见，没必要去修复。我马上对他说，我写代码的目标是“零缺陷”，
+所以哪怕是再简单的程序，我都会尽量进行彻底的测试。这就是我的追求，就像艺术家对完
+美的追求那样。确实，C 的出错处理太难错了，我真怀念 Perl 中强大的文本处理能力。</p>
+<p>当然，必须指出的是，因为有了经过彻底测试的 Perl 版本的实现在手，C 版本的 IDU 
+的开发已经变得容易许多了。</p>
+<p>一开始，我的 C IDU 和我原来的 Perl IDU 共享了绝大部分的测试集，但不是全部。嗯，
+就是机器指令随机生成器驱动的 NASM 应力测试集 (pat_cover). 
+后来，在吴元斌的鼓励下，我又更进一步，让两种语言版本的 IDU 共享全部 100% 的测试集。
+事后我分析了一下，无论从理论还是从技术上这都不成问题，只要我的 C IDU 提供和原来的
+Perl IDU 全部相同的接口 (interface) 就可以了。我不禁要高呼：“封
+装万岁！面向对象万岁！” 实践证明，好的设计往往能自动适应未来变化的需求，呵呵。</p>
+<p>按照这种思路，在这种测试框架下，以后新增加的所有测试都会自动地为两个版本的实现所
+共享！而且，我以为不仅 Perl 与 C 实现可以完全共享测试集，我那两天经
+过思考后认为，像 C#, VB, Java 甚至于像 Verilog HDL 
+这样的硬件描述语言的实现都可以共享同一个测试台！具体做法是
+是通过 COM 接口、Inline::* 模块或者 C 进行语言之间的“过渡”。</p>
+<p>
+</p>
+<h3><a name="c9fab3c920Verilog20IDU">生成 Verilog IDU</a></h3>
+<p>
+</p>
+<h2><a name="d7d4b6afb2e2cad420IDU">自动测试 IDU</a></h2>
+<p>为了对我们的指令译码器进行应用测试，我自然需要根据机器指令的码表，编写一个能
+随机生成合法的 IA-32 机器码的Perl 程序。码表仍然来自 Intel 手册 2B 卷的
+Appendix B, 因此严格覆盖了整个``非64位通用目的指令集”和整个“x87 FPU 浮点
+指令集”。事实上，每次运行生成器，每一种指令模式都会生成至少一条机器指令，而
+每一种寻址方式、每一个可能操作数组合，都有<strong>可能</strong>生成。我已用一些第三方的反汇
+编器对我的 Perl 脚本生成的 x86 机器指令进行了测试。</p>
+<p>一开始，我们只是测试 IDU 译码得到的指令名和指令长度，因为这比较简单（当然了，
+Intel 指令集中众多的“别名”和前缀码 (preffix byte) 是比较难处理的部分）。
+指令名测试虽然简单，但却非常有效，能状态机和 IDU 模板的大部分问题。</p>
+<p>然而，指令名测试毕竟是不全面的，我们无法对一些寻址方式和取数结果进行检验。因
+此，我们又在 IDU 的基础上实现了一个汇编代码的输出后端。只有让 IDU 将译码的
+结果输出为 NASM 汇编代码的形式，我们才能直接将之与 NASM 的反汇编器输出进行
+精确比较。事实上，一个生成汇编代码的后端加上 IDU 指令译码器本身，便构成了一个
+x86 反汇编器。其实，支持如此之大的指令集的 x86 反汇编器本身就已经是一个极端复
+杂的项目了。我们不得不为自己的工作而感到骄傲。</p>
+<p>由于有了如此完美的指令应力测试台，我们的反汇编器的正确性与稳定性毫不亚于 NASM
+自带的反汇编器。事实上，我们的测试台居然捕捉到了 NASM 的 FPU 指令集处理部分的
+一个微妙的 bug. 自动化测试万岁！应力测试万岁！</p>
+<p>
+</p>
+<h3><a name="SMOKE20bcbccaf5">SMOKE 技术</a></h3>
+<p>我们的 IDU 项目测试台能够生成完美的 HTML 测试报表。该项技术称之为 SMOKE.
+我曾经兴奋地在 QQ 中写道：</p>
+<pre>
+    smoke, smoke, i'd love to smoke ... ah, no smoking please! :=)</pre>
+<p>以图形化的方式显示测试集的结果的技术有专门一个术语，那就是 SMOKE，正好是抽烟的意思。
+在输出的 smoke.html 中看到的是一个巨大的方块矩阵。其中浅绿色的方块表示顺利通过的测试，
+红色方块表示失败的测试。而深绿色方块表示未通过的 TODO 测试，浅黄色表示意外通过的
+TODO 测试。另外值得一提的是，如果你把鼠标悬停在任何一个彩色方块的上方，持续几秒
+钟，会出现一个黄色的小帮助，告诉你相关的调试信息。</p>
+<p>生成报表只用了一个命令:</p>
+<pre>
+    nmake smoke</pre>
+<p>该命令在屏幕上的输出为:</p>
+<pre>
+            perl util\run-smoke.pl . smoke.html
+    Sorry, concurrency not supported on your platform
+    t\Idu.t
+    t\bin2asm.t
+    t\bin2hex.exe.t
+    #     Failed test (t\bin2hex.exe.t at line 83)
+    #     Failed test (t\bin2hex.exe.t at line 84)
+    Use of uninitialized value in pattern match (m//) at t\bin2hex.exe.t line 101.
+    Use of uninitialized value in pattern match (m//) at t\bin2hex.exe.t line 107.
+    #     Failed test (t\bin2hex.exe.t at line 132)
+    #          got: undef
+    #     expected: 'DEC'
+    ...
+    #     Failed test (t\bin2hex.exe.t at line 132)
+    #          got: undef
+    #     expected: 'INC'
+    # Looks like you failed 93 tests of 24753.
+    t\bin2hex.t
+    t\catln.t
+    t\exe2hex.t
+    t\hex2bin.t
+    t\main.cod.t
+    t\my_perl.exe.t
+    t\optest.t
+    t\pat_tree.t
+    t\state_mac.t
+    *** All done! Smoke matrix saved as 'smoke.html'.</pre>
+<p>那些方块矩阵图就称之为 Smoke Matrix.</p>
+<p>下面是两个例子：</p>
+<pre>
+    <img src="/image/01smoke.png" alt="smoke.html">
+</pre>
+<br>
+<pre>
+    <img src="/image/02smoke.png" alt="smoke2.html">
+</pre><p>
+</p>
+<hr />
+<h1><a name="IEU20b5c4bfaab7a2">IEU 的开发</a></h1>
+<p>XXX</p>
+<p>
+</p>
+<hr />
+<h1><a name="Extension20of20Salent">Extension of Salent</a></h1>
+<p>Salent 项目是如此丰富多彩，以至于从它出发，我们可以引出许多更为有趣的项目与方向。
+SVM 便是其中最迷人的一个例子。</p>
+<p>
+</p>
+<h2><a name="Salent20Virtual20Machine2028SVM29">Salent Virtual Machine (SVM)</a></h2>
+<p>大三上学期，我开始着手 SVM 虚拟机的构建问题。SVM 与 Salent 既是相互独立的两个项目，
+又是相互关联的两个项目。关键是我们能从 SVM 中得到什么特别的好处。一个完成了“自举”过
+程的 VM 会拥有怎样的优势，会具有怎么的奇异特性呢？我的哥们仲伟祥给了我四个字：“妙不
+可言”。啊，一个能自己运行自己的 VM…… awful...</p>
+<p>我确实已经在脑海中构画出了一个看起来可行的 roadmap。那么，我们从哪里开始呢？噢，从
+MASM 汇编开始。我设想的指令处理流程是：</p>
+<pre>
+    C/C++ code =&gt; [CL.EXE] =&gt; MASM code =&gt; [masm2nasm.pl] =&gt;
+        NASM code =&gt; [sasm.pl] =&gt; x86 machine code =&gt; [SVM]</pre>
+<p>其中，方括号内的是编译器或者解释器，其他是我们希望在 SVM 上运行的指令文件。 SVM 相当
+于一块虚拟的软件 CPU 了。当起点处的 C/C++ code 就是 SVM 的实现代码的时候，整个处理
+流程就形成了一个封闭的回路：</p>
+<pre>
+    SVM in C/C++ =&gt; ... =&gt; [SVM]
+    
+这正是虚拟机的含义呀！“虚拟 CPU”，呵呵。一旦形成封闭回路以后，SVM 的自举过程就宣告完成！</pre>
+<p>我们需要编写一些工具，比如将 MASM 转换为 NASM 的 masm2nasm.pl 的实现。我们在 Salent
+中已经做好的其实是一个将 x86 机器指令转换为 NASM 的反汇编器。此外，sasm.pl 其实就是一
+个针对 SVM 的汇编器。sasm 就是 SVM Assembler. masm2nasm 就是 MASM-to-NASM, SVM
+将 x86 机器指令转换为 NASM 的反汇编器。</p>
+<p>至于“最后的结果能出现在屏幕上吗”这样的问题，唔，我想回答应该是肯定的。只要我们的 SVM 提供
+了 I/O 例程可供调用。就像真实的机器提供 BIOS 调用那样。</p>
+<p>当然，我们远不止要让最后的结果出现在屏幕上，一旦 SVM 完成了自举，我们下一步要考虑的就是为
+SVM 这台虚拟机开发属于它自己的“虚拟操作系统”了！ 	如果能让 Linux 和 Windows 也能在 SVM
+上“跑”起来，那可就是更好了！当然我们距离那个目标可能过于遥远了。</p>
+<p>反汇编器不是 SVM 的一部分。SVM 是一个运行时环境，提供了 x86 机器指令在运行时所需要的硬件环
+境（当然是虚拟的了）。反汇编器与它没多大关系。</p>
+<p>思考 SVM 的一种好的方法就是把它视作硬作 CPU 的一个纯软件替代物。你看，x86 机器指令一般是直
+接运行在 x86 芯片上的，不是么？ 我们的 SVM 就是要提供一块真实的 x86 芯片所提供的所有必要的
+服务与功能。 	使用运行于其上的 x86 指令“感觉”自己好像就是运行在真实的 CPU 上的，但事实上却
+不是，它运行在一个软件上，呵呵。这个软件就是我们的 SVM。x86 指令需要的不就是一个 RAM，一个
+指令译码器 idu，一个指令执行单元(ieu)以及其中的众多寄存器和 PSW 等东东？	而这一切正是我们在
+Salent 项目中一直努力想实现的，只不过那里我们更愿意使用 HDL 硬件描述语言来实现。但在 SVM
+中，我们将用纯的高级编程语言。</p>
+<p>事实上，我们已经有了 ram 和 idu 的纯软件实现了，呵呵。这是 Salent 项目的“副产品”，但却是
+SVM 的核心部件。我已经在 QQ 聊天中请求万珣新给出他的 MMU 的纯软件实现。下面很自然的，我们
+只需要一个 ieu 的纯软件实现，SVM 就基本完成了。当然，为了能使它可以跑 C/C++ 程序，我们还得
+做一些上层建筑，比如 MASM 汇编器。我一直在想，能否利用已有的 MASM 汇编器，这样我们就不必自
+己动手做一个了。汇编器的复杂度相当了得。——呵，最大的困难就是地址分配问题。	还有就是系统调用问
+题。地址分配，或者说指令的重定位，是一个非常头疼的问题。</p>
+<p>
+</p>
+<hr />
+<h1><a name="BIBLIOGRAPHY">BIBLIOGRAPHY</a></h1>
+<ul>
+<li></li>
+IA-32 Intel Architecture Software Developer's Manuals
+<p><a href="http://www.intel.com/design/pentium4/manuals/index_new.htm">http://www.intel.com/design/pentium4/manuals/index_new.htm</a></p>
+<p></p>
+<li></li>
+Network Assembler (NASM) Core Documentation
+<p><a href="http://nasm.sourceforge.net/doc/nasmdoc.pdf">http://nasm.sourceforge.net/doc/nasmdoc.pdf</a></p>
+<p></p>
+<li></li>
+Carl Hamacher, Zvonko Vranesic, and Safwat Zaky, ``Computer Organization, Fifth
+Edition'', McGraw-Hill, 2002.
+<pre>
+    <img src="/image/comp_org.jpg" alt="Computer Organization">
+</pre><p></p>
+<li></li>
+Darren Chamberlain, David Cross, Andy Wardley ``Perl Template Toolkit'',
+First Edition December 2003 
+ISBN: 0-596-00476-1
+<p><a href="http://www.oreilly.com/catalog/perltt/">http://www.oreilly.com/catalog/perltt/</a></p>
+<pre>
+    <img src="/image/perltt.gif" alt="Perl Template Toolkit">
+</pre><p></p>
+<li></li>
+User guide and reference manual for the Template Toolkit
+<p><a href="http://search.cpan.org/~abw/Template-Toolkit-2.14/lib/Template/Manual.pod">http://search.cpan.org/~abw/Template-Toolkit-2.14/lib/Template/Manual.pod</a></p>
+<p></p></ul>
+<p>
+</p>
+<hr />
+<h1><a name="COPYRIGHT">COPYRIGHT</a></h1>
+<p>Copyright (c) 2005 Agent Zhang</p>
+<p>This document is free. You can modify and/or redistribute it under the 
+same terms as Perl.</p>
+<table border="0" width="100%" cellspacing="0" cellpadding="3">
+<tr><td class="block" valign="middle">
+<big><strong><span class="block">&nbsp;report - Computer Organization Design Report for Salent</span></strong></big>
+</td></tr>
+</table>
+
+</body>
+
+</html>

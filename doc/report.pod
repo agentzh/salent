@@ -65,10 +65,10 @@ Salent 项目使用了许多有趣的新技术来辅助硬件系统的开发，这是同时值得硬
 是硬件测试自动化的核心，我们总结出了一种比较高效和简单的解决方案。
 
 Salent 带动了众多其他的项目，比如我的第一批贡献到 CPAN 的模块，
-L<ModelSim::List>, L<Template::Plugin::POSIX>,
-L<Template::Plugin::Perl>, L<Template::Ast>,
-和 L<Win32::Wildcard>。另外，我的流程图生成器 Flowviz，Makefile
-构造流程生成器 L<Makefile::GraphViz> 及相关联的 L<Makefile::Parser>
+ModelSim::List, Template::Plugin::POSIX,
+Template::Plugin::Perl, Template::Ast,
+和 Win32::Wildcard。另外，我的流程图生成器 Flowviz，Makefile
+构造流程生成器 Makefile::GraphViz 及相关联的 Makefile::Parser
 也是为了适应 Salent 项目的文档工作而开发的。
 
 我们为 Salent IDU 的测试台开发的 x86 指令随机生成器是如此完美，如此
@@ -574,14 +574,11 @@ IA-32 Intel Architecture Software Developer's Manuals
 
 L<http://www.intel.com/design/pentium4/manuals/index_new.htm>
 
-=begin html
+=item *
 
-<pre>
-    <img src="image\intel_manual.png"
-    alt="IA-32 Intel Architecture Software Developer's Manuals">
-</pre>
+Network Assembler (NASM) Core Documentation
 
-=end html
+L<http://nasm.sourceforge.net/doc/nasmdoc.pdf>
 
 =item *
 
@@ -595,6 +592,28 @@ Edition", McGraw-Hill, 2002.
 </pre>
 
 =end html
+
+=item *
+
+Darren Chamberlain, David Cross, Andy Wardley "Perl Template Toolkit",
+First Edition December 2003 
+ISBN: 0-596-00476-1
+
+L<http://www.oreilly.com/catalog/perltt/>
+
+=begin html
+
+<pre>
+    <img src="/image/perltt.gif" alt="Perl Template Toolkit">
+</pre>
+
+=end html
+
+=item *
+
+User guide and reference manual for the Template Toolkit
+
+L<http://search.cpan.org/~abw/Template-Toolkit-2.14/lib/Template/Manual.pod>
 
 =back
 

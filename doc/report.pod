@@ -382,6 +382,11 @@ XML 描述生成的示意图：
 
 =head3 关于模板
 
+Salent 项目中使用的模板都是 Perl Template Toolkit 的模块（又称为 TT2
+模板）。
+
+XXX Add something more about TT2 template.
+
 =head3 生成 Perl IDU
 
 Perl IDU 是我得到的第一版本的 IDU 实现。它的开发过程完全是测试驱动的

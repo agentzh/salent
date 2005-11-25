@@ -287,7 +287,7 @@ Developer's Manual"中的指令码表的格式已经相当规整，但是却并不是专门为构造指
 所以不仅可用于生成 Verilog 描述，也能生成 C/C++/Perl 程序。
 
 为了理解 IA-32 的指令码表，开始的几周我一直在研读 Intel 的
-"IA-32 Intel ArchitectureSoftware Developer's Manual".
+"IA-32 Intel Architecture Software Developer's Manual".
 此外，我还精读了英文版的"Computer Organization"，NASM 的帮助，还有 MASM
 方面的的基础知识…… 即便如此，我还是经过很多天的冥思苦想才最终搞清楚
 了 Intel 文档中的几章的内容。本项目的一个重要合作者仲伟祥也花费了大量的时间
@@ -346,7 +346,7 @@ program's source code. The Perl template we've already obtained, the Java
 template you'll write, and even more templates in the future will have a similar
 appearance.	They'll be pretty alike. "
 
-B<关于状态机>
+=head3 关于状态机
 
 记得“数字逻辑电路”课程中接触到的“状态机”么？就是那种东西。我们在当时用
 状态机构造“二进制序列检测器”的？ 状态图？ 你可能还不知道它有多么强大、多
@@ -364,7 +364,7 @@ XML 描述生成的示意图：
 =begin html
 
 <pre>
-    <img src="/image/state_mac.png" alt="State Machine">
+    <img src="image/state_mac.png" alt="State Machine">
 </pre>
 
 =end html
@@ -375,10 +375,12 @@ XML 描述生成的示意图：
 =begin html
 
 <pre>
-    <img src="/image/mini_state_mac.png" alt="Mini State Machine">
+    <img src="image/mini_state_mac.png" alt="Mini State Machine">
 </pre>
 
 =end html
+
+=head3 关于模板
 
 =head3 生成 Perl IDU
 
@@ -495,11 +497,11 @@ TODO 测试。另外值得一提的是，如果你把鼠标悬停在任何一个彩色方块的上方，持续几秒
 =begin html
 
 <pre>
-    <img src="/image/01smoke.png" alt="smoke.html">
+    <img src="image/01smoke.png" alt="smoke.html">
 </pre>
 <br>
 <pre>
-    <img src="/image/02smoke.png" alt="smoke2.html">
+    <img src="image/02smoke.png" alt="smoke2.html">
 </pre>
 
 =end html
@@ -588,7 +590,7 @@ Edition", McGraw-Hill, 2002.
 =begin html
 
 <pre>
-    <img src="/image/comp_org.jpg" alt="Computer Organization">
+    <img src="image/comp_org.jpg" alt="Computer Organization">
 </pre>
 
 =end html
@@ -604,7 +606,7 @@ L<http://www.oreilly.com/catalog/perltt/>
 =begin html
 
 <pre>
-    <img src="/image/perltt.gif" alt="Perl Template Toolkit">
+    <img src="image/perltt.gif" alt="Perl Template Toolkit">
 </pre>
 
 =end html

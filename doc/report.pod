@@ -307,11 +307,14 @@ Appendix B.
 神不神奇啊？ 它们都是多么不同的语言啊。它们之所以可以共享一棵 AST 就在于
 “状态机”这种东西的通用性。
 
-我在邀请我们专业的何杉同学为我们的 Salent IDU 提供 Java 实现的模板的时候曾经在 QQ 中这样向他解释如何将我们已有的 Perl 实现的模板改写为 Java 实现的模板：
+我在邀请我们专业的何杉同学为我们的 Salent IDU 提供 Java 实现的模板的
+时候曾经在 QQ 中这样向他解释如何将我们已有的 Perl 实现的模板改写为
+Java 实现的模板：
 
 "Well, it's quite straightforward. 	The two versions of IDU implementations
 (the Perl one and Java one) will share the same AST, I mean Abstract Semantic
-Tree. The best way to comprehend ASTs is simply reguard it as a complex data structure. Hmm...maybe something like a tree, an array, a hash, or so so...
+Tree. The best way to comprehend ASTs is simply reguard it as a complex data 
+structure. Hmm...maybe something like a tree, an array, a hash, or so so...
 To generate the final implementation, an AST is not enough.	The info stored in
 the AST is only concerned with the state machine (or the state graph), hence
 There is nothing specific to the programming language we finally choose.
@@ -339,6 +342,20 @@ appearance.	They'll be pretty alike. "
 
 熟练掌握状态机模型却仍需要大量的实践和思考。我们在写处理输入的 Perl 程序
 时很难不去用它。只不过大多数时候我们用到了，却并不知觉。
+
+IDU 的状态机规模非常庞大，共有 590 个状态。我不认为用手工的方式能够在可
+以接受的时间之内圆满地完成它。下面是用 Graphviz 自动根据 IDU 状态机的
+XML 描述生成的示意图：
+
+=begin html
+
+<pre>
+    <img src="image/state_mac.png" alt="State Machine">
+</pre>
+
+为了方便起见，这儿有一个
+
+=end html
 
 =head3 生成 Perl IDU
 
@@ -381,10 +398,25 @@ Perl IDU 全部相同的接口 (interface) 就可以了。我不禁要高呼：“封
 
 为了对我们的指令译码器进行应用测试，我自然需要根据机器指令的码表，编写一个能
 随机生成合法的 IA-32 机器码的Perl 程序。码表仍然来自 Intel 手册 2B 卷的
-Appendix B。我已用一些第三方的反汇编器对我的 Perl 脚本生成的 x86 机器指令
-进行了测试。
+Appendix B, 因此严格覆盖了整个"非64位通用目的指令集”和整个“x87 FPU 浮点
+指令集”。事实上，每次运行生成器，每一种指令模式都会生成至少一条机器指令，而
+每一种寻址方式、每一个可能操作数组合，都有B<可能>生成。我已用一些第三方的反汇
+编器对我的 Perl 脚本生成的 x86 机器指令进行了测试。
 
+一开始，我们只是测试 IDU 译码得到的指令名和指令长度，因为这比较简单（当然了，
+Intel 指令集中众多的“别名”和前缀码 (preffix byte) 是比较难处理的部分）。
+指令名测试虽然简单，但却非常有效，能状态机和 IDU 模板的大部分问题。
 
+然而，指令名测试毕竟是不全面的，我们无法对一些寻址方式和取数结果进行检验。因
+此，我们又在 IDU 的基础上实现了一个汇编代码的输出后端。只有让 IDU 将译码的
+结果输出为 NASM 汇编代码的形式，我们才能直接将之与 NASM 的反汇编器输出进行
+精确比较。事实上，一个生成汇编代码的后端加上 IDU 指令译码器本身，便构成了一个
+x86 反汇编器。其实，支持如此之大的指令集的 x86 反汇编器本身就已经是一个极端复
+杂的项目了。我们不得不为自己的工作而感到骄傲。
+
+由于有了如此完美的指令应力测试台，我们的反汇编器的正确性与稳定性毫不亚于 NASM
+自带的反汇编器。事实上，我们的测试台居然捕捉到了 NASM 的 FPU 指令集处理部分的
+一个微妙的 bug. 自动化测试万岁！应力测试万岁！
 
 =head3 SMOKE 技术
 
@@ -439,6 +471,16 @@ TODO 测试。另外值得一提的是，如果你把鼠标悬停在任何一个彩色方块的上方，持续几秒
     *** All done! Smoke matrix saved as 'smoke.html'.
 
 那些方块矩阵图就称之为 Smoke Matrix.
+
+下面是一个例子：
+
+=begin html
+
+<pre>
+    <img src="image/smoke.png" alt="smoke.html">
+</pre>
+
+=end html
 
 =head2 意外的收获
 

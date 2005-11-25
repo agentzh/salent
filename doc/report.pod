@@ -301,6 +301,28 @@ Appendix B.
 Éñ²»ÉñÆæ°¡£¿ ËüÃÇ¶¼ÊÇ¶àÃ´²»Í¬µÄÓïÑÔ°¡¡£ËüÃÇÖ®ËùÒÔ¿ÉÒÔ¹²ÏíÒ»¿Ã AST ¾ÍÔÚÓÚ
 ¡°×´Ì¬»ú¡±ÕâÖÖ¶«Î÷µÄÍ¨ÓÃĞÔ¡£
 
+ÎÒÔÚÑûÇëÎÒÃÇ×¨ÒµµÄºÎÉ¼Í¬Ñ§ÎªÎÒÃÇµÄ Salent IDU Ìá¹© Java ÊµÏÖµÄÄ£°åµÄÊ±ºòÔø¾­ÔÚ QQ ÖĞÕâÑùÏòËû½âÊÍÈçºÎ½«ÎÒÃÇÒÑÓĞµÄ Perl ÊµÏÖµÄÄ£°å¸ÄĞ´Îª Java ÊµÏÖµÄÄ£°å£º
+
+"Well, it's quite straightforward. 	The two versions of IDU implementations
+(the Perl one and Java one) will share the same AST, I mean Abstract Semantic
+Tree. The best way to comprehend ASTs is simply reguard it as a complex data structure. Hmm...maybe something like a tree, an array, a hash, or so so...
+To generate the final implementation, an AST is not enough.	The info stored in
+the AST is only concerned with the state machine (or the state graph), hence
+There is nothing specific to the programming language we finally choose.
+
+"In order to generate the IDU programs automatically, we provide a full-fledged 
+AST and a well defined program template to the computer. The computer will 
+combine the two to generate the final implementation, say, the final program. 
+The key is combining an AST with a program template. So it's another example of
+a program that writes another program.
+
+"The AST describing the state machine is now ready. What I asked you to do is
+basically to provide a template that depicts the layout of the final Java
+program's source code. The Perl template we've already obtained, the Java
+template you'll write, and even more templates in the future will have a similar
+appearance.	They'll be pretty alike. "
+
+
 =head3 ¹ØÓÚ×´Ì¬»ú
 
 ¼ÇµÃ¡°Êı×ÖÂß¼­µçÂ·¡±¿Î³ÌÖĞ½Ó´¥µ½µÄ¡°×´Ì¬»ú¡±Ã´£¿¾ÍÊÇÄÇÖÖ¶«Î÷¡£ÎÒÃÇÔÚµ±Ê±ÓÃ
@@ -313,6 +335,12 @@ Appendix B.
 Ê±ºÜÄÑ²»È¥ÓÃËü¡£Ö»²»¹ı´ó¶àÊıÊ±ºòÎÒÃÇÓÃµ½ÁË£¬È´²¢²»Öª¾õ¡£
 
 =head3 Éú³É Perl IDU
+
+Perl IDU ÊÇÎÒµÃµ½µÄµÚÒ»°æ±¾µÄ IDU ÊµÏÖ¡£ËüµÄ¿ª·¢¹ı³ÌÍêÈ«ÊÇ²âÊÔÇı¶¯µÄ
+(test-driven)¡£ÔÚ²»¶ÏµØÌá¸ß Perl IDU µÄ²âÊÔÍ¨¹ıÂÊµÄ¹ı³ÌÖ®ÖĞ£¬ÎÒÒ²²»¶Ï
+µØĞŞÕı×´Ì¬»úÄËÖÁÓÚÖ¸ÁîÂë±íÖĞµÄ´íÎó¡£¶øÕâÕıÊÇ¿ª·¢ Perl °æ±¾µÄ IDU µÄÖ÷Òª
+Ä¿µÄÖ®Ò»¡£Èç¹ûÎÒÊ×ÏÈ±àĞ´ Verilog HDL µÄÄ£°å£¬Ôò²âÊÔÓëÅÅ´íµÄÄÑ¶È¶¼»á´ó´ó
+Ìá¸ß¡£
 
 =head3 Éú³É C IDU
 
@@ -335,8 +363,8 @@ Appendix B¡£ÎÒÒÑÓÃÒ»Ğ©µÚÈı·½µÄ·´»ã±àÆ÷¶ÔÎÒµÄ Perl ½Å±¾Éú³ÉµÄ x86 »úÆ÷Ö¸Áî
 ÒÔÍ¼ĞÎ»¯µÄ·½Ê½ÏÔÊ¾²âÊÔ¼¯µÄ½á¹ûµÄ¼¼ÊõÓĞ×¨ÃÅÒ»¸öÊõÓï£¬ÄÇ¾ÍÊÇ SMOKE£¬ÕıºÃÊÇ³éÑÌµÄÒâË¼¡£
 ÔÚÊä³öµÄ smoke.html ÖĞ¿´µ½µÄÊÇÒ»¸ö¾Ş´óµÄ·½¿é¾ØÕó¡£ÆäÖĞÇ³ÂÌÉ«µÄ·½¿é±íÊ¾Ë³ÀûÍ¨¹ıµÄ²âÊÔ£¬
 ºìÉ«·½¿é±íÊ¾Ê§°ÜµÄ²âÊÔ¡£¶øÉîÂÌÉ«·½¿é±íÊ¾Î´Í¨¹ıµÄ TODO ²âÊÔ£¬Ç³»ÆÉ«±íÊ¾ÒâÍâÍ¨¹ıµÄ
-TODO ²âÊÔ¡£ÁíÍâÖµµÃÒ»ÌáµÄÊÇ£¬Èç¹ûÄã°ÑÊó±êĞüÍ£ÔÚÈÎºÎÒ»¸ö²ÊÉ«·½¿éµÄÉÏ·½£¬³ÖĞø¼¸ÃëÖÓ£¬»á
-³öÏÖÒ»¸ö»ÆÉ«µÄĞ¡°ïÖú£¬¸æËßÄãÏà¹ØµÄµ÷ÊÔĞÅÏ¢¡£Ë¬µÃÒªËÀ¡£
+TODO ²âÊÔ¡£ÁíÍâÖµµÃÒ»ÌáµÄÊÇ£¬Èç¹ûÄã°ÑÊó±êĞüÍ£ÔÚÈÎºÎÒ»¸ö²ÊÉ«·½¿éµÄÉÏ·½£¬³ÖĞø¼¸Ãë
+ÖÓ£¬»á³öÏÖÒ»¸ö»ÆÉ«µÄĞ¡°ïÖú£¬¸æËßÄãÏà¹ØµÄµ÷ÊÔĞÅÏ¢¡£
 
 Éú³É±¨±íÖ»ÓÃÁËÒ»¸öÃüÁî:
 
@@ -377,7 +405,7 @@ TODO ²âÊÔ¡£ÁíÍâÖµµÃÒ»ÌáµÄÊÇ£¬Èç¹ûÄã°ÑÊó±êĞüÍ£ÔÚÈÎºÎÒ»¸ö²ÊÉ«·½¿éµÄÉÏ·½£¬³ÖĞø¼¸ÃëÖ
     t\state_mac.t
     *** All done! Smoke matrix saved as 'smoke.html'.
 
-ÄÇĞ©·½¿é¾ØÕóÍ¼¾Í³ÆÖ®Îª Smoke Matrix ¡ª¡ª 	¿á±ĞÁË£¡ 
+ÄÇĞ©·½¿é¾ØÕóÍ¼¾Í³ÆÖ®Îª Smoke Matrix.
 
 =head2 ÒâÍâµÄÊÕ»ñ
 

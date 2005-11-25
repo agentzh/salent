@@ -12,7 +12,7 @@ Agent Zhang (章亦春) E<lt>agent2002@126.comE<gt>
 
 =head1 VERSION
 
-本文档描述了于 2005 年 9 月发布的 Salent 0.08
+本文档描述了于 2005 年 10 月底发布的 Salent 0.08
 
 =head1 DESCRIPTION
 
@@ -27,13 +27,14 @@ Agent Zhang (章亦春) E<lt>agent2002@126.comE<gt>
 
 =head2 何为 Salent 项目？
 
-Salent 项目是章亦春为适应学校计算机组成课程设计的要求开发的支持
+Salent 项目是章亦春为
+适应学校计算机组成课程设计的要求开发的支持
 x86 常用指令集的计算机硬件系统，简单地说，就是自己设计一台电子计算机。
 该项目自 2005 年 6 月底启动以来，开发工作一直延续至今。
 
 =head2 为何名为 Salent ？
 
-Salent 是本项目最初的两个开发人员仲伟祥(sal)和章亦春(agent)的
+Salent 是本项目最初的两个开发人员仲伟祥 (sal) 和章亦春 (agent) 的
 英文名的字母组合： SAL-ENT。
 
 =head2 Salent 项目的开发动机是什么？
@@ -80,6 +81,19 @@ L<Template::Plugin::Perl>, L<Template::Ast>,
 还有一个很有趣的“副产品”十分有趣，那就是我们轻松得到的纯 Perl 版本的
 x86 反汇编器实现。这个东东完全可以独立成一个 Perl 模块，贡献到 CPAN
 网络。我们可以利用这个 Perl 实现做许多有趣的事情。:=)
+
+=head2 如何获得 Salent？
+
+Salent 项目已处于现代的版本控制系统 Subversion (SVN) 的管理之下，因此
+你总是可以从 Salent 位于德国的 SVN 中央服务器
+
+L<https://svn.berlios.de/svnroot/repos/salent>
+
+获得。该项目允许匿名下载。嗯，或许你需要一个 SVN 客户程序来下载整个项目，
+而不是从 Web 浏览器中一个文件一个文件地复制。
+
+对于 Windows 用户而言，TortoiseSVN 是很值得一试的。如果你希望实现离线
+操作，SVK 则是非常不错的选择。
 
 =head2 Salent 使用了何种语言？
 
@@ -236,7 +250,8 @@ Toolkit 的自动化测试框架对其进行了比较彻底的测试。
 、按位与/或/非/异或。应该没有什么重要的遗漏，因为我可是对照着 Intel
 文档来做的噢。
 
-ALU 不是做指令译码器，单纯的 ALU 操作没有我们想象的那么多么。
+ALU 不是做指令译码器，单纯的 ALU 
+操作没有我们想象的那么多么。
 我们的指令译码器支持 419 条 x86 常用指令。指令执行单元就不可能支持
 那么多机器指令了，除非我能得到更多人的帮助。
 
@@ -258,8 +273,8 @@ x86 指令集的机器码格式在开发初期曾让我感到非常头痛，因为指令长度居然是变长的，
 由于 IDU 支持的指令数目众多，必须要找到一种自动化的方法能构造出 IDU 的实现，
 同时也必须找到一种自动化的方法对 IDU 进行彻底的测试。
 
-另一问题来自 Intel 的指令码表本身。虽然"IA-32 Intel  ArchitectureSoftware
-Developer’s Manual"中的指令码表的格式已经相当规整，但是却并不是专门为构造指
+另一问题来自 Intel 的指令码表本身。虽然"IA-32 Intel Architecture Software
+Developer's Manual"中的指令码表的格式已经相当规整，但是却并不是专门为构造指
 令译码器和汇编器而提供的，因此码表中有一些含混的地方，有一些排字错误 (typos)。
 有的问题在解析码表的时候就能捕捉到，比如一些影响到解析的 typo，但有的问题就只能
 在后期模板测试的时候才会浮出水面。
@@ -272,14 +287,14 @@ Developer’s Manual"中的指令码表的格式已经相当规整，但是却并不是专门为构造指
 所以不仅可用于生成 Verilog 描述，也能生成 C/C++/Perl 程序。
 
 为了理解 IA-32 的指令码表，开始的几周我一直在研读 Intel 的
-"IA-32 Intel  ArchitectureSoftware Developer’s Manual".
+"IA-32 Intel ArchitectureSoftware Developer's Manual".
 此外，我还精读了英文版的"Computer Organization"，NASM 的帮助，还有 MASM
 方面的的基础知识…… 即便如此，我还是经过很多天的冥思苦想才最终搞清楚
 了 Intel 文档中的几章的内容。本项目的一个重要合作者仲伟祥也花费了大量的时间
 “苦读”这些材料。
 
 我们使用的 IA-32 指令格式的码表来自
-"IA-32 Intel  ArchitectureSoftware Developer’s Manual" 第二卷中的 
+"IA-32 Intel Architecture Software Developer's Manual" 第二卷中的 
 Appendix B.
 
 在软件技术上，我还学习 Verilog HDL 语言，神奇的 Perl Template Toolkit，
@@ -331,8 +346,7 @@ program's source code. The Perl template we've already obtained, the Java
 template you'll write, and even more templates in the future will have a similar
 appearance.	They'll be pretty alike. "
 
-
-=head3 关于状态机
+B<关于状态机>
 
 记得“数字逻辑电路”课程中接触到的“状态机”么？就是那种东西。我们在当时用
 状态机构造“二进制序列检测器”的？ 状态图？ 你可能还不知道它有多么强大、多
@@ -350,10 +364,19 @@ XML 描述生成的示意图：
 =begin html
 
 <pre>
-    <img src="image/state_mac.png" alt="State Machine">
+    <img src="/image/state_mac.png" alt="State Machine">
 </pre>
 
-为了方便起见，这儿有一个
+=end html
+
+
+为了研究和测试之方便，我还生成了一个只包含了七条指令模式的“袖珍版”状态机：
+
+=begin html
+
+<pre>
+    <img src="/image/mini_state_mac.png" alt="Mini State Machine">
+</pre>
 
 =end html
 
@@ -433,15 +456,10 @@ TODO 测试。另外值得一提的是，如果你把鼠标悬停在任何一个彩色方块的上方，持续几秒
 
 生成报表只用了一个命令:
 
-    > nmake smoke
+    nmake smoke
 
 该命令在屏幕上的输出为:
 
-    Microsoft (R) 程序维护实用工具 7.10.3077 版
-    版权所有 (C) Microsoft Corporation。保留所有权利。
-            cd t
-            nmake /nologo
-            cd..
             perl util\run-smoke.pl . smoke.html
     Sorry, concurrency not supported on your platform
     t\Idu.t
@@ -472,21 +490,113 @@ TODO 测试。另外值得一提的是，如果你把鼠标悬停在任何一个彩色方块的上方，持续几秒
 
 那些方块矩阵图就称之为 Smoke Matrix.
 
-下面是一个例子：
+下面是两个例子：
 
 =begin html
 
 <pre>
-    <img src="image/smoke.png" alt="smoke.html">
+    <img src="/image/01smoke.png" alt="smoke.html">
+</pre>
+<br>
+<pre>
+    <img src="/image/02smoke.png" alt="smoke2.html">
 </pre>
 
 =end html
 
-=head2 意外的收获
-
-
-
 =head1 IEU 的开发
+
+XXX
+
+=head1 Extension of Salent
+
+Salent 项目是如此丰富多彩，以至于从它出发，我们可以引出许多更为有趣的项目与方向。
+SVM 便是其中最迷人的一个例子。
+
+=head2 Salent Virtual Machine (SVM)
+
+大三上学期，我开始着手 SVM 虚拟机的构建问题。SVM 与 Salent 既是相互独立的两个项目，
+又是相互关联的两个项目。关键是我们能从 SVM 中得到什么特别的好处。一个完成了“自举”过
+程的 VM 会拥有怎样的优势，会具有怎么的奇异特性呢？我的哥们仲伟祥给了我四个字：“妙不
+可言”。啊，一个能自己运行自己的 VM…… awful...
+
+我确实已经在脑海中构画出了一个看起来可行的 roadmap。那么，我们从哪里开始呢？噢，从
+MASM 汇编开始。我设想的指令处理流程是：
+
+    C/C++ code => [CL.EXE] => MASM code => [masm2nasm.pl] =>
+        NASM code => [sasm.pl] => x86 machine code => [SVM]
+
+其中，方括号内的是编译器或者解释器，其他是我们希望在 SVM 上运行的指令文件。 SVM 相当
+于一块虚拟的软件 CPU 了。当起点处的 C/C++ code 就是 SVM 的实现代码的时候，整个处理
+流程就形成了一个封闭的回路：
+
+    SVM in C/C++ => ... => [SVM]
+    
+这正是虚拟机的含义呀！“虚拟 CPU”，呵呵。一旦形成封闭回路以后，SVM 的自举过程就宣告完成！
+
+我们需要编写一些工具，比如将 MASM 转换为 NASM 的 masm2nasm.pl 的实现。我们在 Salent
+中已经做好的其实是一个将 x86 机器指令转换为 NASM 的反汇编器。此外，sasm.pl 其实就是一
+个针对 SVM 的汇编器。sasm 就是 SVM Assembler. masm2nasm 就是 MASM-to-NASM, SVM
+将 x86 机器指令转换为 NASM 的反汇编器。
+
+至于“最后的结果能出现在屏幕上吗”这样的问题，唔，我想回答应该是肯定的。只要我们的 SVM 提供
+了 I/O 例程可供调用。就像真实的机器提供 BIOS 调用那样。
+
+当然，我们远不止要让最后的结果出现在屏幕上，一旦 SVM 完成了自举，我们下一步要考虑的就是为
+SVM 这台虚拟机开发属于它自己的“虚拟操作系统”了！ 	如果能让 Linux 和 Windows 也能在 SVM
+上“跑”起来，那可就是更好了！当然我们距离那个目标可能过于遥远了。
+
+反汇编器不是 SVM 的一部分。SVM 是一个运行时环境，提供了 x86 机器指令在运行时所需要的硬件环
+境（当然是虚拟的了）。反汇编器与它没多大关系。
+
+思考 SVM 的一种好的方法就是把它视作硬作 CPU 的一个纯软件替代物。你看，x86 机器指令一般是直
+接运行在 x86 芯片上的，不是么？ 我们的 SVM 就是要提供一块真实的 x86 芯片所提供的所有必要的
+服务与功能。 	使用运行于其上的 x86 指令“感觉”自己好像就是运行在真实的 CPU 上的，但事实上却
+不是，它运行在一个软件上，呵呵。这个软件就是我们的 SVM。x86 指令需要的不就是一个 RAM，一个
+指令译码器 idu，一个指令执行单元(ieu)以及其中的众多寄存器和 PSW 等东东？	而这一切正是我们在
+Salent 项目中一直努力想实现的，只不过那里我们更愿意使用 HDL 硬件描述语言来实现。但在 SVM
+中，我们将用纯的高级编程语言。
+
+事实上，我们已经有了 ram 和 idu 的纯软件实现了，呵呵。这是 Salent 项目的“副产品”，但却是
+SVM 的核心部件。我已经在 QQ 聊天中请求万珣新给出他的 MMU 的纯软件实现。下面很自然的，我们
+只需要一个 ieu 的纯软件实现，SVM 就基本完成了。当然，为了能使它可以跑 C/C++ 程序，我们还得
+做一些上层建筑，比如 MASM 汇编器。我一直在想，能否利用已有的 MASM 汇编器，这样我们就不必自
+己动手做一个了。汇编器的复杂度相当了得。——呵，最大的困难就是地址分配问题。	还有就是系统调用问
+题。地址分配，或者说指令的重定位，是一个非常头疼的问题。 	
+
+=head1 BIBLIOGRAPHY
+
+=over
+
+=item *
+
+IA-32 Intel Architecture Software Developer's Manuals
+
+L<http://www.intel.com/design/pentium4/manuals/index_new.htm>
+
+=begin html
+
+<pre>
+    <img src="image\intel_manual.png"
+    alt="IA-32 Intel Architecture Software Developer's Manuals">
+</pre>
+
+=end html
+
+=item *
+
+Carl Hamacher, Zvonko Vranesic, and Safwat Zaky, "Computer Organization, Fifth
+Edition", McGraw-Hill, 2002.
+
+=begin html
+
+<pre>
+    <img src="/image/comp_org.jpg" alt="Computer Organization">
+</pre>
+
+=end html
+
+=back
 
 =head1 COPYRIGHT
 

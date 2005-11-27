@@ -230,12 +230,69 @@ Mozilla ä¯ÀÀÆ÷½øÐÐ»ã×Ü£©¡£»¹ÓÐ²»ÉÙÄÚÈÝÀ´×Ô Salent
 
 ÕâÌ¨»úËã»ú³ýÁË CPU Ö®Íâ£¬»¹ÓÐÒ»Ð©Íâ²¿Éè±¸£¬±ÈÈç RAM¡¢I/O µÈµÈ¡£
 
+=head1 ºê¹ÛµÄÉè¼ÆÓë¿ª·¢¾ö²ß
+
+ÎÒÔÚÏîÄ¿¿ªÊ¼Ö®³õ¾Í¿¼ÂÇÁËÒ»ÏÂÄ£ÐÍ»úµÄÉè¼ÆÓë²âÊÔµÄ×Ü²ßÂÔ¡£
+
+=over
+
+=item *
+
+·ÂÕæÓë¿É×ÛºÏÐÔ
+
+ÎÒÏëÈç¹ûÔÚÒ»¿ªÊ¼¾Í¿¼ÂÇÄÄÐ©¶«¶«ÊÇ Synthesizable£¬ÄÄÐ©²»¿ÉÒÔ£¬ÄÇÃ´ÎÒ½«
+´ç²½ÄÑÐÐ¡£ËùÒÔÎÒ¾ö¶¨
+Ö»ÒªÎÒµÄÉè¼ÆÄÜµ¥´¿µØ½øÐÐ·ÂÕæ¾Í¿ÉÒÔÁË¡£ÈÕºóÓÐ»ú»áÔÙ°Ñ²»ÄÜ×ÛºÏ(synthesis)
+µÄ´úÂë¸Ä³É¿ÉÒÔ×ÛºÏµÄ¡£ÊÂÊµÉÏÎÒÏÖÔÚÒ²¸ã²»Çåµ½µ×ÄÄÐ©ÊÇ¿ÉÒÔ×ÛºÏµÄ£¬ÒòÎªÕâÊÇ
+ÓÉ Vendors £¨¹©Ó¦ÉÌ£©×Ô¼º¾ö¶¨µÄ¡£
+
+=item *
+
+Ó²¼þÃèÊöÓïÑÔ (HDL) µÄÑ¡Ôñ
+
+ÁíÍâ£¬ÎÒ¾ö¶¨²»Ê¹ÓÃ VHDL ÓïÑÔ£¬ËüÊµÔÚ
+ÊÇÌ«ÄÑ¿´ÁË¡£¾­¹ý±È½Ï£¬ÎÒ·¢ÏÖ Verilog HDL ÊÇ¸üºÃµÄÑ¡Ôñ£¬Ëü²»½ö¼Ç·¨ºÜ¸É
+¾»£¬¶øÇÒÃ»ÓÐ VHDL ÖÐÀàÐÍ×ª»»·½ÃæµÄÀ§ÄÓ£¬¸üÖØÒªµÄÊÇËüÒ²ÊÇ IEEE ±ê×¼µÄÒ»
+²¿·Ö£¬ºÇºÇ¡£
+
+ÎÒÔÚÍøÉÏÕÒµ½Ò»¸öÃûÎª X-HDL µÄ¹¤¾ß£¬Ëü¿ÉÒÔÔÚÁ½ÖÖ HDL ÓïÑÔÖ®
+¼ä½øÐÐ×Ô¶¯×ª»»¡ª¡ªàÅ£¬·Ç³£ÓÐÈ¤µÄ¶«¶«Å¶¡£²»¹ý»¹ÊÇÓÐÐ©ÏÞÖÆµÄ¡£Èç¹ûÎÒÊ¹ÓÃ
+Verilog ÓïÑÔµÄ¸ß¼¶ÌØÐÔ£¬ÔÚ·­Òëµ½¶ÔÓ¦µÄ VHDL ÓïÑÔÊ±¿ÉÄÜÃ»ÓÐ¶ÔÓ¦µÄµÈ¼ÛÎï¡£
+Òò´ËÎÒ±»ÏÞÖÆÔÚÒ»¸ö×Ó¼¯Ö®ÖÐ¡£²»¹ýÈç¹ûÎÒÄÜ×Ô¼ºÌá¹© Verilog ÔÚ VHDL ÖÐµÄ
+¡°µÈ¼ÛÎï¡±£¨±ÈÈç ShiftRightº¯Êý£©µÄ¿âÊµÏÖµÄ»°£¬¿ÉÒÔÊ¹ÎÒÄÜÊ¹ÓÃµÄ×Ó¼¯½Ó½ü
+È«¼¯¡£µ«ºóÀ´ÎÒ»¹ÊÇ·ÅÆúÁËÍ¬Ê±Î¬»¤ Verilog ºÍ VHDL Á½ÖÖÓïÑÔµÄÊµÏÖ°æ±¾µÄ
+Ïë·¨¡£
+
+=back
+
 =head1 RAM µÄ¿ª·¢
 
-32Î»µÄ RAM ÒÑ¾­Éè¼ÆÍê³É£¬Ê¹ÓÃ Verilog HDL£¬¶øÇÒÓÃ»ùÓÚ Perl Template
-Toolkit µÄ×Ô¶¯»¯²âÊÔ¿ò¼Ü¶ÔÆä½øÐÐÁË±È½Ï³¹µ×µÄ²âÊÔ¡£
+Éè¼Æ RAM Ê±Óöµ½µÄÒ»¸ö¼òµ¥µÄÎÊÌâÊÇ£¬Èç¹ûµØÖ·ÊÇ 32 Î»£¬¶øÇÒÊÇ byte-addressable£¬
+ÄÇÃ´ RAM ÊÇ·ñÓ¦¸Ã×Ô¼ºÍÆµ¼µ½¡°×Ö¡±(word)µÄµØÖ·£¨¼´ºöÂÔµô32Î»µØÖ·µÄ×îºóÁ½¸öbit£©£¿
+ßí£¬»¹ÊÇÓÉ´¦ÀíÆ÷¸ºÔð½«×Ö½ÚµØÖ·×ª»»Îª×ÖµØÖ·£¿²»¹ýÄÇÑùµÄ»°£¬µØÖ·×ÜÏßÉÏµÄµØÖ·¾Í²»ÔÙ
+ÊÇ 32 Î»³¤£¬¶øÊÇ 30 Î»³¤ÁË¡£
+
+ÔÚÉè¼Æ¼ÆËã»úÏµÍ³µÄÊ±ºòÎÒ±ØÐë°ÑÕâ¸öÎÊÌâ¿¼ÂÇÇå³þ£¬ÌØ±ðÊÇ½«¡°×Ö¡±ÇÐÆ¬Îª¡°×Ö½Ú¡±µÄÎÊÌâ¡£ÔÙ
+ÓÐ¾ÍÊÇ¡°×Ö¡±µÄµØÖ·Óë¡°×Ö½Ú¡±µÄµØÖ·Ö®¼äµÄÏà»¥×ª»»¡£ 
+
+Ä¿Ç°µÄ RAM ÄÚ²¿°´×Ö´æ·Å£¬Í¬Ê±µØÖ·µÄ³¤¶ÈÒ²ÊÇÒ»¸ö×Ö¡£Òò¶Ô RAM µÄÖ±½Ó¶ÁÐ´¶¼ÊÇ°´
+×Ö½øÐÐµÄ£¬¼´±ã´«µÝ¸ø RAM µÄµØÖ·¶¼ÊÇ×Ö½ÚµØÖ·¡£RAM ÔÚÄÚ²¿ºöÂÔµØÖ·µÄ×îºó 2 ¸ö±È
+ÌØ(¶ÔÓÚ 32 Î» RAM ¶øÑÔ£©£¬×Ô¼ºÍÆµ¼³ö×Ö½ÚËùÔÚµÄ×ÖµÄµØÖ·¡£
+
+RAM µÄ Verilog ÊµÏÖÊÇÍ¨¹ý Perl Template Toolkit µÄÄ£¿é×Ô¶¯Éú³ÉµÄ£¬Òò´ËËüµÄ
+Î»ÊýÊÇ¿ÉÒÔÅäÖÃµÄ¡£
+
+RAM Ê¹ÓÃ»ùÓÚ Perl Template
+Toolkit µÄ×Ô¶¯»¯²âÊÔ¿ò¼Ü¶ÔÆä½øÐÐÁË±È½Ï³¹µ×µÄ²âÊÔ¡£Ó¦ÓÃ²âÊÔÌ¨ÒÑ¶Ô 8 Î» RAM£¬16
+Î» RAM£¬32 Î» RAM ºÍ 64 Î» RAM ½øÐÐÁË²âÊÔ¡£
 
 =head1 ALU µÄ¿ª·¢
+
+ÔÚÉè¼Æ ALU µÄÊ±ºò£¬Óöµ½Ò»¸öÎÊÌâÊÇ PSW (Process Status Word) ÊÇ×÷ÎªÒ»¸öµ¥
+¶ÀµÄÄ£¿éÀ´ÊµÏÖÄØ£¬»¹ÊÇ×÷ÎªÆäËûÄ£¿é£¬±ÈÈç ALU µÄÒ»²¿·Ö¡£ÖÚËùÖÜÖª£¬PSW Óë ALU ÓÐ
+¹ØÁª£¬ALU Ã¿¼ÆËã³öÒ»¸ö½á¹û¶¼Ó¦µ±ÉèÖÃ PSW ÖÐµÄÏàÓ¦µÄÎ»(bit)¡£µ«ÊÇ Intel ÎÄµµ
+¶ÔÃ¿Ò»Ìõ x86 Ö¸Áî¶Ô PSW µÄÓ°Ïì¶¼×÷ÁË¾ßÌåµÄËµÃ÷£¬Òò´Ë¸üºÏÊÊµÄ×ö·¨ÊÇ½« PSW ×÷Îª
+Ò»¸ö¶ÀÁ¢µÄÄ£¿é£¬ÓÉ ALU ºÍÖ¸ÁîÖ´ÐÐµ¥Ôª IEU À´¶Ô PSW ½øÐÐ¶ÁÐ´¡£
 
 ÎÒÃÇµÄ ALU Ö§³ÖÒÔÏÂ²Ù×÷:
 
@@ -255,12 +312,205 @@ ALU ²»ÊÇ×öÖ¸ÁîÒëÂëÆ÷£¬µ¥´¿µÄ ALU
 ÎÒÃÇµÄÖ¸ÁîÒëÂëÆ÷Ö§³Ö 419 Ìõ x86 ³£ÓÃÖ¸Áî¡£Ö¸ÁîÖ´ÐÐµ¥Ôª¾Í²»¿ÉÄÜÖ§³Ö
 ÄÇÃ´¶à»úÆ÷Ö¸ÁîÁË£¬³ý·ÇÎÒÄÜµÃµ½¸ü¶àÈËµÄ°ïÖú¡£
 
+=head2 ´ÓÄ£°åÉú³ÉÓ²¼þÉè¼Æ
+
+ALU µÄ Verilog Ô´´úÂëÊÇ´ÓÄ£°å×Ô¶¯Éú³ÉµÄ¡£Salent ÏîÄ¿ÖÐÊ¹ÓÃµÄÄ£°å¶¼
+ÊÇ Perl Template Toolkit µÄÄ£¿é£¨ÓÖ³ÆÎª TT2 Ä£°å£©¡£
+
+ÏÂÃæÊÇÒ»¸öÀý×Ó£¨À´×Ô ALU Verilog ÊµÏÖµÄÄ£°åÎÄ¼þ£©£º
+
+=begin html
+
+<pre>
+    <img src="image/tt.png">
+</pre>
+
+=end html
+
+=head1 RAM ºÍ ALU Ó²¼þÉè¼ÆµÄ×Ô¶¯»¯²âÊÔ
+
+ÎÒÎª Salent µÄ RAM ºÍ ALU Éè¼Æ³öÁËÒ»¸öÍ¨ÓÃµÄ×Ô¶¯»¯B<Ó²¼þ>²âÊÔ¿ò¼Ü£¬´Ó²âÊÔÊä
+ÈëµÄÉú³É£¬µ½²âÊÔ½á¹ûµÄÑéÖ¤£¬È«²¿×Ô¶¯»¯£¬ÎÞÐèÈËµÄ¸ÉÔ¤¡£
+
+ÎÒÃÇ¿á¿áµÄ»ùÓÚ ModelSim µÄ²âÊÔÌ¨µÄ¹¹½¨¼¼Êõ¿ÉÊÇÕæÕýÒâÒåÉÏµÄ×Ô¶¯»¯²âÊÔ£ºËæ»ú²úÉúºÏ
+·¨µÄÊäÈëÐÅºÅ£¬È»ºó×Ô¶¯¼ì²é·ÂÕæÆ÷µÄÊä³ö¡­¡­ 
+
+ÎÒÃÇÒÑ¾­ÓÃ¸Ã¿ò¼Ü¶Ô Salent
+Ä£ÐÍ»úµÄ RAM ºÍ ALU ²¿¼þ½øÐÐÁË³¹µ×µÄ²âÊÔ¡£²âÊÔÕÒ³öÁËÐí¶àºÜÎ¢ÃîµÄ bug£¬ÓÐµÄÊÇÎÒ
+µÄ Verilog ÊµÏÖµÄ£¬ÓÐµÄÊÇÎÒµÄ²âÊÔ´úÂë±¾ÉíµÄÎÊÌâ£¬»¹ÓÐµÄÊÇ ModelSim ·ÂÕæÆ÷µÄ
+BUG. ÎÞÂÛÈçºÎ£¬ÓÉÓÚÊäÈëÐÅºÅÊÇ²âÊÔÌ¨Ëæ»úÉú³ÉµÄ£¬Ö»ÒªÔËÐÐ×ã¹»³¤µÄÊ±¼ä£¬±ã¿ÉÒÔ·¢ÏÖ
+¼¸ºõËùÓÐµÄ bug. Ö»Òª²¶×½µ½ bug£¬¾ÀÕýÒ»°ã¶¼ÊÇºÜÖ±½ØÁËµ±µÄ¡£
+
+ÎÒÏÖÔÚ¶ÔÎÒÃÇµÄ RAM 
+ºÍ ALU ÒÑ½¨Á¢ÆðÁË×ã¹»µÄÐÅÐÄ¡£³ÏÈ»£¡²âÊÔÌ¨ÆÈÊ¹ÏîÄ¿×ÜÊÇÔÚÕýÈ·µÄ¿ÉÒÔ¿ØÖÆµÄ¹ìµÀÉÏÇ°½ø¡£
+ÎÒÃÇÃ¿×÷Ò»´¦¸Ä¶¯£¬¾ÍÔËÐÐÕû¸ö²âÊÔ¼¯£¬È·±£Ëù×÷µÄÐÞ¸ÄÃ»ÓÐÅö»µÆäËûÔ­±¾¿ÉÒÔ¹¤×÷µÄ¶«Î÷¡£
+Í¬Ê±ÕâÒ²¿ÉÒÔÍ¨¹ý²âÊÔÌ¨Éú³ÉµÄ±¨±í£¬ÆÀ¼ÛËù×÷ÐÞ¸ÄµÄÊµ¼ÊÐ§¹û¡£
+
+²»¹ý£¬²âÊÔÌ¨ÔËÐÐÊ±¼ä±È
+½Ï³¤£¬´óÔ¼ÊÇÊ®¼¸Ãëµ½¼¸Ê®Ãë²»µÈ¡£±ÈÈç ALU µÄ²âÊÔ¼¯£¬ÔËÐÐÒ»´Î£¬½«½øÐÐ 6887 ¸ö²âÊÔ¡£
+ÎÒ×¢Òâµ½ ModelSim SE 6.0 µÄ·ÂÕæÆ÷ÔÚÐÔÄÜÉÏÔ¶²»¼° 5.7d Õâ¸ö½ÏÀÏµÄ°æ±¾¡£ÕæÆæ¹Ö¡£
+ÔÚÎÒÕâÌ¨×°ÓÐ ModelSim 6.0 µÄ Pentium4 2.6GHz µÄ»úÆ÷ÉÏÔËÐÐ ALU µÄ²âÊÔ¼¯»¹²»
+¼°ÎÒ¼ÒÄÇÌ¨×°ÓÐ 5.7d µÄ ÈüÑï 330 µÄÆÆ»úÆ÷¡£ÎÒ¹À¼ÆÔ­Òò¿ÉÄÜÊÇ 6.0 ×öµÃÌ«ÅÓ´óÁË¡£
+
+Ã¿´ÎÔËÐÐ£¬²âÊÔÌ¨Êµ¼ÊÖ´ÐÐµÄ²âÊÔ¶¼²»Ò»Ñù£¬ÒòÎªÊäÈë¶¼ÊÇËæ»úÉú³ÉµÄ£¬¶øÇÒÖÖ×ÓÊÇÊ¹ÓÃµÄÏµ
+Í³Ê±¼ä¡£ÎÒÃÇÓÃÄ£°åÉú³ÉÈÎºÎ¶«Î÷£¬´Ó Verilog ´úÂëµ½ Perl ³ÌÐò£¬´Ó Tcl ·ÂÕæ½Å±¾µ½
+POD ºÍ HTML ÎÄµµ£¬»¹ÓÐÐ´³ÌÐòµÄ³ÌÐò¡­¡­ 
+
+    I'd rather write programs to write programs to write programs.
+    
+ÏÂÃæÊÇ ALU ²âÊÔÌ¨µÄÒ»´ÎµäÐÍÔËÐÐËùÉú³ÉµÄ²âÊÔ±¨±í£º
+
+    alu.........ok
+    talu1.op....ok
+    talu2.op....ok
+    talu3.op....ok
+    talu4.op....ok
+    talu5.op....ok
+    All tests successful.
+    Files=6, Tests=6887, 12 wallclock secs ( 0.00 cusr +  0.00 csys =  0.00 CPU)
+    Timing Result: 525.359000 sec on average.
+
+Ò»¹²»¨ÁË 525 ÃëÒ®£¡
+
+ÔÚ²âÊÔÖÐ£¬Èç¹û·¢Éú´íÎó£¬²âÊÔÌ¨»á±¨¸æ·¢Éú´íÎóµÄ¾ßÌåÎ»ÖÃ£¬±ÈÈçÎÄ¼þÃû¡¢ÐÐºÅ¡¢·ÂÕæÊ±
+¼äÇø¼ä¡¢ALU ÊäÈëÐÅºÅµÄÈ¡Öµ¡¢µÈµÈ¡£ÕâÐ©ÐÅÏ¢¸øÅÅ´í´øÀ´ÁË¼«´óµÄ±ãÀû¡£
+
+ÏÂÃæÊÇ RAM µÄÒ»¸öÔçÆÚ°æ±¾Òò 64 Î»ÎÊÌâ¶øÈÃÎÒÃÇµÄ²âÊÔÌ¨¡°±¨Ô¹¡±µÄÀý×Ó£º
+
+    ...
+
+    tramX_5.rw..........ok
+    tramX_6.rw..........ok
+    tramX_7.rw..........ok
+    tramX_8.rw..........NOK 8
+    #   Failed test 'tramX_8.rw: line 7: r 'd0 0*abcd (@ 55 ~ 103)'
+    #   in tramX_8.rw.t at line 26.
+    #                   '00000000zzzzzzzz'
+    #     doesn't match '(?i-xsm:^z+$)'
+
+    tramX_8.rw..........NOK 12#   Failed test
+            'tramX_8.rw: line 8: r 'd15 ? (@ 103 ~ 141)'
+    #   in tramX_8.rw.t at line 31.
+    #                   '00000000zzzzzzzz'
+    #     doesn't match '(?i-xsm:^z+$)'
+
+    ...
+
+        Failed Test        Stat Wstat Total Fail  Failed  List of Failed
+    -------------------------------------------------------------------------------
+    ...
+    tramX_4.rw.t         17  4352    54   17  31.48%  8 12-13 17-18 25-26 30-31 35-
+                                                      36 43-44 48-49 53-54
+    tramX_8.rw.t         49 12544   140   49  35.00%  8 12-13 17-18 22-23 27-28 35-
+                                                      36 40-41 45-46 50-51 55-56
+                                                      63-64 68-69 73-74 78-79 83-84
+                                                      91-92 96-97 101-102 106-107
+                                                      111-112 119-120 124-125 129-
+                                                      130 134-135 139-140
+    Failed 4/18 test scripts, 77.78% okay. 238/3627 subtests failed, 93.44% okay.
+
+ÖÙÎ°ÏéÍ¬Ñ§ÔÚÎÒµÄ¿ò¼Ü»ù´¡ÉÏ±àÐ´µÄRAM µÄ¡°Ëæ»úÓ¦Á¦²âÊÔÌ¨¡±²¶×½µ½ÁË ModelSim ·ÂÕæÆ÷µÄÒ»¸ö bug.
+Ì«°ôÁË£¡ÕâÖÖ¸ßÇ¿¶ÈµÄËæ»ú²âÊÔ¶Ô°ü
+À¨·ÂÕæÆ÷ÔÚÄÚµÄÃ¿Ò»¸ö²¿¼þ£¬Ã¿Ò»ÐÐ´úÂë¶¼Ê©¼ÓÁË¾Þ´óµÄÑ¹Á¦£¬²»ÊÇÃ´£¿ 	Well done! Sal++ 	
+
 =head1 MMU µÄ¿ª·¢
+
+MMU ÊÇ Memory Management Unit µÄÊ××ÖÄ¸ËõÐ´£¬Ä¿Ç°µÄÖ÷Òª¹¦ÄÜÊÇ½«¡°×Ö¡±ÇÐÆ¬Îª¡°×Ö½Ú¡±¡£
+±Ï¾¹ÎÒÃÇµÄ RAM ÊÇ°´¡°×Ö¡±À´´æÈ¡µÄ£¬¶ø´¦ÀíÆ÷È´Ê±³£°´ÕÕ¡°×Ö½Ú¡±À´¶ÁÐ´¡£MMU µÄ×÷ÓÃ¾ÍÊÇÐ­µ÷
+ÕâÖÖ²îÒì¡£ËüÔÚ´¦ÀíÆ÷ºÍ RAM Ö®¼ä°çÑÝ×Å¡°ÖÐ¼äÈË¡±µÄ½ÇÉ«¡£ 
+
+ÎÒÔÚ MMU µÄ specification ÖÐÕâÑùÐ´µÀ£º
+
+The MMU in Salent is reponsible for slicing "words" to "bytes". It bridges
+the gap between the processor and RAM. The RAM operates in words, but the
+processor usually wants to access one single byte, two successive bytes, 
+or a whole word. 
+
+MMU will play such a role that from the viewpoint of the processor, 
+the memory is byte-addressable, and it is only word-addressable from the 
+viewpoint of RAM.
+
+The I/O ports for the MMU can be divided into two separate sub-interface,
+one for the processor, and one for RAM:
+
+  RAM <=> MMU <=> Processor
+
+The sub-interface of MMU for RAM is exactly the same as the interface of RAM. 
+MMU should take the full reponsibility to interact with RAM, including setting
+data bus, address bus, rw and strb control signals.
+
+=over
+
+=item *
+
+bus_strb - out
+
+Strobe signal issued by MMU itself to start the RAM.
+
+=item *
+
+bus_rw - out
+
+Read or write signal issued by MMU 
+
+=item *
+
+bus_data - inout
+
+=item *
+
+bus_addr - out
+
+=item *
+
+bus_mfc - in
+
+=back
+
+The sub-interface of MMU for processor is very simple, consisting of only four signals:
+
+=over
+
+=item *
+
+mar - in, reg
+
+Memory Address Register storing the address of the leading byte
+
+=item *
+
+byte - inout, reg
+
+Memory Data Register storing the byte accessed or written by processor     
+
+=item *
+
+strb - in
+
+Strobe signal issued by procssor to start the MMU.
+
+=item *
+
+rw - in
+
+Read/Write'
+
+=item *
+
+mfc - out
+
+=back
 
 =head1 IDU µÄ¿ª·¢
 
 IA-32 Ö¸Áî¼¯»¹ÓÐÒ»ÖÖ 64 Î»µÄÀ©Õ¹Ä£Ê½£¬ÃûÎª IA-32e£¬¶Ô 64 Î»Ö¸ÁîµÄÖ§³Ö²¢
 ²»ÔÚÎÒµÄ TODO ÁÐ±íÖÐ¡£
+
+ÎÒÃÇµÄ IDU Éè¼ÆÒÔ¼°½¨Á¢ÔÚËüÖ®ÉÏµÄ x86 ·´»ã±àÆ÷ÊÇÓÉ
+´úÂëÉú³ÉÆ÷×Ô¶¯Éú³ÉµÄ£¬¶øÇÒÆäÖ§³ÖµÄÖ¸Áî¼¯¿ÉÒÔ¶¯Ì¬µØ½øÐÐÅäÖÃ¡£ÎÒÃÇÔÚÒ»¸öÅäÖÃ
+ÎÄ¼þÖÐÌí¼ÓÒ»Ìõ»úÆ÷Ö¸ÁîµÄ±àÂëÄ£Ê½¼°¶ÔÓ¦µÄ»ã±àÓïÑÔ¸ñÊ½£¬ÔËÐÐMake Ö®ºó£¬·´»ã
+±àÆ÷½«×Ô¶¯¶ÔÐÂÔöÖ¸ÁîÌá¹©Ö§³Ö¡£Õâ¸öÅäÖÃÎÄ¼þµÄ¸ñÊ½¾ÍÊÇ Intel IA-32 ÊÖ²áµÄ
+Ö¸ÁîÂë±íµÄ¸ñÊ½¡£ÔÚ Salent ÏîÄ¿Ä¿Â¼ÖÐ£¬ÃûÎª F<encoding.txt>.
 
 =head2 Óöµ½µÄÀ§ÄÑ
 
@@ -311,7 +561,9 @@ Appendix B.
 ÕâÊÇµäÐÍµÄ¡°Ð´³ÌÐòµÄ³ÌÐò¡±¡£ÓÉÓÚ×´Ì¬»úÄ£ÐÍÊÇÓëÊä³öµÄÊµÏÖÓïÑÔÎÞ¹ØµÄ£¬Òò´Ë
 Ìá¹© Perl ´úÂëµÄÄ£°å¾Í²úÉú Perl °æ±¾µÄÒëÂëÆ÷³ÌÐò£¬Ìá¹© Verilog ´úÂë
 µÄÄ£ÐÍ¾Í²úÉú Verilog °æ±¾µÄÒëÂëÆ÷ÃèÊö£¬C/C++ »¹ÓÐ Java »¹ÓÐ VHDL ¶¼
-ÒÀ´ËÀàÍÆ¡£
+ÒÀ´ËÀàÍÆ¡£ÎÒÓÐ¼Æ»®ÔÙÔÚ Salent IDU ÏîÄ¿ÖÐÒýÈë Java, C#, JavaScript,
+Visual Basi, ÉõÖÁÓÚ Haskell ºÍ Perl6 ÕâÐ©ÓïÑÔ¡£Èç´ËÖ®¶àµÄÓïÑÔºÍÎÄ»¯
+ÔÚ Salent ÏîÄ¿ÖÐ½»»ã³ÉÒ»¹ÉÎ°´óµÄºéÁ÷£¬ÊÆ²»¿Éµ±£¡
 
 ÕâÒâÎ¶×ÅÒ»µ©ÎÒÃÇµÃµ½ÁËÒ»ÖÖÓïÑÔÏÂµÄÒëÂëÆ÷ÊµÏÖ£¬¾Í¿ÉÒÔÇá¶øÒ×¾ÙµØ»ñµÃÆäËû
 ÓïÑÔµÄÊµÏÖ¡£Òª×öµÄÖ»ÊÇÌá¹©ÕâÖÖÓïÑÔÏÂµÄÄ£°åÎÄ¼þ¾Í¿ÉÒÔÁË¡£¶øÄ£°åÎÄ¼þ¶¼ÊÇ
@@ -327,14 +579,15 @@ Appendix B.
 Java ÊµÏÖµÄÄ£°å£º
 
 "Well, it's quite straightforward. 	The two versions of IDU implementations
-(the Perl one and Java one) will share the same AST, I mean Abstract Semantic
-Tree. The best way to comprehend ASTs is simply reguard it as a complex data 
-structure. Hmm...maybe something like a tree, an array, a hash, or so so...
+(the Perl one and Java one) will share the same AST, I mean Abstract Syntax
+Tree. The best way to comprehend ASTs is to simply reguard it as a complex
+data structure. Hmm...maybe something like a tree, an array, a hash, or so.
 To generate the final implementation, an AST is not enough.	The info stored in
 the AST is only concerned with the state machine (or the state graph), hence
 There is nothing specific to the programming language we finally choose.
 
-"In order to generate the IDU programs automatically, we provide a full-fledged 
+"In order to generate the IDU programs automatically, we provide a 
+full-fledged 
 AST and a well defined program template to the computer. The computer will 
 combine the two to generate the final implementation, say, the final program. 
 The key is combining an AST with a program template. So it's another example of
@@ -346,6 +599,14 @@ program's source code. The Perl template we've already obtained, the Java
 template you'll write, and even more templates in the future will have a similar
 appearance.	They'll be pretty alike. "
 
+µ±ÎÒ¶ÔÎÒÃÇ°àµÄÒ»¸öÍ¬Ñ§Ëµ£¬Intel ÊÖ²áµÄÖ¸ÁîÂë±íÖÐÓÐºÜ¶à typo £¨¼üÈë´íÎó£©µÄÊ±ºò£¬Ëû·´²µ
+ÎÒËµ£¬ÕâÊÇ¡°ÄÑÃâ¡±µÄ¡£ÎÒ·´²µµÀ£¬ÎÒÃÇ Salent ÏîÄ¿ÖÐµÄÂë±íÎÄ¼þÈ´¿ÉÒÔÍêÈ«±ÜÃâ typo¡£
+ËûºÜ»³ÒÉÎÒµÄËµ·¨£¬ÎÊÎÒÎªÊ²Ã´£¿ÎÒ¸æËßËû£¬ÎÒÃÇµÄÎÄµµ£¬IDU ÊµÏÖ£¬ÒÔ¼°ÎÒÃÇ
+µÄ IDU ²âÊÔÌ¨¶¼ÊÇ¸ù¾ÝÒ»¿Ã AST ÓÉ³ÌÐò×Ô¶¯Éú³ÉµÄÑ½£¡¶øÕâ¿Ã AST (Abstract 
+Syntax Tree) ÓÖÊÇ´Ó Intel µÄÎÄµµ×Ô¶¯×ª»»¹ýÀ´µÄ¡£Òò´Ë Intel ÎÄµµÖÐµÄËùÓÐ
+typo ¶¼»á·´Ó³µ½ÎÒÃÇµÄ idu ÊµÏÖºÍ idu ²âÊÔÌ¨µÄ´úÂëÖÐ£¬²¢×îÖÕ±»²âÊÔÌ¨²¶×½µ½¡£
+ÓÉ´Ë¿É¼û£¬ÎÒÃÇÊ¹ÓÃµÄÕæµÄÊÇÒ»ÖÖÉñÆæµÄ¼¼Êõ£¡ 
+
 =head3 ¹ØÓÚ×´Ì¬»ú
 
 ¼ÇµÃ¡°Êý×ÖÂß¼­µçÂ·¡±¿Î³ÌÖÐ½Ó´¥µ½µÄ¡°×´Ì¬»ú¡±Ã´£¿¾ÍÊÇÄÇÖÖ¶«Î÷¡£ÎÒÃÇÔÚµ±Ê±ÓÃ
@@ -354,8 +615,45 @@ appearance.	They'll be pretty alike. "
 ÀàËÆµÄÊ¶±ðÄ£Ê½µÄ³ÌÐòºÍÓ²¼þÉè¼Æ¶øÑÔ¼òÖ±ÊÇÎÞ¼ÛÖ®±¦£¡·Ç³£ÓÅÃÀ£¬·Ç³£³éÏó£¬·Ç
 ³£¼ò½à¡£¸üÖØÒªµÄÊÇ:·Ç³£ÊµÓÃ¡£
 
-ÊìÁ·ÕÆÎÕ×´Ì¬»úÄ£ÐÍÈ´ÈÔÐèÒª´óÁ¿µÄÊµ¼ùºÍË¼¿¼¡£ÎÒÃÇÔÚÐ´´¦ÀíÊäÈëµÄ Perl ³ÌÐò
-Ê±ºÜÄÑ²»È¥ÓÃËü¡£Ö»²»¹ý´ó¶àÊýÊ±ºòÎÒÃÇÓÃµ½ÁË£¬È´²¢²»Öª¾õ¡£
+×´Ì¬»úÊÇÕâÑùÒ»ÖÖ³éÏóµÄ»úÆ÷£¬Õâ¸ö»úÆ÷ÄÜ¹»Î¬»¤²¢ÇÒÇÐ»»µ±Ç°µÄ×´Ì¬¡£Ëü¸ù¾Ý
+Íâ²¿µÄÊäÈëºÍÄÚ²¿²úÉúµÄÊä³öÀ´µÃµ½×´Ì¬ÇÐ»»µÄÌõ¼þ¡£×´Ì¬»úÊÇÉè¼ÆÈí¼þºÍÉè¼ÆÓ²¼þµÄ»ù
+±¾¹¤¾ß¡£ÓëÆäËµËüÊÇÒ»Ì¨¡°»úÆ÷¡±£¬²»ÈçËµËüÊÇÒ»ÖÖÊýÑ§Ä£ÐÍ¡£ÆäÊµ×´Ì¬»úµÄºËÐÄË¼Ïë·Ç³£
+¼òµ¥£¬ÎÒÏë´òÒ»¸ö±È·½À´¼ÓÒÔËµÃ÷¡£
+
+±ÈÈçÎÒÏë¡°Ê¶±ð¡±³öÁ½¸öµ¥´Ê add ºÍ and£¬ÏÖÔÚÎÒÃÇ¿ÉÒÔÓÃ×´Ì¬»úÀ´Íê³É¡°Ê¶±ð¡±µÄÈÎÎñ¡£
+Áî×´Ì¬ 0 Îª³õÊ¼×´Ì¬¡£
+Ê×ÏÈ£¬ÎÒÃÇ¶ÁÈ¡Î´Öªµ¥´ÊµÄµÚÒ»¸ö×ÖÄ¸£¬±ÈÈçËµÊÇ a£¬ÎÒÃÇ±ãÇÐ»»µ½×´Ì¬1£¬·ñÔòÌø×ªµ½³ö
+´í×´Ì¬£¬ÒòÎªÁ½¸ö´Ê¶¼ÊÇÓÉ a ÆðÊ¼µÄ¡£½Ó×Å£¬ÎÒÃÇ¶Á
+È¡µÚ¶þ¸ö×ÖÄ¸£¬ÕâÊ±¾ÍÒª·ÖÈýÖÖÇé¿ö½øÐÐÌÖÂÛ£¬Èç¹ûµÃµ½µÄÊÇ d£¬¾ÍÌø×ªµ½×´Ì¬ 2£»Èç¹û
+ÊÇ n £¬ÔòÌø×ªµ½×´Ì¬ 3£»·ñÔò¾ÍÌøµ½³ö´í×´Ì¬¡£È»ºó£¬ÎÒÃÇ¶ÁÈ¡µÚÈý¸ö×ÖÄ¸£¬Èç¹ûµ±Ç°
+×´Ì¬ÊÇ 2£¬¶øÇÒµ±Ç°µÄ×Ö·ûÊÇ d£¬ÔòÍê³É¶Ô add µÄÊ¶±ð¡£Èç¹ûµ±Ç°×´Ì¬ÊÇ 3£¬¶øµ±Ç°µÄ
+×Ö·ûÊÇ d £¬ÔòÍê³É¶Ô and µÄÊ¶±ð¡£ÆäÓàÇé¿ö£¬Ìø×ªµ½³ö´í×´Ì¬£¬¼´Æ¥ÅäÊ§°Ü¡£ÉÏÃæÕâ¸ö
+Àý×Ó¿ÉÒÔÓÃÀ´Ê¶±ðÓ¢Óïµ¥´Ê¡£
+
+ÏÂÃæÊÇÕâ¸öÀý×ÓÖÐµÄ×´Ì¬»úµÄÊ¾ÒâÍ¼£º
+
+=begin html
+
+<pre>
+    <img src="image/ex_state_mac.png" alt="Sample State Machine">
+</pre>
+
+=end html
+
+Í¼ÖÐµÄÃ¿Ò»¸ö½Úµã£¨Ô²È¦£©¶¼´ú±íÒ»¸ö¶ÀÁ¢µÄ¡°×´Ì¬¡±£¬½ÚµãÖ®¼äµÄ¼ýÍ·±íÊ¾×´Ì¬Ö®¼äµÄ×ª
+»»Ìõ¼þ¡£
+
+ÎÒµÄÒ»Î»¸ßÖÐÍ¬Ñ§ÓÉ´ËÏëµ½ÁË¡°ÎÄÇúÐÇ¡±µÄ¹¤×÷Ô­Àí¡£ºÇºÇ£¬
+ÎÒÒ²¾õµÃÓÐµã¶ùÀàËÆÅ¶¡ª¡ªàÅ£¬ÕæµÄºÜÏàËÆ¡£
+
+ÊÂÊµÉÏ£¬×´Ì¬»úÊÇÎÞ´¦²»ÔÚµÄ¡£×´Ì¬»úÔÚ±àÐ´Ê¶±ðÐÔÖÊµÄ³ÌÐòºÍµçÂ·µÄÊ±ºò£¬¼òÖ±ÊÇÎÞ¼ÛÖ®
+±¦¡£±ÈÈçÊ¶±ð»úÆ÷ÓïÑÔµÄ¼¯³ÉµçÂ·£¬Ê¶±ð¸÷ÖÖ¸ß¼¶±à³ÌÓïÑÔµÄ±àÒëÆ÷ºÍ½âÊÍÆ÷£¬»¹ÓÐºÜ¶àÒ»
+°ãÐÔµÄ³ÌÐò£¬×´Ì¬»úÎÞ´¦²»ÔÚ£¡ÓÐÊ±ºòÎÒÃÇ¼´Ê±×Ô¼ºÊ¹ÓÃÁË£¬¿ÉÄÜ»¹Î´·¢¾õ¡£Õâ²¢²»ÊÇÎÒÔÚ
+¿ª·¢ Salent ÏîÄ¿µÄ¹ý³ÌÖÐ¸Õ¸ÕÑ§µ½µÄÖªÊ¶£¬ÊÂÊµÉÏ£¬ÎÒÒÑ¾­Ê¹ÓÃÁË¶àÄêÁË¡£´Ó¸ßÈý¿ªÊ¼
+ÎÒ¾ÍÓÐÒâÊ¶µØÔÚ×Ô¼º±àÐ´µÄ´úÂëÖÐ´óÁ¿µØÊ¹ÓÃ¡£×´Ì¬»úÊÇ±à³ÌÁìÓò±È½ÏÓÐÈ¤µÄ¶«¶«¡£ÎÒ´Ó¸ß
+Ò»¿ªÊ¼×ÔÑ§±à³Ì£¬ÔÚ¸ß¶þÊ±Ñ§Ï°ÁË¼ÆËã»ú×¨ÒµµÄ¡¶±àÒëÔ­Àí¡·¿Î³Ì£¬ÔÚÄÇ¶ùÎÒÊ×´Î½Ó´¥ÁË×´
+Ì¬»úÀíÂÛ¡£²»¾ÃÎÒ¾Í·¢ÏÖËüÊÇÈç´ËµØÇ¿´ó£¬²¢×îÖÕÔÚ Salent µÄ IDU ÖÐ½«ÕâÖÖÍþÁ¦·¢»Ó
+µ½ÁË½üºõÉñÆæµÄµØ²½¡£
 
 IDU µÄ×´Ì¬»ú¹æÄ£·Ç³£ÅÓ´ó£¬¹²ÓÐ 590 ¸ö×´Ì¬¡£ÎÒ²»ÈÏÎªÓÃÊÖ¹¤µÄ·½Ê½ÄÜ¹»ÔÚ¿É
 ÒÔ½ÓÊÜµÄÊ±¼äÖ®ÄÚÔ²ÂúµØÍê³ÉËü¡£ÏÂÃæÊÇÓÃ Graphviz ×Ô¶¯¸ù¾Ý IDU ×´Ì¬»úµÄ
@@ -380,14 +678,7 @@ XML ÃèÊöÉú³ÉµÄÊ¾ÒâÍ¼£º
 
 =end html
 
-=head3 ¹ØÓÚÄ£°å
-
-Salent ÏîÄ¿ÖÐÊ¹ÓÃµÄÄ£°å¶¼ÊÇ Perl Template Toolkit µÄÄ£¿é£¨ÓÖ³ÆÎª TT2
-Ä£°å£©¡£
-
-XXX Add something more about TT2 template.
-
-=head3 Éú³É Perl IDU
+=head3 Perl IDU
 
 Perl IDU ÊÇÎÒµÃµ½µÄµÚÒ»°æ±¾µÄ IDU ÊµÏÖ¡£ËüµÄ¿ª·¢¹ý³ÌÍêÈ«ÊÇ²âÊÔÇý¶¯µÄ
 (test-driven)¡£ÔÚ²»¶ÏµØÌá¸ß Perl IDU µÄ²âÊÔÍ¨¹ýÂÊµÄ¹ý³ÌÖ®ÖÐ£¬ÎÒÒ²²»¶Ï
@@ -395,7 +686,38 @@ Perl IDU ÊÇÎÒµÃµ½µÄµÚÒ»°æ±¾µÄ IDU ÊµÏÖ¡£ËüµÄ¿ª·¢¹ý³ÌÍêÈ«ÊÇ²âÊÔÇý¶¯µÄ
 Ä¿µÄÖ®Ò»¡£Èç¹ûÎÒÊ×ÏÈ±àÐ´ Verilog HDL µÄÄ£°å£¬Ôò²âÊÔÓëÅÅ´íµÄÄÑ¶È¶¼»á´ó´ó
 Ìá¸ß¡£
 
-=head3 Éú³É C IDU
+=head4 Perl IDU µÄ×Ô¶¯»¯²âÊÔ
+
+ÎªÁË¶ÔÎÒÃÇµÄÖ¸ÁîÒëÂëÆ÷½øÐÐÓ¦ÓÃ²âÊÔ£¬ÎÒ×ÔÈ»ÐèÒª¸ù¾Ý»úÆ÷Ö¸ÁîµÄÂë±í£¬±àÐ´Ò»¸öÄÜ
+Ëæ»úÉú³ÉºÏ·¨µÄ IA-32 »úÆ÷ÂëµÄPerl ³ÌÐò¡£Âë±íÈÔÈ»À´×Ô Intel ÊÖ²á 2B ¾íµÄ
+Appendix B, Òò´ËÑÏ¸ñ¸²¸ÇÁËÕû¸ö"·Ç64Î»Í¨ÓÃÄ¿µÄÖ¸Áî¼¯¡±ºÍÕû¸ö¡°x87 FPU ¸¡µã
+Ö¸Áî¼¯¡±¡£ÊÂÊµÉÏ£¬Ã¿´ÎÔËÐÐÉú³ÉÆ÷£¬Ã¿Ò»ÖÖÖ¸ÁîÄ£Ê½¶¼»áÉú³ÉÖÁÉÙÒ»Ìõ»úÆ÷Ö¸Áî£¬¶ø
+Ã¿Ò»ÖÖÑ°Ö··½Ê½¡¢Ã¿Ò»¸ö¿ÉÄÜ²Ù×÷Êý×éºÏ£¬¶¼ÓÐB<¿ÉÄÜ>Éú³É¡£Õâ¶ÔÓÚ²âÊÔÎÒÃÇµÄ·´»ã±à
+Æ÷¶øÑÔ£¬¼òÖ±ÊÇÎÞ¼ÛÖ®±¦£¬ÒòÎªÒ»°ãµÄ EXE ÎÄ¼þ´úÂë¶ÎÖÐµÄÖ¸ÁîÔÚÕû¸ö x86 Ö¸Áî¼¯ÖÐ
+µÄ¸²¸ÇÂÊÖ»ÓÐ 30 ~ 50%£¬¶øÇÒÖØ¸´ÂÊ¸ß£¬ÓÃÓÚÓ¦Á¦²âÊÔ£¬Ð§¹ûºÜ²»ÀíÏë¡£µ«Ê¹ÓÃÒ»Ð©
+µäÐÍµÄ EXE ÎÄ¼þµÄ´úÂë¶ÎÖÐµÄ»úÆ÷Ö¸ÁîÐòÁÐÀ´²âÊÔÎÒÃÇµÄ IDU ÈÔÊÇ²âÊÔÌ¨µÄÒ»¸ö
+ÖØÒªµÄ×é³É²¿·Ö¡£
+
+ÎÒÒÑÓÃÒ»Ð©µÚÈý·½µÄ·´»ã±àÆ÷¶ÔÎÒµÄ Perl ½Å±¾Éú³ÉµÄ x86 »úÆ÷Ö¸Áî½øÐÐÁË²âÊÔ¡£
+
+Ò»¿ªÊ¼£¬ÎÒÃÇÖ»ÊÇ²âÊÔ IDU ÒëÂëµÃµ½µÄÖ¸ÁîÃûºÍÖ¸Áî³¤¶È£¬ÒòÎªÕâ±È½Ï¼òµ¥£¨µ±È»ÁË£¬
+Intel Ö¸Áî¼¯ÖÐÖÚ¶àµÄ¡°±ðÃû¡±ºÍÇ°×ºÂë (prefix byte) ÊÇ±È½ÏÄÑ´¦ÀíµÄ²¿·Ö£©¡£
+Ö¸ÁîÃû²âÊÔËäÈ»¼òµ¥£¬µ«È´·Ç³£ÓÐÐ§£¬ÄÜ×´Ì¬»úºÍ IDU Ä£°åµÄ´ó²¿·ÖÎÊÌâ¡£
+
+È»¶ø£¬Ö¸ÁîÃû²âÊÔ±Ï¾¹ÊÇ²»È«ÃæµÄ£¬ÎÒÃÇÎÞ·¨¶ÔÒ»Ð©Ñ°Ö··½Ê½ºÍÈ¡Êý½á¹û½øÐÐ¼ìÑé¡£Òò
+´Ë£¬ÎÒÃÇÓÖÔÚ IDU µÄ»ù´¡ÉÏÊµÏÖÁËÒ»¸ö»ã±à´úÂëµÄÊä³öºó¶Ë¡£Ö»ÓÐÈÃ IDU ½«ÒëÂëµÄ
+½á¹ûÊä³öÎª NASM »ã±à´úÂëµÄÐÎÊ½£¬ÎÒÃÇ²ÅÄÜÖ±½Ó½«Ö®Óë NASM µÄ·´»ã±àÆ÷Êä³ö½øÐÐ
+¾«È·±È½Ï¡£ÊÂÊµÉÏ£¬Ò»¸öÉú³É»ã±à´úÂëµÄºó¶Ë¼ÓÉÏ IDU Ö¸ÁîÒëÂëÆ÷±¾Éí£¬±ã¹¹³ÉÁËÒ»¸ö
+x86 ·´»ã±àÆ÷¡£ÆäÊµ£¬Ö§³ÖÈç´ËÖ®´óµÄÖ¸Áî¼¯µÄ x86 ·´»ã±àÆ÷±¾Éí¾ÍÒÑ¾­ÊÇÒ»¸ö¼«¶Ë¸´
+ÔÓµÄÏîÄ¿ÁË¡£ÎÒÃÇ²»µÃ²»Îª×Ô¼ºµÄ¹¤×÷¶ø¸Ðµ½½¾°Á¡£
+
+ÓÉÓÚÓÐÁËÈç´ËÍêÃÀµÄÖ¸ÁîÓ¦Á¦²âÊÔÌ¨£¬ÎÒÃÇµÄ·´»ã±àÆ÷µÄÕýÈ·ÐÔÓëÎÈ¶¨ÐÔºÁ²»ÑÇÓÚ NASM
+×Ô´øµÄ·´»ã±àÆ÷¡£ÊÂÊµÉÏ£¬ÎÒÃÇµÄ²âÊÔÌ¨¾ÓÈ»²¶×½µ½ÁË NASM µÄ FPU Ö¸Áî¼¯´¦Àí²¿·ÖµÄ
+Ò»¸öÎ¢ÃîµÄ bug. ×Ô¶¯»¯²âÊÔÍòËê£¡Ó¦Á¦²âÊÔÍòËê£¡
+
+=head4 ¸ü¶à¹Ø
+
+=head3 C IDU
 
 ÔÚ Perl IDU Í¨¹ýÈ«²¿µÄ²âÊÔ¼¯Ö®ºó£¬ÎÒÃÇÓÖµÃµ½ÁË C ÓïÑÔµÄÖ¸ÁîÒëÂëÆ÷ÊµÏÖ¡£
 C °æ±¾µÄ²âÊÔ¹ý³ÌÏà¶ÔÓÚ Perl °æ±¾¶øÑÔ¾Í±È½ÏÂé·³£¬±È½Ï·±ËöÁË¡£
@@ -409,7 +731,9 @@ read". ËûËµÕâ¸ö´íÎóºÜ³£¼û£¬Ã»±ØÒªÈ¥ÐÞ¸´¡£ÎÒÂíÉÏ¶ÔËûËµ£¬ÎÒÐ´´úÂëµÄÄ¿±êÊÇ¡°ÁãÈ±ÏÝ¡
 µ±È»£¬±ØÐëÖ¸³öµÄÊÇ£¬ÒòÎªÓÐÁË¾­¹ý³¹µ×²âÊÔµÄ Perl °æ±¾µÄÊµÏÖÔÚÊÖ£¬C °æ±¾µÄ IDU 
 µÄ¿ª·¢ÒÑ¾­±äµÃÈÝÒ×Ðí¶àÁË¡£
 
-Ò»¿ªÊ¼£¬ÎÒµÄ C IDU ºÍÎÒÔ­À´µÄ Perl IDU ¹²ÏíÁË¾ø´ó²¿·ÖµÄ²âÊÔ¼¯£¬µ«²»ÊÇÈ«²¿¡£àÅ£¬
+=head4 C IDU µÄ×Ô¶¯»¯²âÊÔ
+
+×î³õ£¬ÎÒµÄ C IDU ºÍÎÒÔ­À´µÄ Perl IDU ¹²ÏíÁË¾ø´ó²¿·ÖµÄ²âÊÔ¼¯£¬µ«²»ÊÇÈ«²¿¡£àÅ£¬
 ¾ÍÊÇ»úÆ÷Ö¸ÁîËæ»úÉú³ÉÆ÷Çý¶¯µÄ NASM Ó¦Á¦²âÊÔ¼¯ (pat_cover). 
 ºóÀ´£¬ÔÚÎâÔª±óµÄ¹ÄÀøÏÂ£¬ÎÒÓÖ¸ü½øÒ»²½£¬ÈÃÁ½ÖÖÓïÑÔ°æ±¾µÄ IDU ¹²ÏíÈ«²¿ 100% µÄ²âÊÔ¼¯¡£
 ÊÂºóÎÒ·ÖÎöÁËÒ»ÏÂ£¬ÎÞÂÛ´ÓÀíÂÛ»¹ÊÇ´Ó¼¼ÊõÉÏÕâ¶¼²»³ÉÎÊÌâ£¬Ö»ÒªÎÒµÄ C IDU Ìá¹©ºÍÔ­À´µÄ
@@ -423,30 +747,6 @@ Perl IDU È«²¿ÏàÍ¬µÄ½Ó¿Ú (interface) ¾Í¿ÉÒÔÁË¡£ÎÒ²»½ûÒª¸ßºô£º¡°·â
 ÊÇÍ¨¹ý COM ½Ó¿Ú¡¢Inline::* Ä£¿é»òÕß C ½øÐÐÓïÑÔÖ®¼äµÄ¡°¹ý¶É¡±¡£
 
 =head3 Éú³É Verilog IDU
-
-=head2 ×Ô¶¯²âÊÔ IDU
-
-ÎªÁË¶ÔÎÒÃÇµÄÖ¸ÁîÒëÂëÆ÷½øÐÐÓ¦ÓÃ²âÊÔ£¬ÎÒ×ÔÈ»ÐèÒª¸ù¾Ý»úÆ÷Ö¸ÁîµÄÂë±í£¬±àÐ´Ò»¸öÄÜ
-Ëæ»úÉú³ÉºÏ·¨µÄ IA-32 »úÆ÷ÂëµÄPerl ³ÌÐò¡£Âë±íÈÔÈ»À´×Ô Intel ÊÖ²á 2B ¾íµÄ
-Appendix B, Òò´ËÑÏ¸ñ¸²¸ÇÁËÕû¸ö"·Ç64Î»Í¨ÓÃÄ¿µÄÖ¸Áî¼¯¡±ºÍÕû¸ö¡°x87 FPU ¸¡µã
-Ö¸Áî¼¯¡±¡£ÊÂÊµÉÏ£¬Ã¿´ÎÔËÐÐÉú³ÉÆ÷£¬Ã¿Ò»ÖÖÖ¸ÁîÄ£Ê½¶¼»áÉú³ÉÖÁÉÙÒ»Ìõ»úÆ÷Ö¸Áî£¬¶ø
-Ã¿Ò»ÖÖÑ°Ö··½Ê½¡¢Ã¿Ò»¸ö¿ÉÄÜ²Ù×÷Êý×éºÏ£¬¶¼ÓÐB<¿ÉÄÜ>Éú³É¡£ÎÒÒÑÓÃÒ»Ð©µÚÈý·½µÄ·´»ã
-±àÆ÷¶ÔÎÒµÄ Perl ½Å±¾Éú³ÉµÄ x86 »úÆ÷Ö¸Áî½øÐÐÁË²âÊÔ¡£
-
-Ò»¿ªÊ¼£¬ÎÒÃÇÖ»ÊÇ²âÊÔ IDU ÒëÂëµÃµ½µÄÖ¸ÁîÃûºÍÖ¸Áî³¤¶È£¬ÒòÎªÕâ±È½Ï¼òµ¥£¨µ±È»ÁË£¬
-Intel Ö¸Áî¼¯ÖÐÖÚ¶àµÄ¡°±ðÃû¡±ºÍÇ°×ºÂë (preffix byte) ÊÇ±È½ÏÄÑ´¦ÀíµÄ²¿·Ö£©¡£
-Ö¸ÁîÃû²âÊÔËäÈ»¼òµ¥£¬µ«È´·Ç³£ÓÐÐ§£¬ÄÜ×´Ì¬»úºÍ IDU Ä£°åµÄ´ó²¿·ÖÎÊÌâ¡£
-
-È»¶ø£¬Ö¸ÁîÃû²âÊÔ±Ï¾¹ÊÇ²»È«ÃæµÄ£¬ÎÒÃÇÎÞ·¨¶ÔÒ»Ð©Ñ°Ö··½Ê½ºÍÈ¡Êý½á¹û½øÐÐ¼ìÑé¡£Òò
-´Ë£¬ÎÒÃÇÓÖÔÚ IDU µÄ»ù´¡ÉÏÊµÏÖÁËÒ»¸ö»ã±à´úÂëµÄÊä³öºó¶Ë¡£Ö»ÓÐÈÃ IDU ½«ÒëÂëµÄ
-½á¹ûÊä³öÎª NASM »ã±à´úÂëµÄÐÎÊ½£¬ÎÒÃÇ²ÅÄÜÖ±½Ó½«Ö®Óë NASM µÄ·´»ã±àÆ÷Êä³ö½øÐÐ
-¾«È·±È½Ï¡£ÊÂÊµÉÏ£¬Ò»¸öÉú³É»ã±à´úÂëµÄºó¶Ë¼ÓÉÏ IDU Ö¸ÁîÒëÂëÆ÷±¾Éí£¬±ã¹¹³ÉÁËÒ»¸ö
-x86 ·´»ã±àÆ÷¡£ÆäÊµ£¬Ö§³ÖÈç´ËÖ®´óµÄÖ¸Áî¼¯µÄ x86 ·´»ã±àÆ÷±¾Éí¾ÍÒÑ¾­ÊÇÒ»¸ö¼«¶Ë¸´
-ÔÓµÄÏîÄ¿ÁË¡£ÎÒÃÇ²»µÃ²»Îª×Ô¼ºµÄ¹¤×÷¶ø¸Ðµ½½¾°Á¡£
-
-ÓÉÓÚÓÐÁËÈç´ËÍêÃÀµÄÖ¸ÁîÓ¦Á¦²âÊÔÌ¨£¬ÎÒÃÇµÄ·´»ã±àÆ÷µÄÕýÈ·ÐÔÓëÎÈ¶¨ÐÔºÁ²»ÑÇÓÚ NASM
-×Ô´øµÄ·´»ã±àÆ÷¡£ÊÂÊµÉÏ£¬ÎÒÃÇµÄ²âÊÔÌ¨¾ÓÈ»²¶×½µ½ÁË NASM µÄ FPU Ö¸Áî¼¯´¦Àí²¿·ÖµÄ
-Ò»¸öÎ¢ÃîµÄ bug. ×Ô¶¯»¯²âÊÔÍòËê£¡Ó¦Á¦²âÊÔÍòËê£¡
 
 =head3 SMOKE ¼¼Êõ
 
@@ -513,7 +813,7 @@ TODO ²âÊÔ¡£ÁíÍâÖµµÃÒ»ÌáµÄÊÇ£¬Èç¹ûÄã°ÑÊó±êÐüÍ£ÔÚÈÎºÎÒ»¸ö²ÊÉ«·½¿éµÄÉÏ·½£¬³ÖÐø¼¸Ãë
 
 =head1 IEU µÄ¿ª·¢
 
-XXX
+ÉÐÎ´¿ªÊ¼¡£
 
 =head1 Extension of Salent
 
@@ -574,6 +874,10 @@ SVM µÄºËÐÄ²¿¼þ¡£ÎÒÒÑ¾­ÔÚ QQ ÁÄÌìÖÐÇëÇóÍò«‘ÐÂ¸ø³öËûµÄ MMU µÄ´¿Èí¼þÊµÏÖ¡£ÏÂÃæºÜ×ÔÈ
 =head1 BIBLIOGRAPHY
 
 =over
+
+=item *
+
+"Verilog ¸ß¼¶ÊýÑ§µçÂ·Éè¼Æ"
 
 =item *
 

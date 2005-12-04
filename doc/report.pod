@@ -322,7 +322,7 @@ ALU 的 Verilog 源代码是从模板自动生成的。Salent 项目中使用的模板都
 =begin html
 
 <pre>
-    <img src="image/tt.png">
+    <img src="image/tt.png" alt="Template for alu.v">
 </pre>
 
 =end html

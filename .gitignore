@@ -1,0 +1,13 @@
+*~
+*.swo
+*.swp
+0*.clp
+0*.vrg
+0*.xclp
+knowledge/anti-vectorize.clp
+knowledge/goal-match.clp
+knowledge/vector-eval.clp
+knowledge/vectorize.clp
+lib/VRG/Compiler.pm
+doc/*.html
+upload

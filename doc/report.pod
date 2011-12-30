@@ -1,14 +1,8 @@
+=encoding utf-8
+
 =head1 NAME
 
 report - Computer Organization Design Report for Salent
-
-=head1 AUTHOR
-
-Agent Zhang (章亦春) E<lt>agent2002@126.comE<gt>
-
-3030602110 计算机0304班
-
-计算机科学与通信工程学院  江苏大学
 
 =head1 VERSION
 
@@ -922,13 +916,18 @@ L<http://www.oreilly.com/catalog/perltt/>
 
 User guide and reference manual for the Template Toolkit
 
-L<http://search.cpan.org/~abw/Template-Toolkit-2.14/lib/Template/Manual.pod>
+L<http://search.cpan.org/perldoc?Template::Manual>
 
 =back
 
+=head1 AUTHOR
+
+Zhang "agentzh" Yichun (章亦春) E<lt>agentzh@gmail.comE<gt>
+
 =head1 COPYRIGHT
 
-Copyright (c) 2005 Agent Zhang
+Copyright (c) 2005-2011 Zhang "agentzh" Yichun
 
-This document is free. You can modify and/or redistribute it under the 
+This document is free. You can modify and/or redistribute it under the
 same terms as Perl.
+

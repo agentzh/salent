@@ -6,7 +6,7 @@ report - Computer Organization Design Report for Salent
 
 =head1 VERSION
 
-本文档描述了于 2005 年 10 月底发布的 Salent 0.08
+本文档描述了于 2005 年 10 月底发布的 Salent 0.08.
 
 =head1 DESCRIPTION
 
@@ -78,16 +78,10 @@ x86 反汇编器实现。这个东东完全可以独立成一个 Perl 模块，�
 
 =head2 如何获得 Salent？
 
-Salent 项目已处于现代的版本控制系统 Subversion (SVN) 的管理之下，因此
-你总是可以从 Salent 位于德国的 SVN 中央服务器
+Salent 项目已处于版本控制系统的管理之下，因此
+你总是可以从它的 GitHub 首页获得：
 
-L<https://svn.berlios.de/svnroot/repos/salent>
-
-获得。该项目允许匿名下载。嗯，或许你需要一个 SVN 客户程序来下载整个项目，
-而不是从 Web 浏览器中一个文件一个文件地复制。
-
-对于 Windows 用户而言，TortoiseSVN 是很值得一试的。如果你希望实现离线
-操作，SVK 则是非常不错的选择。
+L<https://github.com/agentzh/salent>
 
 =head2 Salent 使用了何种语言？
 
@@ -926,7 +920,7 @@ Zhang "agentzh" Yichun (章亦春) E<lt>agentzh@gmail.comE<gt>
 
 =head1 COPYRIGHT
 
-Copyright (c) 2005-2011 Zhang "agentzh" Yichun
+Copyright (c) 2005-2011 by Zhang "agentzh" Yichun. All rights reserved.
 
 This document is free. You can modify and/or redistribute it under the
 same terms as Perl.

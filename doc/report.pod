@@ -863,7 +863,7 @@ SVM 的核心部件。我已经在 QQ 聊天中请求万珣新给出他的 MMU �
 
 =item *
 
-"Verilog 高级数学电路设计"
+"Verilog 高级数字电路设计"
 
 =item *
 
